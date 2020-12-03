@@ -1,68 +1,54 @@
+/// Custom function to test
 function add(a, b) {
 	return a + b;
 }
 
-function subtract(a, b) {
-	return a - b;
-}
-
-function multiply(a, b) {
-	return a * b;
-}
-
-function divide(a, b) {
-	return a / b;
-}
-
+// Create test suite
 suite = new TestSuite();
 
-// False negative
-testEqualArrays = new TestCase(function() {
-	var a = ["Test", 0, 3, undefined];
-	var b = ["Test", 0, 3, undefined];
-	self.assertEqual(a, b);
-	var arr_equ = array_equals(a, b);
-	self.assertTrue(arr_equ);
-}, "testEqualArrays");
-suite.addTest(testEqualArrays);
-
-
-/*
-testAdd = new TestCase(function() {
+// Create test case for our custom function
+testAddFunction = new TestCase(function() {
 	var _number = other.add(10, 5);
 	self.assertEqual(_number, 15);
-	_number = other.add(-3, -2);
-	self.assertEqual(_number, -5);
-	_number = other.add(, -2);
-	self.assertEqual(_number, -5);
-}, "testAdd");
-suite.addTest(testAdd);
+}, "testAddFunction");
+// Add it to the test suite
+suite.addTest(testAddFunction);
 
-testSubtract = new TestCase(function() {
-	var _number = other.subtract(7, 4);
-	self.assertEqual(_number, 3);
-}, "testSubtract");
-suite.addTest(testSubtract);
 
-testMultiply = new TestCase(function() {
-	var _number = other.multiply(5, -6);
-	self.assertEqual(_number, -30);
-}, "testMultiply");
-suite.addTest(testMultiply);
+// Create test cases for the rest of the assertion functions
+testEqual = new TestCase(function() {
+	self.assertEqual(2 + 3, 5);
+}, "testEqual");
+suite.addTest(testEqual);
 
-testDivide = new TestCase(function() {
-	var _number = other.divide(100, 2);
-	self.assertEqual(_number, 50);
-}, "testDivide");
-suite.addTest(testDivide);
-*/
+testNotEqual = new TestCase(function() {
+	self.assertNotEqual(1, 5);
+	self.assertNotEqual(-4, noone);
+	self.assertNotEqual(true, "true");
+	self.assertNotEqual(3, "This is a test");
+	self.assertNotEqual(1, 1, "Wait, these are equal.");
+}, "testNotEqual");
+suite.addTest(testNotEqual);
+
+testTrue = new TestCase(function() {
+	self.assertTrue(true);
+}, "testTrue");
+suite.addTest(testTrue);
+
+testFalse = new TestCase(function() {
+	self.assertFalse(false);
+	self.assertFalse(noone);
+	self.assertFalse(undefined);
+}, "testFalse");
+suite.addTest(testFalse);
+
 
 // Run the unittest suite
 if UNITTEST_RUN {
 	suite.run();
 }
 
-// Destroy self once done
-if UNITTEST_AUTO_DESTROY {
+// Destroy testing object once complete
+if UNITTEST_AUTO_DESTROY || !UNITTEST_RUN {
 	instance_destroy();
 }
