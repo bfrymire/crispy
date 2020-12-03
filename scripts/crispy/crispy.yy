@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UnitTest",
-    "path": "folders/UnitTest.yy",
+    "name": "Crispy Unittest",
+    "path": "folders/Crispy Unittest.yy",
   },
   "resourceVersion": "1.0",
-  "name": "unittest",
+  "name": "crispy",
   "tags": [],
   "resourceType": "GMScript",
 }

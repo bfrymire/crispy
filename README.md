@@ -34,7 +34,7 @@ suite.run();
 **TestCase**
 A _TestCase_ is where the actions of the test are stored. TestCase expects the test to be passed as a script or method function. 
 
-## Naming your tests
+## Organizing your tests
 
 It's a good idea to give your tests descriptive names, this will make it easier if you have to go back in your code and find the TestCase. 
 

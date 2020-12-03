@@ -1,7 +1,7 @@
 {
   "resources": [
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":0,},
-    {"id":{"name":"unittest","path":"scripts/unittest/unittest.yy",},"order":0,},
+    {"id":{"name":"crispy","path":"scripts/crispy/crispy.yy",},"order":0,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":0,},
   ],
   "Options": [
@@ -28,7 +28,7 @@
     {"folderPath":"folders/Objects.yy","order":0,"resourceVersion":"1.0","name":"Objects","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Rooms.yy","order":1,"resourceVersion":"1.0","name":"Rooms","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Notes.yy","order":2,"resourceVersion":"1.0","name":"Notes","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/UnitTest.yy","order":3,"resourceVersion":"1.0","name":"UnitTest","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Crispy Unittest.yy","order":3,"resourceVersion":"1.0","name":"Crispy Unittest","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},
@@ -41,7 +41,7 @@
     "IDEVersion": "2.3.1.536",
   },
   "resourceVersion": "1.4",
-  "name": "gamemaker-unittest",
+  "name": "crispy",
   "tags": [],
   "resourceType": "GMProject",
 }

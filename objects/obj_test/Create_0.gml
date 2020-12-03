@@ -43,12 +43,12 @@ testFalse = new TestCase(function() {
 suite.addTest(testFalse);
 
 
-// Run the unittest suite
-if UNITTEST_RUN {
+// Run the Crispy suite
+if CRISPY_RUN {
 	suite.run();
 }
 
 // Destroy testing object once complete
-if UNITTEST_AUTO_DESTROY || !UNITTEST_RUN {
+if CRISPY_AUTO_DESTROY || !CRISPY_RUN {
 	instance_destroy();
 }
