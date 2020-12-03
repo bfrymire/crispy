@@ -14,6 +14,8 @@ global.UNITTEST_TIME = 0;
 global.UNITTEST_TIME_START = 0;
 global.UNITTEST_TIME_STOP = 0;
 
+show_debug_message("Using GameMaker Unittest version " + UNITTEST_VERSION);
+
 /**
  * Save the current in-game's time as a starting position.
  * @function
