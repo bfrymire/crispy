@@ -1,6 +1,6 @@
 /// @description unittest();
 
-#macro UNITTEST_VERSION 0.0.1
+#macro UNITTEST_VERSION "0.0.1"
 #macro UNITTEST_RUN true
 #macro UNITTEST_VERBOSITY 2 // {0|1|2}
 #macro UNITTEST_AUTO_DESTROY true
@@ -48,8 +48,8 @@ function unittestGetTime() {
 }
 
 /**
- * Test that the supplied parameters are equal.
- * The parameters will be checked for the same type, then check if they're equal.
+ * Test that first and second are equal.
+ * The first and second will be checked for the same type first, then check if they're equal.
  * @function
  * @param {*} first - First value.
  * @param {*} second - Second value to check against.
@@ -64,12 +64,12 @@ function assertEqual(first, second) {
 	if first == second {
 		self.parent.addLog(new unittestLog(self));
 	} else {
-		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg,helper_text:"First is not equal to Second: " + string(first) + ", " + string(second)}));
+		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(first) + ", " + string(second)}));
 	}
 }
 
 /**
- * Test that the supplied parameters are not equal.
+ * Test that first and second are not equal.
  * @function
  * @param {*} first - First type to check.
  * @param {*} second - Second type to check against.
@@ -80,7 +80,7 @@ function assertNotEqual(first, second) {
 	if first != second {
 		self.parent.addLog(new unittestLog(self, {pass:true}));
 	} else {
-		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg}));
+		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(first) + ", " + string(second)}));
 	}
 }
 
@@ -93,10 +93,17 @@ function assertNotEqual(first, second) {
  */
 function assertTrue(expr) {
 	var _msg = (argument_count > 1) ? argument[1] : undefined;
-	if bool(expr) == true {
+	try {
+		var _bool = bool(expr);
+	}
+	catch(err) {
+		self.parent.addLog(new unittestLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+		return;
+	}
+	if _bool == true {
 		self.parent.addLog(new unittestLog(self, {pass:true}));
 	} else {
-		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg}));
+		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg,helper_text:"expr is not true."}));
 	}
 }
 
@@ -109,10 +116,17 @@ function assertTrue(expr) {
  */
 function assertFalse(expr) {
 	var _msg = (argument_count > 1) ? argument[1] : undefined;
-	if bool(expr) == false {
-		self.parent.addLog(new unittestLog(self, true));
+	try {
+		var _bool = bool(expr);
+	}
+	catch(err) {
+		self.parent.addLog(new unittestLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+		return;
+	}
+	if _bool == false {
+		self.parent.addLog(new unittestLog(self, {pass:true}));
 	} else {
-		self.parent.addLog(new unittestLog(self, false, msg));
+		self.parent.addLog(new unittestLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
 	}
 }
 
@@ -174,10 +188,10 @@ function unittestLog(_case) constructor {
 					_msg += "..." + UNITTEST_PASS_MSG_VERBOSE;
 				} else {
 					if !is_undefined(self.msg) && self.msg != "" {
-						_msg += self.msg;
+						_msg += " - " + self.msg;
 					} else {
 						if !is_undefined(self.helper_text) {
-							_msg += self.helper_text;
+							_msg += " - " + self.helper_text;
 						}
 					}
 				}
