@@ -1,6 +1,7 @@
 /// @description unittest();
 
 #macro UNITTEST_VERSION "0.0.1"
+#macro UNITTEST_DATE "12/3/2020"
 #macro UNITTEST_RUN true
 #macro UNITTEST_VERBOSITY 2 // {0|1|2}
 #macro UNITTEST_AUTO_DESTROY true
@@ -138,7 +139,7 @@ function assertFalse(expr) {
  * @param {TestCase} _case - Testcase struct that ran the assertion.
  * @param [struct] Structure to replace existing constructor values.
  */
-function unittestLog(_case) constructor {
+function unittestLog(_case) : unittestExtendStructUnpack() constructor {
 	self.verbosity = UNITTEST_VERBOSITY;
 	self.pass = true;
 	self.msg = undefined;
@@ -146,7 +147,6 @@ function unittestLog(_case) constructor {
 	self.class = _case.class;
 	self.name = _case.name;
 
-	unittestExtendStructUnpack(self);
 	if argument_count > 1 && !is_undefined(argument[1]) {
 		self.unittestStructUnpack(argument[1]);
 	}
@@ -208,8 +208,8 @@ function unittestLog(_case) constructor {
  * @function
  * @param {struct} _struct - Struct to give method veriable.
  */
-function unittestExtendStructUnpack(_struct) {
-	_struct.unittestStructUnpack = method(_struct, unittestStructUnpack);
+function unittestExtendStructUnpack() constructor {
+	unittestStructUnpack = method(self, unittestStructUnpack);
 }
 
 /**
@@ -304,7 +304,13 @@ function TestSuite() constructor {
  * @param {function} fun - Function that holds the test.
  * @param [string] name - Name of the test.
  */
-function TestCase(fun) constructor {
+function TestCase(fun) : unittestExtendAssertions() constructor {
+	if typeof(fun) != "method" {
+		throw("Expected script function, received " + string(typeof(fun)));
+	}
+	updateName = function(name) {
+		self.name = name;
+	}
 	name = (argument_count > 1 && !is_undefined(argument[1]) && is_string(argument[1])) ? argument[1] : undefined;
 	class = instanceof(self);
 	parent = undefined;
@@ -312,17 +318,15 @@ function TestCase(fun) constructor {
 	run = function() {
 		test();
 	}
-	unittestExtendTestCase(self);
 }
 
 /**
- * Helper function that extends TestCase to have assertion functions as method variables.
+ * Helper class that extends other constructors to have assertion functions as method variables.
  * @function
- * @param {TestCase} _case - TestCase constructor.
  */
-function unittestExtendTestCase(_case) {
-	_case.assertEqual = method(_case, assertEqual);
-	_case.assertNotEqual = method(_case, assertNotEqual);
-	_case.assertTrue = method(_case, assertTrue);
-	_case.assertFalse = method(_case, assertFalse);
+function unittestExtendAssertions() constructor {
+	assertEqual = method(self, assertEqual);
+	assertNotEqual = method(self, assertNotEqual);
+	assertTrue = method(self, assertTrue);
+	assertFalse = method(self, assertFalse);
 }
