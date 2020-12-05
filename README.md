@@ -1,14 +1,12 @@
-# GameMaker Unittest
+<div style="text-align:center;"><img src="./LOGO.png" style="display:block;width:250px;margin:auto;"></div>
 
-An automated unit testing framework built in GameMaker made for GameMaker.
+# crispy 0.0.1
 
-Compatable with GameMaker version 2.3+
-
-version 0.0.1
+An automated unit testing framework built in GML for GameMaker Studio 2.3+
 
 ## Basic example
 
-The most basic elements that GameMaker Unittest needs to function are:
+The most basic elements that Crispy needs to function are:
 
 1. Create TestSuite
 2. Create TestCase
@@ -24,6 +22,7 @@ testAdd = new TestCase(function() {
 	var sum = 2 + 3;
 	self.assertEqual(sum, 5);
 }, "testAdd");
+
 // Add TestCase to TestSuite
 suite.addTest(testAdd);
 
@@ -31,12 +30,13 @@ suite.addTest(testAdd);
 suite.run();
 ```
 
-**TestCase**
-A _TestCase_ is where the actions of the test are stored. TestCase expects the test to be passed as a script or method function. 
+###TestSuite
 
-## Organizing your tests
+A _TestSuite_ is where the TestCases are stored. When `TestSuite.run()`  is executed, the TestSuite will iterate through every supplied TestCase and run its test.
 
-It's a good idea to give your tests descriptive names, this will make it easier if you have to go back in your code and find the TestCase. 
+###TestCase
+
+A _TestCase_ is where the actions of the test are stored. Pass the test to the TestCase in the type of a method function. A name can also be supplied to the TestCase
 
 ## License
 
