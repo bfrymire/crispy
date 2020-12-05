@@ -1,11 +1,9 @@
 /// crispy();
-/// @description Crispy is nn automated unit testing framework built in GameMaker made for GameMaker.
+/// @description Crispy is an automated unit testing framework built in GameMaker made for GameMaker.
 
 #macro CRISPY_VERSION "0.0.1"
 #macro CRISPY_DATE "12/3/2020"
-#macro CRISPY_RUN true
-#macro CRISPY_VERBOSITY 2 // {0|1|2}
-#macro CRISPY_AUTO_DESTROY true
+#macro CRISPY_VERBOSITY 1 // {0|1 [default]|2}
 #macro CRISPY_TIME_PRECISION 6
 #macro CRISPY_PASS_MSG_SILENT "."
 #macro CRISPY_FAIL_MSG_SILENT "F"
@@ -52,89 +50,6 @@ function crispyGetTime() {
 }
 
 /**
- * Test that first and second are equal.
- * The first and second will be checked for the same type first, then check if they're equal.
- * @function
- * @param {*} first - First value.
- * @param {*} second - Second value to check against.
- * @param {string} [_msg] - Custom message to output on failure.
- */
-function assertEqual(first, second) {
-	var _msg = (argument_count > 2) ? argument[2] : undefined;
-	if typeof(first) != typeof(second) {
-		self.parent.addLog(new crispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(first) + " and " + typeof(second) + "."}));
-		return;
-	}
-	if first == second {
-		self.parent.addLog(new crispyLog(self));
-	} else {
-		self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(first) + ", " + string(second)}));
-	}
-}
-
-/**
- * Test that first and second are not equal.
- * @function
- * @param {*} first - First type to check.
- * @param {*} second - Second type to check against.
- * @param {string} [_msg] - Custom message to output on failure.
- */
-function assertNotEqual(first, second) {
-	var _msg = (argument_count > 2) ? argument[2] : undefined;
-	if first != second {
-		self.parent.addLog(new crispyLog(self, {pass:true}));
-	} else {
-		self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(first) + ", " + string(second)}));
-	}
-}
-
-/**
- * Test whether the provided expression is true.
- * The test will first convert the expr to a boolean, then check if it equals true.
- * @function
- * @param {*} expr - Expression to check.
- * @param {string} [_msg] - Custom message to output on failure.
- */
-function assertTrue(expr) {
-	var _msg = (argument_count > 1) ? argument[1] : undefined;
-	try {
-		var _bool = bool(expr);
-	}
-	catch(err) {
-		self.parent.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
-		return;
-	}
-	if _bool == true {
-		self.parent.addLog(new crispyLog(self, {pass:true}));
-	} else {
-		self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not true."}));
-	}
-}
-
-/**
- * Test whether the provided expression is false.
- * The test will first convert the expr to a boolean, then check if it equals false.
- * @function
- * @param {*} expr - Expression to check.
- * @param {string} [_msg] - Custom message to output on failure.
- */
-function assertFalse(expr) {
-	var _msg = (argument_count > 1) ? argument[1] : undefined;
-	try {
-		var _bool = bool(expr);
-	}
-	catch(err) {
-		self.parent.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
-		return;
-	}
-	if _bool == false {
-		self.parent.addLog(new crispyLog(self, {pass:true}));
-	} else {
-		self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
-	}
-}
-
-/**
  * Saves the result and output of assertion.
  * @constructor
  * @param {TestCase} _case - Testcase struct that ran the assertion.
@@ -148,7 +63,7 @@ function crispyLog(_case) : crispyExtendStructUnpack() constructor {
 	self.class = _case.class;
 	self.name = _case.name;
 
-	if argument_count > 1 && !is_undefined(argument[1]) {
+	if argument_count > 1 {
 		self.crispyStructUnpack(argument[1]);
 	}
 
@@ -219,11 +134,8 @@ function crispyExtendStructUnpack() constructor {
  * @param {struct} _struct - Struct to replace existing values with.
  */
 function crispyStructUnpack(_struct) {
-	if is_undefined(_struct) {
-		throw("crispyStructUnpack() supplied argument '_struct' is undefined.\nCheck if argument for _struct is being supplied correctly.");
-	}
 	if !is_struct(_struct) {
-		throw("crispyStructUnpack() expected struct, received " + typeof(_struct));
+		throw("crispyStructUnpack() expectes a struct, received " + typeof(_struct) + ".");
 	}
 	var _names = variable_struct_get_names(_struct);
 	var _len = array_length(_names);
@@ -239,11 +151,7 @@ function crispyStructUnpack(_struct) {
  * Suite to hold tests and will run each test when instructed to.
  * @constructor
  */
-function TestSuite() constructor {
-
-	tests = [];
-	logs = [];
-
+function TestSuite() : crispyExtendStructUnpack() constructor {
 	addLog = function(log) {
 		logs[array_length(logs)] = log;
 	}
@@ -297,6 +205,13 @@ function TestSuite() constructor {
 		self.tearDown();
 	}
 
+	tests = [];
+	logs = [];
+
+	if argument_count > 0 {
+		self.crispyStructUnpack(argument[0]);
+	}
+
 }
 
 /**
@@ -305,29 +220,101 @@ function TestSuite() constructor {
  * @param {function} fun - Function that holds the test.
  * @param [string] name - Name of the test.
  */
-function TestCase(fun) : crispyExtendAssertions() constructor {
+function TestCase(fun) constructor {
 	if typeof(fun) != "method" {
-		throw("Expected script function, received " + string(typeof(fun)));
+		throw("TestCase expects a method function as its , received " + string(typeof(fun)));
+	}
+
+	/**
+	 * Test that first and second are equal.
+	 * The first and second will be checked for the same type first, then check if they're equal.
+	 * @function
+	 * @param {*} first - First value.
+	 * @param {*} second - Second value to check against.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	function assertEqual(first, second) {
+		var _msg = (argument_count > 2) ? argument[2] : undefined;
+		if typeof(first) != typeof(second) {
+			self.parent.addLog(new crispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(first) + " and " + typeof(second) + "."}));
+			return;
+		}
+		if first == second {
+			self.parent.addLog(new crispyLog(self));
+		} else {
+			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(first) + ", " + string(second)}));
+		}
+	}
+
+	/**
+	 * Test that first and second are not equal.
+	 * @function
+	 * @param {*} first - First type to check.
+	 * @param {*} second - Second type to check against.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	function assertNotEqual(first, second) {
+		var _msg = (argument_count > 2) ? argument[2] : undefined;
+		if first != second {
+			self.parent.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(first) + ", " + string(second)}));
+		}
+	}
+
+	/**
+	 * Test whether the provided expression is true.
+	 * The test will first convert the expr to a boolean, then check if it equals true.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	function assertTrue(expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		try {
+			var _bool = bool(expr);
+		}
+		catch(err) {
+			self.parent.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+			return;
+		}
+		if _bool == true {
+			self.parent.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not true."}));
+		}
+	}
+
+	/**
+	 * Test whether the provided expression is false.
+	 * The test will first convert the expr to a boolean, then check if it equals false.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	function assertFalse(expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		try {
+			var _bool = bool(expr);
+		}
+		catch(err) {
+			self.parent.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+			return;
+		}
+		if _bool == false {
+			self.parent.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
+		}
 	}
 	updateName = function(name) {
 		self.name = name;
+	}
+	run = function() {
+		test();
 	}
 	name = (argument_count > 1 && !is_undefined(argument[1]) && is_string(argument[1])) ? argument[1] : undefined;
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, fun);
-	run = function() {
-		test();
-	}
-}
-
-/**
- * Helper class that extends other constructors to have assertion functions as method variables.
- * @function
- */
-function crispyExtendAssertions() constructor {
-	assertEqual = method(self, assertEqual);
-	assertNotEqual = method(self, assertNotEqual);
-	assertTrue = method(self, assertTrue);
-	assertFalse = method(self, assertFalse);
 }
