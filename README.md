@@ -1,4 +1,4 @@
-<div style="align:center;"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></div>
+<p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
 <p>Version 0.0.1</p>
