@@ -38,8 +38,23 @@ testFalse = new TestCase(function() {
 suite.addTest(testFalse);
 
 
+// Failure without custom message
+testFailure = new TestCase(function() {
+	self.assertEqual(3, "String");
+}, "testFailure");
+suite.addTest(testFailure);
+
+// Failure with custom message
+testFailure = new TestCase(function() {
+	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
+}, "testFailure");
+suite.addTest(testFailure);
+
+
 // Run the Crispy suite
-suite.run();
+if CRISPY_RUN {
+	suite.run();
+}
 
 // Destroy testing object once complete
 instance_destroy();
