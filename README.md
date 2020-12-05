@@ -37,6 +37,9 @@ suite.run();
 <b>TestCase</b>
 <p>A <i>TestCase</i> is where the actions of the test are stored. Pass the test to the TestCase in the type of a method function. A name can also be supplied to the TestCase</p>
 
+<h2>Installation</h2>
+<a href="https://github.com/bfrymire/crispy/releases/tag/v.0.0.1">Download the .yymp file</a>
+
 <h2>License</h2>
 <a href="https://opensource.org/licenses/MIT" _target="blank">MIT License</a>
 <p>Copywrite (c) 2020 bfrymire</p>
