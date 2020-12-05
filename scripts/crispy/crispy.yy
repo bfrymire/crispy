@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Crispy Automated Testing",
-    "path": "folders/Crispy Automated Testing.yy",
+    "name": "Crispy",
+    "path": "folders/Crispy.yy",
   },
   "resourceVersion": "1.0",
   "name": "crispy",

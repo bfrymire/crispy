@@ -1,5 +1,9 @@
-/// crispy();
-/// @description Crispy is an automated unit testing framework built in GameMaker made for GameMaker.
+/**
+ * crispy();
+ * @description Crispy is an automated unit testing framework built in GML for GameMaker Studio 2.3+
+ * https://github.com/bfrymire/crispy
+ * Copywrite (c) bfrymire
+ */
 
 #macro CRISPY_VERSION "0.0.1"
 #macro CRISPY_DATE "12/5/2020"
@@ -16,7 +20,6 @@ global.CRISPY_TIME_START = 0;
 global.CRISPY_TIME_STOP = 0;
 
 show_debug_message("Using Crispy automated unit testing framework version " + CRISPY_VERSION);
-// show_debug_message("Verbosity Level: " + string(CRISPY_VERBOSITY));
 
 
 /**
