@@ -72,56 +72,74 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 	}
 
 	setUp = function() {
-		self.logs = [];
-		self.start_time = crispyGetTime();
-		if !is_undefined(self.__setUp) {
-			self.__setUp();
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__setUp = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			self.logs = [];
+			self.start_time = crispyGetTime();
+			if !is_undefined(self.__setUp) {
+				self.__setUp();
+			}
 		}
 	}
 
 	tearDown = function() {
-		if !is_undefined(self.__tearDown) {
-			self.__tearDown();
-		}
-
-		// Get total run time
-		self.stop_time = crispyGetTime();
-		self.total_time = crispyGetTimeDiff(self.start_time, self.stop_time);
-		self.display_time = crispyTimeConvert(self.total_time);
-
-		// Display test results
-		var _passed_tests = 0;
-		var _len = array_length(self.logs);
-		var _t = "";
-		for(var i = 0; i < _len; i++) {
-			if self.logs[i].pass {
-				_t += CRISPY_PASS_MSG_SILENT;
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__tearDown = method(self, argument[0]);
 			} else {
-				_t += CRISPY_FAIL_MSG_SILENT;
+				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
 			}
-		}
-		show_debug_message(_t);
+		} else {
+			// Get total run time
+			self.stop_time = crispyGetTime();
+			self.total_time = crispyGetTimeDiff(self.start_time, self.stop_time);
+			self.display_time = crispyTimeConvert(self.total_time);
 
-		// Horizontal row
-		show_debug_message(hr());
-
-		// Show individual log messages
-		for(var i = 0; i < _len; i++) {
-			if logs[i].pass {
-				_passed_tests += 1;
+			// Display test results
+			var _passed_tests = 0;
+			var _len = array_length(self.logs);
+			var _t = "";
+			for(var i = 0; i < _len; i++) {
+				if self.logs[i].pass {
+					_t += CRISPY_PASS_MSG_SILENT;
+				} else {
+					_t += CRISPY_FAIL_MSG_SILENT;
+				}
 			}
-			var _msg = logs[i].getMsg();
-			if _msg != "" {
-				show_debug_message(_msg);
+			show_debug_message(_t);
+
+			// Horizontal row
+			show_debug_message(hr());
+
+			// Show individual log messages
+			for(var i = 0; i < _len; i++) {
+				if logs[i].pass {
+					_passed_tests += 1;
+				}
+				var _msg = logs[i].getMsg();
+				if _msg != "" {
+					show_debug_message(_msg);
+				}
 			}
+
+			// Finish by showing entire time it took to run the suite 
+			show_debug_message("\n" + string(_len) + " tests ran in " + self.display_time + "s");
+
+			if _passed_tests == _len {
+				show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
+			}
+
+			if !is_undefined(self.__tearDown) {
+				self.__tearDown();
+			}
+			
 		}
 
-		// Finish by showing entire time it took to run the suite 
-		show_debug_message("\n" + string(_len) + " tests ran in " + self.display_time + "s");
-
-		if _passed_tests == _len {
-			show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
-		}
 	}
 
 	__setUp = undefined;
@@ -160,11 +178,31 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
 	}
 
 	setUp = function() {
-		// Moved to TestRunner
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__setUp = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			if !is_undefined(self.__setUp) {
+				self.__setUp();
+			}
+		}
 	}
 
 	tearDown = function() {
-		// Moved to TestRunner
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__tearDown = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			if !is_undefined(self.__tearDown) {
+				self.__tearDown();
+			}
+		}
 	}
 
 	run = function() {
@@ -176,6 +214,8 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
 		self.tearDown();
 	}
 
+	__setUp = undefined;
+	__tearDown = undefined;
 	parent = undefined;
 	tests = [];
 
