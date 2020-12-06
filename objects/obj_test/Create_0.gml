@@ -55,7 +55,7 @@ suite.addTestCase(testFailure);
 testFailureCustomMessage = new TestCase(function() {
 	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
 }, "testFailureCustomMessage");
-suite.addTest(testFailureCustomMessage);
+suite.addTestCase(testFailureCustomMessage);
 
 
 // Run the TestRunner
