@@ -45,10 +45,10 @@ testFailure = new TestCase(function() {
 suite.addTest(testFailure);
 
 // Failure with custom message
-testFailure = new TestCase(function() {
+testFailureCustomMessage = new TestCase(function() {
 	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
-}, "testFailure");
-suite.addTest(testFailure);
+}, "testFailureCustomMessage");
+suite.addTest(testFailureCustomMessage);
 
 
 // Run the Crispy suite
