@@ -2,7 +2,7 @@
  * crispy();
  * @description Crispy is an automated unit testing framework built in GML for GameMaker Studio 2.3+
  * https://github.com/bfrymire/crispy
- * Copywrite (c) bfrymire
+ * Copywrite (c) 2020 bfrymire
  */
 
 #macro CRISPY_VERSION "0.0.1"
@@ -113,8 +113,8 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
  * @param [string] name - Name of the test.
  */
 function TestCase(fun) constructor {
-	if typeof(fun) != "method" {
-		throw("TestCase expects a method function as its , received " + string(typeof(fun)));
+	if !is_method(fun) {
+		throw(instanceof(self) + "() expected a method function as argument0, received " + typeof(fun));
 	}
 
 	/**
@@ -125,7 +125,7 @@ function TestCase(fun) constructor {
 	 * @param {*} second - Second value to check against.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertEqual(first, second) {
+	assertEqual = function(first, second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if typeof(first) != typeof(second) {
 			self.parent.addLog(new crispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(first) + " and " + typeof(second) + "."}));
@@ -145,7 +145,7 @@ function TestCase(fun) constructor {
 	 * @param {*} second - Second type to check against.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertNotEqual(first, second) {
+	assertNotEqual = function(first, second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if first != second {
 			self.parent.addLog(new crispyLog(self, {pass:true}));
@@ -161,7 +161,7 @@ function TestCase(fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertTrue(expr) {
+	assertTrue = function(expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(expr);
@@ -184,7 +184,7 @@ function TestCase(fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertFalse(expr) {
+	assertFalse = function(expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(expr);
@@ -200,12 +200,44 @@ function TestCase(fun) constructor {
 		}
 	}
 
+	setUp = function() {
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__setUp = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			if !is_undefined(self.__setUp) {
+				self.__setUp();
+			}
+		}
+	}
+	__setUp = undefined;
+	
+	tearDown = function() {
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__tearDown = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			if !is_undefined(self.__tearDown) {
+				self.__tearDown();
+			}
+		}
+	}
+	__tearDown = undefined;
+
 	updateName = function(name) {
 		self.name = name;
 	}
 
 	run = function() {
-		test();
+		self.setUp();
+		self.test();
+		self.tearDown();
 	}
 
 	name = (argument_count > 1 && !is_undefined(argument[1]) && is_string(argument[1])) ? argument[1] : undefined;
@@ -337,7 +369,7 @@ function crispyExtendStructUnpack() constructor {
  */
 function crispyStructUnpack(_struct) {
 	if !is_struct(_struct) {
-		throw("crispyStructUnpack() expectes a struct, received " + typeof(_struct) + ".");
+		throw("crispyStructUnpack() expected a struct, received " + typeof(_struct) + ".");
 	}
 	var _names = variable_struct_get_names(_struct);
 	var _len = array_length(_names);
@@ -348,4 +380,3 @@ function crispyStructUnpack(_struct) {
 		}
 	}
 }
-
