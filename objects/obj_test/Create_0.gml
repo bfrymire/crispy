@@ -3,8 +3,15 @@ function add(a, b) {
 	return a + b;
 }
 
+
+// Create TestRunner
+runner = new TestRunner();
+
 // Create TestSuite
 suite = new TestSuite();
+
+// Add TestSuite to TestRunner
+runner.addSuite(suite);
 
 // Create TestCase for our custom function
 testAddFunction = new TestCase(function() {
@@ -51,9 +58,9 @@ testFailure = new TestCase(function() {
 suite.addTest(testFailure);
 
 
-// Run the Crispy suite
+// Run the TestRunner
 if CRISPY_RUN {
-	suite.run();
+	runner.run();
 }
 
 // Destroy testing object once complete
