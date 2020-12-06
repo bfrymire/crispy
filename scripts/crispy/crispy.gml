@@ -30,10 +30,10 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 	addSuite = function(suite) {
 		if instanceof(suite) != "TestSuite" {
 			try {
-				throw(instanceof(self) + ".addSuite() expects a TestSuite instance, received " + instanceof(suite));
+				throw(instanceof(self) + ".addSuite() expected a TestSuite instance, received " + instanceof(suite));
 			}
 			catch(err) {
-				throw(instanceof(self) + ".addSuite() expects a TestSuite instance, received " + typeof(suite));
+				throw(instanceof(self) + ".addSuite() expected a TestSuite instance, received " + typeof(suite));
 			}
 		}
 		suite.parent = self;
@@ -340,10 +340,10 @@ function crispyGetTime() {
  */
 function crispyGetTimeDiff(start_time, stop_time) {
 	if !is_real(start_time) {
-		throw("crispyGetTimeDiff() start_time expects a number, received " + typeof(start_time));
+		throw("crispyGetTimeDiff() start_time expected a number, received " + typeof(start_time));
 	}
 	if !is_real(stop_time) {
-		throw("crispyGetTimeDiff() stop_time expects a number, received " + typeof(stop_time));
+		throw("crispyGetTimeDiff() stop_time expected a number, received " + typeof(stop_time));
 	}
 	return (stop_time - start_time) / 1000000;
 }
