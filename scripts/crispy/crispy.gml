@@ -54,9 +54,8 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 		self.setUp();
 		var _suites_len = array_length(self.suites);
 		for(var k = 0; k < _suites_len; k++) {
-			// self.suites[i].run();
 			var _suite = self.suites[k];
-			// _suite.setUp(); // TO-DO: Move the TestSuite's setUp and tearDown to the TestRunner
+			_suite.setUp();
 			var _tests_len = array_length(_suite.tests);
 			for(var i = 0; i < _tests_len; i++) {
 				var _test = _suite.tests[i];
@@ -65,8 +64,9 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 				for(var j = 0; j < _logs_len; j++) {
 					self.addLog(_test.logs[j]);
 				}
+				_test.logs = [];
 			}
-			// _suite.tearDown(); // TO-DO: Move the TestSuite's setUp and tearDown to the TestRunner
+			_suite.tearDown();
 		}
 		self.tearDown();
 	}
@@ -167,15 +167,12 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
 	}
 
 	run = function() {
-		// self.setUp();
+		self.setUp();
 		var _len = array_length(self.tests);
 		for(var i = 0; i < _len; i++) {
-			if !is_undefined(self.parent) && instance_exists(self.parent) {
-				// self.tests[i].
-			}
 			self.tests[i].run();
 		}
-		// self.tearDown();
+		self.tearDown();
 	}
 
 	parent = undefined;
@@ -321,7 +318,7 @@ function TestCase(fun) constructor {
 	}
 
 	run = function() {
-		self.setUp(); // TO-DO: When TestCase.setUp() is created, clear the logs
+		self.setUp();
 		self.test();
 		self.tearDown();
 	}
@@ -335,7 +332,7 @@ function TestCase(fun) constructor {
 }
 
 /**
- * Returns the current crispy time difference as a string 
+ * Returns the current time in micro-seconds since the project started running
  * @function
  */
 function crispyGetTime() {
@@ -343,7 +340,7 @@ function crispyGetTime() {
 }
 
 /**
- * Updates the current crispy time in seconds
+ * Returns the current difference between two times
  * @function
  */
 function crispyGetTimeDiff(start_time, stop_time) {
@@ -353,15 +350,15 @@ function crispyGetTimeDiff(start_time, stop_time) {
 	if !is_real(stop_time) {
 		throw("crispyGetTimeDiff() stop_time expected a number, received " + typeof(stop_time));
 	}
-	return (stop_time - start_time) / 1000000;
+	return stop_time - start_time;
 }
 
 /**
- * Returns the current crispy time difference as a string 
+ * Returns the given time in seconds as a string
  * @function
  */
 function crispyTimeConvert(time) {
-	return string_format(time, 0, CRISPY_TIME_PRECISION);
+	return string_format(time / 1000000, 0, CRISPY_TIME_PRECISION);
 }
 
 /**
