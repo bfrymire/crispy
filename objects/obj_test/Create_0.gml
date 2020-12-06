@@ -11,7 +11,7 @@ runner = new TestRunner();
 suite = new TestSuite();
 
 // Add TestSuite to TestRunner
-runner.addSuite(suite);
+runner.addTestSuite(suite);
 
 // Create TestCase for our custom function
 testAddFunction = new TestCase(function() {
@@ -20,42 +20,42 @@ testAddFunction = new TestCase(function() {
 }, "testAddFunction");
 
 // Add TestCase to TestSuite
-suite.addTest(testAddFunction);
+suite.addTestCase(testAddFunction);
 
 
 // Create TestCase for the rest of the assertion functions
 testEqual = new TestCase(function() {
 	self.assertEqual(10, 10);
 }, "testEqual");
-suite.addTest(testEqual);
+suite.addTestCase(testEqual);
 
 testNotEqual = new TestCase(function() {
 	self.assertNotEqual(1, 5);
 }, "testNotEqual");
-suite.addTest(testNotEqual);
+suite.addTestCase(testNotEqual);
 
 testTrue = new TestCase(function() {
 	self.assertTrue(true);
 }, "testTrue");
-suite.addTest(testTrue);
+suite.addTestCase(testTrue);
 
 testFalse = new TestCase(function() {
 	self.assertFalse(false);
 }, "testFalse");
-suite.addTest(testFalse);
+suite.addTestCase(testFalse);
 
 
 // Failure without custom message
 testFailure = new TestCase(function() {
 	self.assertEqual(3, "String");
 }, "testFailure");
-suite.addTest(testFailure);
+suite.addTestCase(testFailure);
 
 // Failure with custom message
 testFailure = new TestCase(function() {
 	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
 }, "testFailure");
-suite.addTest(testFailure);
+suite.addTestCase(testFailure);
 
 
 // Run the TestRunner

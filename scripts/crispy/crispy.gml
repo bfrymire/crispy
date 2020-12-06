@@ -27,13 +27,13 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 		logs[array_length(logs)] = log;
 	}
 
-	addSuite = function(suite) {
-		if instanceof(suite) != "TestSuite" {
-			try {
-				throw(instanceof(self) + ".addSuite() expected a TestSuite instance, received " + instanceof(suite));
-			}
-			catch(err) {
-				throw(instanceof(self) + ".addSuite() expected a TestSuite instance, received " + typeof(suite));
+	addTestSuite = function(suite) {
+		var _inst = instanceof(suite);
+		if _inst != "TestSuite" {
+			if !is_undefined(_inst) {
+				throw(instanceof(self) + ".addTestSuite() expected a TestSuite instance, received " + _inst);
+			} else {
+				throw(instanceof(self) + ".addTestSuite() expected a TestSuite instance, received " + typeof(suite));
 			}
 		}
 		suite.parent = self;
@@ -145,7 +145,15 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
  * @constructor
  */
 function TestSuite() : crispyExtendStructUnpack() constructor {
-	addTest = function(_case) {
+	addTestCase = function(_case) {
+		var _inst = instanceof(_case);
+		if _inst != "TestCase" {
+			if !is_undefined(_inst) {
+				throw(instanceof(self) + ".addTestCase() expected a TestSuite instance, received " + _inst);
+			} else {
+				throw(instanceof(self) + ".addTestCase() expected a TestSuite instance, received " + typeof(_case));
+			}
+		}
 		_case.parent = self;
 		self.tests[array_length(tests)] = _case;
 	}
