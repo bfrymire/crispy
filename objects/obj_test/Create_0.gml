@@ -3,8 +3,15 @@ function add(a, b) {
 	return a + b;
 }
 
+
+// Create TestRunner
+runner = new TestRunner();
+
 // Create TestSuite
 suite = new TestSuite();
+
+// Add TestSuite to TestRunner
+runner.addTestSuite(suite);
 
 // Create TestCase for our custom function
 testAddFunction = new TestCase(function() {
@@ -13,36 +20,36 @@ testAddFunction = new TestCase(function() {
 }, "testAddFunction");
 
 // Add TestCase to TestSuite
-suite.addTest(testAddFunction);
+suite.addTestCase(testAddFunction);
 
 
 // Create TestCase for the rest of the assertion functions
 testEqual = new TestCase(function() {
 	self.assertEqual(10, 10);
 }, "testEqual");
-suite.addTest(testEqual);
+suite.addTestCase(testEqual);
 
 testNotEqual = new TestCase(function() {
 	self.assertNotEqual(1, 5);
 }, "testNotEqual");
-suite.addTest(testNotEqual);
+suite.addTestCase(testNotEqual);
 
 testTrue = new TestCase(function() {
 	self.assertTrue(true);
 }, "testTrue");
-suite.addTest(testTrue);
+suite.addTestCase(testTrue);
 
 testFalse = new TestCase(function() {
 	self.assertFalse(false);
 }, "testFalse");
-suite.addTest(testFalse);
+suite.addTestCase(testFalse);
 
 
 // Failure without custom message
 testFailure = new TestCase(function() {
 	self.assertEqual(3, "String");
 }, "testFailure");
-suite.addTest(testFailure);
+suite.addTestCase(testFailure);
 
 // Failure with custom message
 testFailureCustomMessage = new TestCase(function() {
@@ -51,9 +58,9 @@ testFailureCustomMessage = new TestCase(function() {
 suite.addTest(testFailureCustomMessage);
 
 
-// Run the Crispy suite
+// Run the TestRunner
 if CRISPY_RUN {
-	suite.run();
+	runner.run();
 }
 
 // Destroy testing object once complete

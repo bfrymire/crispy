@@ -27,7 +27,6 @@
   "Folders": [
     {"folderPath":"folders/Objects.yy","order":0,"resourceVersion":"1.0","name":"Objects","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Rooms.yy","order":1,"resourceVersion":"1.0","name":"Rooms","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Notes.yy","order":2,"resourceVersion":"1.0","name":"Notes","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Crispy.yy","order":3,"resourceVersion":"1.0","name":"Crispy","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [

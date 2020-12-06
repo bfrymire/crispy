@@ -2,7 +2,7 @@
  * crispy();
  * @description Crispy is an automated unit testing framework built in GML for GameMaker Studio 2.3+
  * https://github.com/bfrymire/crispy
- * Copywrite (c) bfrymire
+ * Copywrite (c) 2020 bfrymire
  */
 
 #macro CRISPY_VERSION "0.0.1"
@@ -15,33 +15,79 @@
 #macro CRISPY_PASS_MSG_VERBOSE "ok"
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail"
 
-global.CRISPY_TIME = 0;
-global.CRISPY_TIME_START = 0;
-global.CRISPY_TIME_STOP = 0;
-
 show_debug_message("Using Crispy automated unit testing framework version " + CRISPY_VERSION);
 
 
 /**
- * Suite to hold tests and will run each test when instructed to.
+ * Runner to hold TestSuites and iterates through each TestSuite, running its TestUnits when instructed to.
  * @constructor
  */
-function TestSuite() : crispyExtendStructUnpack() constructor {
+function TestRunner() : crispyExtendStructUnpack() constructor {
 	addLog = function(log) {
 		logs[array_length(logs)] = log;
 	}
 
-	addTest = function(_case) {
-		_case.parent = self;
-		self.tests[array_length(tests)] = _case;
+	addTestSuite = function(suite) {
+		var _inst = instanceof(suite);
+		if _inst != "TestSuite" {
+			if !is_undefined(_inst) {
+				throw(instanceof(self) + ".addTestSuite() expected a TestSuite instance, received " + _inst);
+			} else {
+				throw(instanceof(self) + ".addTestSuite() expected a TestSuite instance, received " + typeof(suite));
+			}
+		}
+		suite.parent = self;
+		self.suites[array_length(self.suites)] = suite;
+	}
+
+	hr = function() {
+		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
+		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(argument[1], 0, 120) : 70;
+		var _hr = "";
+		repeat(_count) {
+			_hr += _str;
+		}
+		return _hr;
+	}
+
+  	run = function() {
+		self.setUp();
+		var _suites_len = array_length(self.suites);
+		for(var k = 0; k < _suites_len; k++) {
+			var _suite = self.suites[k];
+			_suite.setUp();
+			var _tests_len = array_length(_suite.tests);
+			for(var i = 0; i < _tests_len; i++) {
+				var _test = _suite.tests[i];
+				_test.logs = [];
+				_test.run();
+				var _logs_len = array_length(_test.logs);
+				for(var j = 0; j < _logs_len; j++) {
+					self.addLog(_test.logs[j]);
+				}
+			}
+			_suite.tearDown();
+		}
+		self.tearDown();
 	}
 
 	setUp = function() {
-		global.crispyTimeStart();
+		self.logs = [];
+		self.start_time = crispyGetTime();
+		if !is_undefined(self.__setUp) {
+			self.__setUp();
+		}
 	}
 
 	tearDown = function() {
-		global.crispyTimeStop();
+		if !is_undefined(self.__tearDown) {
+			self.__tearDown();
+		}
+
+		// Get total run time
+		self.stop_time = crispyGetTime();
+		self.total_time = crispyGetTimeDiff(self.start_time, self.stop_time);
+		self.display_time = crispyTimeConvert(self.total_time);
 
 		// Display test results
 		var _passed_tests = 0;
@@ -71,11 +117,54 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
 		}
 
 		// Finish by showing entire time it took to run the suite 
-		show_debug_message("\n" + string(_len) + " tests ran in " + crispyGetTime() + "s");
+		show_debug_message("\n" + string(_len) + " tests ran in " + self.display_time + "s");
 
 		if _passed_tests == _len {
 			show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
 		}
+	}
+
+	__setUp = undefined;
+	__tearDown = undefined;
+	name = (argument_count > 0 && !is_string(argument[0])) ? argument[0] : "TestRunner";
+	start_time = 0;
+	stop_time = 0;
+	total_time = 0;
+	display_time = "0";
+	suites = [];
+	logs = [];
+
+	// Struct Unpacker
+	if argument_count > 1 {
+		self.crispyStructUnpack(argument[1]);
+	}
+
+}
+
+/**
+ * Suite to hold tests and will run each test when instructed to.
+ * @constructor
+ */
+function TestSuite() : crispyExtendStructUnpack() constructor {
+	addTestCase = function(_case) {
+		var _inst = instanceof(_case);
+		if _inst != "TestCase" {
+			if !is_undefined(_inst) {
+				throw(instanceof(self) + ".addTestCase() expected a TestSuite instance, received " + _inst);
+			} else {
+				throw(instanceof(self) + ".addTestCase() expected a TestSuite instance, received " + typeof(_case));
+			}
+		}
+		_case.parent = self;
+		self.tests[array_length(tests)] = _case;
+	}
+
+	setUp = function() {
+		// Moved to TestRunner
+	}
+
+	tearDown = function() {
+		// Moved to TestRunner
 	}
 
 	run = function() {
@@ -87,19 +176,10 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
 		self.tearDown();
 	}
 
-	hr = function() {
-		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
-		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(argument[1], 0, 120) : 70;
-		var _hr = "";
-		repeat(_count) {
-			_hr += _str;
-		}
-		return _hr;
-	}
-
+	parent = undefined;
 	tests = [];
-	logs = [];
 
+	// Struct Unpacker
 	if argument_count > 0 {
 		self.crispyStructUnpack(argument[0]);
 	}
@@ -113,8 +193,12 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
  * @param [string] name - Name of the test.
  */
 function TestCase(fun) constructor {
-	if typeof(fun) != "method" {
-		throw("TestCase expects a method function as its , received " + string(typeof(fun)));
+	if !is_method(fun) {
+		throw(instanceof(self) + "() expected a method function as argument0, received " + typeof(fun));
+	}
+
+	addLog = function(log) {
+		logs[array_length(logs)] = log;
 	}
 
 	/**
@@ -125,16 +209,16 @@ function TestCase(fun) constructor {
 	 * @param {*} second - Second value to check against.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertEqual(first, second) {
+	assertEqual = function(first, second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if typeof(first) != typeof(second) {
-			self.parent.addLog(new crispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(first) + " and " + typeof(second) + "."}));
+			self.addLog(new crispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(first) + " and " + typeof(second) + "."}));
 			return;
 		}
 		if first == second {
-			self.parent.addLog(new crispyLog(self));
+			self.addLog(new crispyLog(self));
 		} else {
-			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(first) + ", " + string(second)}));
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(first) + ", " + string(second)}));
 		}
 	}
 
@@ -145,12 +229,12 @@ function TestCase(fun) constructor {
 	 * @param {*} second - Second type to check against.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertNotEqual(first, second) {
+	assertNotEqual = function(first, second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if first != second {
-			self.parent.addLog(new crispyLog(self, {pass:true}));
+			self.addLog(new crispyLog(self, {pass:true}));
 		} else {
-			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(first) + ", " + string(second)}));
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(first) + ", " + string(second)}));
 		}
 	}
 
@@ -161,19 +245,19 @@ function TestCase(fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertTrue(expr) {
+	assertTrue = function(expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(expr);
 		}
 		catch(err) {
-			self.parent.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+			self.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
 			return;
 		}
 		if _bool == true {
-			self.parent.addLog(new crispyLog(self, {pass:true}));
+			self.addLog(new crispyLog(self, {pass:true}));
 		} else {
-			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not true."}));
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not true."}));
 		}
 	}
 
@@ -184,68 +268,98 @@ function TestCase(fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	function assertFalse(expr) {
+	assertFalse = function(expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(expr);
 		}
 		catch(err) {
-			self.parent.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+			self.addLog(new crispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
 			return;
 		}
 		if _bool == false {
-			self.parent.addLog(new crispyLog(self, {pass:true}));
+			self.addLog(new crispyLog(self, {pass:true}));
 		} else {
-			self.parent.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
 		}
 	}
+
+	setUp = function() {
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__setUp = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			if !is_undefined(self.__setUp) {
+				self.__setUp();
+			}
+		}
+	}
+	__setUp = undefined;
+	
+	tearDown = function() {
+		if argument_count > 0 {
+			if is_method(argument[0]) {
+				self.__tearDown = method(self, argument[0]);
+			} else {
+				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
+			}
+		} else {
+			if !is_undefined(self.__tearDown) {
+				self.__tearDown();
+			}
+		}
+	}
+	__tearDown = undefined;
 
 	updateName = function(name) {
 		self.name = name;
 	}
 
 	run = function() {
-		test();
+		self.setUp();
+		self.test();
+		self.tearDown();
 	}
 
 	name = (argument_count > 1 && !is_undefined(argument[1]) && is_string(argument[1])) ? argument[1] : undefined;
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, fun);
+	logs = [];
 
 }
 
 /**
- * Save the current in-game's time as a starting position.
- * @function
- */
-function crispyTimeStart() {
-	global.CRISPY_TIME_START = get_timer();
-}
-
-/**
- * Save the current in-game's time as a stopping position and updates the difference.
- * @function
- */
-function crispyTimeStop() {
-	global.CRISPY_TIME_STOP = get_timer();
-	crispyTimeUpdate();
-}
-
-/**
- * Updates the current crispy time in seconds
- * @function
- */
-function crispyTimeUpdate() {
-	global.CRISPY_TIME = (global.CRISPY_TIME_STOP - global.CRISPY_TIME_START) / 1000000;
-}
-
-/**
- * Returns the current crispy time difference as a string 
+ * Returns the current time in micro-seconds since the project started running
  * @function
  */
 function crispyGetTime() {
-	return string_format(global.CRISPY_TIME, 0, CRISPY_TIME_PRECISION);
+	return get_timer();
+}
+
+/**
+ * Returns the current difference between two times
+ * @function
+ */
+function crispyGetTimeDiff(start_time, stop_time) {
+	if !is_real(start_time) {
+		throw("crispyGetTimeDiff() start_time expected a number, received " + typeof(start_time));
+	}
+	if !is_real(stop_time) {
+		throw("crispyGetTimeDiff() stop_time expected a number, received " + typeof(stop_time));
+	}
+	return stop_time - start_time;
+}
+
+/**
+ * Returns the given time in seconds as a string
+ * @function
+ */
+function crispyTimeConvert(time) {
+	return string_format(time / 1000000, 0, CRISPY_TIME_PRECISION);
 }
 
 /**
@@ -302,6 +416,7 @@ function crispyLog(_case) : crispyExtendStructUnpack() constructor {
 	self.class = _case.class;
 	self.name = _case.name;
 
+	// Struct Unpacker
 	if argument_count > 1 {
 		self.crispyStructUnpack(argument[1]);
 	}
@@ -337,7 +452,7 @@ function crispyExtendStructUnpack() constructor {
  */
 function crispyStructUnpack(_struct) {
 	if !is_struct(_struct) {
-		throw("crispyStructUnpack() expectes a struct, received " + typeof(_struct) + ".");
+		throw("crispyStructUnpack() expected a struct, received " + typeof(_struct) + ".");
 	}
 	var _names = variable_struct_get_names(_struct);
 	var _len = array_length(_names);
@@ -348,4 +463,3 @@ function crispyStructUnpack(_struct) {
 		}
 	}
 }
-
