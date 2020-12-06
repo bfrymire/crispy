@@ -59,12 +59,12 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 			var _tests_len = array_length(_suite.tests);
 			for(var i = 0; i < _tests_len; i++) {
 				var _test = _suite.tests[i];
+				_test.logs = [];
 				_test.run();
 				var _logs_len = array_length(_test.logs);
 				for(var j = 0; j < _logs_len; j++) {
 					self.addLog(_test.logs[j]);
 				}
-				_test.logs = [];
 			}
 			_suite.tearDown();
 		}
@@ -72,6 +72,7 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 	}
 
 	setUp = function() {
+		self.logs = [];
 		self.start_time = crispyGetTime();
 		if !is_undefined(self.__setUp) {
 			self.__setUp();
