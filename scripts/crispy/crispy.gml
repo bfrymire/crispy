@@ -2,13 +2,14 @@
  * crispy();
  * @description Crispy is an automated unit testing framework built in GML for GameMaker Studio 2.3+
  * https://github.com/bfrymire/crispy
- * Copywrite (c) 2020 bfrymire
+ * Copyright (c) 2020 bfrymire
  */
 
-#macro CRISPY_VERSION "0.0.1"
-#macro CRISPY_DATE "12/5/2020"
+#macro CRISPY_VERSION "1.0.0"
+#macro CRISPY_DATE "12/7/2020"
+#macro CRISPY_NAME "Crispy"
 #macro CRISPY_RUN true
-#macro CRISPY_VERBOSITY 1 // {0|1|2}
+#macro CRISPY_VERBOSITY 2 // {0|1|2}
 #macro CRISPY_TIME_PRECISION 6
 #macro CRISPY_PASS_MSG_SILENT "."
 #macro CRISPY_FAIL_MSG_SILENT "F"
@@ -25,6 +26,32 @@ show_debug_message("Using Crispy automated unit testing framework version " + CR
 function TestRunner() : crispyExtendStructUnpack() constructor {
 	addLog = function(log) {
 		logs[array_length(logs)] = log;
+	}
+
+	captureLogs = function(_inst) {
+		switch (instanceof(_inst)) {
+			case "crispyLog":
+				self.addLog(_inst);
+				break;
+			case "TestCase":
+				var _logs_len = array_length(_inst.logs);
+				for(var i = 0; i < _logs_len; i++) {
+					self.addLog(_inst.logs[i]);
+				}
+				break;
+			case "TestSuite":
+				var _tests_len = array_length(_inst.tests);
+				for(var k = 0; k < _tests_len; k++) {
+					var _logs_len = array_length(_inst.tests[k].logs);
+					for(var i = 0; i < _logs_len; i++) {
+						self.addLog(_inst.tests[k].logs[i]);
+					}
+				}
+				break;
+			default:
+				crispyThrowExpected(self, "captureLogs", "TestCase", logger);
+				break;
+		}
 	}
 
 	addTestSuite = function(suite) {
@@ -53,20 +80,9 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
   	run = function() {
 		self.setUp();
 		var _suites_len = array_length(self.suites);
-		for(var k = 0; k < _suites_len; k++) {
-			var _suite = self.suites[k];
-			_suite.setUp();
-			var _tests_len = array_length(_suite.tests);
-			for(var i = 0; i < _tests_len; i++) {
-				var _test = _suite.tests[i];
-				_test.logs = [];
-				_test.run();
-				var _logs_len = array_length(_test.logs);
-				for(var j = 0; j < _logs_len; j++) {
-					self.addLog(_test.logs[j]);
-				}
-			}
-			_suite.tearDown();
+		for(var i = 0; i < _suites_len; i++) {
+			self.suites[i].run();
+			self.captureLogs(self.suites[i]);
 		}
 		self.tearDown();
 	}
@@ -81,6 +97,7 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
 		} else {
 			self.logs = [];
 			self.start_time = crispyGetTime();
+			if typeof(self.__setUp) != ""
 			if !is_undefined(self.__setUp) {
 				self.__setUp();
 			}
@@ -214,10 +231,18 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
 		self.tearDown();
 	}
 
+	setName = function(name) {
+		if !is_string(name) {
+			crispyThrowExpected(self, "setName", "string", name);
+		}
+		self.name = name;
+	}
+
 	__setUp = undefined;
 	__tearDown = undefined;
 	parent = undefined;
 	tests = [];
+	name = "TestSuite";
 
 	// Struct Unpacker
 	if argument_count > 0 {
@@ -238,7 +263,11 @@ function TestCase(fun) constructor {
 	}
 
 	addLog = function(log) {
-		logs[array_length(logs)] = log;
+		self.logs[array_length(self.logs)] = log;
+	}
+
+	clearLogs = function() {
+		self.logs = [];
 	}
 
 	/**
@@ -332,6 +361,7 @@ function TestCase(fun) constructor {
 				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
 			}
 		} else {
+			self.clearLogs();
 			if !is_undefined(self.__setUp) {
 				self.__setUp();
 			}
@@ -364,7 +394,18 @@ function TestCase(fun) constructor {
 		self.tearDown();
 	}
 
-	name = (argument_count > 1 && !is_undefined(argument[1]) && is_string(argument[1])) ? argument[1] : undefined;
+	setName = function(name) {
+		if !is_string(name) {
+			crispyThrowExpected(self, "setName", "string", name);
+		}
+		self.name = name;
+	}
+
+	if argument_count > 1 {
+		setName(argument[1]);
+	} else {
+		setName(undefined);
+	}
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, fun);
@@ -381,15 +422,15 @@ function crispyGetTime() {
 }
 
 /**
- * Returns the current difference between two times
+ * Returns the difference between two times
  * @function
  */
 function crispyGetTimeDiff(start_time, stop_time) {
 	if !is_real(start_time) {
-		throw("crispyGetTimeDiff() start_time expected a number, received " + typeof(start_time));
+		crispyThrowExpected(self, "crispyGetTimeDiff", "number", start_time);
 	}
 	if !is_real(stop_time) {
-		throw("crispyGetTimeDiff() stop_time expected a number, received " + typeof(stop_time));
+		crispyThrowExpected(self, "crispyGetTimeDiff", "number", stop_time);
 	}
 	return stop_time - start_time;
 }
@@ -399,6 +440,9 @@ function crispyGetTimeDiff(start_time, stop_time) {
  * @function
  */
 function crispyTimeConvert(time) {
+	if !is_real(time) {
+		crispyThrowExpected(self, "crispyTimeConvert", "number", time);
+	}
 	return string_format(time / 1000000, 0, CRISPY_TIME_PRECISION);
 }
 
@@ -502,4 +546,20 @@ function crispyStructUnpack(_struct) {
 			variable_struct_set(self, _names[i], _value);
 		}
 	}
+}
+
+function crispyThrowExpected(_self, _name, _expected, _received) {
+	var _char = string_ord_at(string_lower(_expected), 1);
+	var _vowels = ["a", "e", "i", "o", "u"];
+	var _len = array_length(_vowels);
+	var _preposition = "a";
+	for(var i = 0; i < _len; i++) {
+		if _char == _vowels[i] {
+			_preposition = "an";
+			break;
+		}
+	}
+	var _msg = instanceof(_self) + "." + _name + "() expected " + _preposition + " ";
+	_msg += _expected + ", received " + typeof(_received) + ".";
+	throw(_msg);
 }
