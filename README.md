@@ -42,7 +42,7 @@ runner.run();
 ```
 
 
-<b>TestRunner</b><samp>.([name], [struct_unpack])</samp>
+<b>TestRunner</b><samp>.([struct_unpack])</samp>
 <p>A <i>TestRunner</i> is where the test suites are stored. When <samp>TestRunner.run()</samp> is executed, the test runner will iterate through its test suites, then every test suite's test case, and run the test. A name can be given to the test runner.</p>
 
 <samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
@@ -56,7 +56,7 @@ runner.run();
 <samp>.hr([string], [length])</samp> Display a horizontal row. It will output "-" * 70 by default, but can be overwritten by supplying a string and number between 0 and 120.
 
 
-<b>TestSuite</b><samp>.([name], [struct_unpack])</samp>
+<b>TestSuite</b><samp>.([struct_unpack])</samp>
 <p>A <i>TestSuite</i> is where the test cases are stored for more organization. A name can be given to the test suite.</p>
 
 <samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
@@ -67,7 +67,7 @@ runner.run();
 <samp>.addTestCase(TestCase)</samp> Add the supplied <samp>TestCase</samp> object as a child test case.
 
 
-<b>TestCase</b>
+<b>TestCase</b><samp>.([name], [struct_unpack])</samp>
 <p>A <i>TestCase</i> is where the actions of the test are stored. Give the test to the test case in the type of a method function. A name can also be given to the test case.</p>
 
 <samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.

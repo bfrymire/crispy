@@ -5,7 +5,7 @@
  * Copyright (c) 2020 bfrymire
  */
 
-#macro CRISPY_VERSION "1.0.0"
+#macro CRISPY_VERSION "1.0.1"
 #macro CRISPY_DATE "12/7/2020"
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_RUN true
