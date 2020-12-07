@@ -1,7 +1,7 @@
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
-<p>Version 0.0.1</p>
+<p>Version 1.0.1</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
@@ -46,9 +46,9 @@ runner.run();
 <p>A <i>TestRunner</i> is where the test suites are stored. When <samp>TestRunner.run()</samp> is executed, the test runner will iterate through its test suites, then every test suite's test case, and run the test. A name can be given to the test runner.</p>
 
 <samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
-<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp.>.setUp(method function)</samp> to edit this function.
+<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp>.setUp(method function)</samp> to edit this function.
 <samp>.tearDown([method function])</samp> Specify instructions to run at the end of the <samp>run</samp> sequence. If provided with a method function, <samp>tearDown</samp> will run that function when called.
-<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp.>.tearDown(method function)</samp> to edit this function.
+<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp>.tearDown(method function)</samp> to edit this function.
 <samp>.run()</samp> Iterates through the <samp>suites</samp> and runs each <samp>test</samp>.
 <samp>.addLog(log)</samp> Add a <samp>crispyLog</samp> object to the <samp>logs</samp> array. When running a <samp>TestCase</samp>, it will capture all logs from the test.
 <samp>.captureLogs({TestSuite|TestCase|crispyLog})</samp> Will recursively capture and add all <samp>crispyLog</samp> objects from the provided object.
@@ -60,9 +60,9 @@ runner.run();
 <p>A <i>TestSuite</i> is where the test cases are stored for more organization. A name can be given to the test suite.</p>
 
 <samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
-<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp.>.setUp(method function)</samp> to edit this function.
+<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp>.setUp(method function)</samp> to edit this function.
 <samp>.tearDown([method function])</samp> Specify instructions to run at the end of the <samp>run</samp> sequence. If provided with a method function, <samp>tearDown</samp> will run that function when called.
-<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp.>.tearDown(method function)</samp> to edit this function.
+<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp>.tearDown(method function)</samp> to edit this function.
 <samp>.run()</samp> Runs each test added to the <samp>suite</samp>.
 <samp>.addTestCase(TestCase)</samp> Add the supplied <samp>TestCase</samp> object as a child test case.
 
@@ -71,15 +71,15 @@ runner.run();
 <p>A <i>TestCase</i> is where the actions of the test are stored. Give the test to the test case in the type of a method function. A name can also be given to the test case.</p>
 
 <samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
-<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp.>.setUp(method function)</samp> to edit this function.
+<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp>.setUp(method function)</samp> to edit this function.
 <samp>.tearDown([method function])</samp> Specify instructions to run at the end of the <samp>run</samp> sequence. If provided with a method function, <samp>tearDown</samp> will run that function when called.
-<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp.>.tearDown(method function)</samp> to edit this function.
+<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp>.tearDown(method function)</samp> to edit this function.
 <samp>.run()</samp> Runs the test.
 
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v.0.0.1">Download the .yymp file</a>
+<a href="https://github.com/bfrymire/crispy/releases/tag/v.1.0.1">Download the .yymp file</a>
 
 
 <h2>License</h2>
