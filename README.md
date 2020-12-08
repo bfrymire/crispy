@@ -1,3 +1,4 @@
+
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
@@ -42,44 +43,52 @@ runner.run();
 ```
 
 
-<b>TestRunner</b><samp>([struct_unpack])</samp>
-<p>A <i>TestRunner</i> is where the test suites are stored. When <samp>TestRunner.run()</samp> is executed, the test runner will iterate through its test suites, then every test suite's test case, and run the test. A name can be given to the test runner.</p>
-
-<samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
-<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp>.setUp(method function)</samp> to edit this function.
-<samp>.tearDown([method function])</samp> Specify instructions to run at the end of the <samp>run</samp> sequence. If provided with a method function, <samp>tearDown</samp> will run that function when called.
-<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp>.tearDown(method function)</samp> to edit this function.
-<samp>.run()</samp> Iterates through the <samp>suites</samp> and runs each <samp>test</samp>.
-<samp>.addLog(log)</samp> Add a <samp>crispyLog</samp> object to the <samp>logs</samp> array. When running a <samp>TestCase</samp>, it will capture all logs from the test.
-<samp>.captureLogs({TestSuite|TestCase|crispyLog})</samp> Will recursively capture and add all <samp>crispyLog</samp> objects from the provided object.
-<samp>.addTestSuite(TestSuite)</samp> Add the supplied <samp>TestSuite</samp> object as a child suite.
-<samp>.hr([string], [length])</samp> Display a horizontal row. It will output "-" * 70 by default, but can be overwritten by supplying a string and number between 0 and 120.
-
-
-<b>TestSuite</b><samp>([struct_unpack])</samp>
-<p>A <i>TestSuite</i> is where the test cases are stored for more organization. A name can be given to the test suite.</p>
-
-<samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
-<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp>.setUp(method function)</samp> to edit this function.
-<samp>.tearDown([method function])</samp> Specify instructions to run at the end of the <samp>run</samp> sequence. If provided with a method function, <samp>tearDown</samp> will run that function when called.
-<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp>.tearDown(method function)</samp> to edit this function.
-<samp>.run()</samp> Runs each test added to the <samp>suite</samp>.
-<samp>.addTestCase(TestCase)</samp> Add the supplied <samp>TestCase</samp> object as a child test case.
-
-
-<b>TestCase</b><samp>([name], [struct_unpack])</samp>
-<p>A <i>TestCase</i> is where the actions of the test are stored. Give the test to the test case in the type of a method function. A name can also be given to the test case.</p>
-
-<samp>.setUp([method function])</samp> Specify instructions to run at the start of the <samp>run</samp> sequence. If provided with a method function, <samp>setUp</samp> will run that function when called.
-<samp>.\_\_setUp(method function)</samp> Function that is ran along side the default <samp>setUp</samp>. Use <samp>.setUp(method function)</samp> to edit this function.
-<samp>.tearDown([method function])</samp> Specify instructions to run at the end of the <samp>run</samp> sequence. If provided with a method function, <samp>tearDown</samp> will run that function when called.
-<samp>.\_\_tearDown(method function)</samp> Function that is ran along side the default <samp>tearDown</samp>. Use <samp>.tearDown(method function)</samp> to edit this function.
-<samp>.run()</samp> Runs the test.
-
-
-
 <h2>Installation</h2>
 <a href="https://github.com/bfrymire/crispy/releases/tag/v.1.0.1">Download the .yymp file</a>
+
+A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
+
+Expand upon the code to suite your testing needs.
+
+
+<h2>TestCase Assertions</h2>
+
+| Method function | Checks that |
+|--|--|
+| `assertEqual(a, b)` | `a == b` |
+| `assertNotEqual(a, b)` | `a != b` |
+| `assertTrue(a)` | `bool(a) == true` |
+| `assertFalse(a)` | `bool(a) == false` |
+
+<i>TestCase</i><samp>.assertEqual(first, second, [msg=undefined])</samp> - Will check if first and second are the same type. If they are not, the test will fail and an error message will output with their types. If they are the same type, they'll be checked if they're equal and determine whether or not it's equal.
+
+<i>TestCase</i><samp>.assertNotEqual(first, second, [msg=undefined])</samp> - Checks whether or not the first and second are not equal.
+
+<i>TestCase</i><samp>.assertTrue(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to convert into a <samp>bool</samp>, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is true.
+
+<i>TestCase</i><samp>.assertFalse(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to convert into a <samp>bool</samp>, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is false.
+
+
+<h2>setUp() and tearDown()</h2>
+<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a method function into the functions.
+
+<samp>.setUp([method function])</samp> - Provide a method function to run during <samp>setUp()</samp>. If anything other than a method function is provided, an error message will be thrown.
+
+<samp>.tearDown([method function])</samp> - Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
+
+```js
+testAdd = new TestCase(function() {
+	self.assertTrue(_number, 24);
+}, "testAdd");
+testAdd.setUp(function() {
+	_number = 24;
+});
+testAdd.tearDown(function() {
+	show_debug_message("Your number is: " + string(_number));
+});
+```
+
+In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure, this could possibly lead to overwritting variables.
 
 
 <h2>License</h2>
