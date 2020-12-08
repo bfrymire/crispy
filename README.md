@@ -48,7 +48,7 @@ runner.run();
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
-Expand upon the code to suite your testing needs.
+Expand upon the code to suit your testing needs.
 
 
 <h2>TestCase Assertions</h2>
@@ -88,7 +88,7 @@ testAdd.tearDown(function() {
 });
 ```
 
-In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure, this could possibly lead to overwritting variables.
+In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwritting variables and breaking the objects. Be careful with these functions.
 
 
 <h2>License</h2>
