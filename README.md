@@ -78,7 +78,7 @@ Expand upon the code to suite your testing needs.
 
 ```js
 testAdd = new TestCase(function() {
-	self.assertTrue(_number, 24);
+	self.assertEqual(_number, 24);
 }, "testAdd");
 testAdd.setUp(function() {
 	_number = 24;
