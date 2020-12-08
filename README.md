@@ -64,9 +64,9 @@ Expand upon the code to suit your testing needs.
 
 <i>TestCase</i><samp>.assertNotEqual(first, second, [msg=undefined])</samp> - Checks whether or not the first and second are not equal.
 
-<i>TestCase</i><samp>.assertTrue(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to convert into a <samp>bool</samp>, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is true.
+<i>TestCase</i><samp>.assertTrue(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is true.
 
-<i>TestCase</i><samp>.assertFalse(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to convert into a <samp>bool</samp>, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is false.
+<i>TestCase</i><samp>.assertFalse(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is false.
 
 
 <h2>setUp() and tearDown()</h2>
