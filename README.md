@@ -44,7 +44,7 @@ runner.run();
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v.1.0.1">Download the .yymp file</a>
+<a href="https://github.com/bfrymire/crispy/releases/tag/v.1.0.1">Download the .yymps file</a>
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
