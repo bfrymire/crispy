@@ -80,9 +80,11 @@ Expand upon the code to suit your testing needs.
 testAdd = new TestCase(function() {
 	self.assertEqual(_number, 24);
 }, "testAdd");
+
 testAdd.setUp(function() {
 	_number = 24;
 });
+
 testAdd.tearDown(function() {
 	show_debug_message("Your number is: " + string(_number));
 });
