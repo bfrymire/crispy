@@ -367,7 +367,6 @@ function TestCase(fun) constructor {
 			}
 		}
 	}
-	__setUp = undefined;
 	
 	tearDown = function() {
 		if argument_count > 0 {
@@ -381,11 +380,6 @@ function TestCase(fun) constructor {
 				self.__tearDown();
 			}
 		}
-	}
-	__tearDown = undefined;
-
-	updateName = function(name) {
-		self.name = name;
 	}
 
 	run = function() {
@@ -404,8 +398,10 @@ function TestCase(fun) constructor {
 	if argument_count > 1 {
 		setName(argument[1]);
 	} else {
-		setName(undefined);
+		self.name = undefined;
 	}
+	__setUp = undefined;
+	__tearDown = undefined;
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, fun);
