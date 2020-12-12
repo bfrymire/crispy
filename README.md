@@ -2,7 +2,7 @@
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
-<p>Version 1.0.1</p>
+<p>Version 1.0.2</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
@@ -44,7 +44,7 @@ runner.run();
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v.1.0.1">Download the .yymps file</a>
+<a href="https://github.com/bfrymire/crispy/releases/tag/v1.0.2">Download the .yymps file</a>
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
@@ -60,13 +60,13 @@ Expand upon the code to suit your testing needs.
 | `assertTrue(a)` | `bool(a) == true` |
 | `assertFalse(a)` | `bool(a) == false` |
 
-<i>TestCase</i><samp>.assertEqual(first, second, [msg=undefined])</samp> - Will check if first and second are the same type. If they are not, the test will fail and an error message will output with their types. If they are the same type, they'll be checked if they're equal and determine whether or not it's equal.
+<i>TestCase</i><samp>.assertEqual(first, second, [msg=undefined])</samp> - Will check if first and second are the same type. If they are not, the test will fail and an error message will output with their types. If they are the same type, the test checks whether or not <samp>first</samp> and <samp>second</samp> are equal.
 
-<i>TestCase</i><samp>.assertNotEqual(first, second, [msg=undefined])</samp> - Checks whether or not the first and second are not equal.
+<i>TestCase</i><samp>.assertNotEqual(first, second, [msg=undefined])</samp> - Checks whether or not the <samp>first</samp> and <samp>second</samp> are not equal.
 
-<i>TestCase</i><samp>.assertTrue(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is true.
+<i>TestCase</i><samp>.assertTrue(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test checks whether or not <samp>bool(expr)</samp> is true.
 
-<i>TestCase</i><samp>.assertFalse(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is false.
+<i>TestCase</i><samp>.assertFalse(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test checks whether or not <samp>bool(expr)</samp> is false.
 
 
 <h2>setUp() and tearDown()</h2>
@@ -77,12 +77,17 @@ Expand upon the code to suit your testing needs.
 <samp>.tearDown([method function])</samp> - Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
 
 ```js
+// Create TestCase
 testAdd = new TestCase(function() {
 	self.assertEqual(_number, 24);
 }, "testAdd");
+
+// Define setUp() function
 testAdd.setUp(function() {
 	_number = 24;
 });
+
+// Define tearDown() function
 testAdd.tearDown(function() {
 	show_debug_message("Your number is: " + string(_number));
 });
