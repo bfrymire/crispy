@@ -92,6 +92,7 @@ runner.run();
 
 <p>
 	<samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
+	<br>
 	<samp><b>assertNotEqual(first, second, [msg=undefined])</b></samp>
 </p>
 <p>
@@ -100,7 +101,7 @@ runner.run();
 
 
 <samp><b>assertTrue(expr, [msg=undefined])</b></samp>
-
+<br>
 <samp><b>assertFalse(expr, [msg=undefined])</b></samp>
 
 <samp>assertTrue</samp> will try and convert <samp>expr</samp> into a boolean value. If it's unable to do so, the test will immediately fail and log an error message. After successfully converting the <samp>expr</samp>, the test checks whether or not <samp>bool(expr)</samp> is true based on the function name.
