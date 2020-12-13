@@ -353,6 +353,36 @@ function TestCase(fun) constructor {
 		}
 	}
 
+	/**
+	 * Test whether the provided expression is noone.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	assertIsNoone = function(expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		if expr == -4 {
+			self.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not noone."}));
+		}
+	}
+
+	/**
+	 * Test whether the provided expression is not noone.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	assertIsNotNoone = function(expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		if expr != -4 {
+			self.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is noone."}));
+		}
+	}
+
 	setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
