@@ -1,7 +1,7 @@
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
-<p>Version 1.0.2</p>
+<p>Version 1.1.0</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
@@ -43,7 +43,7 @@ runner.run();
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v1.0.2">Download the .yymps file</a>
+<a href="https://github.com/bfrymire/crispy/releases/tag/v1.1.0">Download the .yymps file</a>
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
@@ -64,28 +64,30 @@ Expand upon the code to suit your testing needs.
 <samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
 <br>
 <samp><b>assertNotEqual(first, second, [msg=undefined])</b></samp>
-
+<br>
 <samp>assertEqual</samp> will check if <samp>first</samp> and <samp>second</samp> are the same type. If they are not, the test will immediately fail and log an error message. If they are the same type, the test checks whether or not <samp>first</samp> and <samp>second</samp> are equal based on the function name.
 
 <samp><b>assertTrue(expr, [msg=undefined])</b></samp>
 <br>
 <samp><b>assertFalse(expr, [msg=undefined])</b></samp>
-
+<br>
 <samp>assertTrue</samp> will try and convert <samp>expr</samp> into a boolean value. If it's unable to do so, the test will immediately fail and log an error message. After successfully converting the <samp>expr</samp>, the test checks whether or not <samp>bool(expr)</samp> is true based on the function name.
 
 <samp><b>assertIsNoone(expr, [msg=undefined])</b></samp>
 <br>
 <samp><b>assertIsNotNoone(expr, [msg=undefined])</b></samp>
-
+<br>
 The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>expr</samp> is -4 based on the function name.
 
 <h2>setUp() and tearDown()</h2>
 <samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a method function into the functions.
 
 <samp><b>setUp([method function])</b></samp>
+<br>
 Provide a method function to run during <samp>setUp()</samp>. If anything other than a method function is provided, an error message will be thrown.
 
 <samp><b>tearDown([method function])</b></samp>
+<br>
 Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
 
 ```js
