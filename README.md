@@ -1,20 +1,42 @@
-<p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
+<p align="center">
+	<img src="./LOGO.png" style="display:block;width:250px; margin:auto;">
+</p>
+<h1>
+	crispy
+</h1>
+<p>
+	Version 1.0.2
+</p>
+<p>
+	An automated unit testing framework built in GML for GameMaker Studio 2.3+
+</p>
 
-<h1>crispy</h1>
-<p>Version 1.0.2</p>
-<p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
-
-<h2>Basic example</h2>
-<p>The most basic elements that Crispy needs to function are:</p>
-
+<h2>
+	Basic example
+</h2>
+<p>
+	The most basic elements that Crispy needs to function are:
+</p>
 <ol>
-	<li>Create TestRunner</li>
-	<li>Create TestSuite</li>
-	<li>Add TestSuite to TestRunner</li>
-	<li>Create TestCase</li>
-	<li>Add TestCase to TestSuite</li>
-	<li>Run TestRunner</li>
+	<li>
+		Create TestRunner
+	</li>
+	<li>
+		Create TestSuite
+	</li>
+	<li>
+		Add TestSuite to TestRunner
+	</li>
+	<li>
+		Create TestCase
+	</li>
+	<li>
+		Add TestCase to TestSuite
+	</li>
+	<li>
+		Run TestRunner
+	</li>
 </ol>
 
 
@@ -42,12 +64,19 @@ runner.run();
 ```
 
 
-<h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v1.0.2">Download the .yymps file</a>
+<h2>
+	Installation
+</h2>
+<p>
+	<a href="https://github.com/bfrymire/crispy/releases/tag/v1.0.2">
+		Download the .yymps file
+	</a>
+</p>
+<p>
+	A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
+	Expand upon the code to suit your testing needs.
+</p>
 
-A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
-
-Expand upon the code to suit your testing needs.
 
 
 <h2>TestCase Assertions</h2>
@@ -61,11 +90,14 @@ Expand upon the code to suit your testing needs.
 | `assertIsNoone(x)` | `x == -4` |
 | `assertIsNotNoone(x)` | `x != -4` |
 
-<samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
+<p>
+	<samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
+	<samp><b>assertNotEqual(first, second, [msg=undefined])</b></samp>
+</p>
+<p>
+	<samp>assertEqual</samp> will check if <samp>first</samp> and <samp>second</samp> are the same type. If they are not, the test will immediately fail and log an error message. If they are the same type, the test checks whether or not <samp>first</samp> and <samp>second</samp> are equal based on the function name.
+</p>
 
-<samp><b>assertNotEqual(first, second, [msg=undefined])</b></samp>
-
-<samp>assertEqual</samp> will check if <samp>first</samp> and <samp>second</samp> are the same type. If they are not, the test will immediately fail and log an error message. If they are the same type, the test checks whether or not <samp>first</samp> and <samp>second</samp> are equal based on the function name.
 
 <samp><b>assertTrue(expr, [msg=undefined])</b></samp>
 
