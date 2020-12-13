@@ -1,4 +1,3 @@
-
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
@@ -63,15 +62,21 @@ Expand upon the code to suit your testing needs.
 | `assertIsNotNoone(x)` | `x != -4` |
 
 <samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
+
 <samp><b>assertNotEqual(first, second, [msg=undefined])</b></samp>
+
 <samp>assertEqual</samp> will check if <samp>first</samp> and <samp>second</samp> are the same type. If they are not, the test will immediately fail and log an error message. If they are the same type, the test checks whether or not <samp>first</samp> and <samp>second</samp> are equal based on the function name.
 
 <samp><b>assertTrue(expr, [msg=undefined])</b></samp>
+
 <samp><b>assertFalse(expr, [msg=undefined])</b></samp>
+
 <samp>assertTrue</samp> will try and convert <samp>expr</samp> into a boolean value. If it's unable to do so, the test will immediately fail and log an error message. After successfully converting the <samp>expr</samp>, the test checks whether or not <samp>bool(expr)</samp> is true based on the function name.
 
 <samp><b>assertIsNoone(expr, [msg=undefined])</b></samp>
+
 <samp><b>assertIsNotNoone(expr, [msg=undefined])</b></samp>
+
 The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>expr</samp> is -4 based on the function name.
 
 <h2>setUp() and tearDown()</h2>
