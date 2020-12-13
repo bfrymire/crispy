@@ -5,18 +5,18 @@
  * Copyright (c) 2020 bfrymire
  */
 
-#macro CRISPY_VERSION "1.0.1"
-#macro CRISPY_DATE "12/7/2020"
+#macro CRISPY_VERSION "1.1.0"
+#macro CRISPY_DATE "12/13/2020"
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_RUN true
-#macro CRISPY_VERBOSITY 2 // {0|1|2}
+#macro CRISPY_VERBOSITY 1 // {0|1|2}
 #macro CRISPY_TIME_PRECISION 6
 #macro CRISPY_PASS_MSG_SILENT "."
 #macro CRISPY_FAIL_MSG_SILENT "F"
 #macro CRISPY_PASS_MSG_VERBOSE "ok"
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail"
 
-show_debug_message("Using Crispy automated unit testing framework version " + CRISPY_VERSION);
+show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework version " + CRISPY_VERSION);
 
 
 /**
