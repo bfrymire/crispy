@@ -45,6 +45,21 @@ testFalse = new TestCase(function() {
 }, "testFalse");
 suite.addTestCase(testFalse);
 
+testIsNooneKeyword = new TestCase(function() {
+	self.assertIsNoone(noone);
+}, "testIsNooneKeyword");
+suite.addTestCase(testIsNooneKeyword);
+
+testIsNooneNumber = new TestCase(function() {
+	self.assertIsNoone(-4);
+}, "testIsNooneNumber");
+suite.addTestCase(testIsNooneNumber);
+
+testIsNotNoone = new TestCase(function() {
+	self.assertIsNotNoone(all);
+}, "testIsNotNoone");
+suite.addTestCase(testIsNotNoone);
+
 
 // Failure without custom message
 testFailure = new TestCase(function() {
