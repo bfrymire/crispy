@@ -1,8 +1,7 @@
-
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
 
 <h1>crispy</h1>
-<p>Version 1.0.1</p>
+<p>Version 1.1.0</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
@@ -44,7 +43,7 @@ runner.run();
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v.1.0.1">Download the .yymp file</a>
+<a href="https://github.com/bfrymire/crispy/releases/tag/v1.1.0">Download the .yymps file</a>
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
@@ -57,34 +56,52 @@ Expand upon the code to suit your testing needs.
 |--|--|
 | `assertEqual(a, b)` | `a == b` |
 | `assertNotEqual(a, b)` | `a != b` |
-| `assertTrue(a)` | `bool(a) == true` |
-| `assertFalse(a)` | `bool(a) == false` |
+| `assertTrue(x)` | `bool(x) == true` |
+| `assertFalse(x)` | `bool(x) == false` |
+| `assertIsNoone(x)` | `x == -4` |
+| `assertIsNotNoone(x)` | `x != -4` |
 
-<i>TestCase</i><samp>.assertEqual(first, second, [msg=undefined])</samp> - Will check if first and second are the same type. If they are not, the test will fail and an error message will output with their types. If they are the same type, they'll be checked if they're equal and determine whether or not it's equal.
+<samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
+<br>
+<samp><b>assertNotEqual(first, second, [msg=undefined])</b></samp>
+<br>
+<samp>assertEqual</samp> will check if <samp>first</samp> and <samp>second</samp> are the same type. If they are not, the test will immediately fail and log an error message. If they are the same type, the test checks whether or not <samp>first</samp> and <samp>second</samp> are equal based on the function name.
 
-<i>TestCase</i><samp>.assertNotEqual(first, second, [msg=undefined])</samp> - Checks whether or not the first and second are not equal.
+<samp><b>assertTrue(expr, [msg=undefined])</b></samp>
+<br>
+<samp><b>assertFalse(expr, [msg=undefined])</b></samp>
+<br>
+<samp>assertTrue</samp> will try and convert <samp>expr</samp> into a boolean value. If it's unable to do so, the test will immediately fail and log an error message. After successfully converting the <samp>expr</samp>, the test checks whether or not <samp>bool(expr)</samp> is true based on the function name.
 
-<i>TestCase</i><samp>.assertTrue(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is true.
-
-<i>TestCase</i><samp>.assertFalse(expr, [msg=undefined])</samp> - Will try and convert <samp>expr</samp> into the <samp>typeof</samp> <samp>bool</samp>. If it's unable to do so, an error message will display and the test will fail. After successfully converting the <samp>expr</samp>, the test will check Checks whether or not <samp>bool(expr)</samp> is false.
-
+<samp><b>assertIsNoone(expr, [msg=undefined])</b></samp>
+<br>
+<samp><b>assertIsNotNoone(expr, [msg=undefined])</b></samp>
+<br>
+The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>expr</samp> is -4 based on the function name.
 
 <h2>setUp() and tearDown()</h2>
 <samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a method function into the functions.
 
-<samp>.setUp([method function])</samp> - Provide a method function to run during <samp>setUp()</samp>. If anything other than a method function is provided, an error message will be thrown.
+<samp><b>setUp([method function])</b></samp>
+<br>
+Provide a method function to run during <samp>setUp()</samp>. If anything other than a method function is provided, an error message will be thrown.
 
-<samp>.tearDown([method function])</samp> - Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
+<samp><b>tearDown([method function])</b></samp>
+<br>
+Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
 
 ```js
+// Create TestCase
 testAdd = new TestCase(function() {
 	self.assertEqual(_number, 24);
 }, "testAdd");
 
+// Define setUp() function
 testAdd.setUp(function() {
 	_number = 24;
 });
 
+// Define tearDown() function
 testAdd.tearDown(function() {
 	show_debug_message("Your number is: " + string(_number));
 });

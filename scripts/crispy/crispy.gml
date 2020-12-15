@@ -5,19 +5,19 @@
  * Copyright (c) 2020 bfrymire
  */
 
-#macro CRISPY_VERSION "1.0.1"
-#macro CRISPY_DATE "12/7/2020"
+#macro CRISPY_VERSION "1.1.0"
+#macro CRISPY_DATE "12/13/2020"
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_RUN true
 #macro CRISPY_DEBUG true
-#macro CRISPY_VERBOSITY 2 // {0|1|2}
+#macro CRISPY_VERBOSITY 1 // {0|1|2}
 #macro CRISPY_TIME_PRECISION 6
 #macro CRISPY_PASS_MSG_SILENT "."
 #macro CRISPY_FAIL_MSG_SILENT "F"
 #macro CRISPY_PASS_MSG_VERBOSE "ok"
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail"
 
-show_debug_message("Using Crispy automated unit testing framework version " + CRISPY_VERSION);
+show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework version " + CRISPY_VERSION);
 
 
 /**
@@ -360,6 +360,36 @@ function TestCase(fun) constructor {
 		}
 	}
 
+	/**
+	 * Test whether the provided expression is noone.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	assertIsNoone = function(expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		if expr == -4 {
+			self.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not noone."}));
+		}
+	}
+
+	/**
+	 * Test whether the provided expression is not noone.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	assertIsNotNoone = function(expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		if expr != -4 {
+			self.addLog(new crispyLog(self, {pass:true}));
+		} else {
+			self.addLog(new crispyLog(self, {pass:false,msg:_msg,helper_text:"expr is noone."}));
+		}
+	}
+
 	setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -374,7 +404,6 @@ function TestCase(fun) constructor {
 			}
 		}
 	}
-	__setUp = undefined;
 	
 	tearDown = function() {
 		if argument_count > 0 {
@@ -388,11 +417,6 @@ function TestCase(fun) constructor {
 				self.__tearDown();
 			}
 		}
-	}
-	__tearDown = undefined;
-
-	updateName = function(name) {
-		self.name = name;
 	}
 
 	run = function() {
@@ -411,8 +435,10 @@ function TestCase(fun) constructor {
 	if argument_count > 1 {
 		setName(argument[1]);
 	} else {
-		setName(undefined);
+		self.name = undefined;
 	}
+	__setUp = undefined;
+	__tearDown = undefined;
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, fun);

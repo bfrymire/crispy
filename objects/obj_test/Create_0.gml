@@ -13,33 +13,7 @@ suite = new TestSuite();
 // Add TestSuite to TestRunner
 runner.addTestSuite(suite);
 
-testAdd = new TestCase(function() {
-	self.assertEqual(_number, 24);
-}, "testAdd");
-testAdd.setUp(function() {
-	_number = 24;
-});
-testAdd.tearDown(function() {
-	show_debug_message("Your number is: " + string(_number));
-});
-suite.addTestCase(testAdd);
-testAdd.setUp = function() {
-	".setUp() is taken over.";
-}
 
-testLoop = new TestCase(function() {
-	show_debug_message("Dormammu, I've come to bargain!");
-}, "testLoop");
-testLoop.tearDown(function() {
-	self.test();
-	self.tearDown();
-});
-// suite.addTestCase(testLoop);
-
-
-
-
-/*
 // Create TestCase for our custom function
 testAddFunction = new TestCase(function() {
 	var _number = other.add(10, 5);
@@ -71,6 +45,21 @@ testFalse = new TestCase(function() {
 }, "testFalse");
 suite.addTestCase(testFalse);
 
+testIsNooneKeyword = new TestCase(function() {
+	self.assertIsNoone(noone);
+}, "testIsNooneKeyword");
+suite.addTestCase(testIsNooneKeyword);
+
+testIsNooneNumber = new TestCase(function() {
+	self.assertIsNoone(-4);
+}, "testIsNooneNumber");
+suite.addTestCase(testIsNooneNumber);
+
+testIsNotNoone = new TestCase(function() {
+	self.assertIsNotNoone(all);
+}, "testIsNotNoone");
+suite.addTestCase(testIsNotNoone);
+
 
 // Failure without custom message
 testFailure = new TestCase(function() {
@@ -84,7 +73,7 @@ testFailureCustomMessage = new TestCase(function() {
 }, "testFailureCustomMessage");
 suite.addTestCase(testFailureCustomMessage);
 
-*/
+
 // Run the TestRunner
 if CRISPY_RUN {
 	runner.run();
