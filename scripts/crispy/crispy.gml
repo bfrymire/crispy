@@ -9,7 +9,7 @@
 #macro CRISPY_DATE "12/13/2020"
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_RUN true
-#macro CRISPY_DEBUG true
+#macro CRISPY_DEBUG false
 #macro CRISPY_VERBOSITY 1 // {0|1|2}
 #macro CRISPY_TIME_PRECISION 6
 #macro CRISPY_PASS_MSG_SILENT "."
