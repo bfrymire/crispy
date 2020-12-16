@@ -9,6 +9,7 @@
 #macro CRISPY_DATE "12/13/2020"
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_RUN true
+#macro CRISPY_DEBUG true
 #macro CRISPY_VERBOSITY 1 // {0|1|2}
 #macro CRISPY_TIME_PRECISION 6
 #macro CRISPY_PASS_MSG_SILENT "."
@@ -23,7 +24,10 @@ show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework v
  * Runner to hold TestSuites and iterates through each TestSuite, running its TestUnits when instructed to.
  * @constructor
  */
-function TestRunner() : crispyExtendStructUnpack() constructor {
+function TestRunner() constructor {
+	// Give self cripsyStructUnpack() function
+	crispyMixinStructUnpack(self);
+
 	addLog = function(log) {
 		logs[array_length(logs)] = log;
 	}
@@ -180,7 +184,10 @@ function TestRunner() : crispyExtendStructUnpack() constructor {
  * Suite to hold tests and will run each test when instructed to.
  * @constructor
  */
-function TestSuite() : crispyExtendStructUnpack() constructor {
+function TestSuite() constructor {
+	// Give self cripsyStructUnpack() function
+	crispyMixinStructUnpack(self);
+
 	addTestCase = function(_case) {
 		var _inst = instanceof(_case);
 		if _inst != "TestCase" {
@@ -258,6 +265,9 @@ function TestSuite() : crispyExtendStructUnpack() constructor {
  * @param [string] name - Name of the test.
  */
 function TestCase(fun) constructor {
+	// Give self cripsyStructUnpack() function
+	crispyMixinStructUnpack(self);
+
 	if !is_method(fun) {
 		throw(instanceof(self) + "() expected a method function as argument0, received " + typeof(fun));
 	}
@@ -478,7 +488,10 @@ function crispyTimeConvert(time) {
  * @param {TestCase} _case - Testcase struct that ran the assertion.
  * @param [struct] Structure to replace existing constructor values.
  */
-function crispyLog(_case) : crispyExtendStructUnpack() constructor {
+function crispyLog(_case) constructor {
+	// Give self cripsyStructUnpack() function
+	crispyMixinStructUnpack(self);
+
 	getMsg = function() {
 		if self.verbosity == 2 && self.display_name != "" {
 			var _msg = self.display_name + " ";
@@ -526,11 +539,6 @@ function crispyLog(_case) : crispyExtendStructUnpack() constructor {
 	self.class = _case.class;
 	self.name = _case.name;
 
-	// Struct Unpacker
-	if argument_count > 1 {
-		self.crispyStructUnpack(argument[1]);
-	}
-
 	var _display_name = "";
 	if !is_undefined(self.name) {
 		_display_name += self.name;
@@ -544,36 +552,81 @@ function crispyLog(_case) : crispyExtendStructUnpack() constructor {
 	}
 	self.display_name = _display_name;
 
+	// Struct Unpacker
+	if argument_count > 1 {
+		self.crispyStructUnpack(argument[1]);
+	}
+
 }
 
 /**
- * Helper function that extends structs to have crispyStructUnpack() function.
+ * Mixin function that extends structs to have the crispyStructUnpack() function.
  * @function
- * @param {struct} _struct - Struct to give method veriable.
+ * @param {struct} _struct - Struct to give method variable to.
  */
-function crispyExtendStructUnpack() constructor {
-	crispyStructUnpack = method(self, crispyStructUnpack);
+function crispyMixinStructUnpack(struct) {
+	if !is_struct(struct) {
+		crispyThrowExpected(self, crispyMixinStructUnpack, "struct", struct);
+	}
+	struct.crispyStructUnpack = method(struct, crispyStructUnpack);
 }
 
 /**
- * Helper function for constructorts that will replace its values with the struct's.
+ * Helper function for structs that will replace a destination's variable name values with the given source's variable
+ * 		name values.
  * @function
- * @param {struct} _struct - Struct to replace existing values with.
+ * @param {struct} _struct - Struct used to replace existing values with.
+ * @param {boolean} [_name_must_exist] - Defaults to true. If true, this boolean flag prevents new variable names from
+ * 		being added to the destination struct if the variable name does not already exist.
  */
 function crispyStructUnpack(_struct) {
+	var _name_must_exist = (argument_count > 1 && is_bool(_name_must_exist)) ? argument[1] : true;
 	if !is_struct(_struct) {
-		throw("crispyStructUnpack() expected a struct, received " + typeof(_struct) + ".");
+		crispyThrowExpected(self, "crispyStructUnpack", "struct", struct);
 	}
 	var _names = variable_struct_get_names(_struct);
 	var _len = array_length(_names);
 	for(var i = 0; i < _len; i++) {
-		var _value = variable_struct_get(_struct, _names[i]);
-		if variable_struct_exists(self, _names[i]) {
-			variable_struct_set(self, _names[i], _value);
+		var _name = _names[i];
+		if string_pos(_name, "__") == 1 {
+			if CRISPY_DEBUG {
+				crispyDebugMessage("Variable names beginning in '__' are reserved for the framework.");
+			}
+			continue;
 		}
+		var _value = variable_struct_get(_struct, _name);
+		if _name_must_exist {
+			if !variable_struct_exists(self, _name) {
+				if CRISPY_DEBUG {
+					crispyDebugMessage("Variable name " + _name + " not found in struct, skipping writing variable name.");
+				}
+				continue;
+			}
+		}
+		variable_struct_set(self, _name, _value);
 	}
 }
 
+/**
+ * Helper function for Crispy to display its debug messages
+ * @function
+ * @param {string} msg - Text to be displayed in the Output Window.
+ */
+function crispyDebugMessage(msg) {
+	if !is_string(msg) {
+		crispyThrowExpected(self, "crispyDebugMessage", "string", msg);
+	}
+	show_debug_message(CRISPY_NAME + ": " + msg);
+}
+
+/**
+ * Helper function for Crispy to throw an error message that displays what type of value the function was expecting.
+ * @function
+ * @param {struct} _self - Struct that is calling the function, usually self.
+ * @param {string} _name - String of the name of the function that is currently running the error message.
+ * @param {string} _expected - String of the type of value expected to receive.
+ * @param {*} _received - Value received.
+ */
 function crispyThrowExpected(_self, _name, _expected, _received) {
 	var _char = string_ord_at(string_lower(_expected), 1);
 	var _vowels = ["a", "e", "i", "o", "u"];
