@@ -562,7 +562,7 @@ function crispyLog(_case) constructor {
 /**
  * Mixin function that extends structs to have the crispyStructUnpack() function.
  * @function
- * @param {struct} _struct - Struct to give method veriable to.
+ * @param {struct} _struct - Struct to give method variable to.
  */
 function crispyMixinStructUnpack(struct) {
 	if !is_struct(struct) {
