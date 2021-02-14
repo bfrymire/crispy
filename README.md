@@ -19,7 +19,7 @@
 
 
 ```js
-// Create Testrunner
+// Create TestRunner
 runner = new TestRunner();
 
 // Create TestSuite
@@ -29,13 +29,13 @@ suite = new TestSuite();
 runner.addTestSuite(suite);
 
 // Create TestCase
-testAdd = new TestCase(function() {
+test_sum = new TestCase(function() {
 	var sum = 2 + 3;
 	self.assertEqual(sum, 5);
-}, "testAdd");
+}, "test_sum");
 
 // Add TestCase to TestSuite
-suite.addTestCase(testAdd);
+suite.addTestCase(test_sum);
 
 // Run TestRunner
 runner.run();
@@ -92,24 +92,24 @@ Provide a method function to run during <samp>tearDown()</samp>. If anything oth
 
 ```js
 // Create TestCase
-testAdd = new TestCase(function() {
+test_example = new TestCase(function() {
 	self.assertEqual(_number, 24);
-}, "testAdd");
+}, "test_example");
 
 // Define setUp() function
-testAdd.setUp(function() {
+test_example.setUp(function() {
 	_number = 24;
 });
 
 // Define tearDown() function
-testAdd.tearDown(function() {
+test_example.tearDown(function() {
 	show_debug_message("Your number is: " + string(_number));
 });
 ```
 
-In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwritting variables and breaking the objects. Be careful with these functions.
+In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwriting variables and breaking the objects. Be careful with these functions.
 
 
 <h2>License</h2>
 <a href="https://opensource.org/licenses/MIT" _target="blank">MIT License</a>
-<p>Copyright (c) 2020 bfrymire</p>
+<p>Copyright (c) 2020-2021 bfrymire</p>
