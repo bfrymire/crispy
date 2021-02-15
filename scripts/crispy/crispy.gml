@@ -61,11 +61,8 @@ function TestRunner() constructor {
 	addTestSuite = function(suite) {
 		var _inst = instanceof(suite);
 		if _inst != "TestSuite" {
-			if !is_undefined(_inst) {
-				throw(instanceof(self) + ".addTestSuite() expected a TestSuite instance, received " + _inst);
-			} else {
-				throw(instanceof(self) + ".addTestSuite() expected a TestSuite instance, received " + typeof(suite));
-			}
+			var _type_received = !is_undefined(_inst) ? _inst : typeof(suite);
+			crispyThrowExpected(self, "addTestSuite", "TestSuite", _type_received);
 		}
 		suite.parent = self;
 		self.suites[array_length(self.suites)] = suite;
@@ -96,7 +93,7 @@ function TestRunner() constructor {
 			if is_method(argument[0]) {
 				self.__setUp = method(self, argument[0]);
 			} else {
-				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+				crispyThrowExpected(self, "setUp", "method function", typeof(argument[0]));
 			}
 		} else {
 			self.logs = [];
@@ -113,7 +110,7 @@ function TestRunner() constructor {
 			if is_method(argument[0]) {
 				self.__tearDown = method(self, argument[0]);
 			} else {
-				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
+				crispyThrowExpected(self, "tearDown", "method function", typeof(argument[0]));
 			}
 		} else {
 			// Get total run time
@@ -191,11 +188,8 @@ function TestSuite() constructor {
 	addTestCase = function(_case) {
 		var _inst = instanceof(_case);
 		if _inst != "TestCase" {
-			if !is_undefined(_inst) {
-				throw(instanceof(self) + ".addTestCase() expected a TestSuite instance, received " + _inst);
-			} else {
-				throw(instanceof(self) + ".addTestCase() expected a TestSuite instance, received " + typeof(_case));
-			}
+			var _type_received = !is_undefined(_inst) ? _inst : typeof(_case);
+			crispyThrowExpected(self, "addTestCase", "TestCase", _type_received);
 		}
 		_case.parent = self;
 		self.tests[array_length(tests)] = _case;
@@ -206,7 +200,7 @@ function TestSuite() constructor {
 			if is_method(argument[0]) {
 				self.__setUp = method(self, argument[0]);
 			} else {
-				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+				crispyThrowExpected(self, "setUp", "method function", typeof(argument[0]));
 			}
 		} else {
 			if !is_undefined(self.__setUp) {
@@ -220,7 +214,7 @@ function TestSuite() constructor {
 			if is_method(argument[0]) {
 				self.__tearDown = method(self, argument[0]);
 			} else {
-				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
+				crispyThrowExpected(self, "tearDown", "method function", typeof(argument[0]));
 			}
 		} else {
 			if !is_undefined(self.__tearDown) {
@@ -269,7 +263,7 @@ function TestCase(fun) constructor {
 	crispyMixinStructUnpack(self);
 
 	if !is_method(fun) {
-		throw(instanceof(self) + "() expected a method function as argument0, received " + typeof(fun));
+		crispyThrowExpected(self, "", "method function", typeof(fun));
 	}
 
 	addLog = function(log) {
@@ -398,7 +392,7 @@ function TestCase(fun) constructor {
 			if is_method(argument[0]) {
 				self.__setUp = method(self, argument[0]);
 			} else {
-				throw(instanceof(self) + "().setUp() expected a method function, received " + typeof(argument[0]));
+				crispyThrowExpected(self, "setUp", "method function", typeof(argument[0]));
 			}
 		} else {
 			self.clearLogs();
@@ -413,7 +407,7 @@ function TestCase(fun) constructor {
 			if is_method(argument[0]) {
 				self.__tearDown = method(self, argument[0]);
 			} else {
-				throw(instanceof(self) + "().tearDown() expected a method function, received " + typeof(argument[0]));
+				crispyThrowExpected(self, "tearDown", "method function", typeof(argument[0]));
 			}
 		} else {
 			if !is_undefined(self.__tearDown) {
@@ -638,7 +632,8 @@ function crispyThrowExpected(_self, _name, _expected, _received) {
 			break;
 		}
 	}
-	var _msg = instanceof(_self) + "." + _name + "() expected " + _preposition + " ";
+	_name = _name == "" ? _name : "." + _name;
+	var _msg = instanceof(_self) + _name + "() expected " + _preposition + " ";
 	_msg += _expected + ", received " + typeof(_received) + ".";
 	throw(_msg);
 }
