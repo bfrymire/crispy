@@ -28,7 +28,7 @@ function TestRunner() constructor {
 	crispyMixinStructUnpack(self);
 
 	addLog = function(log) {
-		logs[array_length(logs)] = log;
+		array_push(logs, log);
 	}
 
 	captureLogs = function(_inst) {
@@ -64,7 +64,7 @@ function TestRunner() constructor {
 			crispyThrowExpected(self, "addTestSuite", "TestSuite", _type_received);
 		}
 		_suite.parent = self;
-		self.suites[array_length(self.suites)] = _suite;
+		array_push(self.suites, _suite);
 	}
 
 	hr = function() {
@@ -190,7 +190,7 @@ function TestSuite() constructor {
 			crispyThrowExpected(self, "addTestCase", "TestCase", _type_received);
 		}
 		_case.parent = self;
-		self.tests[array_length(tests)] = _case;
+		array_push(self.tests, _case);
 	}
 
 	setUp = function() {
@@ -265,7 +265,7 @@ function TestCase(_fun) constructor {
 	}
 
 	addLog = function(_log) {
-		self.logs[array_length(self.logs)] = _log;
+		array_push(self.logs, _log);
 	}
 
 	clearLogs = function() {
