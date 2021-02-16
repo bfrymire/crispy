@@ -1,3 +1,6 @@
+can_run_tests = true;
+
+
 /// Custom function to test
 function add(a, b) {
 	return a + b;
@@ -72,12 +75,3 @@ testFailureCustomMessage = new TestCase(function() {
 	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
 }, "testFailureCustomMessage");
 suite.addTestCase(testFailureCustomMessage);
-
-
-// Run the TestRunner
-if CRISPY_RUN {
-	runner.run();
-}
-
-// Destroy testing object once complete
-instance_destroy();
