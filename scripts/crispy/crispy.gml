@@ -60,8 +60,7 @@ function TestRunner() constructor {
 	addTestSuite = function(_suite) {
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
-			var _type_received = !is_undefined(_inst) ? _inst : typeof(suite);
-			crispyThrowExpected(self, "addTestSuite", "TestSuite", _type_received);
+			crispyThrowExpected(self, "addTestSuite", "TestSuite", _suite);
 		}
 		_suite.parent = self;
 		array_push(self.suites, _suite);
@@ -90,15 +89,15 @@ function TestRunner() constructor {
 	setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__setUp = method(self, argument[0]);
+				self.__setUp__ = method(self, argument[0]);
 			} else {
 				crispyThrowExpected(self, "setUp", "method function", argument[0]);
 			}
 		} else {
 			self.logs = [];
 			self.start_time = crispyGetTime();
-			if !is_undefined(self.__setUp) {
-				self.__setUp();
+			if is_method(self.__setUp__) {
+				self.__setUp__();
 			}
 		}
 	}
@@ -106,7 +105,7 @@ function TestRunner() constructor {
 	tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__tearDown = method(self, argument[0]);
+				self.__tearDown__ = method(self, argument[0]);
 			} else {
 				crispyThrowExpected(self, "tearDown", "method function", argument[0]);
 			}
@@ -150,16 +149,16 @@ function TestRunner() constructor {
 				show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
 			}
 
-			if !is_undefined(self.__tearDown) {
-				self.__tearDown();
+			if is_method(self.__tearDown__) {
+				self.__tearDown__();
 			}
 			
 		}
 
 	}
 
-	__setUp = undefined;
-	__tearDown = undefined;
+	__setUp__ = undefined;
+	__tearDown__ = undefined;
 	name = (argument_count > 0 && !is_string(argument[0])) ? argument[0] : "TestRunner";
 	start_time = 0;
 	stop_time = 0;
@@ -196,13 +195,13 @@ function TestSuite() constructor {
 	setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__setUp = method(self, argument[0]);
+				self.__setUp__ = method(self, argument[0]);
 			} else {
 				crispyThrowExpected(self, "setUp", "method function", argument[0]);
 			}
 		} else {
-			if !is_undefined(self.__setUp) {
-				self.__setUp();
+			if is_method(self.__setUp__) {
+				self.__setUp__();
 			}
 		}
 	}
@@ -210,13 +209,13 @@ function TestSuite() constructor {
 	tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__tearDown = method(self, argument[0]);
+				self.__tearDown__ = method(self, argument[0]);
 			} else {
 				crispyThrowExpected(self, "tearDown", "method function", argument[0]);
 			}
 		} else {
-			if !is_undefined(self.__tearDown) {
-				self.__tearDown();
+			if is_method(self.__tearDown__) {
+				self.__tearDown__();
 			}
 		}
 	}
@@ -237,8 +236,8 @@ function TestSuite() constructor {
 		self.name = _name;
 	}
 
-	__setUp = undefined;
-	__tearDown = undefined;
+	__setUp__ = undefined;
+	__tearDown__ = undefined;
 	parent = undefined;
 	tests = [];
 	name = "TestSuite";
@@ -388,14 +387,14 @@ function TestCase(_fun) constructor {
 	setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__setUp = method(self, argument[0]);
+				self.__setUp__ = method(self, argument[0]);
 			} else {
 				crispyThrowExpected(self, "setUp", "method function", argument[0]);
 			}
 		} else {
 			self.clearLogs();
-			if !is_undefined(self.__setUp) {
-				self.__setUp();
+			if is_method(self.__setUp__) {
+				self.__setUp__();
 			}
 		}
 	}
@@ -403,13 +402,13 @@ function TestCase(_fun) constructor {
 	tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__tearDown = method(self, argument[0]);
+				self.__tearDown__ = method(self, argument[0]);
 			} else {
 				crispyThrowExpected(self, "tearDown", "method function", argument[0]);
 			}
 		} else {
-			if !is_undefined(self.__tearDown) {
-				self.__tearDown();
+			if is_method(self.__tearDown__) {
+				self.__tearDown__();
 			}
 		}
 	}
@@ -432,12 +431,17 @@ function TestCase(_fun) constructor {
 	} else {
 		self.name = undefined;
 	}
-	__setUp = undefined;
-	__tearDown = undefined;
+	__setUp__ = undefined;
+	__tearDown__ = undefined;
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, _fun);
 	logs = [];
+
+	// Struct Unpacker
+	if argument_count > 2 {
+		self.crispyStructUnpack(argument[2]);
+	}
 
 }
 
@@ -580,9 +584,10 @@ function crispyStructUnpack(_struct) {
 	var _len = array_length(_names);
 	for(var i = 0; i < _len; i++) {
 		var _name = _names[i];
-		if string_pos(_name, "__") == 1 {
+		show_debug_message("_name: " + _name);
+		if crispyIsInternalVariable(_name) {
 			if CRISPY_DEBUG {
-				crispyDebugMessage("Variable names beginning in '__' are reserved for the framework.");
+				crispyDebugMessage("Variable names beginning and ending in double underscores are reserved for the framework. Skip unpacking struct name: " + _name);
 			}
 			continue;
 		}
@@ -634,4 +639,23 @@ function crispyThrowExpected(_self, _name, _expected, _received) {
 	var _msg = instanceof(_self) + _name + "() expected " + _preposition + " ";
 	_msg += _expected + ", received " + typeof(_received) + ".";
 	throw(_msg);
+}
+
+/**
+ * Helper function for Crispy that returns whether or not a given variable name follows internal variable
+ * 		naming convention.
+ * @function
+ * @param {string} _name - Name of variable to check.
+ */
+function crispyIsInternalVariable(_name) {
+	if !is_string(_name) {
+		crispyThrowExpected("crispyIsInternalVariable", "", "string", _name);
+	}
+	if string_char_at(_name, 1) == "_" && string_char_at(_name, 2) == "_" {
+		var _len = string_length(_name);
+		if string_char_at(_name, _len) == "_" && string_char_at(_name, _len - 1) == "_" {
+			return true;
+		}
+	}
+	return false;
 }
