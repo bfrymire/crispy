@@ -27,11 +27,11 @@ function TestRunner() constructor {
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
-	addLog = function(_log) {
+	static addLog = function(_log) {
 		array_push(logs, _log);
 	}
 
-	captureLogs = function(_inst) {
+	static captureLogs = function(_inst) {
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
 				self.addLog(_inst);
@@ -57,7 +57,7 @@ function TestRunner() constructor {
 		}
 	}
 
-	addTestSuite = function(_suite) {
+	static addTestSuite = function(_suite) {
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
 			crispyErrorExpected(self, "addTestSuite", "TestSuite", _suite);
@@ -66,7 +66,7 @@ function TestRunner() constructor {
 		array_push(self.suites, _suite);
 	}
 
-	hr = function() {
+	static hr = function() {
 		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
 		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(floor(argument[1]), 0, 120) : 70;
 		var _hr = "";
@@ -76,7 +76,7 @@ function TestRunner() constructor {
 		return _hr;
 	}
 
-  	run = function() {
+  	static run = function() {
 		self.setUp();
 		var _len = array_length(self.suites);
 		for(var i = 0; i < _len; i++) {
@@ -86,7 +86,7 @@ function TestRunner() constructor {
 		self.tearDown();
 	}
 
-	setUp = function() {
+	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
 				self.__setUp__ = method(self, argument[0]);
@@ -102,7 +102,7 @@ function TestRunner() constructor {
 		}
 	}
 
-	tearDown = function() {
+	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
 				self.__tearDown__ = method(self, argument[0]);
@@ -182,7 +182,7 @@ function TestSuite() constructor {
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
-	addTestCase = function(_case) {
+	static addTestCase = function(_case) {
 		var _inst = instanceof(_case);
 		if _inst != "TestCase" {
 			var _type_received = !is_undefined(_inst) ? _inst : typeof(_case);
@@ -192,7 +192,7 @@ function TestSuite() constructor {
 		array_push(self.tests, _case);
 	}
 
-	setUp = function() {
+	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
 				self.__setUp__ = method(self, argument[0]);
@@ -206,7 +206,7 @@ function TestSuite() constructor {
 		}
 	}
 
-	tearDown = function() {
+	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
 				self.__tearDown__ = method(self, argument[0]);
@@ -220,7 +220,7 @@ function TestSuite() constructor {
 		}
 	}
 
-	run = function() {
+	static run = function() {
 		self.setUp();
 		var _len = array_length(self.tests);
 		for(var i = 0; i < _len; i++) {
@@ -229,7 +229,7 @@ function TestSuite() constructor {
 		self.tearDown();
 	}
 
-	setName = function(_name) {
+	static setName = function(_name) {
 		if !is_string(_name) {
 			crispyErrorExpected(self, "setName", "string", _name);
 		}
@@ -263,11 +263,11 @@ function TestCase(_function) constructor {
 		crispyErrorExpected(self, "", "method function", _function);
 	}
 
-	addLog = function(_log) {
+	static addLog = function(_log) {
 		array_push(self.logs, _log);
 	}
 
-	clearLogs = function() {
+	static clearLogs = function() {
 		self.logs = [];
 	}
 
@@ -279,7 +279,7 @@ function TestCase(_function) constructor {
 	 * @param {*} second - Second value to check against.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertEqual = function(_first, _second) {
+	static assertEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if typeof(_first) != typeof(_second) {
 			self.addLog(new CrispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
@@ -299,7 +299,7 @@ function TestCase(_function) constructor {
 	 * @param {*} second - Second type to check against.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertNotEqual = function(_first, _second) {
+	static assertNotEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if _first != _second {
 			self.addLog(new CrispyLog(self, {pass:true}));
@@ -315,7 +315,7 @@ function TestCase(_function) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertTrue = function(_expr) {
+	static assertTrue = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(_expr);
@@ -338,7 +338,7 @@ function TestCase(_function) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertFalse = function(_expr) {
+	static assertFalse = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(_expr);
@@ -360,7 +360,7 @@ function TestCase(_function) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertIsNoone = function(_expr) {
+	static assertIsNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		if _expr == -4 {
 			self.addLog(new CrispyLog(self, {pass:true}));
@@ -375,7 +375,7 @@ function TestCase(_function) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertIsNotNoone = function(_expr) {
+	static assertIsNotNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		if _expr != -4 {
 			self.addLog(new CrispyLog(self, {pass:true}));
@@ -384,7 +384,7 @@ function TestCase(_function) constructor {
 		}
 	}
 
-	setUp = function() {
+	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
 				self.__setUp__ = method(self, argument[0]);
@@ -399,7 +399,7 @@ function TestCase(_function) constructor {
 		}
 	}
 	
-	tearDown = function() {
+	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
 				self.__tearDown__ = method(self, argument[0]);
@@ -413,13 +413,13 @@ function TestCase(_function) constructor {
 		}
 	}
 
-	run = function() {
+	static run = function() {
 		self.setUp();
 		self.test();
 		self.tearDown();
 	}
 
-	setName = function(_name) {
+	static setName = function(_name) {
 		if !is_string(_name) {
 			crispyErrorExpected(self, "setName", "string", _name);
 		}
@@ -489,7 +489,7 @@ function CrispyLog(_case) constructor {
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
-	getMsg = function() {
+	static getMsg = function() {
 		if self.verbosity == 2 && self.display_name != "" {
 			var _msg = self.display_name + " ";
 		} else {
