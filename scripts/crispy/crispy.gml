@@ -27,8 +27,8 @@ function TestRunner() constructor {
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
-	addLog = function(log) {
-		array_push(logs, log);
+	addLog = function(_log) {
+		array_push(logs, _log);
 	}
 
 	captureLogs = function(_inst) {
@@ -252,15 +252,15 @@ function TestSuite() constructor {
 /**
  * Creates a Test case object to run assertions.
  * @constructor
- * @param {function} fun - Function that holds the test.
+ * @param {function} function - Function that holds the test.
  * @param [string] name - Name of the test.
  */
-function TestCase(_fun) constructor {
+function TestCase(_function) constructor {
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
-	if !is_method(_fun) {
-		crispyThrowExpected(self, "", "method function", _fun);
+	if !is_method(_function) {
+		crispyThrowExpected(self, "", "method function", _function);
 	}
 
 	addLog = function(_log) {
@@ -315,19 +315,19 @@ function TestCase(_fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertTrue = function(expr) {
+	assertTrue = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
-			var _bool = bool(expr);
+			var _bool = bool(_expr);
 		}
 		catch(err) {
-			self.addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+			self.addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
 			return;
 		}
 		if _bool == true {
 			self.addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not true."}));
+			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not true."}));
 		}
 	}
 
@@ -338,13 +338,13 @@ function TestCase(_fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertFalse = function(expr) {
+	assertFalse = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		try {
-			var _bool = bool(expr);
+			var _bool = bool(_expr);
 		}
 		catch(err) {
-			self.addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(expr) + " into boolean. Cannot evaluate."}));
+			self.addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
 			return;
 		}
 		if _bool == false {
@@ -360,12 +360,12 @@ function TestCase(_fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertIsNoone = function(expr) {
+	assertIsNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
-		if expr == -4 {
+		if _expr == -4 {
 			self.addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"expr is not noone."}));
+			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not noone."}));
 		}
 	}
 
@@ -375,12 +375,12 @@ function TestCase(_fun) constructor {
 	 * @param {*} expr - Expression to check.
 	 * @param {string} [_msg] - Custom message to output on failure.
 	 */
-	assertIsNotNoone = function(expr) {
+	assertIsNotNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
-		if expr != -4 {
+		if _expr != -4 {
 			self.addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"expr is noone."}));
+			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is noone."}));
 		}
 	}
 
@@ -419,11 +419,11 @@ function TestCase(_fun) constructor {
 		self.tearDown();
 	}
 
-	setName = function(name) {
-		if !is_string(name) {
-			crispyThrowExpected(self, "setName", "string", name);
+	setName = function(_name) {
+		if !is_string(_name) {
+			crispyThrowExpected(self, "setName", "string", _name);
 		}
-		self.name = name;
+		self.name = _name;
 	}
 
 	if argument_count > 1 {
@@ -435,7 +435,7 @@ function TestCase(_fun) constructor {
 	__tearDown__ = undefined;
 	class = instanceof(self);
 	parent = undefined;
-	test = method(self, _fun);
+	test = method(self, _function);
 	logs = [];
 
 	// Struct Unpacker
@@ -457,25 +457,26 @@ function crispyGetTime() {
  * Returns the difference between two times
  * @function
  */
-function crispyGetTimeDiff(start_time, stop_time) {
-	if !is_real(start_time) {
-		crispyThrowExpected(self, "crispyGetTimeDiff", "number", start_time);
+function crispyGetTimeDiff(_start_time, _stop_time) {
+	if !is_real(_start_time) {
+		crispyThrowExpected(self, "crispyGetTimeDiff", "number", _start_time);
 	}
-	if !is_real(stop_time) {
-		crispyThrowExpected(self, "crispyGetTimeDiff", "number", stop_time);
+	if !is_real(_stop_time) {
+		crispyThrowExpected(self, "crispyGetTimeDiff", "number", _stop_time);
 	}
-	return stop_time - start_time;
+	return _stop_time - _start_time;
 }
 
 /**
  * Returns the given time in seconds as a string
  * @function
+ * @param [number] time - Time in milliseconds.
  */
-function crispyTimeConvert(time) {
-	if !is_real(time) {
-		crispyThrowExpected(self, "crispyTimeConvert", "number", time);
+function crispyTimeConvert(_time) {
+	if !is_real(_time) {
+		crispyThrowExpected(self, "crispyTimeConvert", "number", _time);
 	}
-	return string_format(time / 1000000, 0, CRISPY_TIME_PRECISION);
+	return string_format(_time / 1000000, 0, CRISPY_TIME_PRECISION);
 }
 
 /**
@@ -607,13 +608,13 @@ function crispyStructUnpack(_struct) {
 /**
  * Helper function for Crispy to display its debug messages
  * @function
- * @param {string} msg - Text to be displayed in the Output Window.
+ * @param {string} message - Text to be displayed in the Output Window.
  */
-function crispyDebugMessage(msg) {
-	if !is_string(msg) {
-		crispyThrowExpected(self, "crispyDebugMessage", "string", msg);
+function crispyDebugMessage(_message) {
+	if !is_string(_message) {
+		crispyThrowExpected(self, "crispyDebugMessage", "string", _message);
 	}
-	show_debug_message(CRISPY_NAME + ": " + msg);
+	show_debug_message(CRISPY_NAME + ": " + _message);
 }
 
 /**
