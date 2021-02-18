@@ -585,7 +585,6 @@ function crispyStructUnpack(_struct) {
 	var _len = array_length(_names);
 	for(var i = 0; i < _len; i++) {
 		var _name = _names[i];
-		show_debug_message("_name: " + _name);
 		if crispyIsInternalVariable(_name) {
 			if CRISPY_DEBUG {
 				crispyDebugMessage("Variable names beginning and ending in double underscores are reserved for the framework. Skip unpacking struct name: " + _name);
