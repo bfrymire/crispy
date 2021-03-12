@@ -19,18 +19,19 @@
 show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework version " + CRISPY_VERSION);
 
 
-/**
- * Creates a runner object to hold TestSuites and run TestCases.
- * @constructor
- */
+// @param [name]
+// @param [struct]
 function TestRunner() constructor {
+
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
+	// @param log
 	static addLog = function(_log) {
 		array_push(logs, _log);
 	}
 
+	// @param instance
 	static captureLogs = function(_inst) {
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
@@ -57,6 +58,7 @@ function TestRunner() constructor {
 		}
 	}
 
+	// @param suite
 	static addTestSuite = function(_suite) {
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
@@ -66,6 +68,9 @@ function TestRunner() constructor {
 		array_push(self.suites, _suite);
 	}
 
+
+	// @param [string]
+	// @param [count]
 	static hr = function() {
 		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
 		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(floor(argument[1]), 0, 120) : 70;
@@ -86,6 +91,7 @@ function TestRunner() constructor {
 		self.tearDown();
 	}
 
+	// @param [function]
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -102,6 +108,8 @@ function TestRunner() constructor {
 		}
 	}
 
+	// @param [name]
+	// @param [function]
 	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -168,21 +176,22 @@ function TestRunner() constructor {
 	suites = [];
 	logs = [];
 
-	// Struct Unpacker
+	// Struct unpacker
 	if argument_count > 1 {
 		self.crispyStructUnpack(argument[1]);
 	}
 
 }
 
-/**
- * Creates a suite to hold tests.
- * @constructor
- */
+
+// @param [name]
+// @param [struct]
 function TestSuite() constructor {
+
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
+	// @param case
 	static addTestCase = function(_case) {
 		var _inst = instanceof(_case);
 		if _inst != "TestCase" {
@@ -193,6 +202,7 @@ function TestSuite() constructor {
 		array_push(self.tests, _case);
 	}
 
+	// @param [function]
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -207,6 +217,7 @@ function TestSuite() constructor {
 		}
 	}
 
+	// @param [function]
 	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -230,6 +241,7 @@ function TestSuite() constructor {
 		self.tearDown();
 	}
 
+	// @param name
 	static setName = function(_name) {
 		if !is_string(_name) {
 			crispyErrorExpected(self, "setName", "string", _name);
@@ -241,11 +253,12 @@ function TestSuite() constructor {
 	__tearDown__ = undefined;
 	parent = undefined;
 	tests = [];
-	name = "TestSuite";
+	name = (argument_count > 0 && !is_string(argument[0])) ? argument[0] : "TestSuite";
 
-	// Struct Unpacker
-	if argument_count > 0 {
-		self.crispyStructUnpack(argument[0]);
+
+	// Struct unpacker
+	if argument_count > 1 {
+		self.crispyStructUnpack(argument[1]);
 	}
 
 }
@@ -253,8 +266,8 @@ function TestSuite() constructor {
 /**
  * Creates a Test case object to run assertions.
  * @constructor
- * @param {function} function - Function that holds the test.
- * @param [string] name - Name of the test.
+ * @param function
+ * @param [name]
  */
 function TestCase(_function) constructor {
 	// Give self cripsyStructUnpack() function
@@ -439,7 +452,7 @@ function TestCase(_function) constructor {
 	test = method(self, _function);
 	logs = [];
 
-	// Struct Unpacker
+	// Struct unpacker
 	if argument_count > 2 {
 		self.crispyStructUnpack(argument[2]);
 	}
@@ -550,7 +563,7 @@ function CrispyLog(_case) constructor {
 	}
 	self.display_name = _display_name;
 
-	// Struct Unpacker
+	// Struct unpacker
 	if argument_count > 1 {
 		self.crispyStructUnpack(argument[1]);
 	}
@@ -639,7 +652,7 @@ function crispyErrorExpected(_self, _name, _expected, _received) {
 	_name = _name == "" ? _name : "." + _name;
 	var _msg = instanceof(_self) + _name + "() expected " + _preposition + " ";
 	_msg += _expected + ", received " + typeof(_received) + ".";
-	show_error(_msg);
+	show_error(_msg, true);
 }
 
 /**
