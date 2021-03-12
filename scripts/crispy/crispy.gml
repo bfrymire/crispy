@@ -143,7 +143,8 @@ function TestRunner() constructor {
 			}
 
 			// Finish by showing entire time it took to run the suite
-			show_debug_message("\n" + string(_len) + " tests ran in " + self.display_time + "s");
+			var string_tests = _len == 1 ? "test" : "tests";
+			show_debug_message("\n" + string(_len) + " " + string_tests + " ran in " + self.display_time + "s");
 
 			if _passed_tests == _len {
 				show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
