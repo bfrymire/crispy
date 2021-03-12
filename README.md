@@ -60,6 +60,8 @@ Expand upon the code to suit your testing needs.
 | `assertFalse(x)` | `bool(x) == false` |
 | `assertIsNoone(x)` | `x == -4` |
 | `assertIsNotNoone(x)` | `x != -4` |
+| `assertIsUndefined(x)` | `is_undefined(x)` |
+| `assertIsNotUndefined(x)` | `!is_undefined(x)` |
 
 <samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
 <br>
@@ -78,6 +80,12 @@ Expand upon the code to suit your testing needs.
 <samp><b>assertIsNotNoone(expr, [msg=undefined])</b></samp>
 <br>
 The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>expr</samp> is -4 based on the function name.
+
+<samp><b>assertIsUndefined(expr, [msg=undefined])</b></samp>
+<br>
+<samp><b>assertIsNotUndefined(expr, [msg=undefined])</b></samp>
+<br>
+Checks whether or not <samp>expr</samp> is undefined based on the function name.
 
 <h2>setUp() and tearDown()</h2>
 <samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a method function into the functions.

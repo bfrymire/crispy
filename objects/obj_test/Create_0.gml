@@ -63,6 +63,16 @@ testIsNotNoone = new TestCase(function() {
 }, "testIsNotNoone");
 suite.addTestCase(testIsNotNoone);
 
+testIsUndefined = new TestCase(function() {
+	self.assertIsUndefined(undefined);
+}, "testIsUndefined");
+suite.addTestCase(testIsUndefined);
+
+testIsNotUndefined = new TestCase(function() {
+	self.assertIsNotUndefined(undefined);
+}, "testIsNotUndefined");
+suite.addTestCase(testIsNotUndefined);
+
 
 // Failure without custom message
 testFailure = new TestCase(function() {

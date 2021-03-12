@@ -398,6 +398,36 @@ function TestCase(_function) constructor {
 		}
 	}
 
+	/**
+	 * Test whether the provided expression is undefined.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	static assertIsUndefined = function(_expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		if is_undefined(_expr) {
+			self.addLog(new CrispyLog(self, {pass:true}));
+		} else {
+			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not undefined."}));
+		}
+	}
+
+	/**
+	 * Test whether the provided expression is not undefined.
+	 * @function
+	 * @param {*} expr - Expression to check.
+	 * @param {string} [_msg] - Custom message to output on failure.
+	 */
+	static assertIsNotUndefined = function(_expr) {
+		var _msg = (argument_count > 1) ? argument[1] : undefined;
+		if !is_undefined(_expr) {
+			self.addLog(new CrispyLog(self, {pass:true}));
+		} else {
+			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is undefined."}));
+		}
+	}
+
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
