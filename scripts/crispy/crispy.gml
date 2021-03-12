@@ -296,7 +296,7 @@ function TestCase(_function) constructor {
 	static assertEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if typeof(_first) != typeof(_second) {
-			addLog(new CrispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
+			addLog(new CrispyLog(self, {pass:false,msg:"Supplied value types are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
 			return;
 		}
 		if _first == _second {
