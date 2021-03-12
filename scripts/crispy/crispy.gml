@@ -35,12 +35,12 @@ function TestRunner() constructor {
 	static captureLogs = function(_inst) {
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
-				self.addLog(_inst);
+				addLog(_inst);
 				break;
 			case "TestCase":
 				var _logs_len = array_length(_inst.logs);
 				for(var i = 0; i < _logs_len; i++) {
-					self.addLog(_inst.logs[i]);
+					addLog(_inst.logs[i]);
 				}
 				break;
 			case "TestSuite":
@@ -48,7 +48,7 @@ function TestRunner() constructor {
 				for(var k = 0; k < _tests_len; k++) {
 					var _logs_len = array_length(_inst.tests[k].logs);
 					for(var i = 0; i < _logs_len; i++) {
-						self.addLog(_inst.tests[k].logs[i]);
+						addLog(_inst.tests[k].logs[i]);
 					}
 				}
 				break;
@@ -65,7 +65,7 @@ function TestRunner() constructor {
 			crispyErrorExpected(self, "addTestSuite", "TestSuite", _suite);
 		}
 		_suite.parent = self;
-		array_push(self.suites, _suite);
+		array_push(suites, _suite);
 	}
 
 
@@ -82,28 +82,28 @@ function TestRunner() constructor {
 	}
 
   	static run = function() {
-		self.setUp();
-		var _len = array_length(self.suites);
+		setUp();
+		var _len = array_length(suites);
 		for(var i = 0; i < _len; i++) {
-			self.suites[i].run();
-			self.captureLogs(self.suites[i]);
+			suites[i].run();
+			captureLogs(suites[i]);
 		}
-		self.tearDown();
+		tearDown();
 	}
 
 	// @param [function]
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__setUp__ = method(self, argument[0]);
+				__setUp__ = method(self, argument[0]);
 			} else {
 				crispyErrorExpected(self, "setUp", "method function", argument[0]);
 			}
 		} else {
-			self.logs = [];
-			self.start_time = crispyGetTime();
-			if is_method(self.__setUp__) {
-				self.__setUp__();
+			logs = [];
+			start_time = crispyGetTime();
+			if is_method(__setUp__) {
+				__setUp__();
 			}
 		}
 	}
@@ -113,22 +113,22 @@ function TestRunner() constructor {
 	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__tearDown__ = method(self, argument[0]);
+				__tearDown__ = method(self, argument[0]);
 			} else {
 				crispyErrorExpected(self, "tearDown", "method function", argument[0]);
 			}
 		} else {
 			// Get total run time
-			self.stop_time = crispyGetTime();
-			self.total_time = crispyGetTimeDiff(self.start_time, self.stop_time);
-			self.display_time = crispyTimeConvert(self.total_time);
+			stop_time = crispyGetTime();
+			total_time = crispyGetTimeDiff(start_time, stop_time);
+			display_time = crispyTimeConvert(total_time);
 
 			// Display test results
 			var _passed_tests = 0;
-			var _len = array_length(self.logs);
+			var _len = array_length(logs);
 			var _t = "";
 			for(var i = 0; i < _len; i++) {
-				if self.logs[i].pass {
+				if logs[i].pass {
 					_t += CRISPY_PASS_MSG_SILENT;
 				} else {
 					_t += CRISPY_FAIL_MSG_SILENT;
@@ -152,14 +152,14 @@ function TestRunner() constructor {
 
 			// Finish by showing entire time it took to run the suite
 			var string_tests = _len == 1 ? "test" : "tests";
-			show_debug_message("\n" + string(_len) + " " + string_tests + " ran in " + self.display_time + "s");
+			show_debug_message("\n" + string(_len) + " " + string_tests + " ran in " + display_time + "s");
 
 			if _passed_tests == _len {
 				show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
 			}
 
-			if is_method(self.__tearDown__) {
-				self.__tearDown__();
+			if is_method(__tearDown__) {
+				__tearDown__();
 			}
 			
 		}
@@ -178,7 +178,7 @@ function TestRunner() constructor {
 
 	// Struct unpacker
 	if argument_count > 1 {
-		self.crispyStructUnpack(argument[1]);
+		crispyStructUnpack(argument[1]);
 	}
 
 }
@@ -199,20 +199,20 @@ function TestSuite() constructor {
 			crispyErrorExpected(self, "addTestCase", "TestCase", _type_received);
 		}
 		_case.parent = self;
-		array_push(self.tests, _case);
+		array_push(tests, _case);
 	}
 
 	// @param [function]
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__setUp__ = method(self, argument[0]);
+				__setUp__ = method(self, argument[0]);
 			} else {
 				crispyErrorExpected(self, "setUp", "method function", argument[0]);
 			}
 		} else {
-			if is_method(self.__setUp__) {
-				self.__setUp__();
+			if is_method(__setUp__) {
+				__setUp__();
 			}
 		}
 	}
@@ -221,24 +221,24 @@ function TestSuite() constructor {
 	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__tearDown__ = method(self, argument[0]);
+				__tearDown__ = method(self, argument[0]);
 			} else {
 				crispyErrorExpected(self, "tearDown", "method function", argument[0]);
 			}
 		} else {
-			if is_method(self.__tearDown__) {
-				self.__tearDown__();
+			if is_method(__tearDown__) {
+				__tearDown__();
 			}
 		}
 	}
 
 	static run = function() {
-		self.setUp();
-		var _len = array_length(self.tests);
+		setUp();
+		var _len = array_length(tests);
 		for(var i = 0; i < _len; i++) {
-			self.tests[i].run();
+			tests[i].run();
 		}
-		self.tearDown();
+		tearDown();
 	}
 
 	// @param name
@@ -246,7 +246,7 @@ function TestSuite() constructor {
 		if !is_string(_name) {
 			crispyErrorExpected(self, "setName", "string", _name);
 		}
-		self.name = _name;
+		name = _name;
 	}
 
 	__setUp__ = undefined;
@@ -258,7 +258,7 @@ function TestSuite() constructor {
 
 	// Struct unpacker
 	if argument_count > 1 {
-		self.crispyStructUnpack(argument[1]);
+		crispyStructUnpack(argument[1]);
 	}
 
 }
@@ -278,11 +278,11 @@ function TestCase(_function) constructor {
 	}
 
 	static addLog = function(_log) {
-		array_push(self.logs, _log);
+		array_push(logs, _log);
 	}
 
 	static clearLogs = function() {
-		self.logs = [];
+		logs = [];
 	}
 
 	/**
@@ -296,13 +296,13 @@ function TestCase(_function) constructor {
 	static assertEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if typeof(_first) != typeof(_second) {
-			self.addLog(new CrispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
+			addLog(new CrispyLog(self, {pass:false,msg:"Supplied typeof() values are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
 			return;
 		}
 		if _first == _second {
-			self.addLog(new CrispyLog(self));
+			addLog(new CrispyLog(self));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(_first) + ", " + string(_second)}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are not equal: " + string(_first) + ", " + string(_second)}));
 		}
 	}
 
@@ -316,9 +316,9 @@ function TestCase(_function) constructor {
 	static assertNotEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
 		if _first != _second {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(_first) + ", " + string(_second)}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"first and second are equal: " + string(_first) + ", " + string(_second)}));
 		}
 	}
 
@@ -335,13 +335,13 @@ function TestCase(_function) constructor {
 			var _bool = bool(_expr);
 		}
 		catch(err) {
-			self.addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
+			addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
 			return;
 		}
 		if _bool == true {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not true."}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not true."}));
 		}
 	}
 
@@ -358,13 +358,13 @@ function TestCase(_function) constructor {
 			var _bool = bool(_expr);
 		}
 		catch(err) {
-			self.addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
+			addLog(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
 			return;
 		}
 		if _bool == false {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not false."}));
 		}
 	}
 
@@ -377,9 +377,9 @@ function TestCase(_function) constructor {
 	static assertIsNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		if _expr == -4 {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not noone."}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not noone."}));
 		}
 	}
 
@@ -392,9 +392,9 @@ function TestCase(_function) constructor {
 	static assertIsNotNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		if _expr != -4 {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is noone."}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is noone."}));
 		}
 	}
 
@@ -407,9 +407,9 @@ function TestCase(_function) constructor {
 	static assertIsUndefined = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		if is_undefined(_expr) {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not undefined."}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is not undefined."}));
 		}
 	}
 
@@ -422,23 +422,23 @@ function TestCase(_function) constructor {
 	static assertIsNotUndefined = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
 		if !is_undefined(_expr) {
-			self.addLog(new CrispyLog(self, {pass:true}));
+			addLog(new CrispyLog(self, {pass:true}));
 		} else {
-			self.addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is undefined."}));
+			addLog(new CrispyLog(self, {pass:false,msg:_msg,helper_text:"Expression is undefined."}));
 		}
 	}
 
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__setUp__ = method(self, argument[0]);
+				__setUp__ = method(self, argument[0]);
 			} else {
 				crispyErrorExpected(self, "setUp", "method function", argument[0]);
 			}
 		} else {
-			self.clearLogs();
-			if is_method(self.__setUp__) {
-				self.__setUp__();
+			clearLogs();
+			if is_method(__setUp__) {
+				__setUp__();
 			}
 		}
 	}
@@ -446,34 +446,34 @@ function TestCase(_function) constructor {
 	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
-				self.__tearDown__ = method(self, argument[0]);
+				__tearDown__ = method(self, argument[0]);
 			} else {
 				crispyErrorExpected(self, "tearDown", "method function", argument[0]);
 			}
 		} else {
-			if is_method(self.__tearDown__) {
-				self.__tearDown__();
+			if is_method(__tearDown__) {
+				__tearDown__();
 			}
 		}
 	}
 
 	static run = function() {
-		self.setUp();
-		self.test();
-		self.tearDown();
+		setUp();
+		test();
+		tearDown();
 	}
 
 	static setName = function(_name) {
 		if !is_string(_name) {
 			crispyErrorExpected(self, "setName", "string", _name);
 		}
-		self.name = _name;
+		name = _name;
 	}
 
 	if argument_count > 1 {
 		setName(argument[1]);
 	} else {
-		self.name = undefined;
+		name = undefined;
 	}
 	__setUp__ = undefined;
 	__tearDown__ = undefined;
@@ -484,7 +484,7 @@ function TestCase(_function) constructor {
 
 	// Struct unpacker
 	if argument_count > 2 {
-		self.crispyStructUnpack(argument[2]);
+		crispyStructUnpack(argument[2]);
 	}
 
 }
@@ -534,14 +534,14 @@ function CrispyLog(_case) constructor {
 	crispyMixinStructUnpack(self);
 
 	static getMsg = function() {
-		if self.verbosity == 2 && self.display_name != "" {
-			var _msg = self.display_name + " ";
+		if verbosity == 2 && display_name != "" {
+			var _msg = display_name + " ";
 		} else {
 			var _msg = "";
 		}
-		switch(self.verbosity) {
+		switch(verbosity) {
 			case 0:
-				if self.pass {
+				if pass {
 					_msg += CRISPY_PASS_MSG_SILENT;
 				} else {
 					_msg += CRISPY_FAIL_MSG_SILENT;
@@ -549,7 +549,7 @@ function CrispyLog(_case) constructor {
 				break;
 			case 1:
 				/*
-				if self.pass {
+				if pass {
 					_msg += CRISPY_PASS_MSG_VERBOSE;
 				} else {
 					_msg += CRISPY_FAIL_MSG_VERBOSE;
@@ -557,14 +557,14 @@ function CrispyLog(_case) constructor {
 				*/
 				break;
 			case 2:
-				if self.pass {
+				if pass {
 					_msg += "..." + CRISPY_PASS_MSG_VERBOSE;
 				} else {
-					if !is_undefined(self.msg) && self.msg != "" {
-						_msg += "- " + self.msg;
+					if !is_undefined(msg) && msg != "" {
+						_msg += "- " + msg;
 					} else {
-						if !is_undefined(self.helper_text) {
-							_msg += "- " + self.helper_text;
+						if !is_undefined(helper_text) {
+							_msg += "- " + helper_text;
 						}
 					}
 				}
@@ -573,29 +573,29 @@ function CrispyLog(_case) constructor {
 		return _msg;
 	}
 
-	self.verbosity = CRISPY_VERBOSITY;
-	self.pass = true;
-	self.msg = undefined;
-	self.helper_text = undefined;
-	self.class = _case.class;
-	self.name = _case.name;
+	verbosity = CRISPY_VERBOSITY;
+	pass = true;
+	msg = undefined;
+	helper_text = undefined;
+	class = _case.class;
+	name = _case.name;
 
 	var _display_name = "";
-	if !is_undefined(self.name) {
-		_display_name += self.name;
+	if !is_undefined(name) {
+		_display_name += name;
 	}
-	if !is_undefined(self.class) {
+	if !is_undefined(class) {
 		if _display_name != "" {
-			_display_name += "." + self.class;
+			_display_name += "." + class;
 		} else {
-			_display_name += self.class;
+			_display_name += class;
 		}
 	}
-	self.display_name = _display_name;
+	display_name = _display_name;
 
 	// Struct unpacker
 	if argument_count > 1 {
-		self.crispyStructUnpack(argument[1]);
+		crispyStructUnpack(argument[1]);
 	}
 
 }
