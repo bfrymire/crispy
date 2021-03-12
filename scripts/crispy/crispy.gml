@@ -531,10 +531,10 @@ function CrispyLog(_case) constructor {
 					_msg += "..." + CRISPY_PASS_MSG_VERBOSE;
 				} else {
 					if !is_undefined(self.msg) && self.msg != "" {
-						_msg += " - " + self.msg;
+						_msg += "- " + self.msg;
 					} else {
 						if !is_undefined(self.helper_text) {
-							_msg += " - " + self.helper_text;
+							_msg += "- " + self.helper_text;
 						}
 					}
 				}
