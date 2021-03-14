@@ -160,6 +160,8 @@ function TestRunner() constructor {
 
 			if _passed_tests == _len {
 				show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
+			} else {
+				show_debug_message(string_upper(CRISPY_FAIL_MSG_VERBOSE) + "ED (failures==" + string(_len - _passed_tests) + ")");
 			}
 
 			if is_method(__tearDown__) {
