@@ -1,4 +1,7 @@
 can_run_tests = true;
+intro_text = CRISPY_NAME + " v." + CRISPY_VERSION + "\n\n";
+log_text = "";
+padding = 10;
 
 
 /// Custom function to test
