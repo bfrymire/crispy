@@ -23,7 +23,7 @@ show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework v
  * Runner to hold TestSuites and iterates through each TestSuite, running its TestUnits when instructed to.
  * @constructor
  * @param [name]
- * @param [struct]
+ * @param [struct] - Struct for crispyStructUnpack
  */
 function TestRunner() constructor {
 
@@ -194,7 +194,7 @@ function TestRunner() constructor {
  * Suite to hold tests and will run each test when instructed to.
  * @constructor
  * @param [name]
- * @param [struct]
+ * @param [struct] - Struct for crispyStructUnpack
  */
 function TestSuite() constructor {
 
@@ -278,6 +278,7 @@ function TestSuite() constructor {
  * @constructor
  * @param function
  * @param [name]
+ * @param [struct] - Struct for crispyStructUnpack
  */
 function TestCase(_function) constructor {
 	// Give self cripsyStructUnpack() function
