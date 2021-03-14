@@ -1,7 +1,7 @@
 can_run_tests = true;
-text = CRISPY_NAME + " " + CRISPY_VERSION + "\n\n";
-text += "View the Output Window to see the test results.\n";
-text += "Press \"R\" to re-run tests.";
+display_text = CRISPY_NAME + " " + CRISPY_VERSION + "\n\n";
+display_text += "View the Output Window to see the test results.\n";
+display_text += "Press \"R\" to re-run tests.";
 
 
 /// Custom function to test
