@@ -19,8 +19,12 @@
 show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework version " + CRISPY_VERSION);
 
 
-// @param [name]
-// @param [struct]
+/**
+ * Runner to hold TestSuites and iterates through each TestSuite, running its TestUnits when instructed to.
+ * @constructor
+ * @param [name]
+ * @param [struct]
+ */
 function TestRunner() constructor {
 
 	// Give self cripsyStructUnpack() function
@@ -123,7 +127,7 @@ function TestRunner() constructor {
 			total_time = crispyGetTimeDiff(start_time, stop_time);
 			display_time = crispyTimeConvert(total_time);
 
-			// Display test results
+			// Display silent test results
 			var _passed_tests = 0;
 			var _len = array_length(logs);
 			var _t = "";
@@ -150,7 +154,7 @@ function TestRunner() constructor {
 				}
 			}
 
-			// Finish by showing entire time it took to run the suite
+			// Finish by showing entire time it took to run the tests
 			var string_tests = _len == 1 ? "test" : "tests";
 			show_debug_message("\n" + string(_len) + " " + string_tests + " ran in " + display_time + "s");
 
@@ -184,8 +188,12 @@ function TestRunner() constructor {
 }
 
 
-// @param [name]
-// @param [struct]
+/**
+ * Suite to hold tests and will run each test when instructed to.
+ * @constructor
+ * @param [name]
+ * @param [struct]
+ */
 function TestSuite() constructor {
 
 	// Give self cripsyStructUnpack() function
@@ -277,6 +285,7 @@ function TestCase(_function) constructor {
 		crispyErrorExpected(self, "", "method function", _function);
 	}
 
+	// @param log
 	static addLog = function(_log) {
 		array_push(logs, _log);
 	}
@@ -291,7 +300,7 @@ function TestCase(_function) constructor {
 	 * @function
 	 * @param {*} first - First value.
 	 * @param {*} second - Second value to check against.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
@@ -311,7 +320,7 @@ function TestCase(_function) constructor {
 	 * @function
 	 * @param {*} first - First type to check.
 	 * @param {*} second - Second type to check against.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertNotEqual = function(_first, _second) {
 		var _msg = (argument_count > 2) ? argument[2] : undefined;
@@ -326,8 +335,8 @@ function TestCase(_function) constructor {
 	 * Test whether the provided expression is true.
 	 * The test will first convert the expr to a boolean, then check if it equals true.
 	 * @function
-	 * @param {*} expr - Expression to check.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {*} expression - Expression to check.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertTrue = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
@@ -349,8 +358,8 @@ function TestCase(_function) constructor {
 	 * Test whether the provided expression is false.
 	 * The test will first convert the expr to a boolean, then check if it equals false.
 	 * @function
-	 * @param {*} expr - Expression to check.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {*} expression - Expression to check.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertFalse = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
@@ -371,8 +380,8 @@ function TestCase(_function) constructor {
 	/**
 	 * Test whether the provided expression is noone.
 	 * @function
-	 * @param {*} expr - Expression to check.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {*} expression - Expression to check.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertIsNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
@@ -386,8 +395,8 @@ function TestCase(_function) constructor {
 	/**
 	 * Test whether the provided expression is not noone.
 	 * @function
-	 * @param {*} expr - Expression to check.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {*} expression - Expression to check.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertIsNotNoone = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
@@ -401,8 +410,8 @@ function TestCase(_function) constructor {
 	/**
 	 * Test whether the provided expression is undefined.
 	 * @function
-	 * @param {*} expr - Expression to check.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {*} expression - Expression to check.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertIsUndefined = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
@@ -416,8 +425,8 @@ function TestCase(_function) constructor {
 	/**
 	 * Test whether the provided expression is not undefined.
 	 * @function
-	 * @param {*} expr - Expression to check.
-	 * @param {string} [_msg] - Custom message to output on failure.
+	 * @param {*} expression - Expression to check.
+	 * @param {string} [message] - Custom message to output on failure.
 	 */
 	static assertIsNotUndefined = function(_expr) {
 		var _msg = (argument_count > 1) ? argument[1] : undefined;
@@ -428,6 +437,7 @@ function TestCase(_function) constructor {
 		}
 	}
 
+	// @param [function]
 	static setUp = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -443,6 +453,7 @@ function TestCase(_function) constructor {
 		}
 	}
 	
+	// @param [function]
 	static tearDown = function() {
 		if argument_count > 0 {
 			if is_method(argument[0]) {
@@ -463,6 +474,7 @@ function TestCase(_function) constructor {
 		tearDown();
 	}
 
+	// @param name
 	static setName = function(_name) {
 		if !is_string(_name) {
 			crispyErrorExpected(self, "setName", "string", _name);
@@ -500,6 +512,8 @@ function crispyGetTime() {
 /**
  * Returns the difference between two times
  * @function
+ * @param start_time
+ * @param stop_time
  */
 function crispyGetTimeDiff(_start_time, _stop_time) {
 	if !is_real(_start_time) {
@@ -526,8 +540,8 @@ function crispyTimeConvert(_time) {
 /**
  * Saves the result and output of assertion.
  * @constructor
- * @param {TestCase} _case - TestCase struct that ran the assertion.
- * @param [struct] Structure to replace existing constructor values.
+ * @param {TestCase} case - TestCase struct that ran the assertion.
+ * @param [struct] struct - Structure to replace existing constructor values.
  */
 function CrispyLog(_case) constructor {
 	// Give self cripsyStructUnpack() function
@@ -603,7 +617,7 @@ function CrispyLog(_case) constructor {
 /**
  * Mixin function that extends structs to have the crispyStructUnpack() function.
  * @function
- * @param {struct} _struct - Struct to give method variable to.
+ * @param {struct} struct - Struct to give method variable to.
  */
 function crispyMixinStructUnpack(_struct) {
 	if !is_struct(_struct) {
@@ -663,10 +677,10 @@ function crispyDebugMessage(_message) {
 /**
  * Helper function for Crispy to throw an error message that displays what type of value the function was expecting.
  * @function
- * @param {struct} _self - Struct that is calling the function, usually self.
- * @param {string} _name - String of the name of the function that is currently running the error message.
- * @param {string} _expected - String of the type of value expected to receive.
- * @param {*} _received - Value received.
+ * @param {struct} self - Struct that is calling the function, usually self.
+ * @param {string} name - String of the name of the function that is currently running the error message.
+ * @param {string} expected - String of the type of value expected to receive.
+ * @param {*} received - Value received.
  */
 function crispyErrorExpected(_self, _name, _expected, _received) {
 	var _char = string_ord_at(string_lower(_expected), 1);
@@ -689,7 +703,7 @@ function crispyErrorExpected(_self, _name, _expected, _received) {
  * Helper function for Crispy that returns whether or not a given variable name follows internal variable
  * 		naming convention.
  * @function
- * @param {string} _name - Name of variable to check.
+ * @param {string} name - Name of variable to check.
  */
 function crispyIsInternalVariable(_name) {
 	if !is_string(_name) {
