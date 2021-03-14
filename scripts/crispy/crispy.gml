@@ -76,8 +76,8 @@ function TestRunner() constructor {
 	// @param [string]
 	// @param [count]
 	static hr = function() {
-		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
-		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(floor(argument[1]), 0, 120) : 70;
+		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "—";
+		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(floor(argument[1]), 0, 120) : 30;
 		var _hr = "";
 		repeat(_count) {
 			_hr += _str;
