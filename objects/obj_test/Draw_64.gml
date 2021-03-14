@@ -1,3 +1,3 @@
 if CRISPY_RUN {
-	draw_text_ext(padding, padding, log_text, -1, room_width - padding * 2);
+	draw_text(10, 10, display_text);
 }
