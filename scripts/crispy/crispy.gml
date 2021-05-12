@@ -101,7 +101,7 @@ function TestRunner() constructor {
 			if is_method(argument[0]) {
 				__setUp__ = method(self, argument[0]);
 			} else {
-				crispyThrowExpected(self, "setUp", "method function", argument[0]);
+				crispyThrowExpected(self, "setUp", "function", argument[0]);
 			}
 		} else {
 			logs = [];
@@ -119,7 +119,7 @@ function TestRunner() constructor {
 			if is_method(argument[0]) {
 				__tearDown__ = method(self, argument[0]);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method function", argument[0]);
+				crispyThrowExpected(self, "tearDown", "function", argument[0]);
 			}
 		} else {
 			// Get total run time
@@ -218,7 +218,7 @@ function TestSuite() constructor {
 			if is_method(argument[0]) {
 				__setUp__ = method(self, argument[0]);
 			} else {
-				crispyThrowExpected(self, "setUp", "method function", argument[0]);
+				crispyThrowExpected(self, "setUp", "function", argument[0]);
 			}
 		} else {
 			if is_method(__setUp__) {
@@ -233,7 +233,7 @@ function TestSuite() constructor {
 			if is_method(argument[0]) {
 				__tearDown__ = method(self, argument[0]);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method function", argument[0]);
+				crispyThrowExpected(self, "tearDown", "function", argument[0]);
 			}
 		} else {
 			if is_method(__tearDown__) {
@@ -285,7 +285,7 @@ function TestCase(_function) constructor {
 	crispyMixinStructUnpack(self);
 
 	if !is_method(_function) {
-		crispyThrowExpected(self, "", "method function", _function);
+		crispyThrowExpected(self, "", "function", _function);
 	}
 
 	// @param log
@@ -446,7 +446,7 @@ function TestCase(_function) constructor {
 			if is_method(argument[0]) {
 				__setUp__ = method(self, argument[0]);
 			} else {
-				crispyThrowExpected(self, "setUp", "method function", argument[0]);
+				crispyThrowExpected(self, "setUp", "function", argument[0]);
 			}
 		} else {
 			clearLogs();
@@ -462,7 +462,7 @@ function TestCase(_function) constructor {
 			if is_method(argument[0]) {
 				__tearDown__ = method(self, argument[0]);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method function", argument[0]);
+				crispyThrowExpected(self, "tearDown", "function", argument[0]);
 			}
 		} else {
 			if is_method(__tearDown__) {

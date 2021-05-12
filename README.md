@@ -52,7 +52,7 @@ Expand upon the code to suit your testing needs.
 
 <h2>TestCase Assertions</h2>
 
-| Method function | Checks that |
+| Function | Checks that |
 |--|--|
 | `assertEqual(a, b)` | `a == b` |
 | `assertNotEqual(a, b)` | `a != b` |
@@ -88,30 +88,30 @@ The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>ex
 Checks whether or not <samp>expr</samp> is undefined based on the function name.
 
 <h2>setUp() and tearDown()</h2>
-<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a method function into the functions.
+<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a function into the functions.
 
-<samp><b>setUp([method function])</b></samp>
+<samp><b>setUp([function])</b></samp>
 <br>
-Provide a method function to run during <samp>setUp()</samp>. If anything other than a method function is provided, an error message will be thrown.
+Provide a function to run during <samp>setUp()</samp>. If anything other than a function is provided, an error message will be thrown.
 
-<samp><b>tearDown([method function])</b></samp>
+<samp><b>tearDown([function])</b></samp>
 <br>
-Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
+Provide a function to run during <samp>tearDown()</samp>. If anything other than a function is provided, an error message will be thrown.
 
 ```js
 // Create TestCase
 test_example = new TestCase(function() {
-	self.assertEqual(_number, 24);
+	self.assertEqual(_number, 24); // The _number variable is defined in the setUp() function
 }, "test_example");
 
 // Define setUp() function
 test_example.setUp(function() {
-	_number = 24;
+	_number = 24; // Here we're defining a variable to use in our test
 });
 
 // Define tearDown() function
 test_example.tearDown(function() {
-	show_debug_message("Your number is: " + string(_number));
+	show_debug_message("Your number is: " + string(_number)); // We can call our _number variable in the tearDown() too!
 });
 ```
 
