@@ -30,7 +30,7 @@ testAddFunction = new TestCase(function() {
 suite.addTestCase(testAddFunction);
 
 
-// Create TestCase for the rest of the assertion functions
+// Create TestCase for assertion functions
 testEqual = new TestCase(function() {
 	self.assertEqual(10, 10);
 }, "testEqual");
@@ -78,10 +78,10 @@ suite.addTestCase(testIsNotUndefined);
 
 
 // Failure without custom message
-testFailure = new TestCase(function() {
+testFailureTypes = new TestCase(function() {
 	self.assertEqual(3, "String");
-}, "testFailure");
-suite.addTestCase(testFailure);
+}, "testFailureTypes");
+suite.addTestCase(testFailureTypes);
 
 // Failure with custom message
 testFailureCustomMessage = new TestCase(function() {
