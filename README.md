@@ -1,4 +1,4 @@
-<p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
+<p align="center"><img src="./LOGO.png" style="display:block;width:250px;margin:auto;"></p>
 
 <h1>crispy</h1>
 <p>Version 1.1.0</p>
@@ -43,7 +43,21 @@ runner.run();
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v1.1.0">Download the .yymps file</a>
+
+<ol>
+	<li>
+		<a href="https://github.com/bfrymire/crispy/releases/latest">Download the .yymps file</a>	
+	</li>
+	<li>
+		Import the .yymps file into your project from the top menu
+		<ul>
+			<li>
+				Tools <b>></b> Import Local Package
+			</li>
+		</ul>
+	</li>
+</ol>
+
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
