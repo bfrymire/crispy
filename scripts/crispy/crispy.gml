@@ -713,7 +713,7 @@ function crispyIsInternalVariable(_name) {
 		crispyThrowExpected("crispyIsInternalVariable", "", "string", _name);
 	}
 	var _len = string_length(_name);
-	if _len > 4 && string_copy(_name, 1, 2) == "__" && string_copy(_name, _len - 1, 2) == "__" {
+	if _len > 4 && string_copy(_name, 1, 2) == "__" && string_copy(_name, _len - 1, _len) == "__" {
 		return true;
 	}
 	return false;
