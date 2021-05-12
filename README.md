@@ -5,7 +5,7 @@
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
-<h2>Basic example</h2>
+<h2>Basic Example</h2>
 <p>The most basic elements that Crispy needs to function are:</p>
 
 <ol>
