@@ -1,7 +1,7 @@
 <p align="center"><img src="./LOGO.png" style="display:block;width:250px;margin:auto;"></p>
 
 <h1>crispy</h1>
-<p>Version 1.1.0</p>
+<p>Version 1.2.0</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
