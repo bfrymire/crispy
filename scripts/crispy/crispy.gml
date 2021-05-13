@@ -15,6 +15,7 @@
 #macro CRISPY_FAIL_MSG_SILENT "F"
 #macro CRISPY_PASS_MSG_VERBOSE "ok"
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail"
+#macro CRISPY_STRUCT_UNPACK_ALLOW_DUNDER false
 
 show_debug_message("Using " + CRISPY_NAME + " automated unit testing framework version " + CRISPY_VERSION);
 
@@ -175,16 +176,17 @@ function TestRunner() constructor {
 
 	// @param message|function
 	static output = function() {
+		var _input = argument[0];
 		if argument_count == 1 {
-			switch (typeof(argument[0])) {
+			switch (typeof(_input)) {
 				case "string":
-						__output__(argument[0]);
+						__output__(_input);
 					break;
 				case "method":
-						__output__ = method(self, argument[0]);
+						__output__ = method(self, _input);
 					break;
 				default:
-					crispyThrowExpected(self, "output", "[string|method]", argument[0]);
+					crispyThrowExpected(self, "output", "[string|method]", _input);
 					break;
 			}
 		} else {
@@ -671,7 +673,7 @@ function crispyStructUnpack(_struct) {
 	var _len = array_length(_names);
 	for(var i = 0; i < _len; i++) {
 		var _name = _names[i];
-		if crispyIsInternalVariable(_name) {
+		if !CRISPY_STRUCT_UNPACK_ALLOW_DUNDER && crispyIsInternalVariable(_name) {
 			if CRISPY_DEBUG {
 				crispyDebugMessage("Variable names beginning and ending in double underscores are reserved for the framework. Skip unpacking struct name: " + _name);
 			}
