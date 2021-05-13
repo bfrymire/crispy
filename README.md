@@ -102,7 +102,7 @@ The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>ex
 Checks whether or not <samp>expr</samp> is undefined based on the function name.
 
 <h2>setUp() and tearDown()</h2>
-<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a function into the functions.
+<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. By providing a function, the function will be ran alongside the pre-defined instructions.
 
 <samp><b>setUp([function])</b></samp>
 <br>
@@ -125,7 +125,7 @@ test_example.setUp(function() {
 
 // Define tearDown() function
 test_example.tearDown(function() {
-	show_debug_message("Your number is: " + string(_number)); // We can call our _number variable in the tearDown() too!
+	show_debug_message("Your number is: " + string(_number)); // We can call our _number variable in the tearDown() too
 });
 ```
 
