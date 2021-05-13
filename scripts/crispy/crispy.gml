@@ -138,10 +138,10 @@ function TestRunner() constructor {
 					_t += CRISPY_FAIL_MSG_SILENT;
 				}
 			}
-			show_debug_message(_t);
+			output(_t);
 
 			// Horizontal row
-			show_debug_message(hr());
+			output(hr());
 
 			// Show individual log messages
 			for(var i = 0; i < _len; i++) {
@@ -150,18 +150,19 @@ function TestRunner() constructor {
 				}
 				var _msg = logs[i].getMsg();
 				if _msg != "" {
-					show_debug_message(_msg);
+					output(_msg);
 				}
 			}
 
 			// Finish by showing entire time it took to run the tests
-			var string_tests = _len == 1 ? "test" : "tests";
-			show_debug_message("\n" + string(_len) + " " + string_tests + " ran in " + display_time + "s");
+			var _string_tests = _len == 1 ? "test" : "tests";
+			output("");
+			output(string(_len) + " " + _string_tests + " ran in " + display_time + "s");
 
 			if _passed_tests == _len {
-				show_debug_message(string_upper(CRISPY_PASS_MSG_VERBOSE));
+				output(string_upper(CRISPY_PASS_MSG_VERBOSE));
 			} else {
-				show_debug_message(string_upper(CRISPY_FAIL_MSG_VERBOSE) + "ED (failures==" + string(_len - _passed_tests) + ")");
+				output(string_upper(CRISPY_FAIL_MSG_VERBOSE) + "ED (failures==" + string(_len - _passed_tests) + ")");
 			}
 
 			if is_method(__tearDown__) {
@@ -172,6 +173,30 @@ function TestRunner() constructor {
 
 	}
 
+	// @param message|function
+	static output = function() {
+		if argument_count == 1 {
+			switch (typeof(argument[0])) {
+				case "string":
+						__output__(argument[0]);
+					break;
+				case "method":
+						__output__ = method(self, argument[0]);
+					break;
+				default:
+					crispyThrowExpected(self, "output", "[string|method]", argument[0]);
+					break;
+			}
+		} else {
+			throw(name + ".output() expected 1 argument, received " + string(argument_count) + " arguments.");
+		}
+	}
+
+	// @param message
+	static __output__ = function(_message) {
+		show_debug_message(_message);
+	}
+	
 	__setUp__ = undefined;
 	__tearDown__ = undefined;
 	name = (argument_count > 0 && !is_string(argument[0])) ? argument[0] : "TestRunner";
