@@ -725,7 +725,7 @@ function crispyThrowExpected(_self, _name, _expected, _received) {
 			break;
 		}
 	}
-	_name = _name == "" ? _name : "." + _name;
+	_name = _name == "" ? "" : "." + _name;
 	var _msg = instanceof(_self) + _name + "() expected " + _preposition + " ";
 	_msg += _expected + ", received " + _received + ".";
 	throw(_msg);
