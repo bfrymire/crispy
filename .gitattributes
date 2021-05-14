@@ -1,0 +1,5 @@
+# Ignore .yy files for language statistics
+*.yy linguist-generated=true
+
+# Ignore .yyp files for language statistics
+*.yyp linguist-generated=true

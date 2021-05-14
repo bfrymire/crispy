@@ -1,3 +1,9 @@
+can_run_tests = true;
+display_text = CRISPY_NAME + " " + CRISPY_VERSION + "\n\n";
+display_text += "View the Output Window to see the test results.\n";
+display_text += "Press \"R\" to re-run tests.";
+
+
 /// Custom function to test
 function add(a, b) {
 	return a + b;
@@ -24,7 +30,7 @@ testAddFunction = new TestCase(function() {
 suite.addTestCase(testAddFunction);
 
 
-// Create TestCase for the rest of the assertion functions
+// Create TestCase for assertion functions
 testEqual = new TestCase(function() {
 	self.assertEqual(10, 10);
 }, "testEqual");
@@ -60,24 +66,25 @@ testIsNotNoone = new TestCase(function() {
 }, "testIsNotNoone");
 suite.addTestCase(testIsNotNoone);
 
+testIsUndefined = new TestCase(function() {
+	self.assertIsUndefined(undefined);
+}, "testIsUndefined");
+suite.addTestCase(testIsUndefined);
+
+testIsNotUndefined = new TestCase(function() {
+	self.assertIsNotUndefined(undefined);
+}, "testIsNotUndefined");
+suite.addTestCase(testIsNotUndefined);
+
 
 // Failure without custom message
-testFailure = new TestCase(function() {
+testFailureTypes = new TestCase(function() {
 	self.assertEqual(3, "String");
-}, "testFailure");
-suite.addTestCase(testFailure);
+}, "testFailureTypes");
+suite.addTestCase(testFailureTypes);
 
 // Failure with custom message
 testFailureCustomMessage = new TestCase(function() {
 	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
 }, "testFailureCustomMessage");
 suite.addTestCase(testFailureCustomMessage);
-
-
-// Run the TestRunner
-if CRISPY_RUN {
-	runner.run();
-}
-
-// Destroy testing object once complete
-instance_destroy();

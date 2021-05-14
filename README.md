@@ -1,11 +1,11 @@
-<p align="center"><img src="./LOGO.png" style="display:block;width:250px; margin:auto;"></p>
+<p align="center"><img src="./LOGO.png" style="display:block;width:250px;margin:auto;"></p>
 
 <h1>crispy</h1>
-<p>Version 1.1.0</p>
+<p>Version 1.2.0</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
 
-<h2>Basic example</h2>
+<h2>Basic Example</h2>
 <p>The most basic elements that Crispy needs to function are:</p>
 
 <ol>
@@ -19,7 +19,7 @@
 
 
 ```js
-// Create Testrunner
+// Create TestRunner
 runner = new TestRunner();
 
 // Create TestSuite
@@ -29,13 +29,13 @@ suite = new TestSuite();
 runner.addTestSuite(suite);
 
 // Create TestCase
-testAdd = new TestCase(function() {
+test_sum = new TestCase(function() {
 	var sum = 2 + 3;
 	self.assertEqual(sum, 5);
-}, "testAdd");
+}, "test_sum");
 
 // Add TestCase to TestSuite
-suite.addTestCase(testAdd);
+suite.addTestCase(test_sum);
 
 // Run TestRunner
 runner.run();
@@ -43,7 +43,21 @@ runner.run();
 
 
 <h2>Installation</h2>
-<a href="https://github.com/bfrymire/crispy/releases/tag/v1.1.0">Download the .yymps file</a>
+
+<ol>
+	<li>
+		<a href="https://github.com/bfrymire/crispy/releases/latest">Download the .yymps file</a>	
+	</li>
+	<li>
+		Import the .yymps file into your project from the top menu
+		<ul>
+			<li>
+				Tools <b>></b> Import Local Package
+			</li>
+		</ul>
+	</li>
+</ol>
+
 
 A good starting point is copying and pasting the code from the <a href="#basic-example">Basic Example</a> section into the Create Event of an object created specifically for running tests.
 
@@ -52,7 +66,7 @@ Expand upon the code to suit your testing needs.
 
 <h2>TestCase Assertions</h2>
 
-| Method function | Checks that |
+| Function | Checks that |
 |--|--|
 | `assertEqual(a, b)` | `a == b` |
 | `assertNotEqual(a, b)` | `a != b` |
@@ -60,6 +74,8 @@ Expand upon the code to suit your testing needs.
 | `assertFalse(x)` | `bool(x) == false` |
 | `assertIsNoone(x)` | `x == -4` |
 | `assertIsNotNoone(x)` | `x != -4` |
+| `assertIsUndefined(x)` | `is_undefined(x)` |
+| `assertIsNotUndefined(x)` | `!is_undefined(x)` |
 
 <samp><b>assertEqual(first, second, [msg=undefined])</b></samp>
 <br>
@@ -79,37 +95,43 @@ Expand upon the code to suit your testing needs.
 <br>
 The keyword <samp>noone</samp> has a value of -4. Checks whether or not <samp>expr</samp> is -4 based on the function name.
 
+<samp><b>assertIsUndefined(expr, [msg=undefined])</b></samp>
+<br>
+<samp><b>assertIsNotUndefined(expr, [msg=undefined])</b></samp>
+<br>
+Checks whether or not <samp>expr</samp> is undefined based on the function name.
+
 <h2>setUp() and tearDown()</h2>
-<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. Custom code can be ran along-side the pre-defined instructions, you can pass a method function into the functions.
+<samp>TestRunner</samp>, <samp>TestSuite</samp>, and <samp>TestCase</samp> all have a <samp>setUp()</samp> and <samp>tearDown()</samp> function that comes with pre-defined instructions. By providing a function, the function will be ran alongside the pre-defined instructions.
 
-<samp><b>setUp([method function])</b></samp>
+<samp><b>setUp([function])</b></samp>
 <br>
-Provide a method function to run during <samp>setUp()</samp>. If anything other than a method function is provided, an error message will be thrown.
+Provide a function to run during <samp>setUp()</samp>. If anything other than a function is provided, an error message will be thrown.
 
-<samp><b>tearDown([method function])</b></samp>
+<samp><b>tearDown([function])</b></samp>
 <br>
-Provide a method function to run during <samp>tearDown()</samp>. If anything other than a method function is provided, an error message will be thrown.
+Provide a function to run during <samp>tearDown()</samp>. If anything other than a function is provided, an error message will be thrown.
 
 ```js
 // Create TestCase
-testAdd = new TestCase(function() {
-	self.assertEqual(_number, 24);
-}, "testAdd");
+test_example = new TestCase(function() {
+	self.assertEqual(_number, 24); // The _number variable is defined in the setUp() function
+}, "test_example");
 
 // Define setUp() function
-testAdd.setUp(function() {
-	_number = 24;
+test_example.setUp(function() {
+	_number = 24; // Here we're defining a variable to use in our test
 });
 
 // Define tearDown() function
-testAdd.tearDown(function() {
-	show_debug_message("Your number is: " + string(_number));
+test_example.tearDown(function() {
+	show_debug_message("Your number is: " + string(_number)); // We can call our _number variable in the tearDown() too
 });
 ```
 
-In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwritting variables and breaking the objects. Be careful with these functions.
+In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwriting variables and breaking the objects. Be careful with these functions.
 
 
 <h2>License</h2>
 <a href="https://opensource.org/licenses/MIT" _target="blank">MIT License</a>
-<p>Copyright (c) 2020 bfrymire</p>
+<p>Copyright (c) 2020-2021 bfrymire</p>
