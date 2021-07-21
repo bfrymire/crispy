@@ -1,6 +1,6 @@
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_VERSION "1.2.0"
-#macro CRISPY_DATE "5/14/2021"
+#macro CRISPY_DATE "2021-05-14"
 
 #macro CRISPY_RUN true									// Boolean flag that can be used to automatically run tests
 #macro CRISPY_DEBUG false								// Enables outputting extra context on some silent functions
