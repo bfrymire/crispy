@@ -12,6 +12,7 @@
     {"id":{"name":"crispyStructUnpack","path":"scripts/crispyStructUnpack/crispyStructUnpack.yy",},"order":9,},
     {"id":{"name":"crispyMixinStructUnpack","path":"scripts/crispyMixinStructUnpack/crispyMixinStructUnpack.yy",},"order":8,},
     {"id":{"name":"crispyThrowExpected","path":"scripts/crispyThrowExpected/crispyThrowExpected.yy",},"order":11,},
+    {"id":{"name":"__crispy_config_macros","path":"scripts/__crispy_config_macros/__crispy_config_macros.yy",},"order":13,},
     {"id":{"name":"TestSuite","path":"scripts/TestSuite/TestSuite.yy",},"order":2,},
     {"id":{"name":"crispyDebugMessage","path":"scripts/crispyDebugMessage/crispyDebugMessage.yy",},"order":10,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":0,},
