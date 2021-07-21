@@ -715,7 +715,7 @@ function crispyDebugMessage(_message) {
  * @param {*} received - Value received.
  */
 function crispyThrowExpected(_self, _name, _expected, _received) {
-	var _char = string_ord_at(string_lower(_expected), 1);
+	var _char = string_lower(string_ord_at(_expected), 1);
 	var _vowels = ["a", "e", "i", "o", "u"];
 	var _len = array_length(_vowels);
 	var _preposition = "a";
