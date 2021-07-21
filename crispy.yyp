@@ -1,7 +1,19 @@
 {
   "resources": [
+    {"id":{"name":"crispyGetTime","path":"scripts/crispyGetTime/crispyGetTime.yy",},"order":4,},
+    {"id":{"name":"crispyIsInternalVariable","path":"scripts/crispyIsInternalVariable/crispyIsInternalVariable.yy",},"order":12,},
+    {"id":{"name":"crispyGetTimeDiff","path":"scripts/crispyGetTimeDiff/crispyGetTimeDiff.yy",},"order":5,},
+    {"id":{"name":"crispyTimeConvert","path":"scripts/crispyTimeConvert/crispyTimeConvert.yy",},"order":6,},
+    {"id":{"name":"CrispyLog","path":"scripts/CrispyLog/CrispyLog.yy",},"order":7,},
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":0,},
+    {"id":{"name":"TestRunner","path":"scripts/TestRunner/TestRunner.yy",},"order":1,},
     {"id":{"name":"crispy","path":"scripts/crispy/crispy.yy",},"order":0,},
+    {"id":{"name":"TestCase","path":"scripts/TestCase/TestCase.yy",},"order":3,},
+    {"id":{"name":"crispyStructUnpack","path":"scripts/crispyStructUnpack/crispyStructUnpack.yy",},"order":9,},
+    {"id":{"name":"crispyMixinStructUnpack","path":"scripts/crispyMixinStructUnpack/crispyMixinStructUnpack.yy",},"order":8,},
+    {"id":{"name":"crispyThrowExpected","path":"scripts/crispyThrowExpected/crispyThrowExpected.yy",},"order":11,},
+    {"id":{"name":"TestSuite","path":"scripts/TestSuite/TestSuite.yy",},"order":2,},
+    {"id":{"name":"crispyDebugMessage","path":"scripts/crispyDebugMessage/crispyDebugMessage.yy",},"order":10,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":0,},
   ],
   "Options": [
