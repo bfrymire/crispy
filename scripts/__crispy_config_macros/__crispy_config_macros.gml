@@ -1,4 +1,5 @@
 #macro CRISPY_NAME "Crispy"
+#macro CRISPY_AUTHOR "Brent Frymire"
 #macro CRISPY_VERSION "1.2.0"
 #macro CRISPY_DATE "2021-05-14"
 
