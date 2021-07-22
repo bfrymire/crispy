@@ -1,17 +1,23 @@
 /**
  * Helper function for structs that will replace a destination's variable name values with the given source's variable
- * 		name values.
+ * 		name values
  * @function
- * @param {struct} struct - Struct used to replace existing values with.
+ * @param {struct} unpack - Struct used to replace existing values with
  * @param {boolean} [name_must_exist=true] - Boolean flag that prevents new variable names from
- * 		being added to the destination struct if the variable name does not already exist.
+ * 		being added to the destination struct if the variable name does not already exist
  */
-function crispyStructUnpack(_struct) {
-	var _name_must_exist = (argument_count > 1 && is_bool(argument[1])) ? argument[1] : true;
-	if !is_struct(_struct) {
-		crispyThrowExpected(self, "crispyStructUnpack", "struct", typeof(_struct));
+function crispyStructUnpack(_unpack, _name_must_exist) {
+
+	if !is_struct(_unpack) {
+		crispyThrowExpected(self, "crispyStructUnpack", "struct", typeof(_unpack));
 	}
-	var _names = variable_struct_get_names(_struct);
+
+	// Optional parameter _name_must_exist defaults to true
+	if !is_bool(_name_must_exist) {
+		_name_must_exist = true;
+	}
+
+	var _names = variable_struct_get_names(_unpack);
 	var _len = array_length(_names);
 	for(var i = 0; i < _len; i++) {
 		var _name = _names[i];
@@ -21,7 +27,7 @@ function crispyStructUnpack(_struct) {
 			}
 			continue;
 		}
-		var _value = variable_struct_get(_struct, _name);
+		var _value = variable_struct_get(_unpack, _name);
 		if _name_must_exist {
 			if !variable_struct_exists(self, _name) {
 				if CRISPY_DEBUG {

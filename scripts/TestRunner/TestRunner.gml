@@ -1,10 +1,12 @@
 /**
  * Runner to hold TestSuites and iterates through each TestSuite, running its TestUnits when instructed to.
  * @constructor
- * @param [name]
- * @param [struct] - Struct for crispyStructUnpack
+ * @param {string} [name="TestRunner"] - Name of TestRunner.
+ * @param {struct} [unpack] - Struct for crispyStructUnpack.
  */
-function TestRunner() constructor {
+function TestRunner(_name, _unpack) constructor {
+
+	var _name = (argument_count > 0) ? argument[0] : "TestRunner";
 
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
@@ -54,11 +56,18 @@ function TestRunner() constructor {
 	}
 
 
-	// @param [string]
-	// @param [count]
-	static hr = function() {
-		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
-		var _count = (argument_count > 1 && is_real(argument[1])) ? clamp(floor(argument[1]), 0, 120) : 70;
+	//
+	// @function
+	// @param {string} _str="-" - String to concat _count times.
+	// @param {number} _count=70 - Number of times to concat _str.
+	// @returns {string} 
+	static hr = function(_str, _count) {
+		if is_undefined(_str) {
+			_str = "-";
+		}
+		if is_undefined(_count) {
+			_count = 70;
+		}
 		var _hr = "";
 		repeat(_count) {
 			_hr += _str;
@@ -76,13 +85,18 @@ function TestRunner() constructor {
 		tearDown();
 	}
 
-	// @param [function]
+	/**
+	 * Clears logs, starts timer, and runs __setUp__
+	 * @function
+	 * @param {method} [func] - Method to override __setUp__ with
+	 */
 	static setUp = function() {
 		if argument_count > 0 {
-			if is_method(argument[0]) {
-				__setUp__ = method(self, argument[0]);
+			var _func = argument[0];
+			if is_method(_func) {
+				__setUp__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "setUp", "method", typeof(argument[0]));
+				crispyThrowExpected(self, "setUp", "method", typeof(_func));
 			}
 		} else {
 			logs = [];
@@ -95,12 +109,18 @@ function TestRunner() constructor {
 
 	// @param [name]
 	// @param [function]
+	/**
+	 * Function ran after test, used to clean up test
+	 * @function
+	 * @param {method} [func] - Method to override __tearDown__ with
+	 */
 	static tearDown = function() {
 		if argument_count > 0 {
-			if is_method(argument[0]) {
-				__tearDown__ = method(self, argument[0]);
+			var _func = argument[0];
+			if is_method(_func) {
+				__tearDown__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method", typeof(argument[0]));
+				crispyThrowExpected(self, "tearDown", "method", typeof(_func));
 			}
 		} else {
 			// Get total run time
@@ -154,10 +174,14 @@ function TestRunner() constructor {
 
 	}
 
-	// @param message|function
+	/**
+	 * Pass input to __output__ if string. Overwrite __output__ if method
+	 * @function
+	 * @param {string|method} input - String to output or function to overwrite __output__
+	 */
 	static output = function() {
-		var _input = argument[0];
-		if argument_count == 1 {
+		var _input = (argument_count > 0) ? argument[0] : undefined;
+		if argument_count > 0 {
 			switch (typeof(_input)) {
 				case "string":
 						__output__(_input);
@@ -166,7 +190,7 @@ function TestRunner() constructor {
 						__output__ = method(self, _input);
 					break;
 				default:
-					crispyThrowExpected(self, "output", "[string|method]", typeof(_input));
+					crispyThrowExpected(self, "input", "{string|method}", typeof(_input));
 					break;
 			}
 		} else {
@@ -174,14 +198,18 @@ function TestRunner() constructor {
 		}
 	}
 
-	// @param message
+	/**
+	 * @function
+	 * @param {string} message - By default, outputs string to Output Console
+	 * @tip This function can be overwritten by a custom function passed into output
+	 */
 	static __output__ = function(_message) {
 		show_debug_message(_message);
 	}
 	
 	__setUp__ = undefined;
 	__tearDown__ = undefined;
-	name = (argument_count > 0 && !is_string(argument[0])) ? argument[0] : "TestRunner";
+	name = (!is_string(_name)) ? _name : "TestRunner";
 	start_time = 0;
 	stop_time = 0;
 	total_time = 0;
@@ -191,7 +219,11 @@ function TestRunner() constructor {
 
 	// Struct unpacker
 	if argument_count > 1 {
-		crispyStructUnpack(argument[1]);
+		var _unpack = argument[1];
+		if !is_struct(_unpack) {
+			crispyThrowExpected(self, "", "struct", typeof(_unpack));
+		}
+		crispyStructUnpack(_unpack);
 	}
 
 }

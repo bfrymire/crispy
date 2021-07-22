@@ -2,7 +2,7 @@
  * Suite to hold tests and will run each test when instructed to.
  * @constructor
  * @param [name]
- * @param [struct] - Struct for crispyStructUnpack
+ * @param {struct} - Struct for crispyStructUnpack
  */
 function TestSuite() constructor {
 
