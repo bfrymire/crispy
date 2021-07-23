@@ -1,11 +1,19 @@
 can_run_tests = true;
+
+// Setting up text to display on screen
 display_text = CRISPY_NAME + " " + CRISPY_VERSION + "\n\n";
 display_text += "View the Output Window to see the test results.\n";
 display_text += "Press \"R\" to re-run tests.";
 
 
-/// Custom function to test
-function add(a, b) {
+/**
+ * Adds two numbers together
+ * @function
+ * @param {real} a - Number to be added
+ * @param {real} b - Number to be added
+ * @returns {real} Sum of a and b
+ */
+add = function(a, b) {
 	return a + b;
 }
 
