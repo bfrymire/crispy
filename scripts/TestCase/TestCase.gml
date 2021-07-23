@@ -25,7 +25,8 @@ function TestCase() constructor {
 	 * @function
 	 * @param log - Log struct
 	 */
-	static addLog = function(_log) {
+	static addLog = function() {
+		var _log = (argument_count > 0) ? argument[0] : undefined;
 		array_push(logs, _log);
 	}
 
@@ -41,7 +42,9 @@ function TestCase() constructor {
 	 * @param {*} second - Second value to check against _first
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertEqual = function(_first, _second) {
+	static assertEqual = function() {
+		var _first = (argument_count > 0) ? argument[0] : undefined;
+		var _second = (argument_count > 1) ? argument[1] : undefined;
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if typeof(_first) != typeof(_second) {
 			addLog(new CrispyLog(self, {pass:false,msg:"Supplied value types are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
@@ -61,7 +64,9 @@ function TestCase() constructor {
 	 * @param {*} second - Second type to check against
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertNotEqual = function(_first, _second) {
+	static assertNotEqual = function() {
+		var _first = (argument_count > 0) ? argument[0] : undefined;
+		var _second = (argument_count > 1) ? argument[1] : undefined;
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if _first != _second {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -77,7 +82,8 @@ function TestCase() constructor {
 	 * @param {*} expr - Expression to check
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertTrue = function(_expr) {
+	static assertTrue = function() {
+		var _expr = (argument_count > 0) ? argument[0] : undefined;
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(_expr);
@@ -100,7 +106,8 @@ function TestCase() constructor {
 	 * @param {*} expr - Expression to check
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertFalse = function(_expr) {
+	static assertFalse = function() {
+		var _expr = (argument_count > 0) ? argument[0] : undefined;
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(_expr);
@@ -122,7 +129,8 @@ function TestCase() constructor {
 	 * @param {*} expr - Expression to check
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertIsNoone = function(_expr) {
+	static assertIsNoone = function() {
+		var _expr = (argument_count > 0) ? argument[0] : undefined;
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if _expr == -4 {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -137,7 +145,8 @@ function TestCase() constructor {
 	 * @param {*} expr - Expression to check
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertIsNotNoone = function(_expr) {
+	static assertIsNotNoone = function() {
+		var _expr = (argument_count > 0) ? argument[0] : undefined;
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if _expr != -4 {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -152,7 +161,8 @@ function TestCase() constructor {
 	 * @param {*} expr - Expression to check
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertIsUndefined = function(_expr) {
+	static assertIsUndefined = function() {
+		var _expr = (argument_count > 0) ? argument[0] : undefined;
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if is_undefined(_expr) {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -167,7 +177,8 @@ function TestCase() constructor {
 	 * @param {*} expr - Expression to check
 	 * @param {string} [message] - Custom message to output on failure
 	 */
-	static assertIsNotUndefined = function(_expr) {
+	static assertIsNotUndefined = function() {
+		var _expr = (argument_count > 0) ? argument[0] : undefined;
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_undefined(_expr) {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -232,7 +243,8 @@ function TestCase() constructor {
 	 * Set the name of the TestCase
 	 * @param {string} name - Name of the test
 	 */
-	static setName = function(_name) {
+	static setName = function() {
+		var _name = (argument_count > 0) ? argument[0] : undefined;
 		if !is_string(_name) {
 			crispyThrowExpected(self, "setName", "string", typeof(_name));
 		}
@@ -248,7 +260,9 @@ function TestCase() constructor {
 	test = method(self, _func);
 	logs = [];
 
-	// Struct unpacker
+	/**
+	 * Struct unpacker if a struct was passed as unpack
+	 */
 	if argument_count > 2 {
 		var _unpack = argument[2];
 		if !is_struct(_unpack) {

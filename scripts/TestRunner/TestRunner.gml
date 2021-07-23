@@ -1,23 +1,33 @@
 /**
- * Runner to hold TestSuites and iterates through each TestSuite, running its TestUnits when instructed to.
+ * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor
  * @param {string} [name="TestRunner"] - Name of TestRunner.
  * @param {struct} [unpack] - Struct for crispyStructUnpack.
  */
-function TestRunner(_name, _unpack) constructor {
+function TestRunner() constructor {
 
-	var _name = (argument_count > 0) ? argument[0] : "TestRunner";
+	var _name = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "TestRunner";
 
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
-	// @param log
-	static addLog = function(_log) {
+	/**
+	 * Adds a Log to the array of logs
+	 * @function
+	 * @param {Log} log - Log struct to add to logs
+	 */
+	static addLog = function() {
+		var _log = (argument_count > 0) ? argument[0] : undefined;
 		array_push(logs, _log);
 	}
 
-	// @param instance
-	static captureLogs = function(_inst) {
+	/**
+	 * Adds Logs to the array of logs
+	 * @function
+	 * @param {CrispyLog|TestCase|TestSuite} inst - Adds logs of inst to logs
+	 */
+	static captureLogs = function() {
+		var _inst = (argument_count > 0) ? argument[0] : undefined;
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
 				addLog(_inst);
@@ -45,7 +55,13 @@ function TestRunner(_name, _unpack) constructor {
 	}
 
 	// @param suite
-	static addTestSuite = function(_suite) {
+	/**
+	 * Adds TestSuite to array of suites
+	 * @function
+	 * @param {TestSuite} suite - TestSuite to add
+	 */
+	static addTestSuite = function() {
+		var _suite = (argument_count > 0) ? argument[0] : undefined;
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
 			var _type = !is_undefined(_inst) ? _inst : typeof(_inst);
@@ -55,19 +71,15 @@ function TestRunner(_name, _unpack) constructor {
 		array_push(suites, _suite);
 	}
 
-
-	//
-	// @function
-	// @param {string} _str="-" - String to concat _count times.
-	// @param {number} _count=70 - Number of times to concat _str.
-	// @returns {string} 
-	static hr = function(_str, _count) {
-		if is_undefined(_str) {
-			_str = "-";
-		}
-		if is_undefined(_count) {
-			_count = 70;
-		}
+	/**
+	 * Creates a horizontal row
+	 * @param {string} [str="-"] - String to concat _count times
+	 * @param {number} [count=70] - Number of times to concat _str.
+	 * @returns {string} String of horizontal row
+	 */
+	static hr = function() {
+		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
+		var _count = (argument_count > 1 && is_real(argument[1])) ? max(0, round(argument[1])) : 70;
 		var _hr = "";
 		repeat(_count) {
 			_hr += _str;
@@ -75,6 +87,10 @@ function TestRunner(_name, _unpack) constructor {
 		return _hr;
 	}
 
+	/**
+	 * Runs test suites and logs results
+	 * @function
+	 */
   	static run = function() {
 		setUp();
 		var _len = array_length(suites);
@@ -107,8 +123,6 @@ function TestRunner(_name, _unpack) constructor {
 		}
 	}
 
-	// @param [name]
-	// @param [function]
 	/**
 	 * Function ran after test, used to clean up test
 	 * @function
@@ -217,7 +231,9 @@ function TestRunner(_name, _unpack) constructor {
 	suites = [];
 	logs = [];
 
-	// Struct unpacker
+	/**
+	 * Struct unpacker if a struct was passed as unpack
+	 */
 	if argument_count > 1 {
 		var _unpack = argument[1];
 		if !is_struct(_unpack) {
