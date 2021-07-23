@@ -1,10 +1,23 @@
 /**
- * Saves the result and output of assertion.
+ * Saves the result and output of assertion
  * @constructor
- * @param {TestCase} case - TestCase struct that ran the assertion.
- * @param [struct] struct - Structure to replace existing constructor values.
+ * @param {TestCase} case - TestCase struct that ran the assertion
+ * @param {struct} [unpack] - Structure to use with crispyStructUnpack
  */
-function CrispyLog(_case) constructor {
+function CrispyLog() constructor {
+
+	var _case = (argument_count > 0) ? argument[0] : undefined;
+	var _unpack = (argument_count > 1 && is_struct(argument[1])) ? argument[1] : undefined;
+
+	if instanceof(_case) != "TestCase" {
+		try {
+			var _type = instanceof(_case);
+		} catch(_e) {
+			var _type = typeof(_case);
+		}
+		crispyThrowExpected(self, "", "TestCase", _type);
+	}
+
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
@@ -69,8 +82,8 @@ function CrispyLog(_case) constructor {
 	display_name = _display_name;
 
 	// Struct unpacker
-	if argument_count > 1 {
-		crispyStructUnpack(argument[1]);
+	if is_struct(_unpack) {
+		crispyStructUnpack(_unpack);
 	}
 
 }

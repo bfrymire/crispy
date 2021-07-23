@@ -1,11 +1,19 @@
 can_run_tests = true;
+
+// Setting up text to display on screen
 display_text = CRISPY_NAME + " " + CRISPY_VERSION + "\n\n";
 display_text += "View the Output Window to see the test results.\n";
 display_text += "Press \"R\" to re-run tests.";
 
 
-/// Custom function to test
-function add(a, b) {
+/**
+ * Adds two numbers together
+ * @function
+ * @param {real} a - Number to be added
+ * @param {real} b - Number to be added
+ * @returns {real} Sum of a and b
+ */
+add = function(a, b) {
 	return a + b;
 }
 
@@ -20,10 +28,10 @@ suite = new TestSuite();
 runner.addTestSuite(suite);
 
 
-// Create TestCase for our custom function
+// Create TestCase for custom add function defined above
 testAddFunction = new TestCase(function() {
 	var _number = other.add(10, 5);
-	self.assertEqual(_number, 15);
+	assertEqual(_number, 15);
 }, "testAddFunction");
 
 // Add TestCase to TestSuite
@@ -32,59 +40,59 @@ suite.addTestCase(testAddFunction);
 
 // Create TestCase for assertion functions
 testEqual = new TestCase(function() {
-	self.assertEqual(10, 10);
+	assertEqual(10, 10);
 }, "testEqual");
 suite.addTestCase(testEqual);
 
 testNotEqual = new TestCase(function() {
-	self.assertNotEqual(1, 5);
+	assertNotEqual(1, 5);
 }, "testNotEqual");
 suite.addTestCase(testNotEqual);
 
 testTrue = new TestCase(function() {
-	self.assertTrue(true);
+	assertTrue(true);
 }, "testTrue");
 suite.addTestCase(testTrue);
 
 testFalse = new TestCase(function() {
-	self.assertFalse(false);
+	assertFalse(false);
 }, "testFalse");
 suite.addTestCase(testFalse);
 
 testIsNooneKeyword = new TestCase(function() {
-	self.assertIsNoone(noone);
+	assertIsNoone(noone);
 }, "testIsNooneKeyword");
 suite.addTestCase(testIsNooneKeyword);
 
 testIsNooneNumber = new TestCase(function() {
-	self.assertIsNoone(-4);
+	assertIsNoone(-4);
 }, "testIsNooneNumber");
 suite.addTestCase(testIsNooneNumber);
 
 testIsNotNoone = new TestCase(function() {
-	self.assertIsNotNoone(all);
+	assertIsNotNoone(all);
 }, "testIsNotNoone");
 suite.addTestCase(testIsNotNoone);
 
 testIsUndefined = new TestCase(function() {
-	self.assertIsUndefined(undefined);
+	assertIsUndefined(undefined);
 }, "testIsUndefined");
 suite.addTestCase(testIsUndefined);
 
 testIsNotUndefined = new TestCase(function() {
-	self.assertIsNotUndefined(undefined);
+	assertIsNotUndefined(undefined);
 }, "testIsNotUndefined");
 suite.addTestCase(testIsNotUndefined);
 
 
 // Failure without custom message
 testFailureTypes = new TestCase(function() {
-	self.assertEqual(3, "String");
+	assertEqual(3, "String");
 }, "testFailureTypes");
 suite.addTestCase(testFailureTypes);
 
 // Failure with custom message
 testFailureCustomMessage = new TestCase(function() {
-	self.assertFalse(instance_exists(obj_test), "This is a custom failure message.");
+	assertFalse(instance_exists(obj_test), "This is a custom failure message.");
 }, "testFailureCustomMessage");
 suite.addTestCase(testFailureCustomMessage);
