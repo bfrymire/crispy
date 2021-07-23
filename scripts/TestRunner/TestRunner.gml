@@ -4,10 +4,7 @@
  * @param [name]
  * @param [struct] - Struct for crispyStructUnpack
  */
-function TestRunner() constructor {
-
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+function TestRunner() : BaseTestClass() constructor {
 
 	// @param log
 	static addLog = function(_log) {

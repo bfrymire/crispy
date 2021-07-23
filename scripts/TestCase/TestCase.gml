@@ -5,9 +5,9 @@
  * @param [name]
  * @param [struct] - Struct for crispyStructUnpack
  */
-function TestCase(_function) constructor {
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+function TestCase() : BaseTestClass() constructor {
+
+	var _function = (argument_count > 0) ? argument[0] : undefined;
 
 	if !is_method(_function) {
 		crispyThrowExpected(self, "", "method", typeof(_function));
