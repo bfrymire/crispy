@@ -5,7 +5,7 @@
  * @param {string} name - Name of TestCase
  * @param {struct} [unpack] - Struct for crispyStructUnpack
  */
-function TestCase() constructor {
+function TestCase() : BaseTestClass() constructor {
 
 	var _func = (argument_count > 0) ? argument[0] : undefined;
 	var _name = (argument_count > 1) ? argument[1] : undefined;
@@ -17,8 +17,12 @@ function TestCase() constructor {
 		crispyThrowExpected(self, "", "string", typeof(_name));
 	}
 
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+	name = _name;
+	class = instanceof(self);
+	parent = undefined;
+	test = method(self, _func);
+	logs = [];
+
 
 	/**
 	 * Adds a Log to the array of logs
@@ -238,27 +242,6 @@ function TestCase() constructor {
 		test();
 		tearDown();
 	}
-
-	/**
-	 * Set the name of the TestCase
-	 * @param {string} name - Name of the test
-	 */
-	static setName = function() {
-		var _name = (argument_count > 0) ? argument[0] : undefined;
-		if !is_string(_name) {
-			crispyThrowExpected(self, "setName", "string", typeof(_name));
-		}
-		name = _name;
-	}
-
-
-	name = _name;
-	__setUp__ = undefined;
-	__tearDown__ = undefined;
-	class = instanceof(self);
-	parent = undefined;
-	test = method(self, _func);
-	logs = [];
 
 	/**
 	 * Struct unpacker if a struct was passed as unpack

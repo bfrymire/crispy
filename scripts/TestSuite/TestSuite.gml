@@ -4,13 +4,15 @@
  * @param {string} [name] - Name of runner
  * @param {struct} - Struct for crispyStructUnpack
  */
-function TestSuite() constructor {
+function TestSuite() : BaseTestClass() constructor {
 
 	var _name = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "TestSuite";
 
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+	name = _name;
+	parent = undefined;
+	tests = [];
 
+	
 	/**
 	 * Adds test case to array of cases
 	 * @function
@@ -91,13 +93,6 @@ function TestSuite() constructor {
 		}
 		name = _name;
 	}
-
-	name = _name;
-	__setUp__ = undefined;
-	__tearDown__ = undefined;
-	parent = undefined;
-	tests = [];
-
 
 	// Struct unpacker if a struct was passed as unpack
 	if argument_count > 1 {
