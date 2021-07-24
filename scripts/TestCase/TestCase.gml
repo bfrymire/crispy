@@ -239,22 +239,8 @@ function TestCase() : BaseTestClass() constructor {
 		tearDown();
 	}
 
-	/**
-	 * Set the name of the TestCase
-	 * @param {string} name - Name of the test
-	 */
-	static setName = function() {
-		var _name = (argument_count > 0) ? argument[0] : undefined;
-		if !is_string(_name) {
-			crispyThrowExpected(self, "setName", "string", typeof(_name));
-		}
-		name = _name;
-	}
-
 
 	name = _name;
-	__setUp__ = undefined;
-	__tearDown__ = undefined;
 	class = instanceof(self);
 	parent = undefined;
 	test = method(self, _func);

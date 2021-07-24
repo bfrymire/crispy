@@ -218,8 +218,6 @@ function TestRunner() : BaseTestClass() constructor {
 		show_debug_message(_message);
 	}
 	
-	__setUp__ = undefined;
-	__tearDown__ = undefined;
 	name = (!is_string(_name)) ? _name : "TestRunner";
 	start_time = 0;
 	stop_time = 0;

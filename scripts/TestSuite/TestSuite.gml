@@ -90,8 +90,6 @@ function TestSuite() : BaseTestClass() constructor {
 	}
 
 	name = _name;
-	__setUp__ = undefined;
-	__tearDown__ = undefined;
 	parent = undefined;
 	tests = [];
 
