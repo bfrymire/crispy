@@ -17,9 +17,6 @@ function TestCase() : BaseTestClass() constructor {
 		crispyThrowExpected(self, "", "string", typeof(_name));
 	}
 
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
-
 	/**
 	 * Adds a Log to the array of logs
 	 * @function
