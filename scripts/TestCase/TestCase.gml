@@ -17,6 +17,13 @@ function TestCase() : BaseTestClass() constructor {
 		crispyThrowExpected(self, "", "string", typeof(_name));
 	}
 
+	name = _name;
+	class = instanceof(self);
+	parent = undefined;
+	test = method(self, _func);
+	logs = [];
+
+
 	/**
 	 * Adds a Log to the array of logs
 	 * @function
@@ -235,13 +242,6 @@ function TestCase() : BaseTestClass() constructor {
 		test();
 		tearDown();
 	}
-
-
-	name = _name;
-	class = instanceof(self);
-	parent = undefined;
-	test = method(self, _func);
-	logs = [];
 
 	/**
 	 * Struct unpacker if a struct was passed as unpack

@@ -8,6 +8,15 @@ function TestRunner() : BaseTestClass() constructor {
 
 	var _name = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "TestRunner";
 
+	name = _name;
+	start_time = 0;
+	stop_time = 0;
+	total_time = 0;
+	display_time = "0";
+	suites = [];
+	logs = [];
+
+
 	/**
 	 * Adds a Log to the array of logs
 	 * @function
@@ -218,14 +227,6 @@ function TestRunner() : BaseTestClass() constructor {
 		show_debug_message(_message);
 	}
 	
-	name = (!is_string(_name)) ? _name : "TestRunner";
-	start_time = 0;
-	stop_time = 0;
-	total_time = 0;
-	display_time = "0";
-	suites = [];
-	logs = [];
-
 	/**
 	 * Struct unpacker if a struct was passed as unpack
 	 */
