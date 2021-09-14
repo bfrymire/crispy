@@ -96,3 +96,7 @@ testFailureCustomMessage = new TestCase(function() {
 	assertFalse(instance_exists(obj_test), "This is a custom failure message.");
 }, "testFailureCustomMessage");
 suite.addTestCase(testFailureCustomMessage);
+
+
+// Discovering test scripts
+runner.discover();
