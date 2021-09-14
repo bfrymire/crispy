@@ -6,6 +6,7 @@
 #macro CRISPY_RUN true									// Boolean flag that can be used to automatically run tests
 #macro CRISPY_DEBUG false								// Enables outputting extra context on some silent functions
 #macro CRISPY_VERBOSITY 2								// Determines how verbose assertion outputs will be. Acceptable values are 0, 1, or 2
+#macro CRISPY_STOP_ON_FAILURE true		// Boolean flag that can be used to stop tests once an assertion fails
 
 #macro CRISPY_TIME_PRECISION 6					// Number of decimal places timers will be output to
 
