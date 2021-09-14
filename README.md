@@ -138,12 +138,12 @@ In the example above, we're able to add instructions to this <samp>TestCase.setU
 
 Unit tests can be organized inside a script, then discovered by a <samp>TestRunner</samp>.
 
-<samp>TestRunner<b>.discover([_test_suite=undefined], [_script_start_pattern="test_"])</b></samp> Function for discovering individual test functions within scripts, and adds them to a TestSuite.
+<samp>TestRunner<b>.discover([\_test_suite=undefined], [\_script_start_pattern="test\_"])</b></samp> Function for discovering individual test functions within scripts, and adds them to a TestSuite.
 
 <b>_test_suite</b> (`undefined` by default)
 Discovered functions will be automatically added to `_test_suite`.
 A <samp>TestSuite</samp> can be passed to this argument to capture the tests.
-Defaults to `undefined`, which will create a new <samp>TestSuite</samp> with the name "__discovered_test_suite__". The suite will be added to the runner.
+Defaults to `undefined`, which will create a new <samp>TestSuite</samp> with the name "\_\_discovered_test_suite\_\_". The suite will be added to the runner.
 
 <b>_script_start_pattern</b> (`"test_"` by default)
 String that script functions need to start with in order to be discoverable. Cannot be an empty string.
