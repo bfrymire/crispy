@@ -195,6 +195,61 @@ function TestRunner() : BaseTestClass() constructor {
 	}
 
 	/**
+	 * Function for discovering individual test functions within scripts, and adds them to a TestSuite
+	 * @function
+	 * @param [test_suite=undefined] test_suite - TestSuite to add discovered test script to, else create a temporary TestSuite
+	 * @param [string="test_"] script_name_start - String that script functions need to start with in order to be discoverable
+	 */
+	static discover = function() {
+		var _test_suite = (argument_count > 0) ? argument[0] : undefined;
+		var _script_start_pattern = (argument_count > 1) ? argument[1] : "test_";
+		var _created_test_suite = is_undefined(_test_suite);
+		if !is_string(_script_start_pattern) {
+			crispyThrowExpected(self, "_script_start_pattern", "string", typeof(_script_start_pattern));
+		}
+		if _script_start_pattern == "" {
+			throw(name + ".discover() argument '_script_start_pattern' cannot be an empty string.");
+		}
+		if !is_undefined(_test_suite) {
+			if instanceof(_test_suite) != "TestSuite" {
+				crispyThrowExpected(self, "_test_suite", "[TestSuite|undefined]", typeof(_test_suite));
+			}
+			if _test_suite.parent != self {
+				throw(name + ".discover() argument '_test_suite' parent is not self. _test_suite may not have been added to " + self.name + " prior to running 'discover()'.");
+			}
+		} else {
+			_test_suite = new TestSuite("__discovered_test_suite__");
+		}
+		var _len = string_length(_script_start_pattern);
+		for(var i = 100000; i < 110000; i++) {
+			if script_exists(i) {
+				var _script_name = script_get_name(i);
+				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
+					if CRISPY_DEBUG && CRISPY_VERBOSITY {
+						crispyDebugMessage("Discovered test script: " + _script_name + " (" + string(i) + ").");
+					}
+					var _test_case = new TestCase(function(){}, _script_name);
+					_test_case.__discover__(i);
+					_test_suite.addTestCase(_test_case);
+				}
+			}
+		}
+		if _created_test_suite {
+			if array_length(_test_suite.tests) == 0 {
+				delete _test_suite;
+				if CRISPY_DEBUG && CRISPY_VERBOSITY == 2 {
+					crispyDebugMessage(name + ".discover() local TestSuite deleted.");
+				}
+			} else {
+				addTestSuite(_test_suite);
+				if CRISPY_DEBUG && CRISPY_VERBOSITY == 2 {
+					crispyDebugMessage(name + ".discover() local TestSuite added: " + _test_suite.name);
+				}
+			}
+		}
+	}
+
+	/**
 	 * Pass input to __output__ if string. Overwrite __output__ if method
 	 * @function
 	 * @param {string|method} input - String to output or function to overwrite __output__

@@ -20,9 +20,24 @@ function TestCase() : BaseTestClass() constructor {
 	name = _name;
 	class = instanceof(self);
 	parent = undefined;
-	test = method(self, _func);
+	test = undefined;
 	logs = [];
+	__is_discovered__ = false;
+	__discovered_script__ = undefined;
+	createTestMethod(_func);
 
+	/**
+	 * Turns a function into a method variable.
+	 * @function
+	 * @param {method} func - Function to turn into a method variable
+	 */
+	static createTestMethod = function() {
+		_func = (argument_count > 0) ? argument[0] : undefined;
+		if !is_method(_func) {
+			crispyThrowExpected(self, "createMethodVariable", "method", typeof(_func));
+		}
+		test = method(self, _func);
+	}
 
 	/**
 	 * Adds a Log to the array of logs
@@ -241,6 +256,23 @@ function TestCase() : BaseTestClass() constructor {
 		setUp();
 		test();
 		tearDown();
+	}
+
+	/**
+	 * Sets up a discovered script to use as the test
+	 * @function
+	 * @param {real} script - ID of script
+	 * @returns self
+	 */
+	static __discover__ = function() {
+		var _script = (argument_count > 0) ? argument[0] : undefined;
+		if !is_real(_script) {
+			crispyThrowExpected(self, "__discovered__", "real", typeof(_script));
+		}
+		__discovered_script__ = _script;
+		__is_discovered__ = true;
+		createTestMethod(function() {script_execute(__discovered_script__)});
+		return self;
 	}
 
 	/**

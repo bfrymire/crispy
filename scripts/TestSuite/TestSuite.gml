@@ -11,6 +11,8 @@ function TestSuite() : BaseTestClass() constructor {
 	name = _name;
 	parent = undefined;
 	tests = [];
+	__discovered_tests__ = [];
+	__test__ = undefined
 
 	
 	/**
@@ -92,6 +94,21 @@ function TestSuite() : BaseTestClass() constructor {
 			crispyThrowExpected(self, "setName", "string", typeof(_name));
 		}
 		name = _name;
+	}
+
+	/**
+	 * Adds a script ID to discovered tests array
+	 * @param {real} script - ID of script
+	 */
+	static __addDiscoveredTest__ = function() {
+		_script = (argument_count > 0) ? argument[0] : undefined;
+		if !is_real(_script) {
+			crispyThrowExpected(self, "__addDiscoveredTest__", "real", typeof(_script));
+		}
+		if !script_exists(_script) {
+			throw("Script with ID " + string(_script) + " cannot be found.");
+		}
+		array_push(__discovered_tests__, _script);
 	}
 
 	// Struct unpacker if a struct was passed as unpack
