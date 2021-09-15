@@ -158,4 +158,4 @@ To prevent this, do not name scripts by the same naming convention when running 
 
 <h2>License</h2>
 <a href="https://opensource.org/licenses/MIT" _target="blank">MIT License</a>
-<p>Copyright (c) 2020-2021 bfrymire</p>
+<p>Copyright (c) 2020-2021 Brent Frymire</p>
