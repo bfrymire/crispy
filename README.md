@@ -154,7 +154,7 @@ String that script functions need to start with in order to be discoverable. Can
 
 <b>NOTE:</b> Test scripts are discovered by checking a range of ID numbers where scripts and their contained functions would be found. There is currently no way in the language to distinct a script from its contained functions. This makes it possible to have the entire script accidentially added as a <samp>TestCase</samp> test.
 
-To prevent this, do not name scripts by the same naming convention when running <samp>TestRunner.discover()</samp>. Remember that by default, <samp>_script_name_start</samp> is "test_", but this value can be manually changed each time <samp>discover()</samp> is ran.
+To prevent this, do not name scripts by the same naming convention when running <samp>TestRunner.discover()</samp>. Remember that by default, <samp>\_script_name_start</samp> is "test\_", but this value can be manually changed each time <samp>discover()</samp> is ran.
 
 <h2>License</h2>
 <a href="https://opensource.org/licenses/MIT" _target="blank">MIT License</a>
