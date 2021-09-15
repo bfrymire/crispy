@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"crispyGetTime","path":"scripts/crispyGetTime/crispyGetTime.yy",},"order":4,},
+    {"id":{"name":"example_of_discoverable_test","path":"scripts/example_of_discoverable_test/example_of_discoverable_test.yy",},"order":0,},
     {"id":{"name":"crispyIsInternalVariable","path":"scripts/crispyIsInternalVariable/crispyIsInternalVariable.yy",},"order":12,},
     {"id":{"name":"crispyGetTimeDiff","path":"scripts/crispyGetTimeDiff/crispyGetTimeDiff.yy",},"order":5,},
     {"id":{"name":"crispyTimeConvert","path":"scripts/crispyTimeConvert/crispyTimeConvert.yy",},"order":6,},
@@ -42,6 +43,7 @@
     {"folderPath":"folders/Objects.yy","order":0,"resourceVersion":"1.0","name":"Objects","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Rooms.yy","order":1,"resourceVersion":"1.0","name":"Rooms","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Crispy.yy","order":3,"resourceVersion":"1.0","name":"Crispy","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Scripts.yy","order":5,"resourceVersion":"1.0","name":"Scripts","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
