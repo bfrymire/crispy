@@ -157,5 +157,5 @@ String that script functions need to start with in order to be discoverable. Can
 To prevent this, do not name scripts by the same naming convention when running <samp>TestRunner.discover()</samp>. Remember that by default, <samp>\_script_name_start</samp> is "test\_", but this value can be manually changed each time <samp>discover()</samp> is ran.
 
 <h2>License</h2>
-<a href="https://opensource.org/licenses/MIT" _target="blank">MIT License</a>
-<p>Copyright (c) 2020-2021 Brent Frymire</p>
+
+[MIT License](./LICENSE) © Brent Frymire
