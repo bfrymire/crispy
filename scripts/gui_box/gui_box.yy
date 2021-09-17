@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Tests",
-    "path": "folders/Scripts/Tests.yy",
+    "name": "GUI",
+    "path": "folders/Scripts/GUI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "example_of_discoverable_test",
+  "name": "gui_box",
   "tags": [],
   "resourceType": "GMScript",
 }
