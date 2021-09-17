@@ -6,7 +6,7 @@
     "path": "folders/Scripts/Tests.yy",
   },
   "resourceVersion": "1.0",
-  "name": "example_of_discoverable_test",
+  "name": "gui_tests",
   "tags": [],
   "resourceType": "GMScript",
 }
