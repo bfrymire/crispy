@@ -11,7 +11,7 @@ function TestSuite() : BaseTestClass() constructor {
 	name = _name;
 	parent = undefined;
 	tests = [];
-
+	
 	
 	/**
 	 * Adds test case to array of cases
