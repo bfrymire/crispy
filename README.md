@@ -1,6 +1,6 @@
 <p align="center"><img src="./LOGO.png" style="margin:auto;"></p>
 
-<h1>crispy</h1>
+<h1>Crispy</h1>
 <p>Version 1.3.0</p>
 <p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
 
@@ -132,29 +132,29 @@ test_example.tearDown(function() {
 });
 ```
 
-In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>test()</samp> and <samp>tearDown()</samp> functions. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwriting variables and breaking the objects. Be careful with these functions.
+In the example above, we're able to add instructions to this <samp>TestCase.setUp()</samp> and <samp>TestCase.tearDown()</samp> functions. These functions are very powerful. Notice in the example that we're able to define a variable to the <samp>TestCase</samp> in the <samp>setUp()</samp> function and be able to call upon it in the <samp>TestCase</samp> struct and <samp>tearDown</samp> function. Passing variables in this fashion applies the variables directly to the structure. This could possibly lead to you overwriting variables and breaking the objects. Be careful with these functions.
 
 <h2>Discoverable Tests</h2>
 
 Unit tests can be organized inside a script, then discovered by a <samp>TestRunner</samp>.
 
-<samp>TestRunner<b>.discover([\_test_suite=undefined], [\_script_start_pattern="test\_"])</b></samp>
+<samp>TestRunner<b>.discover([test_suite=undefined], [script_start_pattern="test\_"])</b></samp>
 <br>
 Function for discovering individual test functions within scripts, and adds them to a TestSuite.
 
-<b>_test_suite</b> (`undefined` by default)
+<b>test_suite</b> (`undefined` by default)
 <br>
-Discovered functions will be automatically added to `_test_suite`.
 A <samp>TestSuite</samp> can be passed to this argument to capture the tests.
-Defaults to `undefined`, which will create a new <samp>TestSuite</samp> with the name "\_\_discovered_test_suite\_\_". The suite will be added to the runner.
+Discovered functions will be automatically added to the `test_suite`.
+If no <samp>TestSuite</samp> is passed into the function, one will be created with the name "\_\_discovered_test_suite\_\_". The suite will be added to the runner that called `discover`.
 
-<b>_script_start_pattern</b> (`"test_"` by default)
+<b>script_start_pattern</b> (`"test_"` by default)
 <br>
 String that script functions need to start with in order to be discoverable. Cannot be an empty string.
 
 <b>NOTE:</b> Test scripts are discovered by checking a range of ID numbers where scripts and their contained functions would be found. There is currently no way in the language to distinct a script from its contained functions. This makes it possible to have the entire script accidentially added as a <samp>TestCase</samp> test.
 
-To prevent this, do not name scripts by the same naming convention when running <samp>TestRunner.discover()</samp>. Remember that by default, <samp>\_script_name_start</samp> is "test\_", but this value can be manually changed each time <samp>discover()</samp> is ran.
+To prevent this, do not name scripts by the same naming convention when running <samp>TestRunner.discover()</samp>. Remember that by default, <samp>script_name_start</samp> is "test\_", but this value can be manually changed each time <samp>discover()</samp> is ran.
 
 ## Credits
 
@@ -162,4 +162,4 @@ To prevent this, do not name scripts by the same naming convention when running 
 
 <h2>License</h2>
 
-[MIT License](./LICENSE) © Brent Frymire
+[MIT License](./LICENSE) &copy; Brent Frymire
