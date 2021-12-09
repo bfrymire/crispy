@@ -49,6 +49,10 @@ function TestCase() : BaseTestClass() constructor {
 		array_push(logs, _log);
 	}
 
+	/**
+	 * Clears array of Logs
+	 * @function clearLogs
+	 */
 	static clearLogs = function() {
 		logs = [];
 	}
@@ -62,9 +66,14 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertEqual = function() {
-		var _first = (argument_count > 0) ? argument[0] : undefined;
-		var _second = (argument_count > 1) ? argument[1] : undefined;
+		// Check supplied arguments
+		if argument_count < 2 {
+			show_error("assertEqual expects 2 arguments, got " + string(argument_count) + ".", true);
+		}
+		var _first = argument[0];
+		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
+		// Check types of first and second
 		if typeof(_first) != typeof(_second) {
 			addLog(new CrispyLog(self, {pass:false,msg:"Supplied value types are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
 			return;
@@ -84,8 +93,12 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertNotEqual = function() {
-		var _first = (argument_count > 0) ? argument[0] : undefined;
-		var _second = (argument_count > 1) ? argument[1] : undefined;
+		// Check supplied arguments
+		if argument_count < 2 {
+			show_error("assertNotEqual expects 2 arguments, got " + string(argument_count) + ".", true);
+		}
+		var _first = argument[0];
+		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if _first != _second {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -102,7 +115,11 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertTrue = function() {
-		var _expr = (argument_count > 0) ? argument[0] : undefined;
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error("assertTrue expects 1 argument, got " + string(argument_count) + ".", true);
+		}
+		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(_expr);
@@ -126,7 +143,11 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertFalse = function() {
-		var _expr = (argument_count > 0) ? argument[0] : undefined;
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error("assertFalse expects 1 argument, got " + string(argument_count) + ".", true);
+		}
+		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		try {
 			var _bool = bool(_expr);
@@ -149,7 +170,11 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertIsNoone = function() {
-		var _expr = (argument_count > 0) ? argument[0] : undefined;
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error("assertIsNoone expects 1 argument, got " + string(argument_count) + ".", true);
+		}
+		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if _expr == -4 {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -165,7 +190,11 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertIsNotNoone = function() {
-		var _expr = (argument_count > 0) ? argument[0] : undefined;
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error("assertIsNotNoone expects 1 argument, got " + string(argument_count) + ".", true);
+		}
+		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if _expr != -4 {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -181,7 +210,11 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertIsUndefined = function() {
-		var _expr = (argument_count > 0) ? argument[0] : undefined;
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error("assertIsUndefined expects 1 argument, got " + string(argument_count) + ".", true);
+		}
+		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if is_undefined(_expr) {
 			addLog(new CrispyLog(self, {pass:true}));
@@ -197,7 +230,11 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {string} [message] - Custom message to output on failure
 	 */
 	static assertIsNotUndefined = function() {
-		var _expr = (argument_count > 0) ? argument[0] : undefined;
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error("assertIsNotUndefined expects 1 argument, got " + string(argument_count) + ".", true);
+		}
+		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_undefined(_expr) {
 			addLog(new CrispyLog(self, {pass:true}));
