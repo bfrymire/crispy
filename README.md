@@ -2,7 +2,7 @@
 
 <h1>Crispy</h1>
 <p>Version 1.3.0</p>
-<p>An automated unit testing framework built in GML for GameMaker Studio 2.3+</p>
+<p>An automated unit testing framework built in GML for GameMaker Studio 2.3.6+</p>
 
 
 <h2>Basic Example</h2>
