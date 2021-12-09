@@ -1,8 +1,8 @@
 /**
  * Saves the result and output of assertion
- * @constructor
+ * @constructor CrispyLog
  * @param {TestCase} case - TestCase struct that ran the assertion
- * @param {struct} [unpack] - Structure to use with crispyStructUnpack
+ * @param {struct} unpack - Structure to use with crispyStructUnpack
  */
 function CrispyLog() constructor {
 
@@ -27,7 +27,7 @@ function CrispyLog() constructor {
 		} else {
 			var _msg = "";
 		}
-		switch(verbosity) {
+		switch (verbosity) {
 			case 0:
 				if pass {
 					_msg += CRISPY_PASS_MSG_SILENT;
@@ -81,7 +81,9 @@ function CrispyLog() constructor {
 	}
 	display_name = _display_name;
 
-	// Struct unpacker
+	/**
+	 * Struct unpacker if a struct was passed as unpack
+	 */
 	if is_struct(_unpack) {
 		crispyStructUnpack(_unpack);
 	}

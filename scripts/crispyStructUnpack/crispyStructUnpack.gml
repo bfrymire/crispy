@@ -1,13 +1,15 @@
 /**
- * Helper function for structs that will replace a destination's variable name values with the given source's variable
- * 		name values
- * @function
+ * Helper function for structs that will replace a destination's
+ * 		variable name values with the given source's variable name values
+ * @function crispyStructUnpack
  * @param {struct} unpack - Struct used to replace existing values with
- * @param {boolean} [name_must_exist=true] - Boolean flag that prevents new variable names from
- * 		being added to the destination struct if the variable name does not already exist
+ * @param [boolean=true] name_must_exist - Boolean flag that prevents
+ * 		new variable names from being added to the destination struct if
+ * 		the variable name does not already exist
  */
 function crispyStructUnpack(_unpack, _name_must_exist) {
 
+	// Throw error if passed value isn't a struct
 	if !is_struct(_unpack) {
 		crispyThrowExpected(self, "crispyStructUnpack", "struct", typeof(_unpack));
 	}

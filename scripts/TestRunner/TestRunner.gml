@@ -1,8 +1,8 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
- * @constructor
- * @param {string} [name="TestRunner"] - Name of TestRunner.
- * @param {struct} [unpack] - Struct for crispyStructUnpack.
+ * @constructor TestRunner
+ * @param [string="TestRunner"] name - Name of TestRunner.
+ * @param [struct] unpack - Struct for crispyStructUnpack.
  */
 function TestRunner() : BaseTestClass() constructor {
 
@@ -19,17 +19,16 @@ function TestRunner() : BaseTestClass() constructor {
 
 	/**
 	 * Adds a Log to the array of logs
-	 * @function
+	 * @function addLog
 	 * @param {Log} log - Log struct to add to logs
 	 */
-	static addLog = function() {
-		var _log = (argument_count > 0) ? argument[0] : undefined;
+	static addLog = function(_log) {
 		array_push(logs, _log);
 	}
 
 	/**
 	 * Adds Logs to the array of logs
-	 * @function
+	 * @function captureLogs
 	 * @param {CrispyLog|TestCase|TestSuite} inst - Adds logs of inst to logs
 	 */
 	static captureLogs = function() {
@@ -60,10 +59,9 @@ function TestRunner() : BaseTestClass() constructor {
 		}
 	}
 
-	// @param suite
 	/**
 	 * Adds TestSuite to array of suites
-	 * @function
+	 * @function addTestSuite
 	 * @param {TestSuite} suite - TestSuite to add
 	 */
 	static addTestSuite = function() {
@@ -78,9 +76,10 @@ function TestRunner() : BaseTestClass() constructor {
 	}
 
 	/**
-	 * Creates a horizontal row
-	 * @param {string} [str="-"] - String to concat _count times
-	 * @param {number} [count=70] - Number of times to concat _str.
+	 * Creates a horizontal row string
+	 * @function hr
+	 * @param [string="-"] srt - String to concat n times
+	 * @param [real=70] count - Number of times to concat _str.
 	 * @returns {string} String of horizontal row
 	 */
 	static hr = function() {
@@ -95,7 +94,7 @@ function TestRunner() : BaseTestClass() constructor {
 
 	/**
 	 * Runs test suites and logs results
-	 * @function
+	 * @function run
 	 */
   	static run = function() {
 		setUp();
@@ -109,8 +108,8 @@ function TestRunner() : BaseTestClass() constructor {
 
 	/**
 	 * Clears logs, starts timer, and runs __setUp__
-	 * @function
-	 * @param {method} [func] - Method to override __setUp__ with
+	 * @function setUp
+	 * @param [method] func - Method to override __setUp__ with
 	 */
 	static setUp = function() {
 		if argument_count > 0 {
@@ -131,8 +130,8 @@ function TestRunner() : BaseTestClass() constructor {
 
 	/**
 	 * Function ran after test, used to clean up test
-	 * @function
-	 * @param {method} [func] - Method to override __tearDown__ with
+	 * @function tearDown
+	 * @param [method] func - Method to override __tearDown__ with
 	 */
 	static tearDown = function() {
 		if argument_count > 0 {
@@ -195,10 +194,13 @@ function TestRunner() : BaseTestClass() constructor {
 	}
 
 	/**
-	 * Function for discovering individual test functions within scripts, and adds them to a TestSuite
-	 * @function
-	 * @param [test_suite=undefined] test_suite - TestSuite to add discovered test script to, else create a temporary TestSuite
-	 * @param [string="test_"] script_name_start - String that script functions need to start with in order to be discoverable
+	 * Function for discovering individual test functions within
+	 * 		scripts, and adds them to a TestSuite
+	 * @function discover
+	 * @param [test_suite=undefined] test_suite - TestSuite to add
+	 * 		discovered test script to, else create a temporary TestSuite
+	 * @param [string="test_"] script_name_start - String that script
+	 * 		functions need to start with in order to be discoverable
 	 */
 	static discover = function() {
 		var _test_suite = (argument_count > 0) ? argument[0] : undefined;
@@ -251,8 +253,9 @@ function TestRunner() : BaseTestClass() constructor {
 
 	/**
 	 * Pass input to __output__ if string. Overwrite __output__ if method
-	 * @function
-	 * @param {string|method} input - String to output or function to overwrite __output__
+	 * @function output
+	 * @param {string|method} input - String to output or function to
+	 * 		overwrite __output__
 	 */
 	static output = function() {
 		var _input = (argument_count > 0) ? argument[0] : undefined;
@@ -274,9 +277,11 @@ function TestRunner() : BaseTestClass() constructor {
 	}
 
 	/**
-	 * @function
+	 * Function that gets called on output
+	 * @function __output__
 	 * @param {string} message - By default, outputs string to Output Console
-	 * @tip This function can be overwritten by a custom function passed into output
+	 * @tip This function can be overwritten by a function passed into
+	 * 		the output function
 	 */
 	static __output__ = function(_message) {
 		show_debug_message(_message);

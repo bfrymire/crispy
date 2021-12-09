@@ -1,19 +1,16 @@
 /**
- * Helper function for Crispy to throw an error message that displays what type of value the function was expecting
- * @function
+ * Helper function for Crispy to throw an error message that displays
+ * 		what type of value the function was expecting
+ * @function crispyThrowExpected
  * @param {struct} self - Struct that is calling the function, usually self
- * @param {string} name - String of the name of the function that is currently running the error message
+ * @param {string} name - String of the name of the function that is
+ * 		currently running the error message
  * @param {string} expected - String of the type of value expected to receive
  * @param {string} received - String of the type of value received
  */
-function crispyThrowExpected() {
+function crispyThrowExpected(_self, _name, _expected, _received) {
 
-	var _self = (argument_count > 0) ? argument[0] : undefined;
-	var _name = (argument_count > 1) ? argument[1] : undefined;
-	var _expected = (argument_count > 2) ? argument[2] : undefined;
-	var _received = (argument_count > 3) ? argument[3] : undefined;
-
-	// Throw error message if wrong type is passed into functions
+	// Throw error message if wrong type is passed into parameters
 	if !is_struct(_self) {
 		throw("crispyThrowExpected() _self parameter expected a struct, received " + typeof(_self) + ".");
 	}
