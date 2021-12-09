@@ -206,16 +206,20 @@ function TestRunner() : BaseTestClass() constructor {
 		var _test_suite = (argument_count > 0) ? argument[0] : undefined;
 		var _script_start_pattern = (argument_count > 1) ? argument[1] : "test_";
 		var _created_test_suite = is_undefined(_test_suite);
+		// Throw error if function pattern is not a string
 		if !is_string(_script_start_pattern) {
 			crispyThrowExpected(self, "_script_start_pattern", "string", typeof(_script_start_pattern));
 		}
+		// Throw error if function pattern is an empty string
 		if _script_start_pattern == "" {
-			throw(name + ".discover() argument '_script_start_pattern' cannot be an empty string.");
+			throw(name + ".discover() argument 'script_start_pattern' cannot be an empty string.");
 		}
+		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
-				crispyThrowExpected(self, "_test_suite", "[TestSuite|undefined]", typeof(_test_suite));
+				crispyThrowExpected(self, "test_suite", "[TestSuite|undefined]", typeof(_test_suite));
 			}
+			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
 				throw(name + ".discover() argument '_test_suite' parent is not self. _test_suite may not have been added to " + self.name + " prior to running 'discover()'.");
 			}
