@@ -5,10 +5,7 @@
  * @param {string} name - Name of TestCase
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
-function TestCase() : BaseTestClass() constructor {
-
-	var _func = (argument_count > 0) ? argument[0] : undefined;
-	var _name = (argument_count > 1) ? argument[1] : undefined;
+function TestCase(_func, _name) : BaseTestClass() constructor {
 
 	if !is_method(_func) {
 		crispyThrowExpected(self, "", "method", typeof(_func));
@@ -27,7 +24,7 @@ function TestCase() : BaseTestClass() constructor {
 	createTestMethod(_func);
 
 	/**
-	 * Turns a function into a method variable.
+	 * Turns a function into a method variable for the test.
 	 * @function createTestMethod
 	 * @param {method} func - Function to turn into a method variable
 	 */
@@ -300,14 +297,13 @@ function TestCase() : BaseTestClass() constructor {
 	 * @param {real} script - ID of script
 	 * @returns {struct} self
 	 */
-	static __discover__ = function() {
-		var _script = (argument_count > 0) ? argument[0] : undefined;
+	static __discover__ = function(_script) {
 		if !is_real(_script) {
 			crispyThrowExpected(self, "__discovered__", "real", typeof(_script));
 		}
 		__discovered_script__ = _script;
 		__is_discovered__ = true;
-		createTestMethod(function() {script_execute(__discovered_script__)});
+		createTestMethod(function() {__discovered_script__()});
 		return self;
 	}
 
