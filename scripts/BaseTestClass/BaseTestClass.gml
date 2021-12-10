@@ -1,6 +1,6 @@
 /**
  * Base "class" test constructors will inherit from
- * @constructor
+ * @constructor BaseTestClass
  */
 function BaseTestClass() {
 
@@ -15,6 +15,7 @@ function BaseTestClass() {
 
 	/**
 	 * Set the name of the TestCase
+	 * @function setName
 	 * @param {string} name - Name of the test
 	 */
 	static setName = function() {
