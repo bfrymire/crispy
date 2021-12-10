@@ -1,13 +1,10 @@
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
- * @param {TestCase} case - TestCase struct that ran the assertion
- * @param {struct} unpack - Structure to use with crispyStructUnpack
+ * @param {TestCase} case - TestCase struct
+ * @param {struct} unpack - Struct to use with crispyStructUnpack
  */
-function CrispyLog() constructor {
-
-	var _case = (argument_count > 0) ? argument[0] : undefined;
-	var _unpack = (argument_count > 1 && is_struct(argument[1])) ? argument[1] : undefined;
+function CrispyLog(_case) constructor {
 
 	if instanceof(_case) != "TestCase" {
 		try {
@@ -21,6 +18,12 @@ function CrispyLog() constructor {
 	// Give self cripsyStructUnpack() function
 	crispyMixinStructUnpack(self);
 
+	/**
+	 * Constructs text based on outcome of test assertion and verbosity
+	 * @function getMsg
+	 * @returns {string} Text based on outcome of test assertion and
+	 * 		verbosity
+	 */
 	static getMsg = function() {
 		if verbosity == 2 && display_name != "" {
 			var _msg = display_name + " ";
@@ -35,15 +38,8 @@ function CrispyLog() constructor {
 					_msg += CRISPY_FAIL_MSG_SILENT;
 				}
 				break;
-			case 1:
-				/*
-				if pass {
-					_msg += CRISPY_PASS_MSG_VERBOSE;
-				} else {
-					_msg += CRISPY_FAIL_MSG_VERBOSE;
-				}
-				*/
-				break;
+			case 1: // TODO: Figure out if anything specific should be
+					// 		 output when CRISPY_VERBOSITY is 1
 			case 2:
 				if pass {
 					_msg += "..." + CRISPY_PASS_MSG_VERBOSE;
@@ -68,6 +64,7 @@ function CrispyLog() constructor {
 	class = _case.class;
 	name = _case.name;
 
+	// Create the display name of log based on TestCase name and class
 	var _display_name = "";
 	if !is_undefined(name) {
 		_display_name += name;
@@ -82,10 +79,10 @@ function CrispyLog() constructor {
 	display_name = _display_name;
 
 	/**
-	 * Struct unpacker if a struct was passed as unpack
+	 * Run struct unpacker if unpack argument was provided
 	 */
-	if is_struct(_unpack) {
-		crispyStructUnpack(_unpack);
+	if argument_count > 1 {
+		crispyStructUnpack(argument[1]);
 	}
 
 }

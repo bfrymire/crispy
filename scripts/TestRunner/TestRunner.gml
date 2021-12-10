@@ -292,14 +292,10 @@ function TestRunner() : BaseTestClass() constructor {
 	}
 	
 	/**
-	 * Struct unpacker if a struct was passed as unpack
+	 * Run struct unpacker if unpack argument was provided
 	 */
 	if argument_count > 1 {
-		var _unpack = argument[1];
-		if !is_struct(_unpack) {
-			crispyThrowExpected(self, "", "struct", typeof(_unpack));
-		}
-		crispyStructUnpack(_unpack);
+		crispyStructUnpack(argument[1]);
 	}
 
 }
