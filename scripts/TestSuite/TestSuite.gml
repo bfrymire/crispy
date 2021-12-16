@@ -1,13 +1,13 @@
 /**
  * Testing suite that holds tests
  * @constructor TestSuite
- * @param {struct} test_struct - Struct containing instructions to run for TestSuite
+ * @param {struct} suite_struct - Struct containing instructions to set up TestSuite
  */
-function TestSuite(_test_struct) : BaseTestClass() constructor {
+function TestSuite(_suite_struct) : BaseTestClass() constructor {
 
 	// Check for correct types
-	if !is_struct(_test_struct) {
-		crispy_throw_expected(self, "", "struct", typeof(_test_struct));
+	if !is_struct(_suite_struct) {
+		crispy_throw_expected(self, "", "struct", typeof(_suite_struct));
 	}
 
 	parent = undefined;
@@ -40,7 +40,7 @@ function TestSuite(_test_struct) : BaseTestClass() constructor {
 	}
 
 	// Apply test_struct to TestCase
-	crispy_struct_unpack(_test_struct, reserved_names);
+	crispy_struct_unpack(_suite_struct, reserved_names);
 
 	// Checks whether the name was set up correctly
 	check_name();

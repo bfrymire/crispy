@@ -1,7 +1,7 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
- * @param {struct} runner_struct - Struct containing instructions to run for TestRunner
+ * @param {struct} runner_struct - Struct containing instructions to set up TestRunner
  */
 function TestRunner(_runner_struct) : BaseTestClass() constructor {
 
@@ -263,6 +263,7 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
 					var _test_struct = i();
 					// Throw error if what is return is not a struct
+					// @TODO: make a switch here to change what to do if given a method or struct
 					if !is_struct(_test_struct) && !is_method(_test_struct) {
 						show_error("Discovered test function \"" + _script_name + "\" did not return a struct, recieved " + typeof(_test_struct) + ".", true);
 						continue;

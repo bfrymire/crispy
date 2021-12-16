@@ -5,7 +5,7 @@
  * @param {string} name - Name of variable to check
  * @returns {boolean} If name follows internal variable naming convention
  */
-function crispy_is_internal_variable() {
+function crispy_is_internal_variable(_name) {
 
 	if !is_string(_name) {
 		crispy_throw_expected("crispy_is_internal_variable", "", "string", typeof(_name));

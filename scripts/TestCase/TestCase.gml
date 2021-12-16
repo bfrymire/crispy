@@ -1,7 +1,7 @@
 /**
  * Creates a TestCase object to run assertions
  * @constructor TestCase
- * @param {struct} test_struct - Struct containing instructions to run for TestCase
+ * @param {struct} test_struct - Struct containing instructions to set up TestCase
  */
 function TestCase(_test_struct) : BaseTestClass() constructor {
 
@@ -71,7 +71,7 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	/**
 	 * Clears array of Logs
 	 * @function clear_logs
-	 * @returns {struct} self
+	 * @returns {struct} Self
 	 */
 	static clear_logs = function() {
 		logs = [];
@@ -117,7 +117,7 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * @param [string] message - Custom message to output on failure
 	 */
 	static assert_not_equal = function() {
-		// Check supplied arguments
+		// Check correct number of arguments
 		if argument_count < 2 {
 			show_error("assert_not_equal expects 2 arguments, got " + string(argument_count) + ".", true);
 		}
@@ -128,9 +128,15 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
 		}
 		if _first != _second {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true,
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"first and second are equal: " + string(_first) + ", " + string(_second)}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "first and second are equal: " + string(_first) + ", " + string(_second),
+			}));
 		}
 	}
 
@@ -155,13 +161,22 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			var _bool = bool(_expr);
 		}
 		catch(err) {
-			add_log(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				helper_text: "Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate.",
+			}));
 			return;
 		}
 		if _bool == true {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true,
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"Expression is not true."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "Expression is not true."
+			}));
 		}
 	}
 
@@ -186,13 +201,22 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			var _bool = bool(_expr);
 		}
 		catch(err) {
-			add_log(new CrispyLog(self, {pass:false,helper_text:"Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				helper_text: "Unable to convert " + typeof(_expr) + " into boolean. Cannot evaluate.",
+			}));
 			return;
 		}
 		if _bool == false {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true,
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"Expression is not false."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "Expression is not false.",
+			}));
 		}
 	}
 
@@ -213,9 +237,15 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
 		}
 		if _expr == -4 {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true,
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"Expression is not noone."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "Expression is not noone.",
+			}));
 		}
 	}
 
@@ -236,9 +266,15 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
 		}
 		if _expr != -4 {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true,
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"Expression is noone."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "Expression is noone.",
+			}));
 		}
 	}
 
@@ -259,9 +295,15 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
 		}
 		if is_undefined(_expr) {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true,
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"Expression is not undefined."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "Expression is not undefined.",
+			}));
 		}
 	}
 
@@ -282,9 +324,15 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
 		}
 		if !is_undefined(_expr) {
-			add_log(new CrispyLog(self, {pass:true}));
+			add_log(new CrispyLog(self, {
+				pass: true
+			}));
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"Expression is undefined."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "Expression is undefined.",
+			}));
 		}
 	}
 
