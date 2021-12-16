@@ -1,16 +1,16 @@
 /**
- * Mixin function that extends structs to have the crispyStructUnpack() function
+ * Mixin function that extends structs to have the crispy_struct_unpack() function
  * @function
- * @param {struct} struct - Struct to give crispyStructUnpack method to
+ * @param {struct} struct - Struct to give crispy_struct_unpack method to
  */
-function crispyMixinStructUnpack() {
+function crispy_mixin_struct_unpack() {
 
 	var _struct = (argument_count > 0) ? argument[0] : undefined;
 
 	if !is_struct(_struct) {
-		crispyThrowExpected(self, crispyMixinStructUnpack, "struct", typeof(_struct));
+		crispy_throw_expected(self, crispy_mixin_struct_unpack, "struct", typeof(_struct));
 	}
 
-	_struct.crispyStructUnpack = method(_struct, crispyStructUnpack);
+	_struct.crispy_struct_unpack = method(_struct, crispy_struct_unpack);
 
 }

@@ -2,11 +2,11 @@
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
  * @param {string} name - Name of runner
- * @param [struct] unpack - Struct for crispyStructUnpack
+ * @param [struct] unpack - Struct for crispy_struct_unpack
  */
 function TestRunner(_name) : BaseTestClass() constructor {
 
-	setName(_name);
+	set_name(_name);
 	start_time = 0;
 	stop_time = 0;
 	total_time = 0;
@@ -17,28 +17,28 @@ function TestRunner(_name) : BaseTestClass() constructor {
 
 	/**
 	 * Adds a Log to the array of logs
-	 * @function addLog
+	 * @function add_log
 	 * @param {Log} log - Log struct to add to logs
 	 */
-	static addLog = function(_log) {
+	static add_log = function(_log) {
 		array_push(logs, _log);
 	}
 
 	/**
 	 * Adds Logs to the array of logs
-	 * @function captureLogs
+	 * @function capture_logs
 	 * @param {CrispyLog|TestCase|TestSuite} inst - Adds logs of inst to logs
 	 */
-	static captureLogs = function() {
+	static capture_logs = function() {
 		var _inst = (argument_count > 0) ? argument[0] : undefined;
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
-				addLog(_inst);
+				add_log(_inst);
 				break;
 			case "TestCase":
 				var _logs_len = array_length(_inst.logs);
 				for(var i = 0; i < _logs_len; i++) {
-					addLog(_inst.logs[i]);
+					add_log(_inst.logs[i]);
 				}
 				break;
 			case "TestSuite":
@@ -46,27 +46,27 @@ function TestRunner(_name) : BaseTestClass() constructor {
 				for(var k = 0; k < _tests_len; k++) {
 					var _logs_len = array_length(_inst.tests[k].logs);
 					for(var i = 0; i < _logs_len; i++) {
-						addLog(_inst.tests[k].logs[i]);
+						add_log(_inst.tests[k].logs[i]);
 					}
 				}
 				break;
 			default:
 				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
-				crispyThrowExpected(self, "captureLogs", "{CrispyLog|TestCase|TestSuite}", _type);
+				crispy_throw_expected(self, "capture_logs", "{CrispyLog|TestCase|TestSuite}", _type);
 				break;
 		}
 	}
 
 	/**
 	 * Adds TestSuite to array of suites
-	 * @function addTestSuite
+	 * @function add_test_suite
 	 * @param {TestSuite} suite - TestSuite to add
 	 */
-	static addTestSuite = function(_suite) {
+	static add_test_suite = function(_suite) {
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
 			var _type = !is_undefined(_inst) ? _inst : typeof(_inst);
-			crispyThrowExpected(self, "addTestSuite", "TestSuite", _type);
+			crispy_throw_expected(self, "add_test_suite", "TestSuite", _type);
 		}
 		_suite.parent = self;
 		array_push(suites, _suite);
@@ -79,9 +79,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 * @param [real=70] count - Number of times to concat _str.
 	 * @returns {string} String of horizontal row
 	 */
-	static hr = function() {
-		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
-		var _count = (argument_count > 1 && is_real(argument[1])) ? max(0, round(argument[1])) : 70;
+	static hr = function(_str="-", _count=70) {
 		var _hr = "";
 		repeat(_count) {
 			_hr += _str;
@@ -94,31 +92,31 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 * @function run
 	 */
   	static run = function() {
-		setUp();
+		set_up();
 		var _len = array_length(suites);
 		for(var i = 0; i < _len; i++) {
 			suites[i].run();
-			captureLogs(suites[i]);
+			capture_logs(suites[i]);
 		}
-		tearDown();
+		tear_down();
 	}
 
 	/**
 	 * Clears logs, starts timer, and runs __setUp__
-	 * @function setUp
+	 * @function set_up
 	 * @param [method] func - Method to override __setUp__ with
 	 */
-	static setUp = function() {
+	static set_up = function() {
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "setUp", "method", typeof(_func));
+				crispy_throw_expected(self, "set_up", "method", typeof(_func));
 			}
 		} else {
 			logs = [];
-			start_time = crispyGetTime();
+			start_time = crispy_get_time();
 			if is_method(__setUp__) {
 				__setUp__();
 			}
@@ -127,21 +125,21 @@ function TestRunner(_name) : BaseTestClass() constructor {
 
 	/**
 	 * Function ran after test, used to clean up test
-	 * @function tearDown
+	 * @function tear_down
 	 * @param [method] func - Method to override __tearDown__ with
 	 */
-	static tearDown = function() {
+	static tear_down = function() {
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method", typeof(_func));
+				crispy_throw_expected(self, "tear_down", "method", typeof(_func));
 			}
 		} else {
 			// Get total run time
-			stop_time = crispyGetTime();
-			total_time = crispyGetTimeDiff(start_time, stop_time);
+			stop_time = crispy_get_time();
+			total_time = crispy_get_time_diff(start_time, stop_time);
 			display_time = crispyTimeConvert(total_time);
 
 			// Display silent test results
@@ -165,7 +163,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 				if logs[i].pass {
 					_passed_tests += 1;
 				}
-				var _msg = logs[i].getMsg();
+				var _msg = logs[i].get_msg();
 				if _msg != "" {
 					output(_msg);
 				}
@@ -203,7 +201,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 		var _created_test_suite = is_undefined(_test_suite);
 		// Throw error if function pattern is not a string
 		if !is_string(_script_start_pattern) {
-			crispyThrowExpected(self, "_script_start_pattern", "string", typeof(_script_start_pattern));
+			crispy_throw_expected(self, "_script_start_pattern", "string", typeof(_script_start_pattern));
 		}
 		// Throw error if function pattern is an empty string
 		if _script_start_pattern == "" {
@@ -212,7 +210,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
-				crispyThrowExpected(self, "test_suite", "[TestSuite|undefined]", typeof(_test_suite));
+				crispy_throw_expected(self, "test_suite", "[TestSuite|undefined]", typeof(_test_suite));
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
@@ -227,11 +225,11 @@ function TestRunner(_name) : BaseTestClass() constructor {
 				var _script_name = script_get_name(i);
 				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
 					if CRISPY_DEBUG && CRISPY_VERBOSITY {
-						crispyDebugMessage("Discovered test script: " + _script_name + " (" + string(i) + ").");
+						crispy_debug_message("Discovered test script: " + _script_name + " (" + string(i) + ").");
 					}
 					var _test_case = new TestCase(_script_name, function(){});
 					_test_case.__discover__(i);
-					_test_suite.addTestCase(_test_case);
+					_test_suite.add_test_case(_test_case);
 				}
 			}
 		}
@@ -239,12 +237,12 @@ function TestRunner(_name) : BaseTestClass() constructor {
 			if array_length(_test_suite.tests) == 0 {
 				delete _test_suite;
 				if CRISPY_DEBUG && CRISPY_VERBOSITY == 2 {
-					crispyDebugMessage(name + ".discover() local TestSuite deleted.");
+					crispy_debug_message(name + ".discover() local TestSuite deleted.");
 				}
 			} else {
-				addTestSuite(_test_suite);
+				add_test_suite(_test_suite);
 				if CRISPY_DEBUG && CRISPY_VERBOSITY == 2 {
-					crispyDebugMessage(name + ".discover() local TestSuite added: " + _test_suite.name);
+					crispy_debug_message(name + ".discover() local TestSuite added: " + _test_suite.name);
 				}
 			}
 		}
@@ -267,7 +265,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 						__output__ = method(self, _input);
 					break;
 				default:
-					crispyThrowExpected(self, "input", "{string|method}", typeof(_input));
+					crispy_throw_expected(self, "input", "{string|method}", typeof(_input));
 					break;
 			}
 		} else {
@@ -290,7 +288,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 * Run struct unpacker if unpack argument was provided
 	 */
 	if argument_count > 1 {
-		crispyStructUnpack(argument[1]);
+		crispy_struct_unpack(argument[1]);
 	}
 
 }

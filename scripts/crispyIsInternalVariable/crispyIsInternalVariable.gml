@@ -5,10 +5,10 @@
  * @param {string} name - Name of variable to check
  * @returns {boolean} If name follows internal variable naming convention
  */
-function crispyIsInternalVariable(_name) {
+function crispy_is_internal_variable() {
 
 	if !is_string(_name) {
-		crispyThrowExpected("crispyIsInternalVariable", "", "string", typeof(_name));
+		crispy_throw_expected("crispy_is_internal_variable", "", "string", typeof(_name));
 	}
 	
 	var _len = string_length(_name);

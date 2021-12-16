@@ -14,4 +14,4 @@
 #macro CRISPY_PASS_MSG_VERBOSE "ok" // Output string when an assertion passes verbosely
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail" // Output string when an assertion fails verbosely
 
-#macro CRISPY_STRUCT_UNPACK_ALLOW_DUNDER false // Enables dunder variables to be overwritten when using crispyStructUnpack
+#macro CRISPY_STRUCT_UNPACK_ALLOW_DUNDER false // Enables dunder variables to be overwritten when using crispy_struct_unpack

@@ -5,22 +5,22 @@
 function BaseTestClass() {
 
 	name = undefined;
-	static setUp = undefined;
-	static __setUp__ = undefined;
-	static tearDown = undefined;
-	static __tearDown__ = undefined;
+	static set_up = undefined;
+	static __set_up__ = undefined;
+	static tear_down = undefined;
+	static __tear_down__ = undefined;
 
 	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+	crispy_mixin_struct_unpack(self);
 
 	/**
-	 * Set the name of the TestCase
-	 * @function setName
-	 * @param {string} name - Name of the test
+	 * Set the name of the class
+	 * @function set_name
+	 * @param {string} name - Name of class
 	 */
-	static setName = function(_name) {
+	static set_name = function(_name) {
 		if !is_string(_name) {
-			crispyThrowExpected(self, "setName", "string", typeof(_name));
+			crispy_throw_expected(self, "set_name", "string", typeof(_name));
 		}
 		name = _name;
 	}

@@ -14,7 +14,7 @@ runner.output = function(_message) {
 gui_test_suite = new TestSuite("gui_suite");
 
 // Add GUI elements TestSuite to TestRunner
-runner.addTestSuite(gui_test_suite);
+runner.add_test_suite(gui_test_suite);
 
 // Discover GUI element tests
 runner.discover(gui_test_suite, "test_gui_box");
@@ -23,7 +23,7 @@ runner.discover(gui_test_suite, "test_gui_box");
 hamburger_suite = new TestSuite("hamburger_suite");
 
 // Set up hamburger for tests
-hamburger_suite.setUp(function() {
+hamburger_suite.set_up(function() {
 	var _ingredients = [
 		new Ingredient("bun"),
 		new Ingredient("pickles", true),
@@ -36,7 +36,7 @@ hamburger_suite.setUp(function() {
 });
 
 // Add hamburger TestSuite to TestRunner
-runner.addTestSuite(hamburger_suite);
+runner.add_test_suite(hamburger_suite);
 
 // Discovering hamburger tests
 runner.discover(hamburger_suite, "test_hamburger_");
