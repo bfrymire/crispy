@@ -6,7 +6,7 @@
     "path": "folders/Crispy.yy",
   },
   "resourceVersion": "1.0",
-  "name": "crispyDebugMessage",
+  "name": "crispy_struct_unpack",
   "tags": [],
   "resourceType": "GMScript",
 }

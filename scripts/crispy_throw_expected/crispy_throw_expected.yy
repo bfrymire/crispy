@@ -6,7 +6,7 @@
     "path": "folders/Crispy.yy",
   },
   "resourceVersion": "1.0",
-  "name": "crispyStructUnpack",
+  "name": "crispy_throw_expected",
   "tags": [],
   "resourceType": "GMScript",
 }

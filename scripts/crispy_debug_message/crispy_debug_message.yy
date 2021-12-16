@@ -6,7 +6,7 @@
     "path": "folders/Crispy.yy",
   },
   "resourceVersion": "1.0",
-  "name": "crispyMixinStructUnpack",
+  "name": "crispy_debug_message",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -6,7 +6,7 @@
     "path": "folders/Crispy.yy",
   },
   "resourceVersion": "1.0",
-  "name": "crispyGetTimeDiff",
+  "name": "crispy_get_time",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -6,7 +6,7 @@
     "path": "folders/Crispy.yy",
   },
   "resourceVersion": "1.0",
-  "name": "crispyIsInternalVariable",
+  "name": "crispy_time_convert",
   "tags": [],
   "resourceType": "GMScript",
 }
