@@ -1,7 +1,7 @@
 /**
  * Helper function for Crispy that returns whether or not a given variable name follows internal variable
  * 		naming convention
- * @function
+ * @function crispy_is_internal_variable
  * @param {string} name - Name of variable to check
  * @returns {boolean} If name follows internal variable naming convention
  */

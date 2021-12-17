@@ -1,6 +1,6 @@
 /**
  * Returns the difference between two times
- * @function
+ * @function crispy_get_time_diff
  * @param {number} start_time - Starting time in milliseconds
  * @param {number} stop_time - Stopping time in milliseconds
  * @returns {number} Difference between start_time and stop_time

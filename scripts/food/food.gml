@@ -1,6 +1,6 @@
 /**
  * Food item
- * @constructor
+ * @constructor Food
  * @param {string} name - Name of food
  * @param {array} ingredients - Ingredients that make up the food
  */
@@ -46,7 +46,7 @@ function Food(_name, _ingredients) constructor {
 
 /**
  * Food ingredient
- * @constructor
+ * @constructor Ingredient
  * @param {string} name - Name of ingredient
  * @param [boolean=false] is_gluten_free - Ingredient is gluten free
  */
