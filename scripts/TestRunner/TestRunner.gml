@@ -140,7 +140,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 			// Get total run time
 			stop_time = crispy_get_time();
 			total_time = crispy_get_time_diff(start_time, stop_time);
-			display_time = crispyTimeConvert(total_time);
+			display_time = crispy_time_convert(total_time);
 
 			// Display silent test results
 			var _passed_tests = 0;
