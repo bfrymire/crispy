@@ -12,16 +12,16 @@ function crispy_throw_expected(_self, _name, _expected, _received) {
 
 	// Throw error message if wrong type is passed into parameters
 	if !is_struct(_self) {
-		throw("crispy_throw_expected() _self parameter expected a struct, received " + typeof(_self) + ".");
+		throw("crispy_throw_expected() \"self\" parameter expected a struct, received " + typeof(_self) + ".");
 	}
 	if !is_string(_name) {
-		throw("crispy_throw_expected() _name parameter expected a string, received " + typeof(_name) + ".");
+		throw("crispy_throw_expected() \"name\" parameter expected a string, received " + typeof(_name) + ".");
 	}
 	if !is_string(_expected) {
-		throw("crispy_throw_expected() _expected parameter expected a string, received " + typeof(_expected) + ".");
+		throw("crispy_throw_expected() \"expected\" parameter expected a string, received " + typeof(_expected) + ".");
 	}
 	if !is_string(_received) {
-		throw("crispy_throw_expected() _received parameter expected a string, received " + typeof(_received) + ".");
+		throw("crispy_throw_expected() \"received\" parameter expected a string, received " + typeof(_received) + ".");
 	}
 
 	var _char = string_lower(string_ord_at(_expected, 1));
