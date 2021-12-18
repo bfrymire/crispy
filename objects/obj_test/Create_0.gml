@@ -57,6 +57,7 @@ info_box = new gui_box(1, 1, room_width - 2, padding * 2 + string_height(info_te
 
 // Test results scrolling
 scroll_position = 0;
+scroll_position_want = scroll_position;
 text_height = string_height("W");
 
 results = ds_list_create();
