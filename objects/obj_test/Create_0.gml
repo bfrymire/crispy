@@ -1,7 +1,17 @@
 // Create TestRunner
-runner = new TestRunner("runner");
+runner = new TestRunner("test_runner", {
+	// Update runner to output test results to Output Window and results ds_list
+	output: function(_message) {
+		show_debug_message(_message);
+		ds_list_insert(results, 0, _message);
+		while ds_list_size(results) > results_max {
+			ds_list_delete(results, results_max - 1);
+		}
+	}
+});
 
 // Update runner to output test results to Output Window and results ds_list
+/*
 runner.output = function(_message) {
 	show_debug_message(_message);
 	ds_list_insert(results, 0, _message);
@@ -9,6 +19,7 @@ runner.output = function(_message) {
 		ds_list_delete(results, results_max - 1);
 	}
 }
+*/
 
 // Create GUI elements TestSuite
 gui_test_suite = new TestSuite("gui_suite");
@@ -17,7 +28,7 @@ gui_test_suite = new TestSuite("gui_suite");
 runner.add_test_suite(gui_test_suite);
 
 // Discover GUI element tests
-runner.discover(gui_test_suite, "test_gui_box");
+// runner.discover(gui_test_suite, "test_gui_box");
 
 // Create hamburger TestSuite
 hamburger_suite = new TestSuite("hamburger_suite");
@@ -39,7 +50,18 @@ hamburger_suite.set_up(function() {
 runner.add_test_suite(hamburger_suite);
 
 // Discovering hamburger tests
-runner.discover(hamburger_suite, "test_hamburger_");
+// runner.discover(hamburger_suite, "test_hamburger_");
+
+var _test = new TestCase("test_hamburger_top_bun", {
+	// name: "changed",
+	class: "this is a test",
+	test: function() {
+		assert_equal(parent.hamburger.ingredients[0].name, "bun", "Expecting 'bun' as hamburger's top ingredient");
+		assert_false(false, "Expecting 'bun' as hamburger's top ingredient");
+		show_debug_message(name);
+	},
+});
+hamburger_suite.add_test_case(_test);
 
 
 // Flag for running tests

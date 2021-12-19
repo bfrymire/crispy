@@ -4,7 +4,7 @@
  * @param {string} name - Name of runner
  * @param [struct] unpack - Struct for crispy_struct_unpack
  */
-function TestRunner(_name) : BaseTestClass() constructor {
+function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 
 	set_name(_name);
 	start_time = 0;
@@ -13,6 +13,19 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	display_time = "0";
 	suites = [];
 	logs = [];
+
+	// Struct of variable names that are reserved by the library
+	reserved_names = {
+		reserved: [],
+		overwrite: [
+			"set_up",
+			"tear_down",
+			"output",
+		],
+	}
+
+	// Apply test_struct to TestCase
+	crispy_struct_unpack(_runner_struct, reserved_names);
 
 
 	/**
@@ -93,12 +106,20 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 */
   	static run = function() {
 		set_up();
+		run_suites();
+		tear_down();
+	}
+
+	/**
+	 * Runs test suites
+	 * @function run_suites
+	 */
+	static run_suites = function() {
 		var _len = array_length(suites);
 		for(var i = 0; i < _len; i++) {
 			suites[i].run();
 			capture_logs(suites[i]);
 		}
-		tear_down();
 	}
 
 	/**
@@ -259,10 +280,10 @@ function TestRunner(_name) : BaseTestClass() constructor {
 		if argument_count > 0 {
 			switch (typeof(_input)) {
 				case "string":
-						__output__(_input);
+					__output__(_input);
 					break;
 				case "method":
-						__output__ = method(self, _input);
+					__output__ = method(self, _input);
 					break;
 				default:
 					crispy_throw_expected(self, "input", "{string|method}", typeof(_input));
@@ -282,13 +303,6 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 */
 	static __output__ = function(_message) {
 		show_debug_message(_message);
-	}
-	
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 */
-	if argument_count > 1 {
-		crispy_struct_unpack(argument[1]);
 	}
 
 }

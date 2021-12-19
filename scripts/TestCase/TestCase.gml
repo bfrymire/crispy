@@ -1,14 +1,14 @@
 /**
- * Creates a Test case object to run assertions
+ * Creates a TestCase object to run assertions
  * @constructor TestCase
  * @param {string} name - Name of case
- * @param {method} func - Test assertion to run for case
- * @param [struct] unpack - Struct for crispy_struct_unpack
+ * @param {struct} test_struct - Struct containing instructions to run for TestCase
  */
-function TestCase(_name, _func) : BaseTestClass() constructor {
+function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 
-	if !is_method(_func) {
-		crispy_throw_expected(self, "", "method", typeof(_func));
+	// Check for correct types
+	if !is_struct(_test_struct) {
+		crispy_throw_expected(self, "", "struct", typeof(_test_struct));
 	}
 
 	set_name(_name);
@@ -18,27 +18,44 @@ function TestCase(_name, _func) : BaseTestClass() constructor {
 	logs = [];
 	__is_discovered__ = false;
 	__discovered_script__ = undefined;
-	create_test_method(_func);
 
-	/**
-	 * Turns a function into a method variable for the test.
-	 * @function create_test_method
-	 * @param {method} func - Function to turn into a method variable
-	 */
-	static create_test_method = function(_func) {
-		if !is_method(_func) {
-			crispy_throw_expected(self, "createMethodVariable", "method", typeof(_func));
-		}
-		test = method(self, _func);
+	// Struct of variable names that are reserved by the library
+	reserved_names = {
+		reserved: [
+			"class",
+			"parent",
+			"logs",
+			"crispy_struct_unpack",
+			"assert_equal",
+			"assert_not_equal",
+			"assert_true",
+			"assert_false",
+			"assert_is_noone",
+			"assert_is_not_noone",
+			"assert_is_undefined",
+			"assert_is_not_undefined",
+			"__is_discovered__",
+			"__discovered_script__",
+			"__set_up__",
+			"__test__",
+			"__tear_down__",
+		],
+		overwrite: [
+			"set_up",
+			"test",
+			"tear_down",
+		],
 	}
+
+	// Apply test_struct to TestCase
+	crispy_struct_unpack(_test_struct, reserved_names);
 
 	/**
 	 * Adds a Log to the array of logs
 	 * @function add_log
 	 * @param {struct} log - Log struct
 	 */
-	static add_log = function() {
-		var _log = (argument_count > 0) ? argument[0] : undefined;
+	static add_log = function(_log) {
 		array_push(logs, _log);
 	}
 
@@ -326,13 +343,6 @@ function TestCase(_name, _func) : BaseTestClass() constructor {
 		__is_discovered__ = true;
 		create_test_method(function() {__discovered_script__()});
 		return self;
-	}
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 */
-	if argument_count > 2 {
-		crispy_struct_unpack(argument[2]);
 	}
 
 }

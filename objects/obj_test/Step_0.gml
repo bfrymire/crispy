@@ -3,6 +3,7 @@ if CRISPY_RUN {
 	if can_run_tests {
 		can_run_tests = false;
 		runner.run();
+		show_debug_message(runner.logs);
 	} else {
 		// Re-run tests
 		if keyboard_check_pressed(ord("R")) {
