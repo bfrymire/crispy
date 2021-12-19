@@ -17,9 +17,9 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	discovered = false;
 
 	// Struct of variable names that are reserved by the library
-	// reserved, nothing can overwrite them, unless false is passed to crispy_struct_unpack's ignore_reserved_names parameter
-	// overwrite, this will call the name as a method and pass the value of name from the source struct to that method
-	// specific, this will create a method function from the function passed as func and pass the contents of source struct to that method
+	// reserved - nothing can overwrite them, unless false is passed to crispy_struct_unpack's ignore_reserved_names parameter
+	// overwrite - this will call the name as a method and pass the value of name from the source struct to that method
+	// specific - this will create a method function from the function passed as func and pass the contents of source struct to that method
 	reserved_names = {
 		reserved: [
 			"class",
@@ -53,6 +53,9 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	if !is_method(test) {
 		throw(instanceof(self) + "() requires a test to be passed as a \"test\" variable in \"test_struct\", received " + typeof(test));
 	}
+
+	// Apply test_struct to TestCase
+	crispy_struct_unpack(_test_struct, reserved_names);
 
 	/**
 	 * Adds a Log to the array of logs
@@ -359,7 +362,6 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	}
 	
 	/**
-	 * Function ran after test executes, used to clean up test
 	 * @function tear_down
 	 * @param [method] func - Method to override __tearDown__ with
 	 */
