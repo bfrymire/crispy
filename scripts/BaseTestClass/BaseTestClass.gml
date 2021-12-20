@@ -10,7 +10,7 @@ function BaseTestClass() constructor {
 	static tear_down = undefined;
 	static __tear_down__ = undefined;
 
-	// Mixin for struct to give itself crispy_struct_unpack() function
+	// Mixin for BaseClass to give itself crispy_struct_unpack() function
 	crispy_mixin_struct_unpack(self);
 
 	/**
