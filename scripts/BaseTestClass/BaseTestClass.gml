@@ -2,7 +2,7 @@
  * Base "class" test constructors will inherit from
  * @constructor BaseTestClass
  */
-function BaseTestClass() {
+function BaseTestClass() constructor {
 
 	name = undefined;
 	static set_up = undefined;
@@ -10,7 +10,7 @@ function BaseTestClass() {
 	static tear_down = undefined;
 	static __tear_down__ = undefined;
 
-	// Give self cripsyStructUnpack() function
+	// Mixin for constructor to give itself crispy_struct_unpack() function
 	crispy_mixin_struct_unpack(self);
 
 	/**
