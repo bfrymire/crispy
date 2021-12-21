@@ -11,13 +11,15 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 		crispy_throw_expected(self, "", "struct", typeof(_test_struct));
 	}
 
-	set_name(_name);
+	name = undefined;
+	if !is_undefined(_name) {
+		set_name(_name);
+	}
 	class = instanceof(self);
 	parent = undefined;
 	test = undefined;
 	logs = [];
-	__is_discovered__ = false;
-	__discovered_script__ = undefined;
+	discovered = false;
 
 	// Struct of variable names that are reserved by the library
 	reserved_names = {
@@ -34,21 +36,27 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 			"assert_is_not_noone",
 			"assert_is_undefined",
 			"assert_is_not_undefined",
-			"__is_discovered__",
-			"__discovered_script__",
 			"__set_up__",
-			"__test__",
 			"__tear_down__",
 		],
 		overwrite: [
 			"set_up",
-			"test",
 			"tear_down",
 		],
 	}
 
 	// Apply test_struct to TestCase
 	crispy_struct_unpack(_test_struct, reserved_names);
+
+	// Throw exception if a name isn't passed to TestCase on creation
+	if is_undefined(name) && !is_undefined(_test_struct) {
+		throw("TestCase() requires a name to be passed either through the \"name\" parameter or as a \"name\" variable in \"test_struct\", received " + typeof(name));
+	}
+
+	// Throw exception if a test isn't passed to TestCase on creation
+	if !is_method(test) {
+		throw("TestCase() requires a test to be passed either through as a \"test\" variable in \"test_struct\", received " + typeof(test));
+	}
 
 	/**
 	 * Adds a Log to the array of logs
@@ -327,22 +335,6 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 		set_up();
 		test();
 		tear_down();
-	}
-
-	/**
-	 * Sets up a discovered script to use as the test
-	 * @function __discover__
-	 * @param {real} script - ID of script
-	 * @returns {struct} self
-	 */
-	static __discover__ = function(_script) {
-		if !is_real(_script) {
-			crispy_throw_expected(self, "__discovered__", "real", typeof(_script));
-		}
-		__discovered_script__ = _script;
-		__is_discovered__ = true;
-		create_test_method(function() {__discovered_script__()});
-		return self;
 	}
 
 }

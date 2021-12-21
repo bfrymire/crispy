@@ -16,7 +16,11 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 
 	// Struct of variable names that are reserved by the library
 	reserved_names = {
-		reserved: [],
+		reserved: [
+			"__set_up__",
+			"__tear_down__",
+			"__output__",
+		],
 		overwrite: [
 			"set_up",
 			"tear_down",
@@ -26,7 +30,6 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 
 	// Apply test_struct to TestCase
 	crispy_struct_unpack(_runner_struct, reserved_names);
-
 
 	/**
 	 * Adds a Log to the array of logs
@@ -213,7 +216,7 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 	 * Function for discovering individual test functions within
 	 * 		scripts, and adds them to a TestSuite
 	 * @function discover
-	 * @param [test_suite=undefined] test_suite - TestSuite to add
+	 * @param [test_suite] test_suite - TestSuite to add
 	 * 		discovered test script to, else create a temporary TestSuite
 	 * @param [string="test_"] script_name_start - String that script
 	 * 		functions need to start with in order to be discoverable
@@ -240,29 +243,38 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");
 		}
+
+		// Loop through known indexes of scripts
 		var _len = string_length(_script_start_pattern);
 		for(var i = 100000; i < 110000; i++) {
 			if script_exists(i) {
 				var _script_name = script_get_name(i);
 				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
-					if CRISPY_DEBUG && CRISPY_VERBOSITY {
-						crispy_debug_message("Discovered test script: " + _script_name + " (" + string(i) + ").");
+					var _test_struct = i();
+					// Throw error if what is return is not a struct
+					if !is_struct(_test_struct) && !is_method(_test_struct) {
+						show_error("Discovered test function \"" + _script_name + "\" did not return a struct, recieved " + typeof(_test_struct) + ".", true);
+						continue;
 					}
-					var _test_case = new TestCase(_script_name, function(){});
-					_test_case.__discover__(i);
+					// Use name of the function as the test's name
+					var _test_case = new TestCase(_script_name, _test_struct);
+					_test_case.discovered = true; // Mark the TestCase as discovered
 					_test_suite.add_test_case(_test_case);
+					if CRISPY_DEBUG {
+						crispy_debug_message("Discovered test script: " + _test_case.name + " (" + string(i) + ")");
+					}
 				}
 			}
 		}
 		if _created_test_suite {
 			if array_length(_test_suite.tests) == 0 {
 				delete _test_suite;
-				if CRISPY_DEBUG && CRISPY_VERBOSITY == 2 {
+				if CRISPY_DEBUG {
 					crispy_debug_message(name + ".discover() local TestSuite deleted.");
 				}
 			} else {
 				add_test_suite(_test_suite);
-				if CRISPY_DEBUG && CRISPY_VERBOSITY == 2 {
+				if CRISPY_DEBUG {
 					crispy_debug_message(name + ".discover() local TestSuite added: " + _test_suite.name);
 				}
 			}
