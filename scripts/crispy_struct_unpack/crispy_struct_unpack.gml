@@ -33,10 +33,10 @@ function crispy_struct_unpack(_source_struct, _reserved_names={}, _ignore_reserv
 		}
 	}
 	var _struct_method = {};
-	if variable_struct_exists(_reserved_names, "ovewrite") {
-		var _len = array_length(_reserved_names.ovewrite);
+	if variable_struct_exists(_reserved_names, "overwrite") {
+		var _len = array_length(_reserved_names.overwrite);
 		for(var i = 0; i < _len; i++) {
-			variable_struct_set(_struct_method, _reserved_names.reserved[@ i], true);
+			variable_struct_set(_struct_method, _reserved_names.overwrite[@ i], true);
 		}
 	}
 	
@@ -45,7 +45,7 @@ function crispy_struct_unpack(_source_struct, _reserved_names={}, _ignore_reserv
 	var _len = array_length(_names);
 	for(var i = 0; i < _len; i++) {
 		var _name = _names[@ i];
-		// Checking if variable name should be ignored
+		// Checking if variable name is reserved and should be ignored
 		if !_ignore_reserved_names {
 			if variable_struct_exists(_struct_reserved, _name) && !variable_struct_exists(_struct_method, _name) {
 				if CRISPY_DEBUG {
@@ -56,11 +56,22 @@ function crispy_struct_unpack(_source_struct, _reserved_names={}, _ignore_reserv
 		}
 		// Check if variable name needs to be called within method variable
 		if variable_struct_exists(_struct_method, _name) {
+			if CRISPY_DEBUG {
+				crispy_debug_message(string(instanceof(self)) + ".crispy_struct_unpack() calling name as method: " + _name);
+			}
 			self[$ _name](_source_struct[$ _name]);
 		} else {
 			if is_method(_source_struct[$ _name]) {
+				// If a method is passed, make it a method variable
+				if CRISPY_DEBUG {
+					crispy_debug_message(string(instanceof(self)) + ".crispy_struct_unpack() creating method variable: " + _name);
+				}
 				self[$ _name] = method(self, _source_struct[$ _name]);
 			} else {
+				// Otherwise, just overwrite the value
+				if CRISPY_DEBUG {
+					crispy_debug_message(string(instanceof(self)) + ".crispy_struct_unpack() overwriting variable \"" + _name + "\" with " + string(_source_struct[$ _name]));
+				}
 				self[$ _name] = _source_struct[$ _name];
 			}
 		}
