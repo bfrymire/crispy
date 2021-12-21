@@ -268,8 +268,11 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 						show_error("Discovered test function \"" + _script_name + "\" did not return a struct, recieved " + typeof(_test_struct) + ".", true);
 						continue;
 					}
-					// Use name of the function as the test's name
-					var _test_case = new TestCase(_script_name, _test_struct);
+					// Use name of the function if a name variable isn't supplied by the test_struct
+					if !variable_struct_exists(_test_struct, "name") {
+						_test_struct.name = _script_name;
+					}
+					var _test_case = new TestCase(_test_struct);
 					_test_case.discovered = true; // Mark the TestCase as discovered
 					_test_suite.add_test_case(_test_case);
 					if CRISPY_DEBUG {

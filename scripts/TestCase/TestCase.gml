@@ -54,9 +54,6 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 		throw(instanceof(self) + "() requires a test to be passed as a \"test\" variable in \"test_struct\", received " + typeof(test));
 	}
 
-	// Apply test_struct to TestCase
-	crispy_struct_unpack(_test_struct, reserved_names);
-
 	/**
 	 * Adds a Log to the array of logs
 	 * @function add_log
