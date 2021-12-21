@@ -49,8 +49,13 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 	crispy_struct_unpack(_test_struct, reserved_names);
 
 	// Throw exception if a name isn't passed to TestCase on creation
-	if is_undefined(name) && !is_undefined(_test_struct) {
+	if !is_string(name) {
 		throw("TestCase() requires a name to be passed either through the \"name\" parameter or as a \"name\" variable in \"test_struct\", received " + typeof(name));
+	}
+
+	// Throw exception if a name isn't passed to TestCase on creation
+	if name == "" {
+		throw("TestCase() \"name\" variable requires a string, received empty string.");
 	}
 
 	// Throw exception if a test isn't passed to TestCase on creation
