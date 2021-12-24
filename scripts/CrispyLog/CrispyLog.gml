@@ -67,7 +67,7 @@ function CrispyLog(_case) constructor {
 					_msg += CRISPY_FAIL_MSG_SILENT;
 				}
 				break;
-			case 1: // TODO: Figure out if anything specific should be
+			case 1: // @TODO: Figure out if anything specific should be
 					// 		 output when CRISPY_VERBOSITY is 1
 			case 2:
 				if pass {

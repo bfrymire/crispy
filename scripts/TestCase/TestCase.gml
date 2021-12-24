@@ -364,6 +364,7 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	}
 	
 	/**
+	 * Function ran after test executes, used to clean up test
 	 * @function tear_down
 	 * @param [method] func - Method to override __tearDown__ with
 	 */
