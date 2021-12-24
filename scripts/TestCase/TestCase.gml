@@ -112,7 +112,7 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 	}
 
 	/**
-	 * Test that first and second are not equal
+	 * Tests that first and second are not equal
 	 * @function assert_not_equal
 	 * @param {*} first - First type to check
 	 * @param {*} second - Second type to check against
@@ -292,7 +292,7 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 
 
 	/**
-	 * Function ran before test, used to set up test
+	 * Function ran before test executes, used to set up test
 	 * @function set_up
 	 * @param [method] func - Method to override __setUp__ with
 	 */
@@ -313,7 +313,7 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 	}
 	
 	/**
-	 * Function ran after test, used to clean up test
+	 * Function ran after test executes, used to clean up test
 	 * @function tear_down
 	 * @param [method] func - Method to override __tearDown__ with
 	 */

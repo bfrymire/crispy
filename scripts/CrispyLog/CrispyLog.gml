@@ -6,14 +6,36 @@
  */
 function CrispyLog(_case) constructor {
 
-	if instanceof(_case) != "TestCase" {
-		try {
-			var _type = instanceof(_case);
-		} catch(_e) {
-			var _type = typeof(_case);
+	// Check if instance of case is a TestCase
+	var _inst = instanceof(_case);
+	if _inst != "TestCase" {
+		if is_undefined(_inst) {
+			crispy_throw_expected(self, "", "TestCase", typeof(_case));
+		} else {
+			crispy_throw_expected(self, "", "TestCase", _inst);
 		}
-		crispy_throw_expected(self, "", "TestCase", _type);
 	}
+
+	verbosity = CRISPY_VERBOSITY;
+	pass = true;
+	msg = undefined;
+	helper_text = undefined;
+	class = _case.class;
+	name = _case.name;
+
+	// Create the display name of log based on TestCase name and class
+	var _display_name = "";
+	if !is_undefined(name) {
+		_display_name += name;
+	}
+	if !is_undefined(class) {
+		if _display_name != "" {
+			_display_name += "." + class;
+		} else {
+			_display_name += class;
+		}
+	}
+	display_name = _display_name;
 
 	// Give self crispy_struct_unpack() function
 	crispy_mixin_struct_unpack(self);
@@ -56,27 +78,6 @@ function CrispyLog(_case) constructor {
 		}
 		return _msg;
 	}
-
-	verbosity = CRISPY_VERBOSITY;
-	pass = true;
-	msg = undefined;
-	helper_text = undefined;
-	class = _case.class;
-	name = _case.name;
-
-	// Create the display name of log based on TestCase name and class
-	var _display_name = "";
-	if !is_undefined(name) {
-		_display_name += name;
-	}
-	if !is_undefined(class) {
-		if _display_name != "" {
-			_display_name += "." + class;
-		} else {
-			_display_name += class;
-		}
-	}
-	display_name = _display_name;
 
 	/**
 	 * Run struct unpacker if unpack argument was provided
