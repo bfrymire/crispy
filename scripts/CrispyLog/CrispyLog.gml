@@ -2,7 +2,7 @@
  * Saves the result and output of assertion
  * @constructor CrispyLog
  * @param {TestCase} case - TestCase struct
- * @param {struct} unpack - Struct to use with crispy_struct_unpack
+ * @param [struct] unpack - Struct to use with crispy_struct_unpack
  */
 function CrispyLog(_case) constructor {
 
@@ -41,6 +41,13 @@ function CrispyLog(_case) constructor {
 	crispy_mixin_struct_unpack(self);
 
 	/**
+	 * Run struct unpacker if unpack argument was provided
+	 */
+	if argument_count > 1 {
+		crispy_struct_unpack(argument[1]);
+	}
+
+	/**
 	 * Constructs text based on outcome of test assertion and verbosity
 	 * @function get_msg
 	 * @returns {string} Text based on outcome of test assertion and
@@ -77,13 +84,6 @@ function CrispyLog(_case) constructor {
 				break;
 		}
 		return _msg;
-	}
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 */
-	if argument_count > 1 {
-		crispy_struct_unpack(argument[1]);
 	}
 
 }

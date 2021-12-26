@@ -1,12 +1,10 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
- * @param {string} name - Name of runner
- * @param [struct] unpack - Struct for crispy_struct_unpack
+ * @param {struct} runner_struct - Struct containing instructions to run for TestRunner
  */
-function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
+function TestRunner(_runner_struct) : BaseTestClass() constructor {
 
-	set_name(_name);
 	start_time = 0;
 	stop_time = 0;
 	total_time = 0;
@@ -31,19 +29,29 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 	// Apply test_struct to TestCase
 	crispy_struct_unpack(_runner_struct, reserved_names);
 
+	// show_message("name: " + string(name));
+	show_debug_message(_runner_struct);
+
+	// Checks whether the name was set up correctly
+	check_name();
+
+
 	/**
 	 * Adds a Log to the array of logs
 	 * @function add_log
 	 * @param {Log} log - Log struct to add to logs
+	 * @returns {struct} self
 	 */
 	static add_log = function(_log) {
 		array_push(logs, _log);
+		return self;
 	}
 
 	/**
 	 * Adds Logs to the array of logs
 	 * @function capture_logs
 	 * @param {CrispyLog|TestCase|TestSuite} inst - Adds logs of inst to logs
+	 * @returns {struct} self
 	 */
 	static capture_logs = function() {
 		var _inst = (argument_count > 0) ? argument[0] : undefined;
@@ -71,12 +79,14 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 				crispy_throw_expected(self, "capture_logs", "{CrispyLog|TestCase|TestSuite}", _type);
 				break;
 		}
+		return self;
 	}
 
 	/**
 	 * Adds TestSuite to array of suites
 	 * @function add_test_suite
 	 * @param {TestSuite} suite - TestSuite to add
+	 * @returns {struct} self
 	 */
 	static add_test_suite = function(_suite) {
 		var _inst = instanceof(_suite);
@@ -86,6 +96,7 @@ function TestRunner(_name, _runner_struct) : BaseTestClass() constructor {
 		}
 		_suite.parent = self;
 		array_push(suites, _suite);
+		return self;
 	}
 
 	/**

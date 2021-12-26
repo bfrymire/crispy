@@ -1,20 +1,15 @@
 /**
  * Creates a TestCase object to run assertions
  * @constructor TestCase
- * @param {string} name - Name of case
  * @param {struct} test_struct - Struct containing instructions to run for TestCase
  */
-function TestCase(_name, _test_struct) : BaseTestClass() constructor {
+function TestCase(_test_struct) : BaseTestClass() constructor {
 
 	// Check for correct types
 	if !is_struct(_test_struct) {
 		crispy_throw_expected(self, "", "struct", typeof(_test_struct));
 	}
 
-	name = undefined;
-	if !is_undefined(_name) {
-		set_name(_name);
-	}
 	class = instanceof(self);
 	parent = undefined;
 	test = undefined;
@@ -22,6 +17,9 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 	discovered = false;
 
 	// Struct of variable names that are reserved by the library
+	// reserved, nothing can overwrite them, unless false is passed to crispy_struct_unpack's ignore_reserved_names parameter
+	// overwrite, this will call the name as a method and pass the value of name from the source struct to that method
+	// specific, this will create a method function from the function passed as func and pass the contents of source struct to that method
 	reserved_names = {
 		reserved: [
 			"class",
@@ -48,36 +46,36 @@ function TestCase(_name, _test_struct) : BaseTestClass() constructor {
 	// Apply test_struct to TestCase
 	crispy_struct_unpack(_test_struct, reserved_names);
 
-	// Throw exception if a name isn't passed to TestCase on creation
-	if !is_string(name) {
-		throw("TestCase() requires a name to be passed either through the \"name\" parameter or as a \"name\" variable in \"test_struct\", received " + typeof(name));
-	}
-
-	// Throw exception if a name isn't passed to TestCase on creation
-	if name == "" {
-		throw("TestCase() \"name\" variable requires a string, received empty string.");
-	}
+	// Checks whether the name was set up correctly
+	check_name();
 
 	// Throw exception if a test isn't passed to TestCase on creation
 	if !is_method(test) {
-		throw("TestCase() requires a test to be passed either through as a \"test\" variable in \"test_struct\", received " + typeof(test));
+		throw(instanceof(self) + "() requires a test to be passed as a \"test\" variable in \"test_struct\", received " + typeof(test));
 	}
 
 	/**
 	 * Adds a Log to the array of logs
 	 * @function add_log
 	 * @param {struct} log - Log struct
+	 * @returns {struct} self
 	 */
 	static add_log = function(_log) {
+		if !is_struct(_log) {
+			crispy_throw_expected(self, "add_log", "struct", typeof(_log));
+		}
 		array_push(logs, _log);
+		return self;
 	}
 
 	/**
 	 * Clears array of Logs
 	 * @function clear_logs
+	 * @returns {struct} self
 	 */
 	static clear_logs = function() {
 		logs = [];
+		return self;
 	}
 
 	/**

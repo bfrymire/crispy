@@ -1,5 +1,6 @@
 // Create TestRunner
-runner = new TestRunner("test_runner", {
+runner = new TestRunner({
+	name: "test_runner",
 	// Update runner to output test results to Output Window and results ds_list
 	output: function(_message) {
 		show_debug_message(_message);
@@ -52,8 +53,8 @@ runner.add_test_suite(hamburger_suite);
 // Discovering hamburger tests
 // runner.discover(hamburger_suite, "test_hamburger_");
 
-var _test = new TestCase("test_hamburger_top_bun", {
-	// name: "changed",
+var _test = new TestCase({
+	name: "test_hamburger_top_bun",
 	class: "this is a test",
 	test: function() {
 		assert_equal(parent.hamburger.ingredients[0].name, "bun", "Expecting 'bun' as hamburger's top ingredient");
