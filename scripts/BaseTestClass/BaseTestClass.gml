@@ -46,4 +46,19 @@ function BaseTestClass() constructor {
 		return true;
 	}
 
+	/**
+	 * Checks whether the name of the struct was set up correctly
+	 * @function check_name
+	 */
+	check_name = function() {
+		// Only allow strings
+		if !is_string(name) {
+			throw(instanceof(self) + "() requires a \"name\" variable in \"source_struct\" to be passed, received " + typeof(name));
+		}
+		// Don't allow empty strings
+		if name == "" {
+			throw(instanceof(self) + "() \"name\" variable requires a string, received empty string.");
+		}
+	}
+
 }

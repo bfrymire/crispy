@@ -49,11 +49,6 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	// Checks whether the name was set up correctly
 	check_name();
 
-	// Throw exception if a name isn't passed to TestCase on creation
-	if name == "" {
-		throw("TestCase() \"name\" variable requires a string, received empty string.");
-	}
-
 	// Throw exception if a test isn't passed to TestCase on creation
 	if !is_method(test) {
 		throw(instanceof(self) + "() requires a test to be passed as a \"test\" variable in \"test_struct\", received " + typeof(test));
