@@ -69,6 +69,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		var _first = argument[0];
 		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		// Check types of first and second
 		if typeof(_first) != typeof(_second) {
 			addLog(new CrispyLog(self, {pass:false,msg:"Supplied value types are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
@@ -96,6 +99,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		var _first = argument[0];
 		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		if _first != _second {
 			addLog(new CrispyLog(self, {pass:true}));
 		} else {
@@ -117,6 +123,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		try {
 			var _bool = bool(_expr);
 		}
@@ -145,6 +154,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		try {
 			var _bool = bool(_expr);
 		}
@@ -172,6 +184,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		if _expr == -4 {
 			addLog(new CrispyLog(self, {pass:true}));
 		} else {
@@ -192,6 +207,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		if _expr != -4 {
 			addLog(new CrispyLog(self, {pass:true}));
 		} else {
@@ -212,6 +230,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
+		if !is_string(message) || !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		if is_undefined(_expr) {
 			addLog(new CrispyLog(self, {pass:true}));
 		} else {
@@ -232,6 +253,9 @@ function TestCase(_func, _name) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
+		if !is_string(_message) && !is_undefined(_message) {
+			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		}
 		if !is_undefined(_expr) {
 			addLog(new CrispyLog(self, {pass:true}));
 		} else {
