@@ -20,10 +20,13 @@
 	</li>
 </ol>
 
+<h3>Getting Started</h3>
 
 A good starting point is copying and pasting the code from the <a href="https://github.com/bfrymire/crispy/wiki/Quick-Start">Wiki's Quick Start page</a> into the Create Event of an object created specifically for running tests.
 
 Expand upon the code to suit your testing needs.
+
+* [Go to the Crispy Wiki](https://github.com/bfrymire/crispy/wiki)
 
 ## Credits
 
