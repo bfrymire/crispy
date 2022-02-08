@@ -1,8 +1,8 @@
 <p align="center"><img src="./LOGO.png" style="margin:auto;"></p>
 
 <h1>Crispy</h1>
-<p>Version 1.3.1</p>
-<p>An automated unit testing framework built in GML for GameMaker Studio 2.3.6+</p>
+<p>Version 1.4.0</p>
+<p>Unit testing framework built in GML for GameMaker Studio 2.3.6+</p>
 
 <h2>Installation</h2>
 
@@ -20,7 +20,7 @@
 	</li>
 </ol>
 
-<h3>Getting Started</h3>
+<h2>Getting Started</h2>
 
 A good starting point is copying and pasting the code from the <a href="https://github.com/bfrymire/crispy/wiki/Quick-Start">Wiki's Quick Start page</a> into the Create Event of an object created specifically for running tests.
 
