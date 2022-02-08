@@ -1,14 +1,12 @@
 /**
  * Testing suite that holds tests
  * @constructor TestSuite
- * @param {string} name - Name of runner
+ * @param {string} name - Name of suite
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
-function TestSuite() : BaseTestClass() constructor {
+function TestSuite(_name) : BaseTestClass() constructor {
 
-	var _name = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "TestSuite";
-
-	name = _name;
+	setName(_name);
 	parent = undefined;
 	tests = [];
 	
@@ -81,18 +79,6 @@ function TestSuite() : BaseTestClass() constructor {
 			tests[i].run();
 		}
 		tearDown();
-	}
-
-	/**
-	 * Set the name of the TestCase
-	 * @function setName
-	 * @param {string} name - Name of the test
-	 */
-	static setName = function(_name) {
-		if !is_string(_name) {
-			crispyThrowExpected(self, "setName", "string", typeof(_name));
-		}
-		name = _name;
 	}
 
 	/**

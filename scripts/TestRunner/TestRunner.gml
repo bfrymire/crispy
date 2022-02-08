@@ -1,14 +1,12 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
- * @param [string="TestRunner"] name - Name of TestRunner.
+ * @param {string} name - Name of TestRunner.
  * @param [struct] unpack - Struct for crispyStructUnpack.
  */
-function TestRunner() : BaseTestClass() constructor {
+function TestRunner(_name) : BaseTestClass() constructor {
 
-	var _name = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "TestRunner";
-
-	name = _name;
+	setName(_name);
 	start_time = 0;
 	stop_time = 0;
 	total_time = 0;
