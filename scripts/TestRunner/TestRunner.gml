@@ -1,8 +1,8 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
- * @param {string} name - Name of TestRunner.
- * @param [struct] unpack - Struct for crispyStructUnpack.
+ * @param {string} name - Name of runner
+ * @param [struct] unpack - Struct for crispyStructUnpack
  */
 function TestRunner(_name) : BaseTestClass() constructor {
 
@@ -62,8 +62,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 * @function addTestSuite
 	 * @param {TestSuite} suite - TestSuite to add
 	 */
-	static addTestSuite = function() {
-		var _suite = (argument_count > 0) ? argument[0] : undefined;
+	static addTestSuite = function(_suite) {
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
 			var _type = !is_undefined(_inst) ? _inst : typeof(_inst);
@@ -200,9 +199,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	 * @param [string="test_"] script_name_start - String that script
 	 * 		functions need to start with in order to be discoverable
 	 */
-	static discover = function() {
-		var _test_suite = (argument_count > 0) ? argument[0] : undefined;
-		var _script_start_pattern = (argument_count > 1) ? argument[1] : "test_";
+	static discover = function(_test_suite, _script_start_pattern="test_") {
 		var _created_test_suite = is_undefined(_test_suite);
 		// Throw error if function pattern is not a string
 		if !is_string(_script_start_pattern) {
@@ -232,7 +229,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 					if CRISPY_DEBUG && CRISPY_VERBOSITY {
 						crispyDebugMessage("Discovered test script: " + _script_name + " (" + string(i) + ").");
 					}
-					var _test_case = new TestCase(function(){}, _script_name);
+					var _test_case = new TestCase(_script_name, function(){});
 					_test_case.__discover__(i);
 					_test_suite.addTestCase(_test_case);
 				}

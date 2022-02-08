@@ -1,5 +1,5 @@
 // Create TestRunner
-runner = new TestRunner();
+runner = new TestRunner("runner");
 
 // Update runner to output test results to Output Window and results ds_list
 runner.output = function(_message) {
