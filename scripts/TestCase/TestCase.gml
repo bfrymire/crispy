@@ -1,20 +1,17 @@
 /**
  * Creates a Test case object to run assertions
  * @constructor TestCase
+ * @param {string} name - Name of case
  * @param {method} func - Test assertion to run for TestCase
- * @param {string} name - Name of TestCase
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
-function TestCase(_func, _name) : BaseTestClass() constructor {
+function TestCase(_name, _func) : BaseTestClass() constructor {
 
 	if !is_method(_func) {
 		crispyThrowExpected(self, "", "method", typeof(_func));
 	}
-	if !is_string(_name) {
-		crispyThrowExpected(self, "", "string", typeof(_name));
-	}
 
-	name = _name;
+	setName(_name);
 	class = instanceof(self);
 	parent = undefined;
 	test = undefined;

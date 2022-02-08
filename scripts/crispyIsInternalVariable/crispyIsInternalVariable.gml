@@ -5,9 +5,7 @@
  * @param {string} name - Name of variable to check
  * @returns {boolean} If name follows internal variable naming convention
  */
-function crispyIsInternalVariable() {
-
-	var _name = (argument_count > 0) ? argument[0] : undefined;
+function crispyIsInternalVariable(_name) {
 
 	if !is_string(_name) {
 		crispyThrowExpected("crispyIsInternalVariable", "", "string", typeof(_name));
