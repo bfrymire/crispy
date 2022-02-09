@@ -23,7 +23,9 @@ runner.output = function(_message) {
 */
 
 // Create GUI elements TestSuite
-gui_test_suite = new TestSuite("gui_suite");
+gui_test_suite = new TestSuite({
+	name: "gui_suite",
+});
 
 // Add GUI elements TestSuite to TestRunner
 runner.add_test_suite(gui_test_suite);
@@ -32,7 +34,9 @@ runner.add_test_suite(gui_test_suite);
 // runner.discover(gui_test_suite, "test_gui_box");
 
 // Create hamburger TestSuite
-hamburger_suite = new TestSuite("hamburger_suite");
+hamburger_suite = new TestSuite({
+	name: "hamburger_suite",
+});
 
 // Set up hamburger for tests
 hamburger_suite.set_up(function() {
