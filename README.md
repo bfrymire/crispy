@@ -20,6 +20,8 @@
 	</li>
 </ol>
 
+You can also drop the `YYMPS` file downloaded from the [Releases](https://github.com/bfrymire/crispy/releases/latest) tab directly onto your GMS IDE and follow the prompts.
+
 <h2>Getting Started</h2>
 
 A good starting point is copying and pasting the code from the <a href="https://github.com/bfrymire/crispy/wiki/Quick-Start">Wiki's Quick Start page</a> into the Create Event of an object created specifically for running tests.
