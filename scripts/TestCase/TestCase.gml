@@ -340,20 +340,20 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	/**
 	 * Function ran before test executes, used to set up test
 	 * @function set_up
-	 * @param [method] func - Method to override __setUp__ with
+	 * @param [method] func - Method to override __set_up__ with
 	 */
 	static set_up = function() {
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
-				__setUp__ = method(self, _func);
+				__set_up__ = method(self, _func);
 			} else {
 				crispy_throw_expected(self, "set_up", "method", typeof(_func));
 			}
 		} else {
 			clear_logs();
-			if is_method(__setUp__) {
-				__setUp__();
+			if is_method(__set_up__) {
+				__set_up__();
 			}
 		}
 	}
@@ -361,19 +361,19 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	/**
 	 * Function ran after test executes, used to clean up test
 	 * @function tear_down
-	 * @param [method] func - Method to override __tearDown__ with
+	 * @param [method] func - Method to override __tear_down__ with
 	 */
 	static tear_down = function() {
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
-				__tearDown__ = method(self, _func);
+				__tear_down__ = method(self, _func);
 			} else {
 				crispy_throw_expected(self, "tear_down", "method", typeof(_func));
 			}
 		} else {
-			if is_method(__tearDown__) {
-				__tearDown__();
+			if is_method(__tear_down__) {
+				__tear_down__();
 			}
 		}
 	}

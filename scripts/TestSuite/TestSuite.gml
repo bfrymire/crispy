@@ -92,42 +92,42 @@ function TestSuite(_suite_struct) : BaseTestClass() constructor {
 
 	/**
 	 * Event that runs before all tests to set up variables
-	 * Can also overwrite __setUp__
+	 * Can also overwrite __set_up__
 	 * @function set_up
-	 * @param {method} func - Function to overwrite __setUp__
+	 * @param {method} func - Function to overwrite __set_up__
 	 */
 	static set_up = function() {
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
-				__setUp__ = method(self, _func);
+				__set_up__ = method(self, _func);
 			} else {
 				crispy_throw_expected(self, "set_up", "method", typeof(_func));
 			}
 		} else {
-			if is_method(__setUp__) {
-				__setUp__();
+			if is_method(__set_up__) {
+				__set_up__();
 			}
 		}
 	}
 
 	/**
 	 * Event that runs after all tests to clean up variables
-	 * Can also overwrite __tearDown__
+	 * Can also overwrite __tear_down__
 	 * @function tear_down
-	 * @param {method} func - Function to overwrite __tearDown__
+	 * @param {method} func - Function to overwrite __tear_down__
 	 */
 	static tear_down = function() {
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
-				__tearDown__ = method(self, _func);
+				__tear_down__ = method(self, _func);
 			} else {
 				crispy_throw_expected(self, "tear_down", "method", typeof(_func));
 			}
 		} else {
-			if is_method(__tearDown__) {
-				__tearDown__();
+			if is_method(__tear_down__) {
+				__tear_down__();
 			}
 		}
 	}
