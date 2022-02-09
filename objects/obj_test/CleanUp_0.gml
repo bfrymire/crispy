@@ -1,2 +1,2 @@
-// Clear ds list
-ds_list_destroy(results);
+// Clear global results array
+global.results = [];

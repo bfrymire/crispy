@@ -1,26 +1,15 @@
 // Create TestRunner
 runner = new TestRunner({
 	name: "test_runner",
-	// Update runner to output test results to Output Window and results ds_list
+	// Update runner to output test results to Output Window and global results array
 	output: function(_message) {
 		show_debug_message(_message);
-		ds_list_insert(results, 0, _message);
-		while ds_list_size(results) > results_max {
-			ds_list_delete(results, results_max - 1);
+		array_insert(global.results, 0, _message);
+		if array_length(global.results) > global.results_max {
+			array_delete(global.results, global.results_max - 1, array_length(global.results) - global.results_max);
 		}
-	}
+	},
 });
-
-// Update runner to output test results to Output Window and results ds_list
-/*
-runner.output = function(_message) {
-	show_debug_message(_message);
-	ds_list_insert(results, 0, _message);
-	while ds_list_size(results) > results_max {
-		ds_list_delete(results, results_max - 1);
-	}
-}
-*/
 
 // Create GUI elements TestSuite
 gui_test_suite = new TestSuite({
@@ -92,8 +81,8 @@ reset_scroll_position = function() {
 	scroll_position_want = scroll_position;
 }
 
-results = ds_list_create();
-results_max = 255;
+global.results = [];
+global.results_max = 255;
 results_box = new gui_box(info_box.x1, info_box.y2 + 3, info_box.x2, room_height - 2);
 
 

@@ -15,18 +15,19 @@ if CRISPY_RUN {
 
 // Clear test results
 if keyboard_check_pressed(ord("C")) {
-	ds_list_clear(results);
+	global.results = [];
 	reset_scroll_position();
 }
 
 // Scrolling through test results
 scroll_dir = -(mouse_wheel_up() || keyboard_check_pressed(vk_up)) + (mouse_wheel_down() || keyboard_check_pressed(vk_down))
-if scroll_dir != 0 && ds_list_size(results) > 0 {
+var _len = array_length(global.results);
+if scroll_dir != 0 && _len > 0 {
 	var _scroll_multiplier = 3;
 	var _amount = scroll_dir * text_height * _scroll_multiplier;
 	var _new_position = scroll_position + _amount;
 	var _h = string_height("W");
-	var _h_total = _h * ds_list_size(results);
+	var _h_total = _h * _len;
 	var _y1 = -_h_total + _h * _scroll_multiplier;
 	var _y2 = results_box.get_height() - _h * _scroll_multiplier;
 	if _new_position == clamp(_new_position, _y1, _y2) {
