@@ -3,7 +3,7 @@
 
 # Crispy
 
-Version 1.4.0
+Version 1.5.0
 
 Unit testing framework built in GML for GameMaker Studio 2.3.6+
 
