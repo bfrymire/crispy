@@ -79,7 +79,7 @@ function TestCase(_name, _func) : BaseTestClass() constructor {
 		}
 		if _first == _second {
 			addLog(new CrispyLog(self), {
-				pass:true,
+				pass: true,
 			});
 		} else {
 			addLog(new CrispyLog(self, {
