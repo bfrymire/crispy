@@ -4,9 +4,8 @@
  * @param {string} name - Name of runner
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
-function TestRunner(_name) : BaseTestClass() constructor {
+function TestRunner(_name) : BaseTestClass(_name) constructor {
 
-	setName(_name);
 	start_time = 0;
 	stop_time = 0;
 	total_time = 0;
@@ -97,8 +96,10 @@ function TestRunner(_name) : BaseTestClass() constructor {
 		setUp();
 		var _len = array_length(suites);
 		for(var i = 0; i < _len; i++) {
+			onRunBegin();
 			suites[i].run();
 			captureLogs(suites[i]);
+			onRunEnd();
 		}
 		tearDown();
 	}
@@ -288,6 +289,7 @@ function TestRunner(_name) : BaseTestClass() constructor {
 	
 	/**
 	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so it may be overwritten
 	 */
 	if argument_count > 1 {
 		crispyStructUnpack(argument[1]);

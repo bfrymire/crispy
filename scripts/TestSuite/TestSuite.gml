@@ -4,9 +4,8 @@
  * @param {string} name - Name of suite
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
-function TestSuite(_name) : BaseTestClass() constructor {
+function TestSuite(_name) : BaseTestClass(_name) constructor {
 
-	setName(_name);
 	parent = undefined;
 	tests = [];
 	
@@ -76,13 +75,16 @@ function TestSuite(_name) : BaseTestClass() constructor {
 		setUp();
 		var _len = array_length(tests);
 		for(var i = 0; i < _len; i++) {
+			onRunBegin();
 			tests[i].run();
+			onRunEnd();
 		}
 		tearDown();
 	}
 
 	/**
 	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so it may be overwritten
 	 */
 	if argument_count > 1 {
 		crispyStructUnpack(argument[1]);
