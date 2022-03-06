@@ -14,8 +14,11 @@ if CRISPY_RUN {
 
 // Clear test results
 if keyboard_check_pressed(ord("C")) {
-	ds_list_clear(results);
-	scroll_position = 0;
+	if ds_list_size(results) > 0 {
+		ds_list_clear(results);
+		scroll_position = 0;
+		show_debug_message("Test results cleared.");
+	}
 }
 
 // Scrolling through test results
