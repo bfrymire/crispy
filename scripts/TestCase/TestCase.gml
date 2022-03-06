@@ -5,13 +5,12 @@
  * @param {method} func - Test assertion to run for TestCase
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
-function TestCase(_name, _func) : BaseTestClass() constructor {
+function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 
 	if !is_method(_func) {
 		crispyThrowExpected(self, "", "method", typeof(_func));
 	}
 
-	setName(_name);
 	class = instanceof(self);
 	parent = undefined;
 	test = undefined;
@@ -365,7 +364,9 @@ function TestCase(_name, _func) : BaseTestClass() constructor {
 	 */
 	static run = function() {
 		setUp();
+		onRunBegin();
 		test();
+		onRunEnd();
 		tearDown();
 	}
 
@@ -387,6 +388,7 @@ function TestCase(_name, _func) : BaseTestClass() constructor {
 
 	/**
 	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so it may be overwritten
 	 */
 	if argument_count > 2 {
 		crispyStructUnpack(argument[2]);
