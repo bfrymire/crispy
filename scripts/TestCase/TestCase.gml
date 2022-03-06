@@ -227,7 +227,7 @@ function TestCase(_name, _func) : BaseTestClass() constructor {
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
-		if !is_string(message) || !is_undefined(_message) {
+		if !is_string(_message) && !is_undefined(_message) {
 			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
 		}
 		if is_undefined(_expr) {
