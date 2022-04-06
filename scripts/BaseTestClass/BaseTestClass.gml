@@ -10,8 +10,8 @@ function BaseTestClass(_name) {
 	static __setUp__ = undefined;
 	static tearDown = undefined;
 	static __tearDown__ = undefined;
-	static __onRunBegin__ = undefined
-	static __onRunEnd__ = undefined
+	static __onRunBegin__ = undefined;
+	static __onRunEnd__ = undefined;
 	setName(_name);
 
 	// Give self cripsyStructUnpack() function
