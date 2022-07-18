@@ -9,9 +9,8 @@
  */
 function crispyStructUnpack(_unpack, _name_must_exist) {
 
-	// Throw error if passed value isn't a struct
 	if !is_struct(_unpack) {
-		crispyThrowExpected(self, "crispyStructUnpack", "struct", typeof(_unpack));
+		throw("crispyStructUnpack() \"unpack\" expected a struct, received " + typeof(_unpack) + ".");
 	}
 
 	// Optional parameter _name_must_exist defaults to true

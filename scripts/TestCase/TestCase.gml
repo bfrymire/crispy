@@ -8,7 +8,7 @@
 function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 
 	if !is_method(_func) {
-		crispyThrowExpected(self, "", "method", typeof(_func));
+		throw(instanceof(self) + " \"func\" expected a method, received " + typeof(_func) + ".");
 	}
 
 	class = instanceof(self);
@@ -26,7 +26,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 */
 	static createTestMethod = function(_func) {
 		if !is_method(_func) {
-			crispyThrowExpected(self, "createMethodVariable", "method", typeof(_func));
+			throw(instanceof(self) + ".createTestMethod() \"func\" expected a method, received " + typeof(_func) + ".");
 		}
 		test = method(self, _func);
 	}
@@ -66,7 +66,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertEqual() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		// Check types of first and second
 		if typeof(_first) != typeof(_second) {
@@ -105,7 +105,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertNotEqual() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _first != _second {
 			addLog(new CrispyLog(self, {
@@ -135,7 +135,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertTrue() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		try {
 			var _bool = bool(_expr);
@@ -175,7 +175,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertFalse() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		try {
 			var _bool = bool(_expr);
@@ -214,7 +214,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertIsNoone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _expr == -4 {
 			addLog(new CrispyLog(self, {
@@ -243,7 +243,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertIsNotNoone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _expr != -4 {
 			addLog(new CrispyLog(self, {
@@ -272,7 +272,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertIsUndefined() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if is_undefined(_expr) {
 			addLog(new CrispyLog(self, {
@@ -301,7 +301,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assertIsNotUndefined() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if !is_undefined(_expr) {
 			addLog(new CrispyLog(self, {
@@ -328,7 +328,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "setUp", "method", typeof(_func));
+				throw(instanceof(self) + ".setUp() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			clearLogs();
@@ -349,7 +349,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method", typeof(_func));
+				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {
@@ -378,7 +378,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 */
 	static __discover__ = function(_script) {
 		if !is_real(_script) {
-			crispyThrowExpected(self, "__discovered__", "real", typeof(_script));
+			throw(instanceof(self) + ".__discover__() \"script\" expected a real number, received " + typeof(_script) + ".");
 		}
 		__discovered_script__ = _script;
 		__is_discovered__ = true;

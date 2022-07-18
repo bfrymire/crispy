@@ -57,7 +57,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 				break;
 			default:
 				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
-				crispyThrowExpected(self, "captureLogs", "{CrispyLog|TestCase|TestSuite}", _type);
+				throw(instanceof(self) + ".captureLogs() \"inst\" expected an instance of either CrispyLog, TestCase, or TestSuite, received " + _type + ".");
 				break;
 		}
 	}
@@ -71,7 +71,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 		var _inst = instanceof(_suite);
 		if _inst != "TestSuite" {
 			var _type = !is_undefined(_inst) ? _inst : typeof(_inst);
-			crispyThrowExpected(self, "addTestSuite", "TestSuite", _type);
+			throw(instanceof(self) + ".addTestSuite() \"suite\" expected an instance of TestSuite, received " + typeof(_suite) + ".");
 		}
 		_suite.parent = self;
 		array_push(suites, _suite);
@@ -123,7 +123,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "setUp", "method", typeof(_func));
+				throw(instanceof(self) + ".setUp() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			logs = [];
@@ -145,7 +145,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method", typeof(_func));
+				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			// Get total run time
@@ -216,20 +216,20 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 		var _created_test_suite = is_undefined(_test_suite);
 		// Throw error if function pattern is not a string
 		if !is_string(_script_start_pattern) {
-			crispyThrowExpected(self, "_script_start_pattern", "string", typeof(_script_start_pattern));
+			throw(instanceof(self) + ".discover() \"script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
 		}
 		// Throw error if function pattern is an empty string
 		if _script_start_pattern == "" {
-			throw(name + ".discover() argument 'script_start_pattern' cannot be an empty string.");
+			throw(instanceof(self) + ".discover() \"script_start_pattern\" cannot be an empty string.");
 		}
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
-				crispyThrowExpected(self, "test_suite", "[TestSuite|undefined]", typeof(_test_suite));
+				throw(instanceof(self) + ".discover() \"test_suite\" expected an instance of TestSuite, received " + typeof(_test_suite) + ".");
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
-				throw(name + ".discover() argument '_test_suite' parent is not self. _test_suite may not have been added to " + self.name + " prior to running 'discover()'.");
+				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self. Provided TestSuite may not have been added to " + self.name + " prior to running discover.");
 			}
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");
@@ -276,17 +276,17 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 		if argument_count > 0 {
 			switch (typeof(_input)) {
 				case "string":
-						__output__(_input);
+					__output__(_input);
 					break;
 				case "method":
-						__output__ = method(self, _input);
+					__output__ = method(self, _input);
 					break;
 				default:
-					crispyThrowExpected(self, "input", "{string|method}", typeof(_input));
+					throw(instanceof(self) + ".output() \"input\" expected either a string or method, received " + typeof(_input) + ".");
 					break;
 			}
 		} else {
-			throw(name + ".output() expected 1 argument, received " + string(argument_count) + " arguments.");
+			throw(instanceof(self) + ".output() expected 1 argument, received " + string(argument_count) + " argument(s).");
 		}
 	}
 

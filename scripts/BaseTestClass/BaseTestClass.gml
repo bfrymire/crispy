@@ -25,7 +25,7 @@ function BaseTestClass(_name) {
 	 */
 	static setName = function(_name) {
 		if !is_string(_name) {
-			crispyThrowExpected(self, "setName", "string", typeof(_name));
+			throw(instanceof(self) + ".setName() \"name\" expected a string, received " + typeof(_name) + ".");
 		}
 		name = _name;
 	}
@@ -41,7 +41,7 @@ function BaseTestClass(_name) {
 			if is_method(_func) {
 				__onRunBegin__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "onRunBegin", "method", typeof(_func));
+				throw(instanceof(self) + ".onRunBegin() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__onRunBegin__) {
@@ -61,7 +61,7 @@ function BaseTestClass(_name) {
 			if is_method(_func) {
 				__onRunEnd__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "onRunEnd", "method", typeof(_func));
+				throw(instanceof(self) + ".onRunEnd() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__onRunEnd__) {

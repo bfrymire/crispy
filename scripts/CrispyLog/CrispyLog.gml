@@ -12,7 +12,7 @@ function CrispyLog(_case) constructor {
 		} catch(_e) {
 			var _type = typeof(_case);
 		}
-		crispyThrowExpected(self, "", "TestCase", _type);
+		throw(instanceof(self) + " \"case\" expected an instance of TestCase, received " + _type + ".");
 	}
 
 	// Give self cripsyStructUnpack() function

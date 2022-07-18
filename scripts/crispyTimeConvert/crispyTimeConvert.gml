@@ -10,7 +10,7 @@ function crispyTimeConvert() {
     var _time = (argument_count > 0) ? argument[0] : undefined;
 
 	if !is_real(_time) {
-		crispyThrowExpected(self, "crispyTimeConvert", "number", typeof(_time));
+		throw("crispyTimeConvert() \"time\" expected a real number, received " + typeof(_time) + ".");
 	}
 
 	return string_format(_time / 1000000, 0, CRISPY_TIME_PRECISION);
