@@ -65,16 +65,15 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Adds TestSuite to array of suites
 	 * @function addTestSuite
-	 * @param {TestSuite} suite - TestSuite to add
+	 * @param {TestSuite} test_suite - TestSuite to add
 	 */
-	static addTestSuite = function(_suite) {
-		var _inst = instanceof(_suite);
-		if _inst != "TestSuite" {
-			var _type = !is_undefined(_inst) ? _inst : typeof(_inst);
-			throw(instanceof(self) + ".addTestSuite() \"suite\" expected an instance of TestSuite, received " + typeof(_suite) + ".");
+	static addTestSuite = function(_test_suite) {
+		if instanceof(_test_suite) != "TestSuite" {
+			var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+			throw(instanceof(self) + ".addTestSuite() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
 		}
-		_suite.parent = self;
-		array_push(suites, _suite);
+		_test_suite.parent = self;
+		array_push(suites, _test_suite);
 	}
 
 	/**
@@ -225,11 +224,12 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
-				throw(instanceof(self) + ".discover() \"test_suite\" expected an instance of TestSuite, received " + typeof(_test_suite) + ".");
+				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+				throw(instanceof(self) + ".discover() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
-				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self. Provided TestSuite may not have been added to " + self.name + " prior to running discover.");
+				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + self.name + " prior to running discover.");
 			}
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");

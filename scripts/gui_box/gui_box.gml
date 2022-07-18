@@ -115,7 +115,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
      */
     set_y2 = function(_y2) {
         if !is_real(_y2) {
-		    throw(instanceof(self) + ".crispyTimeConvert() \"y2\" expected a real number, received " + typeof(_y2) + ".");
+		    throw(instanceof(self) + ".set_y2() \"y2\" expected a real number, received " + typeof(_y2) + ".");
         }
         y2 = _y2;
     }

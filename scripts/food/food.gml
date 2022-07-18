@@ -6,17 +6,17 @@
  */
 function Food(_name, _ingredients) constructor {
 	if !is_string(_name) {
-		throw("Food name expected a string, got " + typeof(_name));
+		throw(instanceof(self) + " \"name\" expected a string, received " + typeof(_name) + ".");
 	}
 	if !is_array(_ingredients) {
-		throw("Food ingredients expected an array, got " + typeof(_ingredients));
+		throw(instanceof(self) + " \"ingredients\" expected an array, received " + typeof(_ingredients) + ".");
 	}
 	var _len = array_length(_ingredients);
 	var i = 0;
 	repeat (_len) {
-		var _type = instanceof(_ingredients[i]);
-		if _type != "Ingredient" {
-			throw("Food ingredients expected an Ingredient, got " + typeof(_ingredients));
+		if instanceof(_inst) != "Ingredient" {
+			var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+			throw(instanceof(self) + " \"ingredients\" expected an instance of Ingredient, received " + _type + ".");
 		}
 		++i;
 	}
@@ -39,7 +39,7 @@ function Food(_name, _ingredients) constructor {
 	}
 	has_ingredient = function(_name) {
 		if !is_string(_name) {
-			throw("Food ingredient name expected a string, got " + typeof(_name));
+			throw(instanceof(self) + ".has_ingredient() \"name\" expected a string, received " + typeof(_name) + ".");
 		}
 		var _len = array_length(ingredients);
 		var i = 0;
@@ -61,10 +61,10 @@ function Food(_name, _ingredients) constructor {
  */
 function Ingredient(_name, _gf=false) constructor {
 	if !is_string(_name) {
-		throw("Ingredient name expected a string, got " + typeof(_name));
+		throw(instanceof(self) + " \"name\" expected a string, received " + typeof(_name));
 	}
 	if !is_real(_gf) && !is_bool(_gf) {
-		throw("Ingredient is_gluten_free expected a boolean, got " + typeof(_gf));
+		throw(instanceof(self) + " \"is_gluten_free\" expected a boolean, received " + typeof(_gf));
 	}
 	name = _name;
 	is_gluten_free = _gf;

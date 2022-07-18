@@ -55,12 +55,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * @function assertEqual
 	 * @param {*} first - First value
 	 * @param {*} second - Second value to check against _first
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertEqual = function() {
 		// Check supplied arguments
 		if argument_count < 2 {
-			show_error("assertEqual expects 2 arguments, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		var _first = argument[0];
 		var _second = argument[1];
@@ -94,12 +94,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * @function assertNotEqual
 	 * @param {*} first - First type to check
 	 * @param {*} second - Second type to check against
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertNotEqual = function() {
 		// Check supplied arguments
 		if argument_count < 2 {
-			show_error("assertNotEqual expects 2 arguments, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertNotEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		var _first = argument[0];
 		var _second = argument[1];
@@ -125,12 +125,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * The test will first convert the expression to a boolean, then check if it equals true
 	 * @function assertTrue
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertTrue = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assertTrue expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertTrue() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
@@ -165,12 +165,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * The test will first convert the expression to a boolean, then check if it equals false
 	 * @function assertFalse
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertFalse = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assertFalse expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertFalse() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
@@ -204,12 +204,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test whether the provided expression is noone
 	 * @function assertIsNoone
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsNoone = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assertIsNoone expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertIsNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
@@ -233,12 +233,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test whether the provided expression is not noone
 	 * @function assertIsNotNoone
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsNotNoone = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assertIsNotNoone expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertIsNotNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
@@ -262,12 +262,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test whether the provided expression is undefined
 	 * @function assertIsUndefined
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsUndefined = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assertIsUndefined expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertIsUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
@@ -291,12 +291,12 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test whether the provided expression is not undefined
 	 * @function assertIsNotUndefined
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsNotUndefined = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assertIsNotUndefined expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assertIsNotUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;

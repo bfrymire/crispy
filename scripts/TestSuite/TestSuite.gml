@@ -11,18 +11,17 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 	
 	
 	/**
-	 * Adds test case to array of cases
+	 * Adds TestCase to array of cases
 	 * @function addTestCase
-	 * @param {TestCase} case - TestCase to add
+	 * @param {TestCase} test_case - TestCase to add
 	 */
-	static addTestCase = function(_case) {
-		var _inst = instanceof(_case);
-		if _inst != "TestCase" {
-			var _type = !is_undefined(_inst) ? _inst : typeof(_case);
-			throw(instanceof(self) + ".addTestCase() \"case\" expected an instance of TestCase, received " + _type + ".");
+	static addTestCase = function(_test_case) {
+		if instanceof(_test_case) != "TestCase" {
+			var _type = !is_undefined(instanceof(_test_case)) ? instanceof(_test_case) : typeof(_test_case);
+			throw(instanceof(self) + ".addTestCase() \"test_case\" expected an instance of TestCase, received " + _type + ".");
 		}
-		_case.parent = self;
-		array_push(tests, _case);
+		_test_case.parent = self;
+		array_push(tests, _test_case);
 	}
 
 	/**
