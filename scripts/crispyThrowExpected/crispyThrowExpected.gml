@@ -28,11 +28,13 @@ function crispyThrowExpected(_self, _name, _expected, _received) {
 	var _vowels = ["a", "e", "i", "o", "u"];
 	var _len = array_length(_vowels);
 	var _preposition = "a";
-	for(var i = 0; i < _len; i++) {
+	var i = 0;
+	repeat (_len) {
 		if _char == _vowels[i] {
 			_preposition = "an";
 			break;
 		}
+		++i;
 	}
 	_name = _name == "" ? "" : "." + _name;
 	var _msg = instanceof(_self) + _name + "() expected " + _preposition + " ";

@@ -21,7 +21,8 @@ function crispyStructUnpack(_unpack, _name_must_exist) {
 
 	var _names = variable_struct_get_names(_unpack);
 	var _len = array_length(_names);
-	for(var i = 0; i < _len; i++) {
+	var i = 0;
+	repeat (_len) {
 		var _name = _names[i];
 		if !CRISPY_STRUCT_UNPACK_ALLOW_DUNDER && crispyIsInternalVariable(_name) {
 			if CRISPY_DEBUG {
@@ -39,5 +40,6 @@ function crispyStructUnpack(_unpack, _name_must_exist) {
 			}
 		}
 		variable_struct_set(self, _name, _value);
+		++i;
 	}
 }

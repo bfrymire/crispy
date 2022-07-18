@@ -36,17 +36,23 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 				break;
 			case "TestCase":
 				var _logs_len = array_length(_inst.logs);
-				for(var i = 0; i < _logs_len; i++) {
+				var i = 0;
+				repeat (_logs_len) {
 					addLog(_inst.logs[i]);
+					++i;
 				}
 				break;
 			case "TestSuite":
 				var _tests_len = array_length(_inst.tests);
-				for(var k = 0; k < _tests_len; k++) {
+				var k = 0;
+				repeat (_tests_len) {
 					var _logs_len = array_length(_inst.tests[k].logs);
-					for(var i = 0; i < _logs_len; i++) {
+					var i = 0;
+					repeat (_logs_len) {
 						addLog(_inst.tests[k].logs[i]);
+						++i;
 					}
+					++k;
 				}
 				break;
 			default:
@@ -95,11 +101,13 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
   	static run = function() {
 		setUp();
 		var _len = array_length(suites);
-		for(var i = 0; i < _len; i++) {
+		var i = 0;
+		repeat (_len) {
 			onRunBegin();
 			suites[i].run();
 			captureLogs(suites[i]);
 			onRunEnd();
+			++i;
 		}
 		tearDown();
 	}
@@ -149,12 +157,14 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 			var _passed_tests = 0;
 			var _len = array_length(logs);
 			var _t = "";
-			for(var i = 0; i < _len; i++) {
+			var i = 0;
+			repeat (_len) {
 				if logs[i].pass {
 					_t += CRISPY_PASS_MSG_SILENT;
 				} else {
 					_t += CRISPY_FAIL_MSG_SILENT;
 				}
+				++i;
 			}
 			output(_t);
 
@@ -162,7 +172,8 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 			output(hr());
 
 			// Show individual log messages
-			for(var i = 0; i < _len; i++) {
+			var i = 0;
+			repeat (_len) {
 				if logs[i].pass {
 					_passed_tests += 1;
 				}
@@ -170,6 +181,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 				if _msg != "" {
 					output(_msg);
 				}
+				++i;
 			}
 
 			// Finish by showing entire time it took to run the tests
@@ -223,7 +235,8 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 			_test_suite = new TestSuite("__discovered_test_suite__");
 		}
 		var _len = string_length(_script_start_pattern);
-		for(var i = 100000; i < 110000; i++) {
+		var i = 100000;
+		repeat (10000) { // Range of custom scripts is 100000 - 110000
 			if script_exists(i) {
 				var _script_name = script_get_name(i);
 				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
@@ -235,6 +248,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 					_test_suite.addTestCase(_test_case);
 				}
 			}
+			++i;
 		}
 		if _created_test_suite {
 			if array_length(_test_suite.tests) == 0 {
