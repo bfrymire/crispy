@@ -8,7 +8,7 @@ function crispyMixinStructUnpack() {
 	var _struct = (argument_count > 0) ? argument[0] : undefined;
 
 	if !is_struct(_struct) {
-		crispyThrowExpected(self, crispyMixinStructUnpack, "struct", typeof(_struct));
+		throw("crispyMixinStructUnpack() \"struct\" expected a struct, received " + typeof(_struct) + ".");
 	}
 
 	_struct.crispyStructUnpack = method(_struct, crispyStructUnpack);

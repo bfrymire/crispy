@@ -11,18 +11,17 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 	
 	
 	/**
-	 * Adds test case to array of cases
+	 * Adds TestCase to array of cases
 	 * @function addTestCase
-	 * @param {TestCase} case - TestCase to add
+	 * @param {TestCase} test_case - TestCase to add
 	 */
-	static addTestCase = function(_case) {
-		var _inst = instanceof(_case);
-		if _inst != "TestCase" {
-			var _type = !is_undefined(_inst) ? _inst : typeof(_case);
-			crispyThrowExpected(self, "addTestCase", "TestCase", _type);
+	static addTestCase = function(_test_case) {
+		if instanceof(_test_case) != "TestCase" {
+			var _type = !is_undefined(instanceof(_test_case)) ? instanceof(_test_case) : typeof(_test_case);
+			throw(instanceof(self) + ".addTestCase() \"test_case\" expected an instance of TestCase, received " + _type + ".");
 		}
-		_case.parent = self;
-		array_push(tests, _case);
+		_test_case.parent = self;
+		array_push(tests, _test_case);
 	}
 
 	/**
@@ -37,7 +36,7 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "setUp", "method", typeof(_func));
+				throw(instanceof(self) + ".setUp() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__setUp__) {
@@ -58,7 +57,7 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				crispyThrowExpected(self, "tearDown", "method", typeof(_func));
+				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {
