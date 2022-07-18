@@ -1,5 +1,5 @@
 {
-  "option_linux_display_name": "Created with GameMaker Studio 2",
+  "option_linux_display_name": "Crispy: Unit Testing Library",
   "option_linux_version": "1.0.0.0",
   "option_linux_maintainer_email": "",
   "option_linux_homepage": "http://www.yoyogames.com",
