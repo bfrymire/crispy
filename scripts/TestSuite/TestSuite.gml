@@ -74,10 +74,12 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 	static run = function() {
 		setUp();
 		var _len = array_length(tests);
-		for(var i = 0; i < _len; i++) {
+		var i = 0;
+		repeat (_len) {
 			onRunBegin();
 			tests[i].run();
 			onRunEnd();
+			++i;
 		}
 		tearDown();
 	}

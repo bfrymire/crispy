@@ -11,20 +11,26 @@ function Food(_name, _ingredients) constructor {
 	if !is_array(_ingredients) {
 		throw("Food ingredients expected an array, got " + typeof(_ingredients));
 	}
-	for (var i = 0; i < array_length(_ingredients); i++) {
+	var _len = array_length(_ingredients);
+	var i = 0;
+	repeat (_len) {
 		var _type = instanceof(_ingredients[i]);
 		if _type != "Ingredient" {
 			throw("Food ingredients expected an Ingredient, got " + typeof(_ingredients));
 		}
+		++i;
 	}
 	name = _name
 	ingredients = _ingredients;
 	is_gluten_free = function() {
 		var _gf = true;
-		for (var i = 0; i < array_length(ingredients); i++) {
+		var _len = array_length(ingredients);
+		var i = 0;
+		repeat (_len) {
 			if !ingredients[i].is_gluten_free {
 				return false;
 			}
+			++i;
 		}
 		return true;
 	}
@@ -35,10 +41,13 @@ function Food(_name, _ingredients) constructor {
 		if !is_string(_name) {
 			throw("Food ingredient name expected a string, got " + typeof(_name));
 		}
-		for (var i = 0; i < array_length(ingredients); i++) {
+		var _len = array_length(ingredients);
+		var i = 0;
+		repeat (_len) {
 			if ingredients[i].name == _name {
 				return true;
 			}
+			++i;
 		}
 		return false;
 	}
