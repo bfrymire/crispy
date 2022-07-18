@@ -14,8 +14,9 @@ function Food(_name, _ingredients) constructor {
 	var _len = array_length(_ingredients);
 	var i = 0;
 	repeat (_len) {
-		if instanceof(_inst) != "Ingredient" {
-			var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+		var _item = _ingredients[i];
+		if instanceof(_item) != "Ingredient" {
+			var _type = !is_undefined(instanceof(_item)) ? instanceof(_item) : typeof(_item);
 			throw(instanceof(self) + " \"ingredients\" expected an instance of Ingredient, received " + _type + ".");
 		}
 		++i;
