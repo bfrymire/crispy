@@ -31,7 +31,7 @@ function BaseTestClass() constructor {
 		}
 		// Don't allow empty strings
 		if name == "" {
-			throw(instanceof(self) + ".validate_name() \"name\" expected a populated string, received empty string.");
+			throw(instanceof(self) + ".validate_name() \"name\" cannot be an empty string.");
 			return false;
 		}
 		return true;
