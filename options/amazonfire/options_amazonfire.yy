@@ -1,6 +1,6 @@
 {
   "option_amazonfire_sync_android": false,
-  "option_amazonfire_display_name": "Created with GameMaker Studio 2",
+  "option_amazonfire_display_name": "Crispy: Unit Testing Library",
   "option_amazonfire_version": "1.0.0.0",
   "option_amazonfire_tools_from_version": false,
   "option_amazonfire_build_tools": "",

@@ -1,13 +1,13 @@
 /**
  * Creates a TestCase object to run assertions
  * @constructor TestCase
- * @param {struct} test_struct - Struct containing instructions to set up TestCase
+ * @param {struct} data - Struct containing instructions to set up TestCase
  */
-function TestCase(_test_struct) : BaseTestClass() constructor {
+function TestCase(_data) : BaseTestClass() constructor {
 
-	// Check for correct types
-	if !is_struct(_test_struct) {
-		crispy_throw_expected(self, "", "struct", typeof(_test_struct));
+	// Check for correct type
+	if !is_struct(_data) {
+		throw(instanceof(self) + " \"data\" expected a struct, received " + typeof(_data) + ".");
 	}
 
 	class = instanceof(self);
@@ -43,16 +43,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 		],
 	}
 
-	// Apply test_struct to TestCase
-	crispy_struct_unpack(_test_struct, reserved_names);
+	// Apply data to TestCase
+	crispy_struct_unpack(_data, reserved_names);
 
 	// Checks whether the name was set up correctly
-	check_name();
+	validate_name();
 
 	// Throw exception if a test isn't passed to TestCase on creation
 	if !is_method(test) {
-		throw(instanceof(self) + "() requires a test to be passed as a \"test\" variable in \"test_struct\", received " + typeof(test));
+		throw(instanceof(self) + " requires a test to be passed as a \"test\" variable in \"data\", received " + typeof(test));
 	}
+
 
 	/**
 	 * Adds a Log to the array of logs
@@ -62,7 +63,7 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 */
 	static add_log = function(_log) {
 		if !is_struct(_log) {
-			crispy_throw_expected(self, "add_log", "struct", typeof(_log));
+			throw(instanceof(self) + ".add_log() \"log\" expected a struct, received " + typeof(_log) + ".");
 		}
 		array_push(logs, _log);
 		return self;
@@ -84,28 +85,37 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * @function assert_equal
 	 * @param {*} first - First value
 	 * @param {*} second - Second value to check against _first
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_equal = function() {
 		// Check supplied arguments
 		if argument_count < 2 {
-			show_error("assert_equal expects 2 arguments, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_equal() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		var _first = argument[0];
 		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_equal() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		// Check types of first and second
 		if typeof(_first) != typeof(_second) {
-			add_log(new CrispyLog(self, {pass:false,msg:"Supplied value types are not equal: " + typeof(_first) + " and " + typeof(_second) + "."}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: "Supplied value types are not equal: " + typeof(_first) + " and " + typeof(_second) + ".",
+			}));
 			return;
 		}
 		if _first == _second {
-			add_log(new CrispyLog(self));
+			add_log(new CrispyLog(self), {
+				pass: true,
+			});
 		} else {
-			add_log(new CrispyLog(self, {pass:false,msg:_message,helper_text:"first and second are not equal: " + string(_first) + ", " + string(_second)}));
+			add_log(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "first and second are not equal: " + string(_first) + ", " + string(_second),
+			}));
 		}
 	}
 
@@ -114,18 +124,18 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * @function assert_not_equal
 	 * @param {*} first - First type to check
 	 * @param {*} second - Second type to check against
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_not_equal = function() {
 		// Check correct number of arguments
 		if argument_count < 2 {
-			show_error("assert_not_equal expects 2 arguments, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_not_equal() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		var _first = argument[0];
 		var _second = argument[1];
 		var _message = (argument_count > 2) ? argument[2] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_not_equal() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _first != _second {
 			add_log(new CrispyLog(self, {
@@ -145,17 +155,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * The test will first convert the expression to a boolean, then check if it equals true
 	 * @function assert_true
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_true = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assert_true expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_true() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_true() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		try {
 			var _bool = bool(_expr);
@@ -185,17 +195,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * The test will first convert the expression to a boolean, then check if it equals false
 	 * @function assert_false
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_false = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assert_false expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_false() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_false() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		try {
 			var _bool = bool(_expr);
@@ -224,17 +234,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * Test whether the provided expression is noone
 	 * @function assert_is_noone
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_is_noone = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assert_is_noone expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_is_noone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_is_noone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _expr == -4 {
 			add_log(new CrispyLog(self, {
@@ -253,17 +263,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * Test whether the provided expression is not noone
 	 * @function assert_is_not_noone
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_is_not_noone = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assert_is_not_noone expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_is_not_noone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_is_not_noone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _expr != -4 {
 			add_log(new CrispyLog(self, {
@@ -282,17 +292,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * Test whether the provided expression is undefined
 	 * @function assert_is_undefined
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_is_undefined = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assert_is_undefined expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_is_undefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
-		if !is_string(message) || !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+		if !is_string(_message) && !is_undefined(_message) {
+			throw(instanceof(self) + ".assert_is_undefined() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if is_undefined(_expr) {
 			add_log(new CrispyLog(self, {
@@ -311,17 +321,17 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 * Test whether the provided expression is not undefined
 	 * @function assert_is_not_undefined
 	 * @param {*} expr - Expression to check
-	 * @param [string] message - Custom message to output on failure
+	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assert_is_not_undefined = function() {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error("assert_is_not_undefined expects 1 argument, got " + string(argument_count) + ".", true);
+			show_error(instanceof(self) + ".assert_is_not_undefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		var _expr = argument[0];
 		var _message = (argument_count > 1) ? argument[1] : undefined;
 		if !is_string(_message) && !is_undefined(_message) {
-			crispyThrowExpected(self, "assertEqual", "string", typeof(_message));
+			throw(instanceof(self) + ".assert_is_not_undefined() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if !is_undefined(_expr) {
 			add_log(new CrispyLog(self, {
@@ -348,7 +358,7 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			if is_method(_func) {
 				__set_up__ = method(self, _func);
 			} else {
-				crispy_throw_expected(self, "set_up", "method", typeof(_func));
+				throw(instanceof(self) + ".set_up() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			clear_logs();
@@ -369,7 +379,7 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 			if is_method(_func) {
 				__tear_down__ = method(self, _func);
 			} else {
-				crispy_throw_expected(self, "tear_down", "method", typeof(_func));
+				throw(instanceof(self) + ".tear_down() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tear_down__) {
@@ -384,7 +394,9 @@ function TestCase(_test_struct) : BaseTestClass() constructor {
 	 */
 	static run = function() {
 		set_up();
+		on_run_begin();
 		test();
+		on_run_end();
 		tear_down();
 	}
 

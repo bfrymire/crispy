@@ -1,9 +1,9 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
- * @param {struct} runner_struct - Struct containing instructions to set up TestRunner
+ * @param {struct} data - Struct containing instructions to set up TestRunner
  */
-function TestRunner(_runner_struct) : BaseTestClass() constructor {
+function TestRunner(_data) : BaseTestClass() constructor {
 
 	start_time = 0;
 	stop_time = 0;
@@ -27,13 +27,10 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 	}
 
 	// Apply test_struct to TestCase
-	crispy_struct_unpack(_runner_struct, reserved_names);
-
-	// show_message("name: " + string(name));
-	show_debug_message(_runner_struct);
+	crispy_struct_unpack(_data, reserved_names);
 
 	// Checks whether the name was set up correctly
-	check_name();
+	validate_name();
 
 
 	/**
@@ -53,30 +50,35 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 	 * @param {CrispyLog|TestCase|TestSuite} inst - Adds logs of inst to logs
 	 * @returns {struct} self
 	 */
-	static capture_logs = function() {
-		var _inst = (argument_count > 0) ? argument[0] : undefined;
+	static capture_logs = function(_inst) {
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
 				add_log(_inst);
 				break;
 			case "TestCase":
 				var _logs_len = array_length(_inst.logs);
-				for(var i = 0; i < _logs_len; i++) {
+				var i = 0;
+				repeat (_logs_len) {
 					add_log(_inst.logs[i]);
+					++i;
 				}
 				break;
 			case "TestSuite":
 				var _tests_len = array_length(_inst.tests);
-				for(var k = 0; k < _tests_len; k++) {
+				var k = 0;
+				repeat (_tests_len) {
 					var _logs_len = array_length(_inst.tests[k].logs);
-					for(var i = 0; i < _logs_len; i++) {
+					var i = 0;
+					repeat (_logs_len) {
 						add_log(_inst.tests[k].logs[i]);
+						++i;
 					}
+					++k;
 				}
 				break;
 			default:
 				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
-				crispy_throw_expected(self, "capture_logs", "{CrispyLog|TestCase|TestSuite}", _type);
+				throw(instanceof(self) + ".capture_logs() \"inst\" expected an instance of either CrispyLog, TestCase, or TestSuite, received " + _type + ".");
 				break;
 		}
 		return self;
@@ -85,33 +87,18 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 	/**
 	 * Adds TestSuite to array of suites
 	 * @function add_test_suite
-	 * @param {TestSuite} suite - TestSuite to add
+	 * @param {TestSuite} test_suite - TestSuite to add
 	 * @returns {struct} self
 	 */
-	static add_test_suite = function(_suite) {
-		var _inst = instanceof(_suite);
+	static add_test_suite = function(_test_suite) {
+		var _inst = instanceof(_test_suite);
 		if _inst != "TestSuite" {
 			var _type = !is_undefined(_inst) ? _inst : typeof(_inst);
-			crispy_throw_expected(self, "add_test_suite", "TestSuite", _type);
+			throw(instanceof(self) + ".add_test_suite() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
 		}
-		_suite.parent = self;
-		array_push(suites, _suite);
+		_test_suite.parent = self;
+		array_push(suites, _test_suite);
 		return self;
-	}
-
-	/**
-	 * Creates a horizontal row string
-	 * @function hr
-	 * @param [string="-"] srt - String to concat n times
-	 * @param [real=70] count - Number of times to concat _str.
-	 * @returns {string} String of horizontal row
-	 */
-	static hr = function(_str="-", _count=70) {
-		var _hr = "";
-		repeat(_count) {
-			_hr += _str;
-		}
-		return _hr;
 	}
 
 	/**
@@ -130,9 +117,13 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 	 */
 	static run_suites = function() {
 		var _len = array_length(suites);
-		for(var i = 0; i < _len; i++) {
+		var i = 0;
+		repeat (_len) {
+			on_run_begin();
 			suites[i].run();
 			capture_logs(suites[i]);
+			on_run_end();
+			++i;
 		}
 	}
 
@@ -147,7 +138,7 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 			if is_method(_func) {
 				__set_up__ = method(self, _func);
 			} else {
-				crispy_throw_expected(self, "set_up", "method", typeof(_func));
+				throw(instanceof(self) + ".set_up() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			logs = [];
@@ -169,7 +160,7 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 			if is_method(_func) {
 				__tear_down__ = method(self, _func);
 			} else {
-				crispy_throw_expected(self, "tear_down", "method", typeof(_func));
+				throw(instanceof(self) + ".tear_down() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			// Get total run time
@@ -181,12 +172,14 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 			var _passed_tests = 0;
 			var _len = array_length(logs);
 			var _t = "";
-			for(var i = 0; i < _len; i++) {
+			var i = 0;
+			repeat (_len) {
 				if logs[i].pass {
 					_t += CRISPY_PASS_MSG_SILENT;
 				} else {
 					_t += CRISPY_FAIL_MSG_SILENT;
 				}
+				++i;
 			}
 			output(_t);
 
@@ -194,7 +187,8 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 			output(hr());
 
 			// Show individual log messages
-			for(var i = 0; i < _len; i++) {
+			var i = 0;
+			repeat (_len) {
 				if logs[i].pass {
 					_passed_tests += 1;
 				}
@@ -202,6 +196,7 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 				if _msg != "" {
 					output(_msg);
 				}
+				++i;
 			}
 
 			// Finish by showing entire time it took to run the tests
@@ -224,6 +219,27 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 	}
 
 	/**
+	 * Creates a horizontal row string
+	 * @function hr
+	 * @param [string="-"] srt - String to concat n times
+	 * @param [real=70] count - Number of times to concat _str.
+	 * @returns {string} String of horizontal row
+	 */
+	static hr = function(_str="-", _count=70) {
+		if !is_string(_str) {
+			throw(instanceof(self) + ".hr() \"str\" expected a string, received " + typeof(_str) + ".");
+		}
+		if !is_real(_count) {
+			throw(instanceof(self) + ".hr() \"count\" expected a real number, received " + typeof(_count) + ".");
+		}
+		var _hr = "";
+		repeat(_count) {
+			_hr += _str;
+		}
+		return _hr;
+	}
+
+	/**
 	 * Function for discovering individual test functions within
 	 * 		scripts, and adds them to a TestSuite
 	 * @function discover
@@ -236,20 +252,21 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 		var _created_test_suite = is_undefined(_test_suite);
 		// Throw error if function pattern is not a string
 		if !is_string(_script_start_pattern) {
-			crispy_throw_expected(self, "_script_start_pattern", "string", typeof(_script_start_pattern));
+			throw(instanceof(self) + ".discover() \"script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
 		}
 		// Throw error if function pattern is an empty string
 		if _script_start_pattern == "" {
-			throw(name + ".discover() argument 'script_start_pattern' cannot be an empty string.");
+			throw(instanceof(self) + ".discover() \"script_start_pattern\" cannot be an empty string.");
 		}
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
-				crispy_throw_expected(self, "test_suite", "[TestSuite|undefined]", typeof(_test_suite));
+				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+				throw(instanceof(self) + ".discover() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
-				throw(name + ".discover() argument '_test_suite' parent is not self. _test_suite may not have been added to " + self.name + " prior to running 'discover()'.");
+				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + instanceof(self) + "." + self.name + " prior to running discover.");
 			}
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");
@@ -257,7 +274,8 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 
 		// Loop through known indexes of scripts
 		var _len = string_length(_script_start_pattern);
-		for(var i = 100000; i < 110000; i++) {
+		var i = 100000;
+		repeat (10000) { // Range of custom scripts is 100000 - 110000
 			if script_exists(i) {
 				var _script_name = script_get_name(i);
 				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
@@ -280,6 +298,7 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 					}
 				}
 			}
+			++i;
 		}
 		if _created_test_suite {
 			if array_length(_test_suite.tests) == 0 {
@@ -313,11 +332,11 @@ function TestRunner(_runner_struct) : BaseTestClass() constructor {
 					__output__ = method(self, _input);
 					break;
 				default:
-					crispy_throw_expected(self, "input", "{string|method}", typeof(_input));
+					throw(instanceof(self) + ".output() \"input\" expected either a string or method, received " + typeof(_input) + ".");
 					break;
 			}
 		} else {
-			throw(name + ".output() expected 1 argument, received " + string(argument_count) + " arguments.");
+			throw(instanceof(self) + ".output() expected 1 argument, received " + string(argument_count) + " argument(s).");
 		}
 	}
 

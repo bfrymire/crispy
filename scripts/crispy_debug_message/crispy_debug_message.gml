@@ -5,7 +5,7 @@
  */
 function crispy_debug_message(_message) {
 	if !is_string(_message) {
-		crispy_throw_expected(self, "crispy_debug_message", "string", typeof(_message));
+		throw("crispy_debug_message() \"message\" expected a string, received " + typeof(_message) + ".");
 	}
 	show_debug_message(CRISPY_NAME + ": " + _message);
 }

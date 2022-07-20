@@ -1,6 +1,7 @@
 /**
- * Base "class" test constructors will inherit from
+ * Base class that test constructors will inherit from
  * @constructor BaseTestClass
+ * @param {string} name - Name of class
  */
 function BaseTestClass() constructor {
 
@@ -9,9 +10,72 @@ function BaseTestClass() constructor {
 	static __set_up__ = undefined;
 	static tear_down = undefined;
 	static __tear_down__ = undefined;
+	static __on_run_begin__ = undefined;
+	static __on_run_end__ = undefined;
+
 
 	// Mixin for BaseClass to give itself crispy_struct_unpack() function
 	crispy_mixin_struct_unpack(self);
+
+
+	/**
+	 * Checks whether the name of the class was set up correctly
+	 * @function validate_name
+	 * @returns {bool} Whether the name was set up correctly
+	 */
+	static validate_name = function() {
+		// Only allow strings
+		if !is_string(name) {
+			throw(instanceof(self) + ".validate_name() \"name\" expected a string, received " + typeof(name) + ".");
+			return false;
+		}
+		// Don't allow empty strings
+		if name == "" {
+			throw(instanceof(self) + ".validate_name() \"name\" expected a populated string, received empty string.");
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Event to be called at the beginning of run
+	 * @function on_run_begin
+	 * @param [method] func - Method to override __on_run_begin__ with
+	 */
+	static on_run_begin = function() {
+		if argument_count > 0 {
+			var _func = argument[0];
+			if is_method(_func) {
+				__on_run_begin__ = method(self, _func);
+			} else {
+				throw(instanceof(self) + ".on_run_begin() \"func\" expected a method, received " + typeof(_func) + ".");
+			}
+		} else {
+			if is_method(__on_run_begin__) {
+				__on_run_begin__();
+			}
+		}
+	}
+
+	/**
+	 * Event to be called at the end of run
+	 * @function on_run_end
+	 * @param [method] func - Method to override __on_run_end__ with
+	 */
+	static on_run_end = function() {
+		if argument_count > 0 {
+			var _func = argument[0];
+			if is_method(_func) {
+				__on_run_end__ = method(self, _func);
+			} else {
+				throw(instanceof(self) + ".on_run_end() \"func\" expected a method, received " + typeof(_func) + ".");
+			}
+		} else {
+			if is_method(__on_run_end__) {
+				__on_run_end__();
+			}
+		}
+	}
 
 	/**
 	 * Set the name of the class
@@ -21,44 +85,11 @@ function BaseTestClass() constructor {
 	 */
 	static set_name = function(_name) {
 		if !is_string(_name) {
-			crispy_throw_expected(self, "set_name", "string", typeof(_name));
+			throw(instanceof(self) + ".set_name() \"name\" expected a string, received " + typeof(_name) + ".");
 		}
 		name = _name;
+		validate_name();
 		return self;
-	}
-
-	/**
-	 * Checks whether the name of the class was set up correctly
-	 * @function check_name
-	 * @returns {bool} Whether the name was set up correctly
-	 */
-	check_name = function() {
-		// Only allow strings
-		if !is_string(name) {
-			throw(instanceof(self) + "() requires a \"name\" variable in \"source_struct\" to be passed, received " + typeof(name));
-			return false;
-		}
-		// Don't allow empty strings
-		if name == "" {
-			throw(instanceof(self) + "() \"name\" variable requires a string, received empty string.");
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Checks whether the name of the struct was set up correctly
-	 * @function check_name
-	 */
-	check_name = function() {
-		// Only allow strings
-		if !is_string(name) {
-			throw(instanceof(self) + "() requires a \"name\" variable in \"source_struct\" to be passed, received " + typeof(name));
-		}
-		// Don't allow empty strings
-		if name == "" {
-			throw(instanceof(self) + "() \"name\" variable requires a string, received empty string.");
-		}
 	}
 
 }

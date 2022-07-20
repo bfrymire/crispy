@@ -1,27 +1,22 @@
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
- * @param {TestCase} case - TestCase struct
- * @param [struct] unpack - Struct to use with crispy_struct_unpack
+ * @param {TestCase} test_case - TestCase struct
+ * @param {struct} unpack - Struct to use with crispyStructUnpack
  */
-function CrispyLog(_case) constructor {
+function CrispyLog(_test_case) constructor {
 
-	// Check if instance of case is a TestCase
-	var _inst = instanceof(_case);
-	if _inst != "TestCase" {
-		if is_undefined(_inst) {
-			crispy_throw_expected(self, "", "TestCase", typeof(_case));
-		} else {
-			crispy_throw_expected(self, "", "TestCase", _inst);
-		}
+	if instanceof(_test_case) != "TestCase" {
+		var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+		throw(instanceof(self) + " \"test_case\" expected an instance of TestCase, received " + _type + ".");
 	}
 
 	verbosity = CRISPY_VERBOSITY;
 	pass = true;
 	msg = undefined;
 	helper_text = undefined;
-	class = _case.class;
-	name = _case.name;
+	class = _test_case.class;
+	name = _test_case.name;
 
 	// Create the display name of log based on TestCase name and class
 	var _display_name = "";

@@ -3,7 +3,7 @@
   "option_windows_executable_name": "${project_name}.exe",
   "option_windows_version": "1.0.0.0",
   "option_windows_company_info": "YoYo Games Ltd",
-  "option_windows_product_info": "Created with GameMaker Studio 2",
+  "option_windows_product_info": "Crispy: Unit Testing Library",
   "option_windows_copyright_info": "",
   "option_windows_description_info": "A GameMaker Studio 2 Game",
   "option_windows_display_cursor": true,

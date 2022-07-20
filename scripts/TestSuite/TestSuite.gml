@@ -1,13 +1,13 @@
 /**
  * Testing suite that holds tests
  * @constructor TestSuite
- * @param {struct} suite_struct - Struct containing instructions to set up TestSuite
+ * @param {struct} data - Struct containing instructions to set up TestSuite
  */
-function TestSuite(_suite_struct) : BaseTestClass() constructor {
+function TestSuite(_data) : BaseTestClass() constructor {
 
-	// Check for correct types
-	if !is_struct(_suite_struct) {
-		crispy_throw_expected(self, "", "struct", typeof(_suite_struct));
+	// Check for correct type
+	if !is_struct(_data) {
+		throw(instanceof(self) + " \"data\" expected a struct, received " + typeof(_data) + ".");
 	}
 
 	parent = undefined;
@@ -40,10 +40,10 @@ function TestSuite(_suite_struct) : BaseTestClass() constructor {
 	}
 
 	// Apply test_struct to TestCase
-	crispy_struct_unpack(_suite_struct, reserved_names);
+	crispy_struct_unpack(_data, reserved_names);
 
 	// Checks whether the name was set up correctly
-	check_name();
+	validate_name();
 	
 	
 	/**
@@ -52,40 +52,33 @@ function TestSuite(_suite_struct) : BaseTestClass() constructor {
 	 * @param {TestCase} case - TestCase to add
 	 * @returns {struct} self
 	 */
-	static add_test_case = function(_case) {
-		var _inst = instanceof(_case);
-		if _inst != "TestCase" {
-			var _type = !is_undefined(_inst) ? _inst : typeof(_case);
-			crispy_throw_expected(self, "add_test_case", "TestCase", _type);
+	static add_test_case = function(_test_case) {
+		if instanceof(_test_case) != "TestCase" {
+			var _type = !is_undefined(instanceof(_test_case)) ? instanceof(_test_case) : typeof(_test_case);
+			throw(instanceof(self) + ".add_test_case() \"test_case\" expected an instance of TestCase, received " + _type + ".");
 		}
-		_case.parent = self;
-		array_push(tests, _case);
+		_test_case.parent = self;
+		array_push(tests, _test_case);
 		return self;
 	}
 
 	/**
-	 *Adds test case or array of test cases to tests
+	 * Adds test case or array of test cases to tests
 	 * @function add
 	 * @param {struct|array} tests - Test case or test cases to be added to tests
 	 * @returns {struct} self
 	 */
 	static add = function(_tests) {
 		if is_struct(_tests) {
-			// Single TestCase passed
 			add_test_case(_tests);
 		} else if is_array(_tests) {
-			// Array of TestCases passed
 			var _len = array_length(_tests);
-			for(var i = 0; i < _len; i++) {
-				var _test = _tests[i];
-				if !is_struct(_test) {
-					crispy_throw_expected(self, "add", "struct", typeof(_test));
-				}
-				add_test_case(_test);
+			repeat (_len) {
+				add_test_case(_tests[i]);
+				++i;
 			}
 		} else {
-			// Throw error
-			crispy_throw_expected(self, "add", "{struct|array}", typeof(_test));
+			throw(instanceof(self) + ".add() \"tests\" expected either a struct or an array, received " + typeof(_tests) + ".");
 		}
 		return self;
 	}
@@ -102,7 +95,7 @@ function TestSuite(_suite_struct) : BaseTestClass() constructor {
 			if is_method(_func) {
 				__set_up__ = method(self, _func);
 			} else {
-				crispy_throw_expected(self, "set_up", "method", typeof(_func));
+				throw(instanceof(self) + ".set_up() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__set_up__) {
@@ -123,7 +116,7 @@ function TestSuite(_suite_struct) : BaseTestClass() constructor {
 			if is_method(_func) {
 				__tear_down__ = method(self, _func);
 			} else {
-				crispy_throw_expected(self, "tear_down", "method", typeof(_func));
+				throw(instanceof(self) + ".tear_down() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tear_down__) {
@@ -139,8 +132,12 @@ function TestSuite(_suite_struct) : BaseTestClass() constructor {
 	static run = function() {
 		set_up();
 		var _len = array_length(tests);
-		for(var i = 0; i < _len; i++) {
+		var i = 0;
+		repeat (_len) {
+			on_run_begin();
 			tests[i].run();
+			on_run_end();
+			++i;
 		}
 		tear_down();
 	}
