@@ -26,7 +26,7 @@ Expand upon the code to suit your testing needs.
 * [Go to the Crispy Wiki](https://github.com/bfrymire/crispy/wiki)
 
 
-## Attributes
+## Attributions
 
 * Color palette from [Dracula Theme](https://github.com/dracula/dracula-theme#color-palette)
 
