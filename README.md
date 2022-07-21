@@ -3,7 +3,7 @@
 
 # Crispy
 
-Version 1.5.0
+Version 1.5.2
 
 Unit testing framework built in GML for GameMaker Studio 2.3.6+
 
@@ -26,7 +26,7 @@ Expand upon the code to suit your testing needs.
 * [Go to the Crispy Wiki](https://github.com/bfrymire/crispy/wiki)
 
 
-## Credits
+## Attributes
 
 * Color palette from [Dracula Theme](https://github.com/dracula/dracula-theme#color-palette)
 
