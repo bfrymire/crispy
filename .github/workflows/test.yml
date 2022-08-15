@@ -12,8 +12,16 @@ jobs:
   my_job:
     name: test-job
     runs-on: ubuntu-latest
+    env:
+      PATH_README: "README.md"
+      PATH_CRISPY_GML: "scripts/crispy/crispy.gml"
     steps:
       - uses: actions/checkout@v3
       
       - name: Run a one-line script
         run: echo Hello, World!
+
+      - name: Run a multi-line script
+        run: |
+          echo $PATH_README
+          echo $PATH_CRISPY_GML
