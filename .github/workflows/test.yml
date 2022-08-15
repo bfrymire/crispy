@@ -1,0 +1,11 @@
+name: Test
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  my_job:
+    name: test-job
+    runs-on: ubuntu-latest
