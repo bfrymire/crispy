@@ -8,8 +8,8 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Draw rectangle using the coordinates of the box
      * @function
-     * @param {color} color - Color to draw rectangle
-     * @param {boolean} outline - Whether the rectangle is drawn filled or outlined
+     * @param {real} _color - Color to draw rectangle
+     * @param {boolean} _outline - Whether the rectangle is drawn filled or outlined
      */
     draw = function(_color, _outline) {
         var _c = draw_get_color();
@@ -21,7 +21,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Get width of box
      * @function
-     * @returns real
+     * @returns {real}
      */
     get_width = function() {
         return abs(x1 - x2);
@@ -30,7 +30,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Get height of box
      * @function
-     * @returns real
+     * @returns {real}
      */
     get_height = function() {
         return abs(y1 - y2);
@@ -75,7 +75,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Set x-position of top-left corner of box
      * @function
-     * @param {real} x1
+     * @param {real} _x1
      * @returns {struct} Self
      */
     set_x1 = function(_x1) {
@@ -89,7 +89,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Set y-position of top-left corner of box
      * @function
-     * @param {real} y1
+     * @param {real} _y1
      * @returns {struct} Self
      */
     set_y1 = function(_y1) {
@@ -103,7 +103,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Set x-position of bottom-right corner of box
      * @function
-     * @param {real} x2
+     * @param {real} _x2
      * @returns {struct} Self
      */
     set_x2 = function(_x2) {
@@ -117,7 +117,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
     /**
      * Set y-position of bottom-right corner of box
      * @function
-     * @param {real} y2
+     * @param {real} _y2
      * @returns {struct} Self
      */
     set_y2 = function(_y2) {

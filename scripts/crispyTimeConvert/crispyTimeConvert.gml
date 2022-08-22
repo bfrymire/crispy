@@ -1,7 +1,7 @@
 /**
  * Converts the given time milliseconds to seconds as a string
  * @function
- * @param {number} time - Time in milliseconds
+ * @param {real} _time - Time in milliseconds
  * @returns {string} time in seconds with CRISPY_TIME_PRECISION number
  * 		of decimal points as a string
  */

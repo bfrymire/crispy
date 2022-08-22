@@ -22,10 +22,10 @@ if keyboard_check_pressed(ord("C")) {
 }
 
 // Scrolling through test results
-scroll_dir = -(mouse_wheel_up() || keyboard_check_pressed(vk_up)) + (mouse_wheel_down() || keyboard_check_pressed(vk_down))
-if scroll_dir != 0 && ds_list_size(results) > 0 {
+var _scroll_dir = -(mouse_wheel_up() || keyboard_check_pressed(vk_up)) + (mouse_wheel_down() || keyboard_check_pressed(vk_down))
+if _scroll_dir != 0 && ds_list_size(results) > 0 {
 	var _scroll_multiplier = 2;
-	var _amount = scroll_dir * text_height * _scroll_multiplier;
+	var _amount = _scroll_dir * text_height * _scroll_multiplier;
 	var _new_position = scroll_position + _amount;
 	var _h = string_height("W");
 	var _h_total = _h * ds_list_size(results);

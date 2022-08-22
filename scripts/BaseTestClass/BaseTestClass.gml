@@ -1,7 +1,7 @@
 /**
  * Base "class" that test constructors will inherit from
  * @constructor BaseTestClass
- * @param {string} name - Name of class
+ * @param {string} _name - Name of class
  */
 function BaseTestClass(_name) {
 
@@ -21,7 +21,7 @@ function BaseTestClass(_name) {
 	/**
 	 * Set name of class object
 	 * @function setName
-	 * @param {string} name - Name of the object
+	 * @param {string} _name - Name of the object
 	 */
 	static setName = function(_name) {
 		if !is_string(_name) {

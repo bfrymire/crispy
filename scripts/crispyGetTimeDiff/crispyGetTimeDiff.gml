@@ -1,9 +1,9 @@
 /**
  * Returns the difference between two times
  * @function
- * @param {number} start_time - Starting time in milliseconds
- * @param {number} stop_time - Stopping time in milliseconds
- * @returns {number} Difference between start_time and stop_time
+ * @param {real} _start_time - Starting time in milliseconds
+ * @param {real} _stop_time - Stopping time in milliseconds
+ * @returns {real} Difference between start_time and stop_time
  */
 function crispyGetTimeDiff() {
 

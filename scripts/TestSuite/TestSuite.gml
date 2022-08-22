@@ -1,8 +1,8 @@
 /**
  * Testing suite that holds tests
  * @constructor TestSuite
- * @param {string} name - Name of suite
- * @param [struct] unpack - Struct for crispyStructUnpack
+ * @param {string} _name - Name of suite
+ * @param [struct] _unpack - Struct for crispyStructUnpack
  */
 function TestSuite(_name) : BaseTestClass(_name) constructor {
 
@@ -13,7 +13,7 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Adds TestCase to array of cases
 	 * @function addTestCase
-	 * @param {TestCase} test_case - TestCase to add
+	 * @param {struct} _test_case - TestCase to add
 	 */
 	static addTestCase = function(_test_case) {
 		if instanceof(_test_case) != "TestCase" {
@@ -28,7 +28,7 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 	 * Event that runs before all tests to set up variables
 	 * Can also overwrite __setUp__
 	 * @function setUp
-	 * @param {method} func - Function to overwrite __setUp__
+	 * @param {function} func - Function to overwrite __setUp__
 	 */
 	static setUp = function() {
 		if argument_count > 0 {
@@ -49,7 +49,7 @@ function TestSuite(_name) : BaseTestClass(_name) constructor {
 	 * Event that runs after all tests to clean up variables
 	 * Can also overwrite __tearDown__
 	 * @function tearDown
-	 * @param {method} func - Function to overwrite __tearDown__
+	 * @param {function} func - Function to overwrite __tearDown__
 	 */
 	static tearDown = function() {
 		if argument_count > 0 {

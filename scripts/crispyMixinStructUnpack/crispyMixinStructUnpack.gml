@@ -1,7 +1,7 @@
 /**
  * Mixin function that extends structs to have the crispyStructUnpack() function
  * @function
- * @param {struct} struct - Struct to give crispyStructUnpack method to
+ * @param {struct} _struct - Struct to give crispyStructUnpack method to
  */
 function crispyMixinStructUnpack() {
 

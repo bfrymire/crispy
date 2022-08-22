@@ -1,8 +1,8 @@
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
- * @param {TestCase} test_case - TestCase struct
- * @param {struct} unpack - Struct to use with crispyStructUnpack
+ * @param {struct.TestCase} _test_case - TestCase struct
+ * @param {struct} _unpack - Struct to use with crispyStructUnpack
  */
 function CrispyLog(_test_case) constructor {
 

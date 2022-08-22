@@ -1,7 +1,7 @@
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
- * @param {string} name - Name of runner
+ * @param {string} _name - Name of runner
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
 function TestRunner(_name) : BaseTestClass(_name) constructor {
@@ -17,7 +17,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Adds a Log to the array of logs
 	 * @function addLog
-	 * @param {Log} log - Log struct to add to logs
+	 * @param {struct} _log - Log struct to add to logs
 	 */
 	static addLog = function(_log) {
 		array_push(logs, _log);
@@ -26,10 +26,9 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Adds Logs to the array of logs
 	 * @function captureLogs
-	 * @param {CrispyLog|TestCase|TestSuite} inst - Adds logs of inst to logs
+	 * @param {struct} _inst - Adds logs of inst to logs
 	 */
-	static captureLogs = function() {
-		var _inst = (argument_count > 0) ? argument[0] : undefined;
+	static captureLogs = function(_inst) {
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
 				addLog(_inst);
@@ -65,11 +64,11 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Adds TestSuite to array of suites
 	 * @function addTestSuite
-	 * @param {TestSuite} test_suite - TestSuite to add
+	 * @param {struct} _test_suite - TestSuite to add
 	 */
 	static addTestSuite = function(_test_suite) {
 		if instanceof(_test_suite) != "TestSuite" {
-			var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+			var _type = !is_undefined(instanceof(_test_suite)) ? instanceof(_test_suite) : typeof(_test_suite);
 			throw(instanceof(self) + ".addTestSuite() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
 		}
 		_test_suite.parent = self;
@@ -206,9 +205,9 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	 * Function for discovering individual test functions within
 	 * 		scripts, and adds them to a TestSuite
 	 * @function discover
-	 * @param [test_suite=undefined] test_suite - TestSuite to add
+	 * @param {Struct.TestSuite} [_test_suite=undefined]  - TestSuite to add
 	 * 		discovered test script to, else create a temporary TestSuite
-	 * @param [string="test_"] script_name_start - String that script
+	 * @param {String} [_script_start_pattern="test_"] - String that script
 	 * 		functions need to start with in order to be discoverable
 	 */
 	static discover = function(_test_suite, _script_start_pattern="test_") {
@@ -224,7 +223,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
-				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
+				var _type = !is_undefined(instanceof(_test_suite)) ? instanceof(_test_suite) : typeof(_test_suite);
 				throw(instanceof(self) + ".discover() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
 			}
 			// Throw error if test_suite was not previously added to test_runner
@@ -268,7 +267,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Pass input to __output__ if string. Overwrite __output__ if method
 	 * @function output
-	 * @param {string|method} input - String to output or function to
+	 * @param {string, method} _input - String to output or function to
 	 * 		overwrite __output__
 	 */
 	static output = function() {
@@ -293,7 +292,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Function that gets called on output
 	 * @function __output__
-	 * @param {string} message - By default, outputs string to Output Console
+	 * @param {string} _message - By default, outputs string to Output Console
 	 * @tip This function can be overwritten by a function passed into
 	 * 		the output function
 	 */

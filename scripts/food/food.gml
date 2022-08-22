@@ -1,8 +1,8 @@
 /**
  * Food item
  * @constructor
- * @param {string} name - Name of food
- * @param {array} ingredients - Ingredients that make up the food
+ * @param {string} _name - Name of food
+ * @param {array} _ingredients - Ingredients that make up the food
  */
 function Food(_name, _ingredients) constructor {
 	if !is_string(_name) {
@@ -57,16 +57,16 @@ function Food(_name, _ingredients) constructor {
 /**
  * Food ingredient
  * @constructor
- * @param {string} name - Name of ingredient
- * @param [boolean=false] is_gluten_free - Ingredient is gluten free
+ * @param {string} _name - Name of ingredient
+ * @param {boolean} [_is_gluten_free=false]  - Ingredient is gluten free
  */
-function Ingredient(_name, _gf=false) constructor {
+function Ingredient(_name, _is_gluten_free=false) constructor {
 	if !is_string(_name) {
 		throw(instanceof(self) + " \"name\" expected a string, received " + typeof(_name));
 	}
-	if !is_real(_gf) && !is_bool(_gf) {
-		throw(instanceof(self) + " \"is_gluten_free\" expected a boolean, received " + typeof(_gf));
+	if !is_real(_is_gluten_free) && !is_bool(_is_gluten_free) {
+		throw(instanceof(self) + " \"is_gluten_free\" expected a boolean, received " + typeof(_is_gluten_free));
 	}
 	name = _name;
-	is_gluten_free = _gf;
+	is_gluten_free = _is_gluten_free;
 }

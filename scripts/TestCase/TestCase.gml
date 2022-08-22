@@ -1,8 +1,8 @@
 /**
  * Creates a Test case object to run assertions
  * @constructor TestCase
- * @param {string} name - Name of case
- * @param {method} func - Test assertion to run for TestCase
+ * @param {string} _name - Name of case
+ * @param {function} _func - Test assertion to run for TestCase
  * @param [struct] unpack - Struct for crispyStructUnpack
  */
 function TestCase(_name, _func) : BaseTestClass(_name) constructor {
@@ -22,7 +22,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Turns a function into a method variable for the test.
 	 * @function createTestMethod
-	 * @param {method} func - Function to turn into a method variable
+	 * @param {function} _func - Function to turn into a method variable
 	 */
 	static createTestMethod = function(_func) {
 		if !is_method(_func) {
@@ -34,7 +34,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Adds a Log to the array of logs
 	 * @function addLog
-	 * @param {struct} log - Log struct
+	 * @param {struct} _log - Log struct
 	 */
 	static addLog = function() {
 		var _log = (argument_count > 0) ? argument[0] : undefined;
@@ -53,8 +53,8 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test that first and second are equal
 	 * The first and second will be checked for the same type first, then check if they're equal
 	 * @function assertEqual
-	 * @param {*} first - First value
-	 * @param {*} second - Second value to check against _first
+	 * @param {any} _first - First value
+	 * @param {any} _second - Second value to check against _first
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertEqual = function() {
@@ -77,9 +77,9 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			return;
 		}
 		if _first == _second {
-			addLog(new CrispyLog(self), {
+			addLog(new CrispyLog(self, {
 				pass: true,
-			});
+			}));
 		} else {
 			addLog(new CrispyLog(self, {
 				pass: false,
@@ -92,8 +92,8 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Test that first and second are not equal
 	 * @function assertNotEqual
-	 * @param {*} first - First type to check
-	 * @param {*} second - Second type to check against
+	 * @param {any} _first - First type to check
+	 * @param {any} _second - Second type to check against
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertNotEqual = function() {
@@ -124,7 +124,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test whether the provided expression is true
 	 * The test will first convert the expression to a boolean, then check if it equals true
 	 * @function assertTrue
-	 * @param {*} expr - Expression to check
+	 * @param {any} _expr - Expression to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertTrue = function() {
@@ -164,7 +164,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	 * Test whether the provided expression is false
 	 * The test will first convert the expression to a boolean, then check if it equals false
 	 * @function assertFalse
-	 * @param {*} expr - Expression to check
+	 * @param {any} _expr - Expression to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertFalse = function() {
@@ -203,7 +203,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Test whether the provided expression is noone
 	 * @function assertIsNoone
-	 * @param {*} expr - Expression to check
+	 * @param {any} _expr - Expression to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsNoone = function() {
@@ -232,7 +232,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Test whether the provided expression is not noone
 	 * @function assertIsNotNoone
-	 * @param {*} expr - Expression to check
+	 * @param {any} _expr - Expression to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsNotNoone = function() {
@@ -261,7 +261,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Test whether the provided expression is undefined
 	 * @function assertIsUndefined
-	 * @param {*} expr - Expression to check
+	 * @param {any} _expr - Expression to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsUndefined = function() {
@@ -290,7 +290,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Test whether the provided expression is not undefined
 	 * @function assertIsNotUndefined
-	 * @param {*} expr - Expression to check
+	 * @param {any} _expr - Expression to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertIsNotUndefined = function() {
@@ -373,7 +373,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Sets up a discovered script to use as the test
 	 * @function __discover__
-	 * @param {real} script - ID of script
+	 * @param {function} _script - ID of script
 	 * @returns {struct} self
 	 */
 	static __discover__ = function(_script) {
