@@ -65,7 +65,7 @@ results_box = new gui_box(info_box.x1, info_box.y2 + 3, info_box.x2, room_height
 
 
 // Defining colors
-dracula_theme = {
+colors = {
 	background: make_color_rgb(40, 42, 54),
 	current_line: make_color_rgb(68, 71, 90),
 	selection: make_color_rgb(68, 71, 90),
@@ -79,4 +79,3 @@ dracula_theme = {
 	red: make_color_rgb(255, 85, 85),
 	yellow: make_color_rgb(241, 250, 140),
 }
-colors = dracula_theme;
