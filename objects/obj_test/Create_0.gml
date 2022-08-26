@@ -64,8 +64,7 @@ results_max = 255;
 results_box = new gui_box(info_box.x1, info_box.y2 + 3, info_box.x2, room_height - 2);
 
 
-// Defining Dracula Theme colors
-// https://github.com/dracula/dracula-theme#color-palette
+// Defining colors
 dracula_theme = {
 	background: make_color_rgb(40, 42, 54),
 	current_line: make_color_rgb(68, 71, 90),
