@@ -84,7 +84,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			addLog(new CrispyLog(self, {
 				pass: false,
 				msg: _message,
-				helper_text: "first and second are not equal: " + string(_first) + ", " + string(_second)
+				helper_text: "first and second are not equal: " + string(_first) + ", " + string(_second),
 			}));
 		}
 	}
@@ -155,7 +155,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			addLog(new CrispyLog(self, {
 				pass: false,
 				msg: _message,
-				helper_text: "Expression is not true."
+				helper_text: "Expression is not true.",
 			}));
 		}
 	}
@@ -282,7 +282,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			addLog(new CrispyLog(self, {
 				pass: false,
 				msg: _message,
-				helper_text: "Expression is not undefined."
+				helper_text: "Expression is not undefined.",
 			}));
 		}
 	}
