@@ -319,7 +319,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	/**
 	 * Test whether the provided function will throw an error message
 	 * @function assertRaises
-	 * @param {method} function - Function check if it throws an error message
+	 * @param {method} function - Function to check whether it throws an error message
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
 	static assertRaises = function(_func, _message) {
@@ -349,13 +349,13 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 	}
 
 	/**
-	 * Test whether the provided function will throw an error message
+	 * Test the value of the error message thrown in the provided function
 	 * @function assertRaiseErrorValue
 	 * @param {method} function - Function ran to throw an error message
-	 * @param {string} expr - Expression to check
+	 * @param {string} value - Value of error message to check
 	 * @param [string|undefined] message - Custom message to output on failure
 	 */
-	static assertRaiseErrorValue = function(_func, _expr, _message) {
+	static assertRaiseErrorValue = function(_func, _value, _message) {
 		// Check supplied arguments
 		if argument_count < 2 {
 			show_error(instanceof(self) + ".assertRaiseErrorValue() expected 2 arguments, recieved " + string(argument_count) + ".", true);
@@ -363,8 +363,8 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		if !is_method(_func) {
 			throw(instanceof(self) + ".assertRaiseErrorValue() \"func\" expected a method, received " + typeof(_func) + ".");
 		}
-		if !is_string(_expr) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"expression\" expected a string, received " + typeof(_expr) + ".");
+		if !is_string(_value) {
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"value\" expected a string, received " + typeof(_value) + ".");
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertRaiseErrorValue() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -382,7 +382,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			if is_struct(err) && variable_struct_exists(err, "message") && is_string(err.message) {
 				err = err.message;
 			}
-			if err == _expr {
+			if err == _value {
 				addLog(new CrispyLog(self), {
 					pass: true,
 				});
@@ -390,7 +390,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 				addLog(new CrispyLog(self, {
 					pass: false,
 					msg: _message,
-					helper_text: "Error message is not equal to expression: \"" + err + "\" != \"" + _expr + "\"",
+					helper_text: "Error message is not equal to value: \"" + err + "\" != \"" + _value + "\"",
 				}));
 			}
 		}
