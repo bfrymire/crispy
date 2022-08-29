@@ -12,7 +12,6 @@
     {"id":{"name":"BaseTestClass","path":"scripts/BaseTestClass/BaseTestClass.yy",},"order":14,},
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":0,},
     {"id":{"name":"TestRunner","path":"scripts/TestRunner/TestRunner.yy",},"order":1,},
-    {"id":{"name":"crispy","path":"scripts/crispy/crispy.yy",},"order":0,},
     {"id":{"name":"TestCase","path":"scripts/TestCase/TestCase.yy",},"order":3,},
     {"id":{"name":"crispyStructUnpack","path":"scripts/crispyStructUnpack/crispyStructUnpack.yy",},"order":9,},
     {"id":{"name":"gui_box","path":"scripts/gui_box/gui_box.yy",},"order":0,},

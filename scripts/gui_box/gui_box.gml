@@ -9,7 +9,7 @@ function gui_box(_x1, _y1, _x2, _y2) constructor {
      * Draw rectangle using the coordinates of the box
      * @function
      * @param {real} _color - Color to draw rectangle
-     * @param {boolean} _outline - Whether the rectangle is drawn filled or outlined
+     * @param {bool} _outline - Whether the rectangle is drawn filled or outlined
      */
     draw = function(_color, _outline) {
         var _c = draw_get_color();

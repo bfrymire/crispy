@@ -3,7 +3,7 @@
  * 		variable name values with the given source's variable name values
  * @function crispyStructUnpack
  * @param {struct} _unpack - Struct used to replace existing values with
- * @param {boolean} [_name_must_exist=true] - Boolean flag that prevents
+ * @param {bool} [_name_must_exist=true] - Boolean flag that prevents
  * 		new variable names from being added to the destination struct if
  * 		the variable name does not already exist
  */
@@ -12,10 +12,8 @@ function crispyStructUnpack(_unpack, _name_must_exist=true) {
 	if !is_struct(_unpack) {
 		throw("crispyStructUnpack() \"unpack\" expected a struct, received " + typeof(_unpack) + ".");
 	}
-
-	// Optional parameter _name_must_exist defaults to true
 	if !is_bool(_name_must_exist) {
-		_name_must_exist = true;
+		throw("crispyStructUnpack() \"_name_must_exist\" expected a boolean, received " + typeof(_name_must_exist) + ".");
 	}
 
 	var _names = variable_struct_get_names(_unpack);

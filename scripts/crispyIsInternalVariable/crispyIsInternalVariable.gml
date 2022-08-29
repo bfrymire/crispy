@@ -3,7 +3,7 @@
  * 		naming convention
  * @function
  * @param {string} _name - Name of variable to check
- * @returns {boolean} If name follows internal variable naming convention
+ * @returns {bool} If name follows internal variable naming convention
  */
 function crispyIsInternalVariable(_name) {
 

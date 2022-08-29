@@ -58,7 +58,7 @@ function Food(_name, _ingredients) constructor {
  * Food ingredient
  * @constructor
  * @param {string} _name - Name of ingredient
- * @param {boolean} [_is_gluten_free=false]  - Ingredient is gluten free
+ * @param {bool} [_is_gluten_free=false] - Ingredient is gluten free
  */
 function Ingredient(_name, _is_gluten_free=false) constructor {
 	if !is_string(_name) {

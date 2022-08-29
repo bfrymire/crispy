@@ -12,12 +12,12 @@ function BaseTestClass(_name) {
 	static __tearDown__ = undefined;
 	static __onRunBegin__ = undefined;
 	static __onRunEnd__ = undefined;
-	setName(_name);
 
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+	crispyMixinStructUnpack();
 
 
+	// Methods
+	
 	/**
 	 * Set name of class object
 	 * @function setName
@@ -33,7 +33,7 @@ function BaseTestClass(_name) {
 	/**
 	 * Event to be called at the beginning of run
 	 * @function onRunBegin
-	 * @param [method] func - Method to override __onRunBegin__ with
+	 * @param [function] _func - Method to override __onRunBegin__ with
 	 */
 	static onRunBegin = function() {
 		if argument_count > 0 {
@@ -53,7 +53,7 @@ function BaseTestClass(_name) {
 	/**
 	 * Event to be called at the end of run
 	 * @function onRunEnd
-	 * @param [method] func - Method to override __onRunEnd__ with
+	 * @param [function] _func - Method to override __onRunEnd__ with
 	 */
 	static onRunEnd = function() {
 		if argument_count > 0 {
@@ -69,5 +69,9 @@ function BaseTestClass(_name) {
 			}
 		}
 	}
+
+	// Update variables
+
+	setName(_name);
 
 }

@@ -2,9 +2,9 @@
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
  * @param {string} _name - Name of runner
- * @param [struct] unpack - Struct for crispyStructUnpack
+ * @param [struct] _unpack - Struct for crispyStructUnpack
  */
-function TestRunner(_name) : BaseTestClass(_name) constructor {
+function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 
 	start_time = 0;
 	stop_time = 0;
@@ -13,6 +13,8 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	suites = [];
 	logs = [];
 
+
+	// Methods
 
 	/**
 	 * Adds a Log to the array of logs
@@ -113,7 +115,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Clears logs, starts timer, and runs __setUp__
 	 * @function setUp
-	 * @param [method] func - Method to override __setUp__ with
+	 * @param [function] _func - Method to override __setUp__ with
 	 */
 	static setUp = function() {
 		if argument_count > 0 {
@@ -135,7 +137,7 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	/**
 	 * Function ran after test, used to clean up test
 	 * @function tearDown
-	 * @param [method] func - Method to override __tearDown__ with
+	 * @param [function] _func - Method to override __tearDown__ with
 	 */
 	static tearDown = function() {
 		if argument_count > 0 {
@@ -205,21 +207,14 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	 * Function for discovering individual test functions within
 	 * 		scripts, and adds them to a TestSuite
 	 * @function discover
-	 * @param {Struct.TestSuite} [_test_suite=undefined]  - TestSuite to add
+	 * @param {struct} [_test_suite=undefined] - TestSuite to add
 	 * 		discovered test script to, else create a temporary TestSuite
-	 * @param {String} [_script_start_pattern="test_"] - String that script
+	 * @param {string} [_script_start_pattern="test_"] - String that script
 	 * 		functions need to start with in order to be discoverable
 	 */
-	static discover = function(_test_suite, _script_start_pattern="test_") {
+	static discover = function(_test_suite, _script_start_pattern) {
+
 		var _created_test_suite = is_undefined(_test_suite);
-		// Throw error if function pattern is not a string
-		if !is_string(_script_start_pattern) {
-			throw(instanceof(self) + ".discover() \"script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
-		}
-		// Throw error if function pattern is an empty string
-		if _script_start_pattern == "" {
-			throw(instanceof(self) + ".discover() \"script_start_pattern\" cannot be an empty string.");
-		}
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
@@ -233,6 +228,18 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");
 		}
+
+		if is_undefined(_script_start_pattern) {
+			_script_start_pattern = "test_";
+		}
+		if !is_string(_script_start_pattern) {
+			throw(instanceof(self) + ".discover() \"script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
+		}
+		// Throw error if function pattern is an empty string
+		if _script_start_pattern == "" {
+			show_error(instanceof(self) + ".discover() \"script_start_pattern\" cannot be an empty string.", true);
+		}
+
 		var _len = string_length(_script_start_pattern);
 		var i = 100000;
 		repeat (10000) { // Range of custom scripts is 100000 - 110000
@@ -293,19 +300,26 @@ function TestRunner(_name) : BaseTestClass(_name) constructor {
 	 * Function that gets called on output
 	 * @function __output__
 	 * @param {string} _message - By default, outputs string to Output Console
-	 * @tip This function can be overwritten by a function passed into
-	 * 		the output function
+	 * @NOTE This function can be overwritten by a function passed into
+	 *		 the output() function
 	 */
 	static __output__ = function(_message) {
 		show_debug_message(_message);
 	}
+
+
+	// Update variables
 	
 	/**
 	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so it may be overwritten
+	 * Stays after all variables are initialized so they may be overwritten
 	 */
-	if argument_count > 1 {
-		crispyStructUnpack(argument[1]);
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
 	}
 
 }

@@ -1,18 +1,26 @@
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
- * @param {struct.TestCase} _test_case - TestCase struct
- * @param {struct} _unpack - Struct to use with crispyStructUnpack
+ * @param {struct} _test_case - Struct that holds the test case
+ * @param [struct] _unpack - Struct to use with crispyStructUnpack
  */
-function CrispyLog(_test_case) constructor {
+function CrispyLog(_test_case, _unpack) constructor {
 
-	if instanceof(_test_case) != "TestCase" {
-		var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
-		throw(instanceof(self) + " \"_test_case\" expected an instance of TestCase, received " + _type + ".");
+	if !is_struct(_test_case) {
+		throw(instanceof(self) + " \"test_case\" expected a struct, received " + _type + ".");
 	}
 
-	// Give self cripsyStructUnpack() function
-	crispyMixinStructUnpack(self);
+	crispyMixinStructUnpack();
+
+	verbosity = CRISPY_VERBOSITY;
+	pass = true;
+	msg = undefined;
+	helper_text = undefined;
+	class = _test_case.class;
+	name = _test_case.name;
+	display_name = undefined;
+
+	// Methods
 
 	/**
 	 * Constructs text based on outcome of test assertion and verbosity
@@ -53,12 +61,7 @@ function CrispyLog(_test_case) constructor {
 		return _msg;
 	}
 
-	verbosity = CRISPY_VERBOSITY;
-	pass = true;
-	msg = undefined;
-	helper_text = undefined;
-	class = _test_case.class;
-	name = _test_case.name;
+	// Update variables
 
 	// Create the display name of log based on TestCase name and class
 	var _display_name = "";
@@ -76,9 +79,14 @@ function CrispyLog(_test_case) constructor {
 
 	/**
 	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
 	 */
-	if argument_count > 1 {
-		crispyStructUnpack(argument[1]);
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
 	}
 
 }
