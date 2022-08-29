@@ -1,7 +1,8 @@
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_AUTHOR "Brent Frymire"
-#macro CRISPY_VERSION "1.5.2"
-#macro CRISPY_DATE "2022-7-21"
+#macro CRISPY_REPO "https://github.com/bfrymire/crispy"
+#macro CRISPY_VERSION "1.6.0"
+#macro CRISPY_DATE "2022-8-26"
 
 #macro CRISPY_RUN true // Boolean flag that can be used to automatically run tests
 #macro CRISPY_DEBUG false // Enables outputting extra context on some silent functions
