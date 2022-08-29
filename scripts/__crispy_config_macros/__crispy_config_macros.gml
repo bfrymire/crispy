@@ -16,3 +16,6 @@
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail" // Output string when an assertion fails verbosely
 
 #macro CRISPY_STRUCT_UNPACK_ALLOW_DUNDER false // Enables dunder variables to be overwritten when using crispyStructUnpack
+
+
+show_debug_message("Using " + CRISPY_NAME + " unit testing framework by " + CRISPY_AUTHOR + ". This is version " + CRISPY_VERSION + ", released on " + CRISPY_DATE + ".");
