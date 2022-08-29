@@ -220,7 +220,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertIsNoone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
-		if _expr == -4 {
+		if _expr == noone {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
@@ -249,7 +249,7 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertIsNotNoone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
-		if _expr != -4 {
+		if _expr != noone {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
