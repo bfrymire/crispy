@@ -3,5 +3,5 @@
  * @function crispyMixinStructUnpack
  */
 function crispyMixinStructUnpack() {
-	crispyStructUnpack = method(_struct, crispyStructUnpack);
+	crispyStructUnpack = method(self, crispyStructUnpack);
 }
