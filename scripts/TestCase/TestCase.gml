@@ -107,7 +107,11 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertNotEqual() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
-		if _first != _second {
+		var _outcome = typeof(_first) != typeof(_second);
+		if !_outcome {
+			_outcome = _first != _second;
+		}
+		if _outcome {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
