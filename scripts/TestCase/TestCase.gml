@@ -77,9 +77,9 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 			return;
 		}
 		if _first == _second {
-			addLog(new CrispyLog(self), {
+			addLog(new CrispyLog(self, {
 				pass: true,
-			});
+			}));
 		} else {
 			addLog(new CrispyLog(self, {
 				pass: false,
@@ -383,9 +383,9 @@ function TestCase(_name, _func) : BaseTestClass(_name) constructor {
 				err = err.message;
 			}
 			if err == _value {
-				addLog(new CrispyLog(self), {
+				addLog(new CrispyLog(self, {
 					pass: true,
-				});
+				}));
 			} else {
 				addLog(new CrispyLog(self, {
 					pass: false,
