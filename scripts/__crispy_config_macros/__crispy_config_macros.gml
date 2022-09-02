@@ -8,7 +8,7 @@
 #macro CRISPY_DEBUG false // Enables outputting extra context on some silent functions
 #macro CRISPY_VERBOSITY 2 // Determines how verbose assertion outputs will be. Acceptable values are 0, 1, or 2
 
-#macro CRISPY_TIME_PRECISION 6 // Number of decimal places timers will be output to
+#macro CRISPY_TIME_PRECISION 6 // Number of decimal places timers will output to
 
 #macro CRISPY_PASS_MSG_SILENT "." // Output string when an assertion passes silently
 #macro CRISPY_FAIL_MSG_SILENT "F" // Output string when an assertion fails silently
