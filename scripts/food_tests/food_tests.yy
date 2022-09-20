@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Food",
-    "path": "folders/Scripts/Food.yy",
+    "name": "Tests",
+    "path": "folders/Scripts/Tests.yy",
   },
   "resourceVersion": "1.0",
-  "name": "food",
+  "name": "food_tests",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -1,6 +1,5 @@
 // Create TestRunner
 runner = new TestRunner("runner");
-
 // Update runner to output test results to Output Window and results ds_list
 runner.output = function(_message) {
 	show_debug_message(_message);
@@ -12,16 +11,13 @@ runner.output = function(_message) {
 
 // Create GUI elements TestSuite
 gui_test_suite = new TestSuite("gui_suite");
-
 // Add GUI elements TestSuite to TestRunner
 runner.addTestSuite(gui_test_suite);
-
 // Discover GUI element tests
 runner.discover(gui_test_suite, "test_gui_box");
 
 // Create hamburger TestSuite
 hamburger_suite = new TestSuite("hamburger_suite");
-
 // Set up hamburger for tests
 hamburger_suite.setUp(function() {
 	var _ingredients = [
@@ -34,13 +30,17 @@ hamburger_suite.setUp(function() {
 	];
 	hamburger = new Food("hamburger", _ingredients);
 });
-
 // Add hamburger TestSuite to TestRunner
 runner.addTestSuite(hamburger_suite);
-
 // Discovering hamburger tests
 runner.discover(hamburger_suite, "test_hamburger_");
 
+// Create Food TestSuite
+food_suite = new TestSuite("food_suite");
+// Add Food TestSuite to TestRunner
+runner.addTestSuite(food_suite);
+// Discovering Food tests
+runner.discover(food_suite, "test_food_");
 
 // Flag for running tests
 can_run_tests = true;
