@@ -25,6 +25,7 @@ function crispyStructUnpack(_unpack, _name_must_exist=true) {
 			if CRISPY_DEBUG {
 				crispyDebugMessage("Variable names beginning and ending in double underscores are reserved for the framework. Skip unpacking struct name: " + _name);
 			}
+			++i;
 			continue;
 		}
 		var _value = variable_struct_get(_unpack, _name);
@@ -33,6 +34,7 @@ function crispyStructUnpack(_unpack, _name_must_exist=true) {
 				if CRISPY_DEBUG {
 					crispyDebugMessage("Variable name \"" + _name + "\" not found in struct, skip writing variable name.");
 				}
+				++i;
 				continue;
 			}
 		}
