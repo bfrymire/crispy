@@ -3,7 +3,7 @@
  * @constructor BaseTestClass
  * @param {string} _name - Name of class
  */
-function BaseTestClass(_name) {
+function BaseTestClass(_name) constructor {
 
 	name = undefined;
 	static setUp = undefined;
