@@ -150,6 +150,10 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
 			}
 		} else {
+			if CRISPY_DEBUG && CRISPY_SILENCE_PASSING_TESTS_OUTPUT {
+				output(CRISPY_NAME + " passing test messages are silenced.");
+			}
+
 			// Get total run time
 			stop_time = crispyGetTime();
 			total_time = crispyGetTimeDiff(start_time, stop_time);
@@ -179,9 +183,11 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 				if logs[i].pass {
 					_passed_tests += 1;
 				}
-				var _msg = logs[i].getMsg();
-				if _msg != "" {
-					output(_msg);
+				if !CRISPY_SILENCE_PASSING_TESTS_OUTPUT || !logs[i].pass {
+					var _msg = logs[i].getMsg();
+					if _msg != "" {
+						output(_msg);
+					}
 				}
 				++i;
 			}
