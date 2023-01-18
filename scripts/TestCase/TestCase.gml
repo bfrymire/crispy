@@ -133,8 +133,10 @@ function TestCase(_name, _func, _unpack) : BaseTestClass(_name) constructor {
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertTrue() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
+		
+		var _bool;
 		try {
-			var _bool = bool(_expr);
+			_bool = bool(_expr);
 		}
 		catch(err) {
 			addLog(new CrispyLog(self, {
@@ -171,8 +173,10 @@ function TestCase(_name, _func, _unpack) : BaseTestClass(_name) constructor {
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertFalse() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
+		
+		var _bool;
 		try {
-			var _bool = bool(_expr);
+			_bool = bool(_expr);
 		}
 		catch(err) {
 			addLog(new CrispyLog(self, {

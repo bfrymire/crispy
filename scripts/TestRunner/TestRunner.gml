@@ -31,13 +31,14 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 	 * @param {struct} _inst - Adds logs of inst to logs
 	 */
 	static captureLogs = function(_inst) {
+		var i, _logs_len;
 		switch (instanceof(_inst)) {
 			case "CrispyLog":
 				addLog(_inst);
 				break;
 			case "TestCase":
-				var _logs_len = array_length(_inst.logs);
-				var i = 0;
+				_logs_len = array_length(_inst.logs);
+				i = 0;
 				repeat (_logs_len) {
 					addLog(_inst.logs[i]);
 					++i;
@@ -47,8 +48,8 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 				var _tests_len = array_length(_inst.tests);
 				var k = 0;
 				repeat (_tests_len) {
-					var _logs_len = array_length(_inst.tests[k].logs);
-					var i = 0;
+					_logs_len = array_length(_inst.tests[k].logs);
+					i = 0;
 					repeat (_logs_len) {
 						addLog(_inst.tests[k].logs[i]);
 						++i;
@@ -140,6 +141,7 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 	 * @param [function] _func - Method to override __tearDown__ with
 	 */
 	static tearDown = function() {
+		var i;
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
@@ -157,7 +159,7 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 			var _passed_tests = 0;
 			var _len = array_length(logs);
 			var _t = "";
-			var i = 0;
+			i = 0;
 			repeat (_len) {
 				if logs[i].pass {
 					_t += CRISPY_PASS_MSG_SILENT;
@@ -172,7 +174,7 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 			output(hr());
 
 			// Show individual log messages
-			var i = 0;
+			i = 0;
 			repeat (_len) {
 				if logs[i].pass {
 					_passed_tests += 1;
@@ -274,7 +276,7 @@ function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
 	/**
 	 * Pass input to __output__ if string. Overwrite __output__ if method
 	 * @function output
-	 * @param {string, method} _input - String to output or function to
+	 * @param {(string|method)} _input - String to output or function to
 	 * 		overwrite __output__
 	 */
 	static output = function() {

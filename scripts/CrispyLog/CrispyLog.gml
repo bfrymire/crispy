@@ -29,10 +29,11 @@ function CrispyLog(_test_case, _unpack) constructor {
 	 * 		verbosity
 	 */
 	static getMsg = function() {
+		var _msg;
 		if verbosity == 2 && display_name != "" {
-			var _msg = display_name + " ";
+			_msg = display_name + " ";
 		} else {
-			var _msg = "";
+			_msg = "";
 		}
 		switch (verbosity) {
 			case 0:
