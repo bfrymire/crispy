@@ -3,9 +3,9 @@
 
 # Crispy
 
-Version 1.6.0
+Version 1.7.0
 
-Unit testing framework built in GML for GameMaker Studio 2.3.6+
+Unit testing framework built in GML for GameMaker LTS
 
 
 ## Installation
@@ -14,7 +14,7 @@ Unit testing framework built in GML for GameMaker Studio 2.3.6+
 1. Import the **.yymps** file into your project from the top menu
     * Tools **>** Import Local Package
 
-You can also drop the **.yymps** file downloaded from the [Releases](https://github.com/bfrymire/crispy/releases/latest) tab directly onto your GMS IDE and follow the prompts.
+You can also drop the **.yymps** file downloaded from the [Releases](https://github.com/bfrymire/crispy/releases/latest) tab directly onto your GM IDE and follow the prompts.
 
 
 ## Getting Started
