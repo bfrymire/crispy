@@ -4,7 +4,7 @@
  * @param {string} _name - Name of runner
  * @param [struct] _unpack - Struct for crispyStructUnpack
  */
-function TestRunner(_name, _unpack) : BaseTestClass(_name) constructor {
+function TestRunner(_name, _unpack = undefined) : BaseTestClass(_name) constructor {
 
 	start_time = 0;
 	stop_time = 0;
