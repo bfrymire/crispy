@@ -2,7 +2,7 @@
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner
  * @param {string} _name - Name of runner
- * @param [struct] _unpack - Struct for crispyStructUnpack
+ * @param [struct] _unpack=undefined - Struct for crispyStructUnpack
  */
 function TestRunner(_name, _unpack = undefined) : BaseTestClass(_name) constructor {
 

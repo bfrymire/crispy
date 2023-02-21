@@ -3,7 +3,7 @@
  * @constructor TestCase
  * @param {string} _name - Name of case
  * @param {function} _func - Method containing assertion method
- * @param [struct] _unpack - Struct for crispyStructUnpack
+ * @param [struct] _unpack=undefined - Struct for crispyStructUnpack
  */
 function TestCase(_name, _func, _unpack = undefined) : BaseTestClass(_name) constructor {
 
