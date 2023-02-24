@@ -2,32 +2,35 @@
  * Creates a Test case object to run assertions
  * @constructor TestCase
  * @param {String} _name - Name of case
- * @param {Function} _func - Method containing assertion method
+ * @param {Function} _func - Function for test assertion
  * @param {Struct} [_unpack=undefined] - Struct for crispyStructUnpack
  */
 function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constructor {
 
+	if !is_method(_func) {
+		throw(instanceof(self) + " \"func\" expected a function, received " + typeof(_func) + ".");
+	}
+
 	class = instanceof(self);
 	parent = undefined;
-	test = undefined;
+	test = method(self, _func);
 	logs = [];
 	__is_discovered__ = false;
 	__discovered_script__ = undefined;
 
+	/**
+	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
+	 */
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
+	}
 
 	// Methods
-
-	/**
-	 * Turns a function into a method variable for the test.
-	 * @function createTestMethod
-	 * @param {Function} _func - Function to turn into a method variable
-	 */
-	static createTestMethod = function(_func) {
-		if !is_method(_func) {
-			throw(instanceof(self) + ".createTestMethod() \"func\" expected a method, received " + typeof(_func) + ".");
-		}
-		test = method(self, _func);
-	}
 
 	/**
 	 * Adds a Log to the array of logs
@@ -451,24 +454,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 		}
 		__discovered_script__ = _script;
 		__is_discovered__ = true;
-		createTestMethod(function() {__discovered_script__()});
-	}
-
-
-	// Update variables
-
-	createTestMethod(_func);
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so they may be overwritten
-	 */
-	if !is_undefined(_unpack) {
-		if is_struct(_unpack) {
-			crispyStructUnpack(_unpack);
-		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
-		}
+		test = method(self, _script);
 	}
 
 }

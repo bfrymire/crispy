@@ -13,6 +13,9 @@ function BaseTestClass(_name) constructor {
 	static __onRunBegin__ = undefined;
 	static __onRunEnd__ = undefined;
 
+	// Update variables
+	setName(_name);
+
 	crispyMixinStructUnpack();
 
 
@@ -69,9 +72,5 @@ function BaseTestClass(_name) constructor {
 			}
 		}
 	}
-
-	// Update variables
-
-	setName(_name);
 
 }

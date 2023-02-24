@@ -1,7 +1,7 @@
 /**
  * Helper function for Crispy to display its debug messages
  * @function crispyDebugMessage
- * @param {...Any} [_message] - Text to be displayed in the Output Window
+ * @param {Any} [_message] - Text to be displayed in the Output Window
  */
 function crispyDebugMessage() {
 	if argument_count == 0 {

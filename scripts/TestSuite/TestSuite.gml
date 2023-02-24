@@ -8,8 +8,21 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 
 	parent = undefined;
 	tests = [];
-	
-	
+
+	/**
+	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
+	 */
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
+	}
+
+	// Methods
+
 	/**
 	 * Adds TestCase to array of cases
 	 * @function addTestCase
@@ -81,18 +94,6 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			++i;
 		}
 		tearDown();
-	}
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so they may be overwritten
-	 */
-	if !is_undefined(_unpack) {
-		if is_struct(_unpack) {
-			crispyStructUnpack(_unpack);
-		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
-		}
 	}
 
 }

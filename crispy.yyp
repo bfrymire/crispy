@@ -17,7 +17,7 @@
     {"id":{"name":"TestRunner","path":"scripts/TestRunner/TestRunner.yy",},"order":1,},
     {"id":{"name":"food_tests","path":"scripts/food_tests/food_tests.yy",},"order":3,},
     {"id":{"name":"TestCase","path":"scripts/TestCase/TestCase.yy",},"order":3,},
-    {"id":{"name":"crispyStructUnpack","path":"scripts/crispyStructUnpack/crispyStructUnpack.yy",},"order":9,},
+    {"id":{"name":"__crispyStructUnpack","path":"scripts/__crispyStructUnpack/__crispyStructUnpack.yy",},"order":9,},
     {"id":{"name":"GuiBox","path":"scripts/GuiBox/GuiBox.yy",},"order":0,},
     {"id":{"name":"crispyMixinStructUnpack","path":"scripts/crispyMixinStructUnpack/crispyMixinStructUnpack.yy",},"order":8,},
     {"id":{"name":"__crispy_config_macros","path":"scripts/__crispy_config_macros/__crispy_config_macros.yy",},"order":13,},
