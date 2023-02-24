@@ -2,8 +2,8 @@
  * Helper function for structs that will replace a destination's
  * 		variable name values with the given source's variable name values
  * @function crispyStructUnpack
- * @param {struct} _unpack - Struct used to replace existing values with
- * @param {bool} [_name_must_exist=true] - Boolean flag that prevents
+ * @param {Struct} _unpack - Struct used to replace existing values with
+ * @param {Bool} [_name_must_exist=true] - Boolean flag that prevents
  * 		new variable names from being added to the destination struct if
  * 		the variable name does not already exist
  */
@@ -30,6 +30,7 @@ function crispyStructUnpack(_unpack, _name_must_exist=true) {
 		}
 		var _value = variable_struct_get(_unpack, _name);
 		if _name_must_exist {
+			// Feather disable once GM1041
 			if !variable_struct_exists(self, _name) {
 				if CRISPY_DEBUG {
 					crispyDebugMessage("Variable name \"" + _name + "\" not found in struct, skip writing variable name.");
@@ -38,6 +39,7 @@ function crispyStructUnpack(_unpack, _name_must_exist=true) {
 				continue;
 			}
 		}
+		// Feather disable once GM1041
 		variable_struct_set(self, _name, _value);
 		++i;
 	}

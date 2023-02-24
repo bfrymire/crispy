@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "gui_tests",
+  "name": "example_of_discoverable_tests",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
