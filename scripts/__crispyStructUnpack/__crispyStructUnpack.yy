@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "crispyDebugMessage",
+  "name": "__crispyStructUnpack",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {

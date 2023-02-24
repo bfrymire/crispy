@@ -1,10 +1,10 @@
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
- * @param {struct} _test_case - Struct that holds the test case
- * @param [struct] _unpack - Struct to use with crispyStructUnpack
+ * @param {Struct} _test_case - Struct that holds the test case
+ * @param {Struct} [_unpack=undefined] - Struct to use with crispyStructUnpack
  */
-function CrispyLog(_test_case, _unpack) constructor {
+function CrispyLog(_test_case, _unpack=undefined) constructor {
 
 	if !is_struct(_test_case) {
 		throw(instanceof(self) + " \"test_case\" expected a struct, received " + _type + ".");
@@ -20,12 +20,38 @@ function CrispyLog(_test_case, _unpack) constructor {
 	name = _test_case.name;
 	display_name = undefined;
 
+	// Create the display name of log based on TestCase name and class
+	var _display_name = "";
+	if !is_undefined(name) {
+		_display_name += name;
+	}
+	if !is_undefined(class) {
+		if _display_name != "" {
+			_display_name += "." + class;
+		} else {
+			_display_name += class;
+		}
+	}
+	display_name = _display_name;
+
+	/**
+	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
+	 */
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
+	}
+
 	// Methods
 
 	/**
 	 * Constructs text based on outcome of test assertion and verbosity
 	 * @function getMsg
-	 * @returns {string} Text based on outcome of test assertion and
+	 * @returns {String} Text based on outcome of test assertion and
 	 * 		verbosity
 	 */
 	static getMsg = function() {
@@ -60,34 +86,6 @@ function CrispyLog(_test_case, _unpack) constructor {
 				break;
 		}
 		return _msg;
-	}
-
-	// Update variables
-
-	// Create the display name of log based on TestCase name and class
-	var _display_name = "";
-	if !is_undefined(name) {
-		_display_name += name;
-	}
-	if !is_undefined(class) {
-		if _display_name != "" {
-			_display_name += "." + class;
-		} else {
-			_display_name += class;
-		}
-	}
-	display_name = _display_name;
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so they may be overwritten
-	 */
-	if !is_undefined(_unpack) {
-		if is_struct(_unpack) {
-			crispyStructUnpack(_unpack);
-		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
-		}
 	}
 
 }

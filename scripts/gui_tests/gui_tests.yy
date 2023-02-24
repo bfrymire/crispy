@@ -1,12 +1,11 @@
 {
+  "resourceType": "GMScript",
+  "resourceVersion": "1.0",
+  "name": "gui_tests",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Tests",
-    "path": "folders/Scripts/Tests.yy",
+    "name": "Unit Tests",
+    "path": "folders/Unit Tests.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "gui_tests",
-  "tags": [],
-  "resourceType": "GMScript",
 }

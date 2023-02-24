@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "crispyStructUnpack",
+  "name": "example_of_discoverable_tests",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Crispy",
-    "path": "folders/Crispy.yy",
+    "name": "Unit Tests",
+    "path": "folders/Unit Tests.yy",
   },
 }

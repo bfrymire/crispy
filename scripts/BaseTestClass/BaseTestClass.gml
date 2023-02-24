@@ -1,7 +1,7 @@
 /**
  * Base "class" that test constructors will inherit from
  * @constructor BaseTestClass
- * @param {string} _name - Name of class
+ * @param {String} _name - Name of class
  */
 function BaseTestClass(_name) constructor {
 
@@ -15,13 +15,12 @@ function BaseTestClass(_name) constructor {
 
 	crispyMixinStructUnpack();
 
-
 	// Methods
 	
 	/**
 	 * Set name of class object
 	 * @function setName
-	 * @param {string} _name - Name of the object
+	 * @param {String} _name - Name of the object
 	 */
 	static setName = function(_name) {
 		if !is_string(_name) {
@@ -33,7 +32,7 @@ function BaseTestClass(_name) constructor {
 	/**
 	 * Event to be called at the beginning of run
 	 * @function onRunBegin
-	 * @param [function] _func - Method to override __onRunBegin__ with
+	 * @param {Function} [_func] - Method to override __onRunBegin__ with
 	 */
 	static onRunBegin = function() {
 		if argument_count > 0 {
@@ -53,7 +52,7 @@ function BaseTestClass(_name) constructor {
 	/**
 	 * Event to be called at the end of run
 	 * @function onRunEnd
-	 * @param [function] _func - Method to override __onRunEnd__ with
+	 * @param {Function} [_func] - Method to override __onRunEnd__ with
 	 */
 	static onRunEnd = function() {
 		if argument_count > 0 {
@@ -69,8 +68,6 @@ function BaseTestClass(_name) constructor {
 			}
 		}
 	}
-
-	// Update variables
 
 	setName(_name);
 
