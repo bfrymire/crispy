@@ -13,7 +13,19 @@ function TestCase(_name, _func, _unpack = undefined) : BaseTestClass(_name) cons
 	logs = [];
 	__is_discovered__ = false;
 	__discovered_script__ = undefined;
+	createTestMethod(_func);
 
+	/**
+	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
+	 */
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
+	}
 
 	// Methods
 
@@ -451,23 +463,6 @@ function TestCase(_name, _func, _unpack = undefined) : BaseTestClass(_name) cons
 		__discovered_script__ = _script;
 		__is_discovered__ = true;
 		createTestMethod(function() {__discovered_script__()});
-	}
-
-
-	// Update variables
-
-	createTestMethod(_func);
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so they may be overwritten
-	 */
-	if !is_undefined(_unpack) {
-		if is_struct(_unpack) {
-			crispyStructUnpack(_unpack);
-		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
-		}
 	}
 
 }

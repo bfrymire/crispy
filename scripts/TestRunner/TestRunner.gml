@@ -13,6 +13,17 @@ function TestRunner(_name, _unpack = undefined) : BaseTestClass(_name) construct
 	suites = [];
 	logs = [];
 
+	/**
+	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
+	 */
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
+	}
 
 	// Methods
 
@@ -313,21 +324,6 @@ function TestRunner(_name, _unpack = undefined) : BaseTestClass(_name) construct
 	 */
 	static __output__ = function(_message) {
 		show_debug_message(_message);
-	}
-
-
-	// Update variables
-	
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so they may be overwritten
-	 */
-	if !is_undefined(_unpack) {
-		if is_struct(_unpack) {
-			crispyStructUnpack(_unpack);
-		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
-		}
 	}
 
 }

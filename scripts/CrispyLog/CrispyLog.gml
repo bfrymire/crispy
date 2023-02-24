@@ -20,6 +20,32 @@ function CrispyLog(_test_case, _unpack) constructor {
 	name = _test_case.name;
 	display_name = undefined;
 
+	// Create the display name of log based on TestCase name and class
+	var _display_name = "";
+	if !is_undefined(name) {
+		_display_name += name;
+	}
+	if !is_undefined(class) {
+		if _display_name != "" {
+			_display_name += "." + class;
+		} else {
+			_display_name += class;
+		}
+	}
+	display_name = _display_name;
+
+	/**
+	 * Run struct unpacker if unpack argument was provided
+	 * Stays after all variables are initialized so they may be overwritten
+	 */
+	if !is_undefined(_unpack) {
+		if is_struct(_unpack) {
+			crispyStructUnpack(_unpack);
+		} else {
+			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+		}
+	}
+
 	// Methods
 
 	/**
@@ -60,34 +86,6 @@ function CrispyLog(_test_case, _unpack) constructor {
 				break;
 		}
 		return _msg;
-	}
-
-	// Update variables
-
-	// Create the display name of log based on TestCase name and class
-	var _display_name = "";
-	if !is_undefined(name) {
-		_display_name += name;
-	}
-	if !is_undefined(class) {
-		if _display_name != "" {
-			_display_name += "." + class;
-		} else {
-			_display_name += class;
-		}
-	}
-	display_name = _display_name;
-
-	/**
-	 * Run struct unpacker if unpack argument was provided
-	 * Stays after all variables are initialized so they may be overwritten
-	 */
-	if !is_undefined(_unpack) {
-		if is_struct(_unpack) {
-			crispyStructUnpack(_unpack);
-		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
-		}
 	}
 
 }
