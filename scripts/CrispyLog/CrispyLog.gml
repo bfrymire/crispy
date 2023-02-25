@@ -1,10 +1,10 @@
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
- * @param {struct} _test_case - Struct that holds the test case
- * @param [struct] _unpack - Struct to use with crispyStructUnpack
+ * @param {Struct} _test_case - Struct that holds the test case
+ * @param {Struct} [_unpack=undefined] - Struct to use with crispyStructUnpack
  */
-function CrispyLog(_test_case, _unpack) constructor {
+function CrispyLog(_test_case, _unpack=undefined) constructor {
 
 	if !is_struct(_test_case) {
 		throw(instanceof(self) + " \"test_case\" expected a struct, received " + _type + ".");
@@ -51,7 +51,7 @@ function CrispyLog(_test_case, _unpack) constructor {
 	/**
 	 * Constructs text based on outcome of test assertion and verbosity
 	 * @function getMsg
-	 * @returns {string} Text based on outcome of test assertion and
+	 * @returns {String} Text based on outcome of test assertion and
 	 * 		verbosity
 	 */
 	static getMsg = function() {

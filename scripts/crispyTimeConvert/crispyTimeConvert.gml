@@ -1,8 +1,8 @@
 /**
  * Converts the given time milliseconds to seconds as a string
- * @function
- * @param {real} _time - Time in milliseconds
- * @returns {string} time in seconds with CRISPY_TIME_PRECISION number
+ * @function crispyTimeConvert
+ * @param {Real} _time - Time in milliseconds
+ * @returns {String} time in seconds with CRISPY_TIME_PRECISION number
  * 		of decimal points as a string
  */
 function crispyTimeConvert(_time) {

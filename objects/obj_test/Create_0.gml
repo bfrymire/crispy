@@ -53,7 +53,7 @@ info_text += "Press \"R\" to re-run tests." + "\n";
 info_text += "Press \"C\" to clear test results." + "\n";
 info_text += "Use mouse wheel or arrow keys to navigate test results.";
 info_text_y = room_height - padding;
-info_box = new gui_box(1, 1, room_width - 2, padding * 2 + string_height(info_text) - 1);
+info_box = new GuiBox(1, 1, room_width - 2, padding * 2 + string_height(info_text) - 1);
 
 // Test results scrolling
 scroll_position = 0;
@@ -61,7 +61,7 @@ text_height = string_height("W");
 
 results = ds_list_create();
 results_max = 255;
-results_box = new gui_box(info_box.x1, info_box.y2 + 3, info_box.x2, room_height - 2);
+results_box = new GuiBox(info_box.x1, info_box.y2 + 3, info_box.x2, room_height - 2);
 
 
 // Defining colors
