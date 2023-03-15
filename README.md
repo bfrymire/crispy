@@ -1,4 +1,6 @@
-<p align="center"><img src="./LOGO.png" style="margin:auto;"></p>
+<div align="center">
+   <img src="./LOGO.png" style="margin:auto;" alt="Crispy Logo">
+</div>
 
 
 # Crispy
