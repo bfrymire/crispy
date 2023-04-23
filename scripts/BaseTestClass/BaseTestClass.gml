@@ -12,8 +12,8 @@ function BaseTestClass(_name) constructor {
 	static __tearDown__ = undefined;
 	static __onRunBegin__ = undefined;
 	static __onRunEnd__ = undefined;
-
 	crispyMixinStructUnpack();
+	setName(_name);
 
 	// Methods
 	
@@ -68,7 +68,5 @@ function BaseTestClass(_name) constructor {
 			}
 		}
 	}
-
-	setName(_name);
 
 }
