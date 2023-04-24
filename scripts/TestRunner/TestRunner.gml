@@ -92,7 +92,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	/**
 	 * Creates a horizontal row string
 	 * @function hr
-	 * @param {string} [srt="-"] - String to concat n times
+	 * @param {String} [str="-"] - String to concat n times
 	 * @param {Real} [count=70] - Number of times to concat _str.
 	 * @returns {String} String of horizontal row
 	 */
