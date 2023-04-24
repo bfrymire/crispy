@@ -123,7 +123,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 
 	/**
 	 * Test whether the provided expression is true
-	 * The test will first convert the expression to a boolean, then check if it equals true
+	 * The test will first try to convert the expression to a boolean, then check if it equals true
 	 * @function assertTrue
 	 * @param {Any} _expr - Expression to check
 	 * @param {String} [_message] - Custom message to output on failure
@@ -137,9 +137,8 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			throw(instanceof(self) + ".assertTrue() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		
-		var _bool;
 		try {
-			_bool = bool(_expr);
+			bool(_expr);
 		}
 		catch(err) {
 			addLog(new CrispyLog(self, {
@@ -148,7 +147,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			}));
 			return;
 		}
-		if _bool == true {
+		if _expr == true {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
@@ -163,7 +162,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 
 	/**
 	 * Test whether the provided expression is false
-	 * The test will first convert the expression to a boolean, then check if it equals false
+	 * The test will first try to convert the expression to a boolean, then check if it equals false
 	 * @function assertFalse
 	 * @param {Any} _expr - Expression to check
 	 * @param {String} [_message] - Custom message to output on failure
@@ -177,9 +176,8 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			throw(instanceof(self) + ".assertFalse() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		
-		var _bool;
 		try {
-			_bool = bool(_expr);
+			bool(_expr);
 		}
 		catch(err) {
 			addLog(new CrispyLog(self, {
@@ -188,7 +186,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			}));
 			return;
 		}
-		if _bool == false {
+		if _expr == false {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
