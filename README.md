@@ -7,7 +7,7 @@
 
 Version 1.8.0
 
-Unit testing framework built in GML for GameMaker LTS
+Unit testing framework built in GML for GameMaker LTS+
 
 
 ## Installation
