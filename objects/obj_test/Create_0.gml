@@ -66,16 +66,16 @@ results_box = new GuiBox(info_box.x1, info_box.y2 + 3, info_box.x2, room_height 
 
 // Defining colors
 colors = {
-	background: make_color_rgb(40, 42, 54),
-	current_line: make_color_rgb(68, 71, 90),
-	selection: make_color_rgb(68, 71, 90),
-	foreground: make_color_rgb(248, 248, 242),
-	comment: make_color_rgb(98, 114, 164),
-	cyan: make_color_rgb(139, 233, 253),
-	green: make_color_rgb(80, 250, 123),
-	orange: make_color_rgb(255, 184, 108),
-	pink: make_color_rgb(255, 121, 198),
-	purple: make_color_rgb(189, 147, 249),
-	red: make_color_rgb(255, 85, 85),
-	yellow: make_color_rgb(241, 250, 140),
+	background: #282a36,
+	current_line: #44475a,
+	selection: #44475a,
+	foreground: #f8f8f2,
+	comment: #6272a4,
+	cyan: #8be9fd,
+	green: #50fa7b,
+	orange: #ffb86c,
+	pink: #ff79c6,
+	purple: #bd93f9,
+	red: #ff5555,
+	yellow: #f1fa8c
 }
