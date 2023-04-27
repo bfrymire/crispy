@@ -88,4 +88,12 @@ function CrispyLog(_test_case, _unpack=undefined) constructor {
 		return _msg;
 	}
 
+	/**
+	 * @function toString
+	 * @returns {String}
+	 */
+	toString = function() {
+		return string("<CrispyLog ({0})>", pass ? "pass" : "fail");
+	}
+
 }

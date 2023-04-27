@@ -328,4 +328,12 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		show_debug_message(_message);
 	}
 
+	/**
+	 * @function toString
+	 * @returns {String}
+	 */
+	toString = function() {
+		return string("<Crispy TestRunner(\"{0}\")>", name);
+	}
+
 }
