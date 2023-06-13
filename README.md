@@ -21,9 +21,9 @@ You can also drop the **.yymps** file downloaded from the [Releases](https://git
 
 ## Getting Started
 
-A good starting point is copying and pasting the code from the [Wiki's Quick Start page](https://github.com/bfrymire/crispy/wiki/Quick-Start) into the Create Event of an object created specifically for running tests.
+A good starting point is copying and pasting the example code from the [Wiki's Quick Start page](https://github.com/bfrymire/crispy/wiki/Quick-Start#getting-started) into the Create Event of an object created specifically for running tests.
 
-Expand upon the code to suit your testing needs.
+Expand upon the example code to suit your testing needs.
 
 * [Go to the Crispy Wiki](https://github.com/bfrymire/crispy/wiki)
 
