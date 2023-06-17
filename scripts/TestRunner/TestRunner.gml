@@ -242,7 +242,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
-				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + self.name + " prior to running discover.");
+				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + name + " prior to running discover.");
 			}
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");
