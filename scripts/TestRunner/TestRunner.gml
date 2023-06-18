@@ -135,7 +135,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			logs = [];
@@ -158,7 +158,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if CRISPY_DEBUG && CRISPY_SILENCE_PASSING_TESTS_OUTPUT {
@@ -242,7 +242,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
-				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + self.name + " prior to running discover.");
+				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + name + " prior to running discover.");
 			}
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");

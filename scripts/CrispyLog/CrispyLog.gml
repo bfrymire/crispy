@@ -7,7 +7,7 @@
 function CrispyLog(_test_case, _unpack=undefined) constructor {
 
 	if !is_struct(_test_case) {
-		throw(instanceof(self) + " \"test_case\" expected a struct, received " + _type + ".");
+		throw(instanceof(self) + " \"test_case\" expected a struct, received " + typeof(_test_case) + ".");
 	}
 
 	crispyMixinStructUnpack();

@@ -49,7 +49,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__setUp__) {
@@ -70,7 +70,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {

@@ -319,7 +319,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertRaises() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_method(_func) {
-			throw(instanceof(self) + ".assertRaises() \"func\" expected a method, received " + typeof(_func) + ".");
+			throw(instanceof(self) + ".assertRaises() \"func\" expected a function, received " + typeof(_func) + ".");
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertRaises() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -352,7 +352,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertRaiseErrorValue() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_method(_func) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"func\" expected a method, received " + typeof(_func) + ".");
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"func\" expected a function, received " + typeof(_func) + ".");
 		}
 		if !is_string(_value) {
 			throw(instanceof(self) + ".assertRaiseErrorValue() \"value\" expected a string, received " + typeof(_value) + ".");
@@ -398,7 +398,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			clearLogs();
@@ -419,7 +419,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {
