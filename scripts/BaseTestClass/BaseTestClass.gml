@@ -40,7 +40,7 @@ function BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__onRunBegin__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".onRunBegin() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".onRunBegin() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__onRunBegin__) {
@@ -60,7 +60,7 @@ function BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__onRunEnd__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".onRunEnd() \"func\" expected a method, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".onRunEnd() \"func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__onRunEnd__) {
