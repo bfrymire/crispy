@@ -36,20 +36,24 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Adds a Log to the array of logs
 	 * @function addLog
 	 * @param {Struct} _log - Log struct
+	 * @returns {Struct<TestCase>}
 	 */
 	static addLog = function(_log) {
 		if !is_struct(_log) {
 			throw(instanceof(self) + ".addLog() \"log\" expected a struct, recieved " + typeof(_log) + ".");
 		}
 		array_push(logs, _log);
+		return self;
 	}
 
 	/**
 	 * Clears array of Logs
 	 * @function clearLogs
+	 * @returns {Struct<TestCase>}
 	 */
 	static clearLogs = function() {
 		logs = [];
+		return self;
 	}
 
 	/**
@@ -391,6 +395,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Function ran before test, used to set up test
 	 * @function setUp
 	 * @param {Function} [_func] - Method to override __setUp__ with
+	 * @returns {Struct<CrispyTestCase>}
 	 */
 	static setUp = function() {
 		if argument_count > 0 {
@@ -406,12 +411,14 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 				__setUp__();
 			}
 		}
+		return self;
 	}
 	
 	/**
 	 * Function ran after test, used to clean up test
 	 * @function tearDown
 	 * @param {Function} [_func] - Method to override __tearDown__ with
+	 * @returns {Struct<CrispyTestCase>}
 	 */
 	static tearDown = function() {
 		if argument_count > 0 {
@@ -426,6 +433,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 				__tearDown__();
 			}
 		}
+		return self;
 	}
 
 	/**
@@ -444,6 +452,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Sets up a discovered script to use as the test
 	 * @function __discover__
 	 * @param {Function} _script - ID of script
+	 * @returns {Struct<CrispyTestCase>}
 	 * @ignore
 	 */
 	static __discover__ = function(_script) {
@@ -453,6 +462,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 		__discovered_script__ = _script;
 		__is_discovered__ = true;
 		test = method(self, _script);
+		return self;
 	}
 
 	/**

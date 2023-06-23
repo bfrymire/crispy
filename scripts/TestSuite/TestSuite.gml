@@ -27,6 +27,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 	 * Adds TestCase to array of cases
 	 * @function addTestCase
 	 * @param {Struct} _test_case - TestCase to add
+	 * @returns {Struct<TestSuite>}
 	 */
 	static addTestCase = function(_test_case) {
 		if instanceof(_test_case) != "TestCase" {
@@ -35,6 +36,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 		}
 		_test_case.parent = self;
 		array_push(tests, _test_case);
+		return self;
 	}
 
 	/**
@@ -42,6 +44,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 	 * Can also overwrite __setUp__
 	 * @function setUp
 	 * @param {Function} [_func] - Function to overwrite __setUp__
+	 * @returns {Struct<TestSuite>}
 	 */
 	static setUp = function() {
 		if argument_count > 0 {
@@ -56,6 +59,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 				__setUp__();
 			}
 		}
+		return self;
 	}
 
 	/**
@@ -63,6 +67,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 	 * Can also overwrite __tearDown__
 	 * @function tearDown
 	 * @param {Function} [_func] - Function to overwrite __tearDown__
+	 * @returns {Struct<TestSuite>}
 	 */
 	static tearDown = function() {
 		if argument_count > 0 {
@@ -77,6 +82,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 				__tearDown__();
 			}
 		}
+		return self;
 	}
 
 	/**

@@ -31,15 +31,18 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * Adds a Log to the array of logs
 	 * @function addLog
 	 * @param {Struct} _log - Log struct to add to logs
+	 * @returns {Struct<TestRunner>}
 	 */
 	static addLog = function(_log) {
 		array_push(logs, _log);
+		return self;
 	}
 
 	/**
 	 * Adds Logs to the array of logs
 	 * @function captureLogs
 	 * @param {Struct} _inst - Adds logs of inst to logs
+	 * @returns {Struct<TestRunner>}
 	 */
 	static captureLogs = function(_inst) {
 		var i, _logs_len;
@@ -73,12 +76,14 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 				throw(instanceof(self) + ".captureLogs() \"inst\" expected an instance of either CrispyLog, TestCase, or TestSuite, received " + _type + ".");
 				break;
 		}
+		return self;
 	}
 
 	/**
 	 * Adds TestSuite to array of suites
 	 * @function addTestSuite
 	 * @param {Struct} _test_suite - TestSuite to add
+	 * @returns {Struct<TestRunner>}
 	 */
 	static addTestSuite = function(_test_suite) {
 		if instanceof(_test_suite) != "TestSuite" {
@@ -87,6 +92,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		}
 		_test_suite.parent = self;
 		array_push(suites, _test_suite);
+		return self;
 	}
 
 	/**
@@ -128,6 +134,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * Clears logs, starts timer, and runs __setUp__
 	 * @function setUp
 	 * @param {Function} [_func] - Method to override __setUp__ with
+	 * @returns {Struct<TestRunner>}
 	 */
 	static setUp = function() {
 		if argument_count > 0 {
@@ -144,12 +151,14 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 				__setUp__();
 			}
 		}
+		return self;
 	}
 
 	/**
 	 * Function ran after test, used to clean up test
 	 * @function tearDown
 	 * @param {Function} [_func] - Method to override __tearDown__ with
+	 * @returns {Struct<TestRunner>}
 	 */
 	static tearDown = function() {
 		var i;
@@ -219,7 +228,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			}
 			
 		}
-
+		return self;
 	}
 
 	/**
@@ -230,9 +239,9 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * 		discovered test script to, else create a temporary TestSuite
 	 * @param {String} [_script_start_pattern="test_"] - String that script
 	 * 		functions need to start with in order to be discoverable
+	 * @returns {Struct<TestRunner>}
 	 */
 	static discover = function(_test_suite, _script_start_pattern) {
-
 		var _created_test_suite = is_undefined(_test_suite);
 		// If value is passed for test_suite
 		if !is_undefined(_test_suite) {
@@ -289,6 +298,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 				}
 			}
 		}
+		return self;
 	}
 
 	/**
@@ -296,6 +306,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @function output
 	 * @param {String|Function} _input - String to output or function to
 	 * 		overwrite __output__
+	 * @returns {Struct<TestRunner>}
 	 */
 	static output = function() {
 		var _input = (argument_count > 0) ? argument[0] : undefined;
@@ -314,6 +325,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		} else {
 			throw(instanceof(self) + ".output() expected 1 argument, received " + string(argument_count) + " argument(s).");
 		}
+		return self;
 	}
 
 	/**
