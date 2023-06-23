@@ -49,8 +49,9 @@ can_run_tests = true;
 padding = 10;
 info_text = CRISPY_NAME + " " + CRISPY_VERSION + "    " + CRISPY_DATE + "\n\n";
 info_text += "Test results are displayed below and in the Output Window.\n";
-info_text += "Press \"R\" to re-run tests." + "\n";
-info_text += "Press \"C\" to clear test results." + "\n";
+info_text += "Press \"R\" to re-run tests.\n";
+info_text += "Press \"C\" to clear test results.\n";
+info_text += "Press \"CTRL\" + \"W\" to exit.\n";
 info_text += "Use mouse wheel or arrow keys to navigate test results.";
 info_text_y = room_height - padding;
 info_box = new GuiBox(1, 1, room_width - 2, padding * 2 + string_height(info_text) - 1);
@@ -78,4 +79,4 @@ colors = {
 	purple: #bd93f9,
 	red: #ff5555,
 	yellow: #f1fa8c
-}
+};
