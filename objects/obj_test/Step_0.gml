@@ -21,6 +21,13 @@ if keyboard_check_pressed(ord("C")) {
 	}
 }
 
+// Exit program
+if keyboard_check(vk_control) {
+	if keyboard_check_pressed(ord("W")) {
+		game_end();
+	}
+}
+
 // Scrolling through test results
 var _scroll_dir = -(mouse_wheel_up() || keyboard_check_pressed(vk_up)) + (mouse_wheel_down() || keyboard_check_pressed(vk_down))
 if _scroll_dir != 0 && ds_list_size(results) > 0 {
