@@ -309,21 +309,21 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @returns {Struct<TestRunner>}
 	 */
 	static output = function() {
-		var _input = (argument_count > 0) ? argument[0] : undefined;
-		if argument_count > 0 {
-			switch (typeof(_input)) {
-				case "string":
-					__output__(_input);
-					break;
-				case "method":
-					__output__ = method(self, _input);
-					break;
-				default:
-					throw(instanceof(self) + ".output() \"input\" expected either a string or method, received " + typeof(_input) + ".");
-					break;
-			}
-		} else {
+		if argument_count == 0 {
 			throw(instanceof(self) + ".output() expected 1 argument, received " + string(argument_count) + " argument(s).");
+			return self;
+		}
+		var _input = argument[0];
+		switch (typeof(_input)) {
+			case "string":
+				__output__(_input);
+				break;
+			case "method":
+				__output__ = method(self, _input);
+				break;
+			default:
+				throw(instanceof(self) + ".output() \"input\" expected either a string or method, received " + typeof(_input) + ".");
+				break;
 		}
 		return self;
 	}

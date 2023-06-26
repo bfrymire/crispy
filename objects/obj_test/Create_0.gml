@@ -1,24 +1,24 @@
 // Create TestRunner
 runner = new TestRunner("runner");
 // Update runner to output test results to Output Window and results ds_list
-runner.output = function(_message) {
+// TestRunner.output() binds the function to the scope of the runner
+runner.output(function(_message) {
 	show_debug_message(_message);
-	ds_list_insert(results, 0, _message);
-	while ds_list_size(results) > results_max {
-		ds_list_delete(results, results_max - 1);
+	with (obj_test) {
+		ds_list_insert(results, 0, _message);
+		while ds_list_size(results) > results_max {
+			ds_list_delete(results, results_max - 1);
+		}
 	}
-}
+});
 
-// Create GUI elements TestSuite
+// Create GUI elements tests
 gui_test_suite = new TestSuite("gui_suite");
-// Add GUI elements TestSuite to TestRunner
 runner.addTestSuite(gui_test_suite);
-// Discover GUI element tests
 runner.discover(gui_test_suite, "test_gui_box");
 
-// Create hamburger TestSuite
+// Create hamburger test
 hamburger_suite = new TestSuite("hamburger_suite");
-// Set up hamburger for tests
 hamburger_suite.setUp(function() {
 	var _ingredients = [
 		new Ingredient("bun"),
@@ -30,17 +30,25 @@ hamburger_suite.setUp(function() {
 	];
 	hamburger = new Food("hamburger", _ingredients);
 });
-// Add hamburger TestSuite to TestRunner
 runner.addTestSuite(hamburger_suite);
-// Discovering hamburger tests
 runner.discover(hamburger_suite, "test_hamburger_");
 
-// Create Food TestSuite
+// Create Food tests
 food_suite = new TestSuite("food_suite");
-// Add Food TestSuite to TestRunner
 runner.addTestSuite(food_suite);
-// Discovering Food tests
 runner.discover(food_suite, "test_food_");
+
+// Unit testing Crispy with Crispy... wait, that's illegal
+// Create Crispy TestSuite
+crispy_suite = new TestSuite("crispy_suite");
+crispy_suite.onRunBegin(function() {
+	fixture = fixture_crispy_tests();
+	fixture.pass.run();
+	fixture.fail.run();
+	fixture.fail_with_message.run();
+});
+runner.addTestSuite(crispy_suite);
+runner.discover(crispy_suite, "test_crispy_");
 
 // Flag for running tests
 can_run_tests = true;
@@ -63,7 +71,6 @@ text_height = string_height("W");
 results = ds_list_create();
 results_max = 255;
 results_box = new GuiBox(info_box.x1, info_box.y2 + 3, info_box.x2, room_height - 2);
-
 
 // Defining colors
 colors = {
