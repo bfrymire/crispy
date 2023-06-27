@@ -96,8 +96,8 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	/**
 	 * Test that first and second are not equal
 	 * @function assertNotEqual
-	 * @param {Any} _first - First type to check
-	 * @param {Any} _second - Second type to check against
+	 * @param {Any} _first - First value to check
+	 * @param {Any} _second - Second value to check against
 	 * @param {String} [_message] - Custom message to output on failure
 	 */
 	static assertNotEqual = function(_first, _second, _message) {

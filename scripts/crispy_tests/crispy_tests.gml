@@ -417,3 +417,77 @@ function test_crispy_TestCase_assertEqual_message_passed_number_raise_error_valu
         _test.run();
     }, "TestCase.assertEqual() \"message\" expected either a string or undefined, received number.");
 }
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_passed_with_different_value_types() {
+    var _test = new TestCase("test", function() {
+        assertNotEqual(1, "test");
+    });
+    _test.run();
+    assertTrue(_test.logs[0].pass);
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_failed_with_same_values() {
+    var _test = new TestCase("test", function() {
+        assertNotEqual(1, 1);
+    });
+    _test.run();
+    assertFalse(_test.logs[0].pass);
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_passed_message_is_undefined() {
+    var _test = new TestCase("test", function() {
+        assertNotEqual(1, "test");
+    });
+    _test.run();
+    assertIsUndefined(_test.logs[0].msg);
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_passed_helper_text_is_undefined() {
+    var _test = new TestCase("test", function() {
+        assertNotEqual(1, "test");
+    });
+    _test.run();
+    assertIsUndefined(_test.logs[0].helper_text);
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_failed_helper_text() {
+    var _test = new TestCase("test", function() {
+        assertNotEqual(1, 1);
+    });
+    _test.run();
+    assertEqual(_test.logs[0].helper_text, "first and second are equal: 1, 1");
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_failed_message() {
+    var _test = new TestCase("test", function() {
+        assertNotEqual(1, 1, "message");
+    });
+    _test.run();
+    assertEqual(_test.logs[0].msg, "message");
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_message_with_number_raises_error() {
+    assertRaises(function() {
+        var _test = new TestCase("test", function() {
+            assertNotEqual(1, 1, 1);
+        });
+        _test.run();
+    });
+}
+
+/// @ignore
+function test_crispy_TestCase_assertNotEqual_message_with_number_raise_error_message_value() {
+    assertRaiseErrorValue(function() {
+        var _test = new TestCase("test", function() {
+            assertNotEqual(1, 1, 1);
+        });
+        _test.run();
+    }, "TestCase.assertNotEqual() \"message\" expected either a string or undefined, received number.");
+}
