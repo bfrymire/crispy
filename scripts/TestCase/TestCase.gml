@@ -147,7 +147,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			}));
 			return;
 		}
-		if _expr == true {
+		if _expr {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
@@ -186,7 +186,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			}));
 			return;
 		}
-		if _expr == false {
+		if !_expr {
 			addLog(new CrispyLog(self, {
 				pass: true,
 			}));
