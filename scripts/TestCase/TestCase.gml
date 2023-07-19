@@ -459,7 +459,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * @function toString
 	 * @returns {String}
 	 */
-	toString = function() {
+	static toString = function() {
 		return string("<Crispy TestCase(\"{0}\")>", name);
 	}
 

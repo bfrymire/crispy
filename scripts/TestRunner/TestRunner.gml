@@ -332,7 +332,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @function toString
 	 * @returns {String}
 	 */
-	toString = function() {
+	static toString = function() {
 		return string("<Crispy TestRunner(\"{0}\")>", name);
 	}
 

@@ -100,7 +100,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 	 * @function toString
 	 * @returns {String}
 	 */
-	toString = function() {
+	static toString = function() {
 		return string("<Crispy TestSuite(\"{0}\")>", name);
 	}
 

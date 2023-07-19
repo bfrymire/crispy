@@ -92,7 +92,7 @@ function CrispyLog(_test_case, _unpack=undefined) constructor {
 	 * @function toString
 	 * @returns {String}
 	 */
-	toString = function() {
+	static toString = function() {
 		return string("<CrispyLog ({0})>", pass ? "pass" : "fail");
 	}
 
