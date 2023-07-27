@@ -5,7 +5,7 @@
 
 # Crispy
 
-Version 1.8.1
+Version 1.8.2
 
 Unit testing framework built in GML for GameMaker LTS 2022+
 
