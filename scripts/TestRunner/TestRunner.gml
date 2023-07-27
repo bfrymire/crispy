@@ -247,8 +247,8 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 				}
 				// Feather disable once GM1041
 				var _script_name = script_get_name(i);
-				// Skip adding anon functions, object methods, and globally scoped functions
-				if string_pos("anon_", _script_name) == 1 || string_count("_gml_Object_", _script_name) > 0 || string_count("_gml_GlobalScript_", _script_name) > 0 {
+				// Skip adding functions that are not named script functions
+				if string_count("_gml_Object_", _script_name) != 0 || string_count("_gml_GlobalScript_", _script_name) != 0 {
 					++i;
 					continue;
 				}
