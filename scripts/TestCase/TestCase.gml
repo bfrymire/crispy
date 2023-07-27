@@ -443,12 +443,15 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	/**
 	 * Sets up a discovered script to use as the test
 	 * @function __discover__
-	 * @param {Function} _script - ID of script
+	 * @param {Real} _script - Index ID of script
 	 * @ignore
 	 */
 	static __discover__ = function(_script) {
 		if !is_real(_script) {
-			throw(instanceof(self) + ".__discover__() \"script\" expected a real number, received " + typeof(_script) + ".");
+			throw(string("{0}.__discover__() \"script\" expected a real number, received {1}.", instanceof(self), typeof(_script)));
+		}
+		if !script_exists(_script) {
+			throw(string("{0}.__discover__() asset of index {1} is not a script function.", instanceof(self), _script));
 		}
 		__discovered_script__ = _script;
 		__is_discovered__ = true;

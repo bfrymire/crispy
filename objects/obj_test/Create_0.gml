@@ -26,7 +26,7 @@ hamburger_suite.setUp(function() {
 		new Ingredient("tomato", true),
 		new Ingredient("lettuce", true),
 		new Ingredient("patty"),
-		new Ingredient("bun"),
+		new Ingredient("bun")
 	];
 	hamburger = new Food("hamburger", _ingredients);
 });
