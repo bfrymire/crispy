@@ -12,6 +12,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	display_time = "0";
 	suites = [];
 	logs = [];
+	__discovered = undefined;
 
 	/**
 	 * Run struct unpacker if unpack argument was provided
@@ -231,7 +232,37 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @param {String} [_script_start_pattern="test_"] - String that script
 	 * 		functions need to start with in order to be discoverable
 	 */
-	static discover = function(_test_suite, _script_start_pattern) {
+	static discover = function(_test_suite, _script_start_pattern="test_") {
+		if !is_string(_script_start_pattern) {
+			throw(string("{0}.discover() \"script_start_pattern\" expected a string, received {1}.", instanceof(self), typeof(_script_start_pattern)));
+		}
+
+		// Cache all script functions
+		if is_undefined(__discovered) {
+			__discovered = [];
+			var i = 100001; // Range of custom scripts is 100000 onwards
+			while (true) {
+				if !script_exists(i) {
+					break;
+				}
+				// Feather disable once GM1041
+				var _script_name = script_get_name(i);
+				// Skip adding functions that are not named script functions
+				if string_count("_gml_Object_", _script_name) != 0 || string_count("_gml_GlobalScript_", _script_name) != 0 {
+					++i;
+					continue;
+				}
+				array_push(__discovered, {
+					name: _script_name,
+					func: i,
+					discovered: false
+				});
+				if CRISPY_DEBUG {
+					crispyDebugMessage(string("Discovered script function: {0} ({1}).", _script_name, i));
+				}
+				++i;
+			}
+		}
 
 		var _created_test_suite = is_undefined(_test_suite);
 		// If value is passed for test_suite
@@ -248,34 +279,30 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			_test_suite = new TestSuite("__discovered_test_suite__");
 		}
 
-		if is_undefined(_script_start_pattern) {
-			_script_start_pattern = "test_";
-		}
-		if !is_string(_script_start_pattern) {
-			throw(instanceof(self) + ".discover() \"script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
-		}
 		// Throw error if function pattern is an empty string
-		if _script_start_pattern == "" {
+		var _pattern_len = string_length(_script_start_pattern);
+		if _pattern_len == 0 {
 			show_error(instanceof(self) + ".discover() \"script_start_pattern\" cannot be an empty string.", true);
 		}
-
-		var _len = string_length(_script_start_pattern);
-		var i = 100000;
-		repeat (10000) { // Range of custom scripts is 100000 - 110000
-			if script_exists(i) {
-				var _script_name = script_get_name(i);
-				if string_pos(_script_start_pattern, _script_name) == 1 && string_length(_script_name) > _len {
-					if CRISPY_DEBUG {
-						crispyDebugMessage("Discovered test script: " + _script_name + " (" + string(i) + ").");
-					}
-					var _test_case = new TestCase(_script_name, function(){});
-					// Feather disable once GM1041
-					_test_case.__discover__(i);
-					_test_suite.addTestCase(_test_case);
-				}
+		
+		// Get the discovered scripts that match the script start pattern
+		var _len = array_length(__discovered);
+		var i = 0;
+		repeat (_len) {
+			var _script = __discovered[i];
+			if _script.discovered {
+				++i;
+				continue;
+			}
+			if string_length(_script.name) >= _pattern_len && string_pos(_script_start_pattern, _script.name) == 1 {
+				var _test_case = new TestCase(_script.name, function(){});
+				_test_case.__discover__(_script.func);
+				_test_suite.addTestCase(_test_case);
+				_script.discovered = true;
 			}
 			++i;
 		}
+
 		if _created_test_suite {
 			if array_length(_test_suite.tests) == 0 {
 				delete _test_suite;
