@@ -241,7 +241,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		if is_undefined(__discovered) {
 			__discovered = [];
 			var i = 100001; // Range of custom scripts is 100000 onwards
-			while (true)  {
+			while (true) {
 				if !script_exists(i) {
 					break;
 				}
