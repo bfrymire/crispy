@@ -40,38 +40,38 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	/**
 	 * Adds Logs to the array of logs
 	 * @function captureLogs
-	 * @param {Struct} _inst - Adds logs of inst to logs
+	 * @param {Struct} _input - Adds logs of the input to logs
 	 */
-	static captureLogs = function(_inst) {
+	static captureLogs = function(_input) {
 		var i, _logs_len;
-		switch (instanceof(_inst)) {
+		switch (instanceof(_input)) {
 			case "CrispyLog":
-				addLog(_inst);
+				addLog(_input);
 				break;
 			case "TestCase":
-				_logs_len = array_length(_inst.logs);
+				_logs_len = array_length(_input.logs);
 				i = 0;
 				repeat (_logs_len) {
-					addLog(_inst.logs[i]);
+					addLog(_input.logs[i]);
 					++i;
 				}
 				break;
 			case "TestSuite":
-				var _tests_len = array_length(_inst.tests);
+				var _tests_len = array_length(_input.tests);
 				var k = 0;
 				repeat (_tests_len) {
-					_logs_len = array_length(_inst.tests[k].logs);
+					_logs_len = array_length(_input.tests[k].logs);
 					i = 0;
 					repeat (_logs_len) {
-						addLog(_inst.tests[k].logs[i]);
+						addLog(_input.tests[k].logs[i]);
 						++i;
 					}
 					++k;
 				}
 				break;
 			default:
-				var _type = !is_undefined(instanceof(_inst)) ? instanceof(_inst) : typeof(_inst);
-				throw(instanceof(self) + ".captureLogs() \"inst\" expected an instance of either CrispyLog, TestCase, or TestSuite, received " + _type + ".");
+				var _type = !is_undefined(instanceof(_input)) ? instanceof(_input) : typeof(_input);
+				throw(instanceof(self) + ".captureLogs() \"_input\" expected an instance of either CrispyLog, TestCase, or TestSuite, received " + _type + ".");
 				break;
 		}
 	}
