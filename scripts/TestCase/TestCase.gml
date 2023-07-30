@@ -26,7 +26,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 		if is_struct(_unpack) {
 			crispyStructUnpack(_unpack);
 		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+			throw(instanceof(self) + " \"_unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
 		}
 	}
 
@@ -39,7 +39,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 */
 	static addLog = function(_log) {
 		if !is_struct(_log) {
-			throw(instanceof(self) + ".addLog() \"log\" expected a struct, recieved " + typeof(_log) + ".");
+			throw(instanceof(self) + ".addLog() \"_log\" expected a struct, recieved " + typeof(_log) + ".");
 		}
 		array_push(logs, _log);
 	}
@@ -66,7 +66,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertEqual() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertEqual() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		// Check types of first and second
 		if typeof(_first) != typeof(_second) {
@@ -102,7 +102,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertNotEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertNotEqual() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertNotEqual() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		var _outcome = typeof(_first) != typeof(_second);
 		if !_outcome {
@@ -134,7 +134,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertTrue() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertTrue() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertTrue() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		
 		try {
@@ -173,7 +173,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertFalse() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertFalse() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertFalse() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		
 		try {
@@ -211,7 +211,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertIsNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertIsNoone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertIsNoone() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _expr == noone {
 			addLog(new CrispyLog(self, {
@@ -238,7 +238,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertIsNotNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertIsNotNoone() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertIsNotNoone() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if _expr != noone {
 			addLog(new CrispyLog(self, {
@@ -265,7 +265,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertIsUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertIsUndefined() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertIsUndefined() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if is_undefined(_expr) {
 			addLog(new CrispyLog(self, {
@@ -292,7 +292,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertIsNotUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertIsNotUndefined() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertIsNotUndefined() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		if !is_undefined(_expr) {
 			addLog(new CrispyLog(self, {
@@ -319,10 +319,10 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertRaises() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_method(_func) {
-			throw(instanceof(self) + ".assertRaises() \"func\" expected a function, received " + typeof(_func) + ".");
+			throw(instanceof(self) + ".assertRaises() \"_func\" expected a function, received " + typeof(_func) + ".");
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertRaises() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertRaises() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		try {
 			_func();
@@ -352,13 +352,13 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			show_error(instanceof(self) + ".assertRaiseErrorValue() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_method(_func) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"func\" expected a function, received " + typeof(_func) + ".");
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"_func\" expected a function, received " + typeof(_func) + ".");
 		}
 		if !is_string(_value) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"value\" expected a string, received " + typeof(_value) + ".");
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"_value\" expected a string, received " + typeof(_value) + ".");
 		}
 		if !is_string(_message) && !is_undefined(_message) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"message\" expected either a string or undefined, received " + typeof(_message) + ".");
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
 		}
 		try {
 			_func();
@@ -398,7 +398,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"_func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			clearLogs();
@@ -419,7 +419,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"_func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {
@@ -448,7 +448,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 */
 	static __discover__ = function(_script) {
 		if !is_real(_script) {
-			throw(string("{0}.__discover__() \"script\" expected a real number, received {1}.", instanceof(self), typeof(_script)));
+			throw(string("{0}.__discover__() \"_script\" expected a real number, received {1}.", instanceof(self), typeof(_script)));
 		}
 		if !script_exists(_script) {
 			throw(string("{0}.__discover__() asset of index {1} is not a script function.", instanceof(self), _script));

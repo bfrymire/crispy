@@ -17,7 +17,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 		if is_struct(_unpack) {
 			crispyStructUnpack(_unpack);
 		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+			throw(instanceof(self) + " \"_unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
 		}
 	}
 
@@ -31,7 +31,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 	static addTestCase = function(_test_case) {
 		if instanceof(_test_case) != "TestCase" {
 			var _type = !is_undefined(instanceof(_test_case)) ? instanceof(_test_case) : typeof(_test_case);
-			throw(instanceof(self) + ".addTestCase() \"test_case\" expected an instance of TestCase, received " + _type + ".");
+			throw(instanceof(self) + ".addTestCase() \"_test_case\" expected an instance of TestCase, received " + _type + ".");
 		}
 		_test_case.parent = self;
 		array_push(tests, _test_case);
@@ -49,7 +49,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"_func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__setUp__) {
@@ -70,7 +70,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"_func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {

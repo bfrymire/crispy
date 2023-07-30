@@ -6,10 +6,10 @@
  */
 function Food(_name, _ingredients) constructor {
 	if !is_string(_name) {
-		throw(instanceof(self) + " \"name\" expected a string, received " + typeof(_name) + ".");
+		throw(instanceof(self) + " \"_name\" expected a string, received " + typeof(_name) + ".");
 	}
 	if !is_array(_ingredients) {
-		throw(instanceof(self) + " \"ingredients\" expected an array, received " + typeof(_ingredients) + ".");
+		throw(instanceof(self) + " \"_ingredients\" expected an array, received " + typeof(_ingredients) + ".");
 	}
 
 	var _len = array_length(_ingredients);
@@ -18,7 +18,7 @@ function Food(_name, _ingredients) constructor {
 		var _item = _ingredients[i];
 		if instanceof(_item) != "Ingredient" {
 			var _type = !is_undefined(instanceof(_item)) ? instanceof(_item) : typeof(_item);
-			throw(instanceof(self) + " \"ingredients\" expected an instance of Ingredient, received " + _type + ".");
+			throw(instanceof(self) + " \"_ingredients\" expected an instance of Ingredient, received " + _type + ".");
 		}
 		++i;
 	}
@@ -60,7 +60,7 @@ function Food(_name, _ingredients) constructor {
 	 */
 	static has_ingredient = function(_name) {
 		if !is_string(_name) {
-			throw(instanceof(self) + ".has_ingredient() \"name\" expected a string, received " + typeof(_name) + ".");
+			throw(instanceof(self) + ".has_ingredient() \"_name\" expected a string, received " + typeof(_name) + ".");
 		}
 		var _len = array_length(ingredients);
 		var i = 0;
@@ -83,10 +83,10 @@ function Food(_name, _ingredients) constructor {
  */
 function Ingredient(_name, _is_gluten_free=false) constructor {
 	if !is_string(_name) {
-		throw(instanceof(self) + " \"name\" expected a string, received " + typeof(_name));
+		throw(instanceof(self) + " \"_name\" expected a string, received " + typeof(_name));
 	}
 	if !is_real(_is_gluten_free) && !is_bool(_is_gluten_free) {
-		throw(instanceof(self) + " \"is_gluten_free\" expected a boolean, received " + typeof(_is_gluten_free));
+		throw(instanceof(self) + " \"_is_gluten_free\" expected a boolean, received " + typeof(_is_gluten_free));
 	}
 	name = _name;
 	is_gluten_free = _is_gluten_free;

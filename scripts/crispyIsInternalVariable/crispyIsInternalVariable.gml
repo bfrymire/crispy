@@ -7,7 +7,7 @@
  */
 function crispyIsInternalVariable(_name) {
 	if !is_string(_name) {
-		throw("crispyIsInternalVariable() \"name\" expected a string, received " + typeof(_name) + ".");
+		throw("crispyIsInternalVariable() \"_name\" expected a string, received " + typeof(_name) + ".");
 	}
 	
 	var _len = string_length(_name);

@@ -22,7 +22,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		if is_struct(_unpack) {
 			crispyStructUnpack(_unpack);
 		} else {
-			throw(instanceof(self) + " \"unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+			throw(instanceof(self) + " \"_unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
 		}
 	}
 
@@ -84,22 +84,26 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	static addTestSuite = function(_test_suite) {
 		if instanceof(_test_suite) != "TestSuite" {
 			var _type = !is_undefined(instanceof(_test_suite)) ? instanceof(_test_suite) : typeof(_test_suite);
-			throw(instanceof(self) + ".addTestSuite() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
+			throw(instanceof(self) + ".addTestSuite() \"_test_suite\" expected an instance of TestSuite, received " + _type + ".");
 		}
 		_test_suite.parent = self;
 		array_push(suites, _test_suite);
 	}
 
 	/**
-	 * Creates a horizontal row string
+	 * Creates a horizontal row string used to visually separate sections
 	 * @function hr
-	 * @param {String} [str="-"] - String to concat n times
-	 * @param {Real} [count=70] - Number of times to concat _str.
+	 * @param {String} [_str="-"] - String to concat n times
+	 * @param {Real} [_count=70] - Number of times to concat _str.
 	 * @returns {String} String of horizontal row
 	 */
-	static hr = function() {
-		var _str = (argument_count > 0 && is_string(argument[0])) ? argument[0] : "-";
-		var _count = (argument_count > 1 && is_real(argument[1])) ? max(0, round(argument[1])) : 70;
+	static hr = function(_str="-", _count=70) {
+		if !is_string(_str) {
+			throw(string("{0}.hr() \"_str\" expected a string, received {1}.", instanceof(self), typeof(_str)));
+		}
+		if !is_real(_count) {
+			throw(string("{0}.hr() \"_count\" expected a real number, received {1}.", instanceof(self), typeof(_count)));
+		}
 		var _hr = "";
 		repeat(_count) {
 			_hr += _str;
@@ -136,7 +140,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"_func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			logs = [];
@@ -159,7 +163,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"_func\" expected a function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if CRISPY_DEBUG && CRISPY_SILENCE_PASSING_TESTS_OUTPUT {
@@ -234,7 +238,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 */
 	static discover = function(_test_suite, _script_start_pattern="test_") {
 		if !is_string(_script_start_pattern) {
-			throw(string("{0}.discover() \"script_start_pattern\" expected a string, received {1}.", instanceof(self), typeof(_script_start_pattern)));
+			throw(string("{0}.discover() \"_script_start_pattern\" expected a string, received {1}.", instanceof(self), typeof(_script_start_pattern)));
 		}
 
 		// Cache all script functions
@@ -265,15 +269,15 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		}
 
 		var _created_test_suite = is_undefined(_test_suite);
-		// If value is passed for test_suite
+		// If value is passed for _test_suite
 		if !is_undefined(_test_suite) {
 			if instanceof(_test_suite) != "TestSuite" {
 				var _type = !is_undefined(instanceof(_test_suite)) ? instanceof(_test_suite) : typeof(_test_suite);
-				throw(instanceof(self) + ".discover() \"test_suite\" expected an instance of TestSuite, received " + _type + ".");
+				throw(instanceof(self) + ".discover() \"_test_suite\" expected an instance of TestSuite, received " + _type + ".");
 			}
 			// Throw error if test_suite was not previously added to test_runner
 			if _test_suite.parent != self {
-				throw(instanceof(self) + ".discover() \"test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + name + " prior to running discover.");
+				throw(instanceof(self) + ".discover() \"_test_suite\" parent is not self.\nProvided TestSuite may not have been added to " + name + " prior to running discover.");
 			}
 		} else {
 			_test_suite = new TestSuite("__discovered_test_suite__");
@@ -335,7 +339,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 					__output__ = method(self, _input);
 					break;
 				default:
-					throw(instanceof(self) + ".output() \"input\" expected either a string or method, received " + typeof(_input) + ".");
+					throw(instanceof(self) + ".output() \"_input\" expected either a string or method, received " + typeof(_input) + ".");
 					break;
 			}
 		} else {

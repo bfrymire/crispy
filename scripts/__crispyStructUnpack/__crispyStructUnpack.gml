@@ -11,7 +11,7 @@
 function __crispyStructUnpack(_unpack, _name_must_exist=true) {
 
 	if !is_struct(_unpack) {
-		throw("crispyStructUnpack() \"unpack\" expected a struct, received " + typeof(_unpack) + ".");
+		throw("crispyStructUnpack() \"_unpack\" expected a struct, received " + typeof(_unpack) + ".");
 	}
 	if !is_bool(_name_must_exist) {
 		throw("crispyStructUnpack() \"_name_must_exist\" expected a boolean, received " + typeof(_name_must_exist) + ".");
