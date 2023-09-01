@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Creates a Test case object to run assertions
  * @constructor TestCase

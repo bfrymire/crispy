@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Base "class" that test constructors will inherit from
  * @constructor BaseTestClass

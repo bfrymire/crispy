@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Returns the current time in micro-seconds since the project started running
  * @function crispyGetTime

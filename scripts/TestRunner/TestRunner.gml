@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Runner to hold test suites and iterates through each TestSuite, running its tests
  * @constructor TestRunner

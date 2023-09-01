@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Testing suite that holds tests
  * @constructor TestSuite

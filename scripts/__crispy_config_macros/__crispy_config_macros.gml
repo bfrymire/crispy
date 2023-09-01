@@ -1,3 +1,5 @@
+// Feather disable all
+
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_AUTHOR "Brent Frymire"
 #macro CRISPY_REPO "https://github.com/bfrymire/crispy"

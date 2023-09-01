@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Saves the result and output of assertion
  * @constructor CrispyLog
