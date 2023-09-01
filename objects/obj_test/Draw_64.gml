@@ -1,7 +1,6 @@
-var padding = 10;
-
 // Draw results GUI box background
 results_box.draw(colors.background, false);
+
 // Draw test results
 var _h_total = 0;
 var _len = ds_list_size(results);
@@ -15,6 +14,7 @@ if _len {
 		++i;
 	}
 }
+
 // Draw results GUI box outline
 results_box.draw(colors.foreground, true);
 
