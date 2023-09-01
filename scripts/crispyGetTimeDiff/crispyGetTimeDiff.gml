@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Returns the difference between two times
  * @function crispyGetTimeDiff

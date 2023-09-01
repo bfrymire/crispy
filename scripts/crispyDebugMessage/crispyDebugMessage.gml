@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Helper function for Crispy to display its debug messages
  * @function crispyDebugMessage

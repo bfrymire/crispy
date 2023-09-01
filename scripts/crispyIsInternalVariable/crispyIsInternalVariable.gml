@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Helper function for Crispy that returns whether or not a given variable name follows internal variable
  * 		naming convention

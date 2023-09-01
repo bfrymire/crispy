@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Converts the given time milliseconds to seconds as a string
  * @function crispyTimeConvert

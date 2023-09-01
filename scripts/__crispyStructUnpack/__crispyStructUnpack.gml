@@ -1,3 +1,5 @@
+// Feather disable all
+
 /**
  * Helper function for structs that will replace a destination's
  * 		variable name values with the given source's variable name values
