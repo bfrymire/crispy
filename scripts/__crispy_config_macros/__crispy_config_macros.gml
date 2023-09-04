@@ -3,7 +3,7 @@
 #macro CRISPY_NAME "Crispy"
 #macro CRISPY_AUTHOR "Brent Frymire"
 #macro CRISPY_REPO "https://github.com/bfrymire/crispy"
-#macro CRISPY_VERSION "1.8.4" // major.minor.patch
+#macro CRISPY_VERSION "1.8.5" // major.minor.patch
 #macro CRISPY_DATE "2023-09-04" // yyyy-mm-dd
 
 #macro CRISPY_RUN true // Boolean flag that can be used to automatically run tests
