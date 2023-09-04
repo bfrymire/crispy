@@ -159,7 +159,6 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @param {Function} [_func] - Method to override __tearDown__ with
 	 */
 	static tearDown = function() {
-		var i;
 		if argument_count > 0 {
 			var _func = argument[0];
 			if is_method(_func) {
@@ -181,14 +180,21 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			var _passed_tests = 0;
 			var _len = array_length(logs);
 			var _t = "";
-			i = 0;
+			var i = 0;
+			var j = 0;
 			repeat (_len) {
+				// CRISPY_STATUS_OUTPUT_PRECISION can be set to negative to disable
+				if j == CRISPY_STATUS_OUTPUT_PRECISION {
+					j = 0;
+					_t += "\n";
+				}
 				if logs[i].pass {
 					_t += CRISPY_PASS_MSG_SILENT;
 				} else {
 					_t += CRISPY_FAIL_MSG_SILENT;
 				}
 				++i;
+				++j;
 			}
 			output(_t);
 

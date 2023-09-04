@@ -16,6 +16,7 @@
 #macro CRISPY_FAIL_MSG_SILENT "F" // Output string when an assertion fails silently
 #macro CRISPY_PASS_MSG_VERBOSE "ok" // Output string when an assertion passes verbosely
 #macro CRISPY_FAIL_MSG_VERBOSE "Fail" // Output string when an assertion fails verbosely
+#macro CRISPY_STATUS_OUTPUT_LENGTH 150 // Number of characters per line when outputting TestCase statuses
 
 #macro CRISPY_SILENCE_PASSING_TESTS_OUTPUT false // Enables silencing passing test messages
 
