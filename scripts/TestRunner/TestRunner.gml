@@ -183,8 +183,8 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			var i = 0;
 			var j = 0;
 			repeat (_len) {
-				// CRISPY_STATUS_OUTPUT_PRECISION can be set to negative to disable
-				if j == CRISPY_STATUS_OUTPUT_PRECISION {
+				// CRISPY_STATUS_OUTPUT_LENGTH can be set to negative to disable
+				if j == CRISPY_STATUS_OUTPUT_LENGTH {
 					j = 0;
 					_t += "\n";
 				}
