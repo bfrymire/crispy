@@ -1,3 +1,6 @@
+# GameMaker files
+*.resource_order
+
 # YYP Maker files
 ___yyp_maker_trash/
 
