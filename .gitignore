@@ -1,8 +1,6 @@
-# GameMaker files
-*.old.*
-
-# YYP Maker removed files
+# YYP Maker files
 ___yyp_maker_trash/
 
 # Stitch files
 tmp/
+stitch.config.json
