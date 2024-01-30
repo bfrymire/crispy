@@ -101,10 +101,10 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 */
 	static hr = function(_str="-", _count=70) {
 		if !is_string(_str) {
-			throw(string("{0}.hr() \"_str\" expected a string, received {1}.", instanceof(self), typeof(_str)));
+			throw(instanceof(self) + ".hr() \"_str\" expected a string, received " + typeof(_str) + ".");
 		}
 		if !is_real(_count) {
-			throw(string("{0}.hr() \"_count\" expected a real number, received {1}.", instanceof(self), typeof(_count)));
+			throw(instanceof(self) + ".hr() \"_count\" expected a real number, received " + typeof(_count) + ".");
 		}
 		var _hr = "";
 		repeat(_count) {
@@ -246,7 +246,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 */
 	static discover = function(_test_suite, _script_start_pattern="test_") {
 		if !is_string(_script_start_pattern) {
-			throw(string("{0}.discover() \"_script_start_pattern\" expected a string, received {1}.", instanceof(self), typeof(_script_start_pattern)));
+			throw(instanceof(self) + ".discover() \"_script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
 		}
 
 		// Cache all script functions
@@ -270,7 +270,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 					discovered: false
 				});
 				if CRISPY_DEBUG {
-					crispyDebugMessage(string("Discovered script function: {0} ({1}).", _script_name, i));
+					crispyDebugMessage("Discovered script function: " + _script_name + " (" + string(i) + ").");
 				}
 				++i;
 			}
@@ -372,7 +372,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @returns {String}
 	 */
 	static toString = function() {
-		return string("<Crispy TestRunner(\"{0}\")>", name);
+		return "<Crispy TestRunner(\"" + name + "\")>";
 	}
 
 }
