@@ -17,7 +17,7 @@ if keyboard_check_pressed(ord("C")) {
 	if ds_list_size(results) > 0 {
 		ds_list_clear(results);
 		scroll_position = 0;
-		show_debug_message("Test results cleared.");
+		show_debug_message(CRISPY_NAME + ": Test results cleared.");
 	}
 }
 
