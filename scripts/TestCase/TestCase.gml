@@ -450,10 +450,10 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 */
 	static __discover__ = function(_script) {
 		if !is_real(_script) {
-			throw(string(instanceof(self) + ".__discover__() \"_script\" expected a real number, received {1}.", instanceof(self), typeof(_script)));
+			throw(instanceof(self) + ".__discover__() \"_script\" expected a real number, received " + typeof(_script) + ".");
 		}
 		if !script_exists(_script) {
-			throw(string(instanceof(self) + ".__discover__() asset of index {1} is not a script function.", instanceof(self), _script));
+			throw(instanceof(self) + ".__discover__() asset of index " + string(_script) + " is not a script function.");
 		}
 		__discovered_script__ = _script;
 		__is_discovered__ = true;
