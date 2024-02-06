@@ -16,19 +16,17 @@
 1. Import the **.yymps** file into your project from the top menu
     * Tools **>** Import Local Package
 
-You can also drop the **.yymps** file downloaded from the [Releases](https://github.com/bfrymire/crispy/releases/latest) tab directly onto your GM IDE and follow the prompts.
+You can also drop the **.yymps** file downloaded from the [Releases](https://github.com/bfrymire/crispy/releases/latest) tab directly onto your GameMaker IDE and follow the prompts.
 
 ## Documentation
 
-* [Go to the Crispy Docs](https://github.com/bfrymire/crispy/wiki)
-
+[Click here to read the docs!](https://bfrymire.github.io/crispy)
 
 ## Getting Started
 
 A good starting point is copying and pasting the example code from the [Wiki's Quick Start page](https://github.com/bfrymire/crispy/wiki/Quick-Start#getting-started) into the Create Event of an object created specifically for running tests.
 
 Expand upon the example code to suit your testing needs.
-
 
 ## Attributions
 
