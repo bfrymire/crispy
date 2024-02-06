@@ -57,8 +57,8 @@ Creates string to be used as a horizontal row to visually separate output messag
 
 | Argument | Type | Description |
 | ---- | ---- | ---- |
-| str | String | String to concat _n_ times |
-| count | Real | Number of times to concat _str_ |
+| str | String | String to concat *n* times |
+| count | Real | Number of times to concat *str* |
 
 <br>
 
