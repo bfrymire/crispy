@@ -1,6 +1,7 @@
 * [Home](Home)
   * [About](Home#about)
   * [Features](Home#features)
+  * [Supported Exports](Home#supported-exports)
   * [License](Home#license)
 * [FAQ](FAQ)
 * [Quick Start](Quick-Start)

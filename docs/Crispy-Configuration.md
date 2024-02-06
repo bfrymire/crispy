@@ -17,4 +17,4 @@ There's a configuration file in the Crispy assets directory named `__crispy_conf
 | `CRISPY_FAIL_MSG_VERBOSE` | `"Fail"` | Output string when an assertion fails verbosely |
 | `CRISPY_STATUS_OUTPUT_LENGTH` | `150` | Number of characters per line when outputting TestCase statuses |
 | `CRISPY_SILENCE_PASSING_TESTS_OUTPUT` | `false` | Enables silencing passing test messages |
-| `CRISPY_STRUCT_UNPACK_ALLOW_DUNDER` | `false` | Enables double underscore variables to be overwritten when using crispyStructUnpack.<br>**Note: Will be deprecated in the future.** |
+| `CRISPY_STRUCT_UNPACK_ALLOW_DUNDER` | `false` | Enables double underscore variables to be overwritten when using `crispyStructUnpack()`.<br>**Note: Will be deprecated in the future.** |

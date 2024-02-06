@@ -18,7 +18,7 @@ However, this can be extended by writing your own functions that handle the stri
 
 ## Quiet on Success, Verbose on Failure
 
-As your project grows and more tests are added, more messages are printed to the [Output Window](https://manual.yoyogames.com/Introduction/The_Output_Window.htm). This will make the Output Window filled with a bunch of noise. You'll adapt to seeing the messages and begin to ignore them. You can overcome this by having a message box pop up only if a test failed.
+As your project grows and more tests are added, more messages may be printed to the [Output Window](https://manual.yoyogames.com/Introduction/The_Output_Window.htm). This will make the Output Window filled with a bunch of noise. You'll adapt to seeing the messages and begin to ignore them. You can overcome this by having a message box pop up only if a test failed.
 
 We can do so by passing a function to your `TestRunner.tearDown()`, which will override the `tearDown()` method of your `TestRunner`.
 
@@ -54,4 +54,4 @@ Now, if there happens to be any tests that fail after the runner is finished, a 
 
 ## Creating Fixtures
 
-_to be continued..._
+*to be continued...*
