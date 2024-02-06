@@ -2,13 +2,13 @@
    <img src="./LOGO.png" style="margin:auto;" alt="Crispy Logo">
 </div>
 
+<h1 align="center">
+   Crispy v1.8.5
+</h1>
 
-# Crispy
-
-Version 1.8.5
-
-Unit testing framework built in GML for GameMaker LTS 2022+
-
+<p align="center">
+   Unit testing framework built in GML for GameMaker LTS 2022+
+</p>
 
 ## Installation
 
@@ -18,6 +18,10 @@ Unit testing framework built in GML for GameMaker LTS 2022+
 
 You can also drop the **.yymps** file downloaded from the [Releases](https://github.com/bfrymire/crispy/releases/latest) tab directly onto your GM IDE and follow the prompts.
 
+## Documentation
+
+* [Go to the Crispy Docs](https://github.com/bfrymire/crispy/wiki)
+
 
 ## Getting Started
 
@@ -25,14 +29,11 @@ A good starting point is copying and pasting the example code from the [Wiki's Q
 
 Expand upon the example code to suit your testing needs.
 
-* [Go to the Crispy Wiki](https://github.com/bfrymire/crispy/wiki)
-
 
 ## Attributions
 
 * Color palette from [Dracula Theme](https://github.com/dracula/dracula-theme#color-palette)
 
-
 ## License
 
-[MIT License](./LICENSE) &copy; Brent Frymire
+[MIT License](./LICENSE)
