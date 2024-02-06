@@ -20,7 +20,7 @@
 
 Crispy is a GameMaker unit testing framework that helps you test your code and keep it future proof.
 
-I first became interested in the idea of creating a unit testing library for GameMaker after watching this [video about how Minecraft handles its automated tests](https://youtu.be/vXaWOJTCYNg?t=48).
+I first became interested in the idea of creating a unit testing library for GameMaker after watching this [video about how Minecraft handles its automated tests](https://youtu.be/vXaWOJTCYNg?t=50).
 
 ## Features
 
