@@ -47,15 +47,15 @@ As a work-around to having your project crash, you can create a [exception_unhan
 
 ```gml
 runner = new TestRunner("runner");
-// Sets the exception handler to run 
+// Sets the exception handler to run
 runner.setUp(function() {
     // Save the previous exception handler
     runner.__exception_unhandled_handler = exception_unhandled_handler();
     exception_unhandled_handler(function(e) {
         var _t = "Crispy: an error has occurred\n";
-        _t += "--------------------------------------------------------------\n";
+        _t += "----------------------n";
         _t += e.message + "\n";
-        _t += "--------------------------------------------------------------\n";
+        _t += "----------------------n";
         _t += e.longMessage + "\n";
         _t += "At " + e.script + " line " + string(e.line) + "\n\n";
         var _len = array_length(e.stacktrace);
