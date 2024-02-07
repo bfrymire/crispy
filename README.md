@@ -24,13 +24,13 @@ You can also drop the **.yymps** file downloaded from the [Releases](https://git
 
 ## Getting Started
 
-A good starting point is copying and pasting the example code from the [Wiki's Quick Start page](https://github.com/bfrymire/crispy/wiki/Quick-Start#getting-started) into the Create Event of an object created specifically for running tests.
+A good starting point is copying and pasting the example code from the [Wiki's Quick Start page](https://bfrymire.github.io/crispy/#/Quick-Start?id=getting-started) into the Create Event of an object created specifically for running tests.
 
 Expand upon the example code to suit your testing needs.
 
 ## Attributions
 
-* Color palette from [Dracula Theme](https://github.com/dracula/dracula-theme#color-palette)
+* Example project color palette from [Dracula Theme](https://github.com/dracula/dracula-theme#color-palette)
 
 ## License
 
