@@ -2,7 +2,7 @@
 
 ## TestSuite(name)
 
-`TestSuite()` is a constructor that holds an array of [`TestCase`](./TestCase) to run, including instructions that can be ran before and after each test.
+`TestSuite()` is a constructor that holds an array of [`TestCase()`](TestCase)s to run, including instructions that can be ran before and after each test.
 
 | Argument | Type | Description |
 | -- | -- | -- |

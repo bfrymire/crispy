@@ -31,7 +31,7 @@ I first became interested in the idea of creating a unit testing library for Gam
 
 ## Supported Exports
 
-Crispy is created using pure GameMaker Language and should be compatible with a wide range of exports.
+Crispy is created using pure GameMaker Language and should be compatible with a wide range of GameMaker's exports.
 
 ## License
 

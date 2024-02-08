@@ -318,7 +318,7 @@ new TestCase("test_player_set_name_when_passing_real_number_raise_error_value", 
 >
 > Behind the scenes, the function passed to the raise error assertion methods is called inside a [try / catch](https://manual.yoyogames.com/GameMaker_Language/GML_Overview/Language_Features/try_catch_finally.htm) block.
 >
-> In full, the test case runs, once an error message is caught in the test, the assert method will break out of the test early, the assertion will be ran against the error, and the outcome will be logged. Any remaining code in the `TestCase.test` function will cease to run after an error is thrown.
+> In full, the test case runs, once an error message is caught in the test, the assert method will break out of the test early, the assertion will be ran against the error, and the outcome will be logged. Any remaining code in the `TestCase.test` function will cease to run after an error is thrown. Because of this, there can only be one `assertRaise*()` in the test and it has to be the last assertion ran.
 >
 > **Example:**
 >

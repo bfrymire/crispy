@@ -46,39 +46,31 @@ You should now be running a fresh Crispy installation with your previous config 
 
 ## Getting Started
 
-The most basic elements that Crispy needs to function are a [TestRunner](./TestRunner), [TestSuite](./TestSuite), and [TestCase](./TestCase).
+The most basic elements that Crispy needs to function are a [TestRunner()](TestRunner), [TestSuite()](TestSuite), and [TestCase()](TestCase).
 
-1. Create `TestRunner`
-1. Create `TestSuite`
-1. Add `TestSuite` to `TestRunner`
-1. Create `TestCase`
-1. Add `TestCase` to `TestSuite`
-1. Run `TestRunner`
+1. Create new `TestRunner()`
+1. Create new `TestSuite()`
+1. Add `TestSuite()` to `TestRunner()`
+1. Create new `TestCase()`
+1. Add `TestCase()` to `TestSuite()`
+1. Run `TestRunner()`
 
 Create a new object that will be your test object to hold the Crispy tests.
 
 In the Create Event, add the following code:
 
 ```gml
-// 1. Create TestRunner
 runner = new TestRunner("runner");
 
-// 2. Create TestSuite
 suite = new TestSuite("suite");
-
-// 3. Add TestSuite to TestRunner
 runner.addTestSuite(suite);
 
-// 4. Create TestCase
 test_sum = new TestCase("test_sum", function() {
     var _sum = 2 + 3;
     assertEqual(_sum, 5);
 });
-
-// 5. Add TestCase to TestSuite
 suite.addTestCase(test_sum);
 
-// 6. Run TestRunner
 runner.run();
 ```
 
@@ -86,7 +78,7 @@ This will create and run the tests. You'll see the outcome of the test in the Ga
 
 ## Example in Production
 
-[Animation Flags](https://github.com/bfrymire/gml-animation-flags), a sister library, uses Crispy to build tests. The code for the tests are in a similar structure as above, but leverages the [Discoverable Tests](./Discoverable-Tests) feature to find the test case functions that are organized in a separate script.
+[Animation Flags](https://github.com/bfrymire/gml-animation-flags), a sister library, uses Crispy to build tests. The code for the tests are in a similar structure as above, but leverages the [Discoverable Tests](Discoverable-Tests) feature to find the test case functions that are organized in a separate script.
 
 Here is the [test object](https://github.com/bfrymire/gml-animation-flags/blob/master/objects/obj_test/Create_0.gml) that sets up the runner, suites, and discovers the tests.
 

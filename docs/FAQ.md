@@ -12,7 +12,7 @@ Even adding a small number of unit tests to your project can go a long way!
 
 ## Can Crispy be used for Test Driven Development?
 
-It's possible to do Test Driven Development *(TDD)* with Crispy. GameMaker will normally throw errors on code that's error prone.
+It's possible to do Test Driven Development *(TDD)* with Crispy. GameMaker will normally throw errors and hault your program on errors.
 
 As a work-around to having your project crash, you can create a [exception_unhandled_handler()](https://manual.yoyogames.com/GameMaker_Language/GML_Reference/Debugging/exception_unhandled_handler.htm) to catch any errors and display them in the Output Window. Errors will be caught, but your project will continue to function after any errors.
 
