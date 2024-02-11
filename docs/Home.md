@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="/assets/images/crispy-logo.png" alt="Crispy Logo">
+    <img src="./assets/images/crispy-logo.png" alt="Crispy Logo">
 </div>
 
 <br>
