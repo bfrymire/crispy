@@ -28,7 +28,7 @@ Clicking on the _Add All_ button will select all of Crispy's resources to be imp
 Here is a video demonstrating the installation steps above by dragging the **.yymps** file onto the GameMaker IDE:
 
 <video style="max-width:100%;width:640px;height:auto;" controls loop>
-    <source align="center" src="/assets/videos/installing-crispy-yymps.mp4" type="video/mp4">
+    <source src="/assets/videos/installing-crispy-yymps.mp4" type="video/mp4">
     Sorry, your browser does not support the video tags.
 </video>
 
