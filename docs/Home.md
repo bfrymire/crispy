@@ -28,7 +28,7 @@ I first became interested in the idea of creating a unit testing library for Gam
 * Variety of built-in test assertions
 * Automated test execution
 * Test discoverability within scripts for better organization
-* [Garbage collectable](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Garbage_Collection/Garbage_Collection.htm) library
+* [Garbage collectable](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Garbage_Collection/Garbage_Collection.htm) framework
 
 ## Supported Exports
 
