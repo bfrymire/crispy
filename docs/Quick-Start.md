@@ -27,7 +27,10 @@ Clicking on the _Add All_ button will select all of Crispy's resources to be imp
 
 Here is a video demonstrating the installation steps above by dragging the **.yymps** file onto the GameMaker IDE:
 
-https://github.com/bfrymire/crispy/assets/20096702/90538237-5de3-45bd-a0bd-c6f93f10ff5a
+<video style="max-width:100%;width:640px;height:auto;" controls loop>
+    <source align="center" src="/assets/videos/installing-crispy-yymps.mp4" type="video/mp4">
+    Sorry, your browser does not support the video tags.
+</video>
 
 Crispy is now imported in your project and ready for use! For further help with GameMaker's package import, [check the manual for Local Asset Packages](https://manual.yoyogames.com/IDE_Tools/Local_Asset_Packages.htm); Specifically the section about **Importing An Asset Package**.
 
