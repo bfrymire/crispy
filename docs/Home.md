@@ -24,10 +24,11 @@ I first became interested in the idea of creating a unit testing library for Gam
 
 ## Features
 
-* Easy introduction to unit testing
-* Discover test cases within scripts for better organization
-* Helper assertion methods for equal checks
-* [Garbage collectable](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Garbage_Collection/Garbage_Collection.htm)
+* Define test cases using a simple and clear syntax
+* Variety of built-in test assertions
+* Automated test execution
+* Test discoverability within scripts for better organization
+* [Garbage collectable](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Garbage_Collection/Garbage_Collection.htm) library
 
 ## Supported Exports
 
