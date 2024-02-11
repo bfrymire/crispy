@@ -1,11 +1,11 @@
 <div align="center">
-    <img src="./assets/crispy-logo.png" alt="Crispy Logo">
+    <img src="/assets/images/crispy-logo.png" alt="Crispy Logo">
 </div>
 
 <br>
 
 <center>
-    <h1>
+    <h1 style="color:white;">
         Crispy <small>v1.8.5</small>
     <h1>
 </center>

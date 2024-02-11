@@ -4,7 +4,7 @@
 
 1. [Download the **.yymps** file](https://github.com/bfrymire/crispy/releases/latest) of the latest version of Crispy.
 
-![Download YYMPS from GitHub Releases](/assets/github-yymps-asset-download.png)
+![Download YYMPS from GitHub Releases](/assets/images/github-yymps-asset-download.png)
 
 > [!TIP]
 > All previous versions of Crispy are also available on the [Releases page](https://github.com/bfrymire/crispy/releases).
@@ -14,7 +14,7 @@
 2. Import the **.yymps** file into your project from the top menu:
     * Tools **>** Import Local Package
 
-![GameMaker LTS Import Local Package](/assets/gamemaker-lts-import-local-package.png)
+![GameMaker LTS Import Local Package](/assets/images/gamemaker-lts-import-local-package.png)
 
 > [!TIP]
 > The **.yymps** file can also be dropped directly onto your GameMaker IDE to import.

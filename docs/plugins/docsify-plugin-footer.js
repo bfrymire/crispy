@@ -1,15 +1,20 @@
 (function () {
     const footerPlugin = (hook, vm) => {
+      hook.afterEach((html) => {
         const year = new Date().getFullYear() || 2020;
-        const footer = [
-          '<div style="margin-top:3rem;"><p align="right">',
+        const footerBegin = '<footer style="margin-top:3rem;"><p align="right">';
+        const footerEnd = '</p></footer>';
+        const footerItems = [
           `Crispy &copy; ${year} by <a target="_blank" href="https://github.com/bfrymire">Brent Frymire</a>`,
-          '</br>',
           `Docs created using <a rel="nofollow" target="_blank" href="https://docsify.js.org/">Docsify</a>`,
-          '</p></div>',
-        ].join('');
-    
-        hook.afterEach((html) => html + footer);
+        ];
+        if (vm.route.file) {
+            const link = `//github.com/bfrymire/crispy/blob/docs/docs/${vm.route.file}`;
+            const editLink = `<a href="${link}" target="_blank">Edit this page on GitHub</a>`;
+            footerItems.unshift(editLink);
+          }
+          return html + `${footerBegin}${footerItems.join('</br>')}${footerEnd}`;
+        });
     }
 
     $docsify = $docsify || {};
