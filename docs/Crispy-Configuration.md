@@ -5,7 +5,7 @@ There's a configuration file in the Crispy assets directory named `__crispy_conf
 > [!WARNING]
 > When updating Crispy versions, if you made custom changes to this file, make sure to carry over the changes to the new version.
 
-| Name | Default Value | Description |
+| Macro Name | Default Value | Description |
 | ------------------------------------- | ------------- | -- |
 | `CRISPY_RUN` | `true` | Boolean flag that can be used to automatically run tests.<br>**Note: Will be deprecated in the future.** |
 | `CRISPY_DEBUG` | `false` | Enables outputting extra context on some silent functions |
