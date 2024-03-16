@@ -18,6 +18,7 @@ As a work-around to having your project crash, you can create a [exception_unhan
 
 ```gml
 runner = new TestRunner("runner");
+
 // Sets the exception handler to run
 runner.setUp(function() {
     // Save the previous exception handler
@@ -40,6 +41,7 @@ runner.setUp(function() {
         return 0;
     });
 });
+
 // Resets the exception handler after tests are run
 runner.tearDown(function() {
     exception_unhandled_handler(__exception_unhandled_handler);
