@@ -12,6 +12,13 @@ if CRISPY_RUN {
 	}
 }
 
+// Exit program
+if keyboard_check(vk_control) {
+	if keyboard_check_pressed(ord("W")) {
+		game_end();
+	}
+}
+
 // Clear test results
 if keyboard_check_pressed(ord("C")) {
 	if ds_list_size(results) > 0 {
