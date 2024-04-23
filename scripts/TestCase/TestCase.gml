@@ -10,7 +10,7 @@
 function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constructor {
 
 	if !is_method(_func) {
-		throw(instanceof(self) + " \"func\" expected a function, received " + typeof(_func) + ".");
+		throw(instanceof(self) + " \"_func\" expected a function, received " + typeof(_func) + ".");
 	}
 
 	class = instanceof(self);

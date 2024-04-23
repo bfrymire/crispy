@@ -294,7 +294,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		// Throw error if function pattern is an empty string
 		var _pattern_len = string_length(_script_start_pattern);
 		if _pattern_len == 0 {
-			show_error(instanceof(self) + ".discover() \"script_start_pattern\" cannot be an empty string.", true);
+			show_error(instanceof(self) + ".discover() \"_script_start_pattern\" cannot be an empty string.", true);
 		}
 		
 		// Get the discovered scripts that match the script start pattern
