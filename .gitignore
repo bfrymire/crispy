@@ -7,3 +7,4 @@ ___yyp_maker_trash/
 # Stitch files
 tmp/
 stitch.config.json
+*.stitch
