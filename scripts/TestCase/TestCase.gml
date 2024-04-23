@@ -65,7 +65,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertEqual = function(_first, _second, _message) {
 		// Check supplied arguments
 		if argument_count < 2 {
-			show_error(instanceof(self) + ".assertEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertEqual() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -101,7 +101,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertNotEqual = function(_first, _second, _message) {
 		// Check supplied arguments
 		if argument_count < 2 {
-			show_error(instanceof(self) + ".assertNotEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertNotEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertNotEqual() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -133,7 +133,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertTrue = function(_expr, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertTrue() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertTrue() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertTrue() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -172,7 +172,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertFalse = function(_expr, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertFalse() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertFalse() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertFalse() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -210,7 +210,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertIsNoone = function(_expr, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertIsNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertIsNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertIsNoone() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -237,7 +237,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertIsNotNoone = function(_expr, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertIsNotNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertIsNotNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertIsNotNoone() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -264,7 +264,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertIsUndefined = function(_expr, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertIsUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertIsUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertIsUndefined() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -291,7 +291,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertIsNotUndefined = function(_expr, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertIsNotUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertIsNotUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertIsNotUndefined() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -318,7 +318,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertRaises = function(_func, _message) {
 		// Check supplied arguments
 		if argument_count < 1 {
-			show_error(instanceof(self) + ".assertRaises() expected 1 argument, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertRaises() expected 1 argument, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_method(_func) {
 			throw(instanceof(self) + ".assertRaises() \"_func\" expected a function, received " + typeof(_func) + ".");
@@ -351,7 +351,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertRaiseErrorValue = function(_func, _value, _message) {
 		// Check supplied arguments
 		if argument_count < 2 {
-			show_error(instanceof(self) + ".assertRaiseErrorValue() expected 2 arguments, recieved " + string(argument_count) + ".", true);
+			throw(instanceof(self) + ".assertRaiseErrorValue() expected 2 arguments, recieved " + string(argument_count) + ".", true);
 		}
 		if !is_method(_func) {
 			throw(instanceof(self) + ".assertRaiseErrorValue() \"_func\" expected a function, received " + typeof(_func) + ".");
