@@ -1,14 +1,12 @@
 // Run the TestRunner
-if CRISPY_RUN {
-	if can_run_tests {
-		can_run_tests = false;
-		runner.run();
-	} else {
-		// Re-run tests
-		if keyboard_check_pressed(ord("R")) {
-			can_run_tests = true;
-			scroll_position = 0;
-		}
+if can_run_tests {
+	can_run_tests = false;
+	runner.run();
+} else {
+	// Re-run tests
+	if keyboard_check_pressed(ord("R")) {
+		can_run_tests = true;
+		scroll_position = 0;
 	}
 }
 
