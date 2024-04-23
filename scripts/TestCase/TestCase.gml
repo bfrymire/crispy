@@ -60,9 +60,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * @function assertEqual
 	 * @param {Any} _first - First value
 	 * @param {Any} _second - Second value to check against _first
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertEqual = function(_first, _second, _message) {
+	static assertEqual = function(_first, _second, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 2 {
 			throw(instanceof(self) + ".assertEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
@@ -96,9 +96,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * @function assertNotEqual
 	 * @param {Any} _first - First type to check
 	 * @param {Any} _second - Second type to check against
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertNotEqual = function(_first, _second, _message) {
+	static assertNotEqual = function(_first, _second, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 2 {
 			throw(instanceof(self) + ".assertNotEqual() expected 2 arguments, recieved " + string(argument_count) + ".", true);
@@ -128,9 +128,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * The test will first try to convert the expression to a boolean, then check if it equals true
 	 * @function assertTrue
 	 * @param {Any} _expr - Expression to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertTrue = function(_expr, _message) {
+	static assertTrue = function(_expr, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertTrue() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -167,9 +167,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * The test will first try to convert the expression to a boolean, then check if it equals false
 	 * @function assertFalse
 	 * @param {Any} _expr - Expression to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertFalse = function(_expr, _message) {
+	static assertFalse = function(_expr, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertFalse() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -205,9 +205,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Test whether the provided expression is noone
 	 * @function assertIsNoone
 	 * @param {Any} _expr - Expression to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertIsNoone = function(_expr, _message) {
+	static assertIsNoone = function(_expr, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertIsNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -232,9 +232,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Test whether the provided expression is not noone
 	 * @function assertIsNotNoone
 	 * @param {Any} _expr - Expression to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertIsNotNoone = function(_expr, _message) {
+	static assertIsNotNoone = function(_expr, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertIsNotNoone() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -259,9 +259,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Test whether the provided expression is undefined
 	 * @function assertIsUndefined
 	 * @param {Any} _expr - Expression to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertIsUndefined = function(_expr, _message) {
+	static assertIsUndefined = function(_expr, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertIsUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -286,9 +286,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Test whether the provided expression is not undefined
 	 * @function assertIsNotUndefined
 	 * @param {Any} _expr - Expression to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertIsNotUndefined = function(_expr, _message) {
+	static assertIsNotUndefined = function(_expr, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertIsNotUndefined() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -313,9 +313,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * Test whether the provided function will throw an error message
 	 * @function assertRaises
 	 * @param {Function} _func - Function to check whether it throws an error message
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertRaises = function(_func, _message) {
+	static assertRaises = function(_func, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 1 {
 			throw(instanceof(self) + ".assertRaises() expected 1 argument, recieved " + string(argument_count) + ".", true);
@@ -346,9 +346,9 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 * @function assertRaiseErrorValue
 	 * @param {Function} _func - Function ran to throw an error message
 	 * @param {String} _value - Value of error message to check
-	 * @param {String} [_message] - Custom message to output on failure
+	 * @param {String} [_message=undefined] - Custom message to output on failure
 	 */
-	static assertRaiseErrorValue = function(_func, _value, _message) {
+	static assertRaiseErrorValue = function(_func, _value, _message=undefined) {
 		// Check supplied arguments
 		if argument_count < 2 {
 			throw(instanceof(self) + ".assertRaiseErrorValue() expected 2 arguments, recieved " + string(argument_count) + ".", true);
