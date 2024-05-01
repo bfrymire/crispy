@@ -8,12 +8,12 @@
 function BaseTestClass(_name) constructor {
 
 	name = undefined;
-	static setUp = undefined;
-	static __setUp__ = undefined;
-	static tearDown = undefined;
-	static __tearDown__ = undefined;
-	static __onRunBegin__ = undefined;
-	static __onRunEnd__ = undefined;
+	setUp = undefined;
+	__setUp__ = undefined;
+	tearDown = undefined;
+	__tearDown__ = undefined;
+	__onRunBegin__ = undefined;
+	__onRunEnd__ = undefined;
 	crispyMixinStructUnpack();
 	setName(_name);
 
