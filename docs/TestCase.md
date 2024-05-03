@@ -14,18 +14,6 @@
 
 ## Methods
 
-### .createTestMethod(func)
-
-Turns the passed function into a method variable used for the test.
-
-**Returns:** N/A
-
-| Argument | Type | Description |
-| -- | -- | -- |
-| func | Function | Function that runs the test assertion |
-
-<br>
-
 ### .addLog(log)
 
 Adds a Log to the array of logs.
