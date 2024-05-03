@@ -1,8 +1,8 @@
 /**
  * Food item
- * @constructor
+ * @constructor Food
  * @param {String} _name - Name of food
- * @param {Array} _ingredients - Ingredients that make up the food
+ * @param {Array<Struct.Ingredient>} _ingredients - Ingredients that make up the food
  */
 function Food(_name, _ingredients) constructor {
 	if !is_string(_name) {
@@ -76,10 +76,9 @@ function Food(_name, _ingredients) constructor {
 
 /**
  * Food ingredient
- * @constructor
+ * @constructor Ingredient
  * @param {String} _name - Name of ingredient
  * @param {Bool} [_is_gluten_free=false] - Ingredient is gluten free
- * @returns {Struct} Self
  */
 function Ingredient(_name, _is_gluten_free=false) constructor {
 	if !is_string(_name) {
@@ -90,5 +89,4 @@ function Ingredient(_name, _is_gluten_free=false) constructor {
 	}
 	name = _name;
 	is_gluten_free = _is_gluten_free;
-	return self;
 }
