@@ -18,7 +18,7 @@
 
 Adds a Log to the array of logs.
 
-**Returns:** N/A
+**Returns:** `Struct.TestCase`
 
 | Argument | Type | Description |
 | -- | -- | -- |
@@ -30,7 +30,7 @@ Adds a Log to the array of logs.
 
 Clears array of Logs.
 
-**Returns:** N/A
+**Returns:** `Struct.TestCase`
 
 | Argument | Type | Description |
 | -- | -- | -- |

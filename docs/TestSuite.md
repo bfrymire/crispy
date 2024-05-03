@@ -16,7 +16,7 @@
 
 Adds `TestCase()` to array of tests. If the `test_case` instance is not that of a `TestCase()`, an error message will be thrown.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | -- | -- | -- |
@@ -30,7 +30,7 @@ Event that runs once before any test is ran. This event is meant to set up any v
 
 The `setUp()` event method can be overwritten by passing in a function as the optional `func` argument. If a function is passed to `setUp()`, the function is bound to the `TestSuite()` and will be ran when calling `setUp()` with no arguments through the `run()` event.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | -- | -- | -- |
@@ -54,7 +54,7 @@ Event that runs once after all tests have ran. This event is meant to clean up a
 
 The `tearDown()` event method can be overwritten by passing in a function as the optional `func` argument. If a function is passed to `tearDown()`, the function is bound to the `TestSuite()` and will be ran when calling `tearDown()` with no arguments through the `run()` event.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | -- | -- | -- |

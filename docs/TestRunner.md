@@ -17,7 +17,7 @@
 
 Adds a Log to the array of logs.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | ---- | ---- | ---- |
@@ -29,7 +29,7 @@ Adds a Log to the array of logs.
 
 Adds a Log to the array of logs.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | ---- | ---- | ---- |
@@ -41,7 +41,7 @@ Adds a Log to the array of logs.
 
 Adds TestSuite to array of suites.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | ---- | ---- | ---- |
@@ -66,7 +66,7 @@ Creates string to be used as a horizontal row to visually separate output messag
 
 Runs test suites and logs results of tests.
 
-**Returns:** N/A
+**Returns:** `Struct.TestRunner`
 
 | Argument | Type | Description |
 | ---- | ---- | ---- |
