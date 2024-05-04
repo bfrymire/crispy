@@ -9,10 +9,10 @@
  */
 function crispyGetTimeDiff(_start_time, _stop_time) {
 	if !is_real(_start_time) {
-		throw("crispyGetTimeDiff() \"_start_time\" expected a real number, received " + typeof(_start_time) + ".");
+		throw("crispyGetTimeDiff() \"_start_time\" expected a Number, received " + typeof(_start_time) + ".");
 	}
 	if !is_real(_stop_time) {
-		throw("crispyGetTimeDiff() \"_stop_time\" expected a real number, received " + typeof(_stop_time) + ".");
+		throw("crispyGetTimeDiff() \"_stop_time\" expected a Number, received " + typeof(_stop_time) + ".");
 	}
 	return _stop_time - _start_time;
 }

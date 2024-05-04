@@ -9,7 +9,7 @@
  */
 function crispyTimeConvert(_time) {
 	if !is_real(_time) {
-		throw("crispyTimeConvert() \"_time\" expected a real number, received " + typeof(_time) + ".");
+		throw("crispyTimeConvert() \"_time\" expected a Number, received " + typeof(_time) + ".");
 	}
 	return string_format(_time / 1000000, 0, CRISPY_TIME_PRECISION);
 }

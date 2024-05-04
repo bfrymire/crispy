@@ -10,7 +10,7 @@
 function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constructor {
 
 	if !is_method(_func) {
-		throw(instanceof(self) + " \"_func\" expected a function, received " + typeof(_func) + ".");
+		throw(instanceof(self) + " \"_func\" expected a Function, received " + typeof(_func) + ".");
 	}
 
 	class = instanceof(self);
@@ -28,7 +28,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 		if is_struct(_unpack) {
 			crispyStructUnpack(_unpack);
 		} else {
-			throw(instanceof(self) + " \"_unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+			throw(instanceof(self) + " \"_unpack\" expected a Struct or Undefined, recieved " + typeof(_unpack) + ".");
 		}
 	}
 
@@ -42,7 +42,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 */
 	static addLog = function(_log) {
 		if !is_struct(_log) {
-			throw(instanceof(self) + ".addLog() \"_log\" expected a struct, recieved " + typeof(_log) + ".");
+			throw(instanceof(self) + ".addLog() \"_log\" expected a Struct, recieved " + typeof(_log) + ".");
 		}
 		array_push(logs, _log);
 		return self;
@@ -298,7 +298,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertRaises = function(_func, _message=undefined) {
 		// Check supplied arguments
 		if !is_method(_func) {
-			throw(instanceof(self) + ".assertRaises() \"_func\" expected a function, received " + typeof(_func) + ".");
+			throw(instanceof(self) + ".assertRaises() \"_func\" expected a Function, received " + typeof(_func) + ".");
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertRaises() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -328,10 +328,10 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	static assertRaiseErrorValue = function(_func, _value, _message=undefined) {
 		// Check supplied arguments
 		if !is_method(_func) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"_func\" expected a function, received " + typeof(_func) + ".");
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"_func\" expected a Function, received " + typeof(_func) + ".");
 		}
 		if !is_string(_value) {
-			throw(instanceof(self) + ".assertRaiseErrorValue() \"_value\" expected a string, received " + typeof(_value) + ".");
+			throw(instanceof(self) + ".assertRaiseErrorValue() \"_value\" expected a String, received " + typeof(_value) + ".");
 		}
 		if !is_string(_message) && !is_undefined(_message) {
 			throw(instanceof(self) + ".assertRaiseErrorValue() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
@@ -375,7 +375,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			clearLogs();
@@ -398,7 +398,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {
@@ -431,7 +431,7 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	 */
 	static __discover__ = function(_script) {
 		if !is_real(_script) {
-			throw(instanceof(self) + ".__discover__() \"_script\" expected a real number, received " + typeof(_script) + ".");
+			throw(instanceof(self) + ".__discover__() \"_script\" expected a Number, received " + typeof(_script) + ".");
 		}
 		if !script_exists(_script) {
 			throw(instanceof(self) + ".__discover__() asset of index " + string(_script) + " is not a script function.");

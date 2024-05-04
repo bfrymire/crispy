@@ -24,7 +24,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 		if is_struct(_unpack) {
 			crispyStructUnpack(_unpack);
 		} else {
-			throw(instanceof(self) + " \"_unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+			throw(instanceof(self) + " \"_unpack\" expected a Struct or Undefined, recieved " + typeof(_unpack) + ".");
 		}
 	}
 
@@ -107,10 +107,10 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 */
 	static hr = function(_str="-", _count=70) {
 		if !is_string(_str) {
-			throw(instanceof(self) + ".hr() \"_str\" expected a string, received " + typeof(_str) + ".");
+			throw(instanceof(self) + ".hr() \"_str\" expected a String, received " + typeof(_str) + ".");
 		}
 		if !is_real(_count) {
-			throw(instanceof(self) + ".hr() \"_count\" expected a real number, received " + typeof(_count) + ".");
+			throw(instanceof(self) + ".hr() \"_count\" expected a Number, received " + typeof(_count) + ".");
 		}
 		var _hr = "";
 		repeat(_count) {
@@ -151,7 +151,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			logs = [];
@@ -175,7 +175,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if CRISPY_DEBUG && CRISPY_SILENCE_PASSING_TESTS_OUTPUT {
@@ -258,7 +258,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 */
 	static discover = function(_test_suite, _script_start_pattern="test_") {
 		if !is_string(_script_start_pattern) {
-			throw(instanceof(self) + ".discover() \"_script_start_pattern\" expected a string, received " + typeof(_script_start_pattern) + ".");
+			throw(instanceof(self) + ".discover() \"_script_start_pattern\" expected a String, received " + typeof(_script_start_pattern) + ".");
 		}
 
 		// Cache all script functions

@@ -27,7 +27,7 @@ function BaseTestClass(_name) constructor {
 	 */
 	static setName = function(_name) {
 		if !is_string(_name) {
-			throw(instanceof(self) + ".setName() \"_name\" expected a string, received " + typeof(_name) + ".");
+			throw(instanceof(self) + ".setName() \"_name\" expected a String, received " + typeof(_name) + ".");
 		}
 		name = _name;
 		return self;
@@ -45,7 +45,7 @@ function BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__onRunBegin__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".onRunBegin() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".onRunBegin() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__onRunBegin__) {
@@ -67,7 +67,7 @@ function BaseTestClass(_name) constructor {
 			if is_method(_func) {
 				__onRunEnd__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".onRunEnd() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".onRunEnd() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__onRunEnd__) {

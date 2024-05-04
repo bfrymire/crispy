@@ -19,7 +19,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 		if is_struct(_unpack) {
 			crispyStructUnpack(_unpack);
 		} else {
-			throw(instanceof(self) + " \"_unpack\" expected a struct or undefined, recieved " + typeof(_unpack) + ".");
+			throw(instanceof(self) + " \"_unpack\" expected a Struct or Undefined, recieved " + typeof(_unpack) + ".");
 		}
 	}
 
@@ -54,7 +54,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			if is_method(_func) {
 				__setUp__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".setUp() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".setUp() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__setUp__) {
@@ -77,7 +77,7 @@ function TestSuite(_name, _unpack=undefined) : BaseTestClass(_name) constructor 
 			if is_method(_func) {
 				__tearDown__ = method(self, _func);
 			} else {
-				throw(instanceof(self) + ".tearDown() \"_func\" expected a function, received " + typeof(_func) + ".");
+				throw(instanceof(self) + ".tearDown() \"_func\" expected a Function, received " + typeof(_func) + ".");
 			}
 		} else {
 			if is_method(__tearDown__) {
