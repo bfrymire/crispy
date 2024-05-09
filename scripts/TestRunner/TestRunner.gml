@@ -124,7 +124,7 @@ function TestRunner(_name, _unpack=undefined) : BaseTestClass(_name) constructor
 	 * @function run
 	 * @returns {Struct.TestRunner}
 	 */
-  	static run = function() {
+	static run = function() {
 		setUp();
 		var _len = array_length(suites);
 		var i = 0;
