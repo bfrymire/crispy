@@ -32,7 +32,9 @@ Here is a video demonstrating the installation steps above by dragging the **.yy
     Sorry, your browser does not support the video tags.
 </video>
 
-Crispy is now imported in your project and ready for use! For further help with GameMaker's package import, [check the manual for Local Asset Packages](https://manual.yoyogames.com/IDE_Tools/Local_Asset_Packages.htm); Specifically the section about **Importing An Asset Package**.
+Crispy is now imported in your project and ready for use!
+
+For further help with GameMaker's package import, [check the manual for Local Asset Packages](https://manual.yoyogames.com/IDE_Tools/Local_Asset_Packages.htm); Specifically the section about **Importing An Asset Package**.
 
 ## Updating Your Crispy Version
 
