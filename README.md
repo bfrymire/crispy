@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="./LOGO.png" style="margin:auto;" alt="Crispy Logo">
+   <img src="https://raw.githubusercontent.com/bfrymire/crispy/master/LOGO.png" style="margin:auto;" alt="Crispy Logo">
 </div>
 
 <h1 align="center">
@@ -20,7 +20,7 @@ You can also drop the **.yymps** file downloaded from the [Releases](https://git
 
 ## Documentation
 
-[Click here to read the docs!](https://bfrymire.github.io/crispy)
+To learn more about how to use Crispy, read the [documentation](https://bfrymire.github.io/crispy).
 
 ## Getting Started
 
@@ -34,4 +34,4 @@ Expand upon the example code to suit your testing needs.
 
 ## License
 
-[MIT License](./LICENSE)
+[MIT License](https://github.com/bfrymire/crispy/blob/master/LICENSE)
