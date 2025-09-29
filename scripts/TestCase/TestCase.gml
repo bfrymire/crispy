@@ -390,6 +390,39 @@ function TestCase(_name, _func, _unpack=undefined) : BaseTestClass(_name) constr
 	}
 
 	/**
+	 * Test whether the provided function runs without throwing an error
+	 * @function assertDoesNotThrow
+	 * @param {Function} _func - Function to check whether it executes safely
+	 * @param {String} [_message] - Custom message to output on failure
+	 */
+	static assertDoesNotThrow = function(_func, _message) {
+		// Check supplied arguments
+		if argument_count < 1 {
+			show_error(instanceof(self) + ".assertDoesNotThrow() expected 1 argument, received " + string(argument_count) + ".", true);
+		}
+		if !is_method(_func) {
+			throw(instanceof(self) + ".assertDoesNotThrow() \"_func\" expected a function, received " + typeof(_func) + ".");
+		}
+		if !is_string(_message) && !is_undefined(_message) {
+			throw(instanceof(self) + ".assertDoesNotThrow() \"_message\" expected either a string or undefined, received " + typeof(_message) + ".");
+		}
+		try {
+			_func();
+			addLog(new CrispyLog(self, {
+				pass: true,
+				msg: _message,
+			}));
+		}
+		catch(err) {
+			addLog(new CrispyLog(self, {
+				pass: false,
+				msg: _message,
+				helper_text: "An unexpected error was thrown: " + string(err),
+			}));
+		}
+	}
+
+	/**
 	 * Function ran before test, used to set up test
 	 * @function setUp
 	 * @param {Function} [_func] - Method to override __setUp__ with
