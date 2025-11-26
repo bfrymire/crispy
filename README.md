@@ -3,7 +3,7 @@
 </div>
 
 <h1 align="center">
-   Crispy v1.8.5
+   Crispy v1.9.0
 </h1>
 
 <p align="center">
